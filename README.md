@@ -38,7 +38,7 @@ Modul ini memungkinkan pengguna untuk menulis dan berbagi opini, ulasan, serta d
 - Filter untuk hanya menampilkan diskusi terhadap buku dengan rating > 4.5
 
 ### 📥 Modul Register Book to Sell 📥 - Muhammad Hilal Darul Fauzan - 2206830542
-Modul ini memungkinkan admin untuk mendaftarkan buku yang ingin dijual di situs aplikasi mobile. Fitur-fitur utama dari modul ini akan meliputi:
+Modul ini memungkinkan admin untuk mendaftarkan buku yang ingin dijual di aplikasi mobile. Fitur-fitur utama dari modul ini akan meliputi:
 - Sebuah form yang harus diisi dengan informasi detail buku seperti judul, penulis, harga, dan lainnya
 - Proses verifikasi oleh admin sebelum buku ditampilkan di katalog untuk dijual
 
