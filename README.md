@@ -14,7 +14,7 @@ LembarPena adalah tempat seluruh komunitas literasi berkumpul. Pembaca dapat mem
 
 ## Daftar modul yang akan diimplementasikan
 ### 📚 Modul Buy Book 📚 - Rifqi Rahmatuloh - 2206820365
-Modul ini memungkinkan pengguna untuk memilih dan membeli buku dari katalog yang tersedia di situs web. Fitur-fitur utama dari modul ini akan meliputi:
+Modul ini memungkinkan pengguna untuk memilih dan membeli buku dari katalog yang tersedia di aplikasi mobile. Fitur-fitur utama dari modul ini akan meliputi:
 - Menampilkan daftar buku yang tersedia untuk dibeli. Pengguna bisa melakukan add to cart. Jendela cart akan menampilkan keranjang belanja dan bisa meminta input jumlah dan akan mengoperasikan total harga.
 - Opsi untuk pengguna mencari buku berdasarkan rating buku.
 - Saat pengguna mengklik buku tertentu, halaman detail buku akan menampilkan informasi yang lebih lengkap
@@ -38,7 +38,7 @@ Modul ini memungkinkan pengguna untuk menulis dan berbagi opini, ulasan, serta d
 - Filter untuk hanya menampilkan diskusi terhadap buku dengan rating > 4.5
 
 ### 📥 Modul Register Book to Sell 📥 - Muhammad Hilal Darul Fauzan - 2206830542
-Modul ini memungkinkan admin untuk mendaftarkan buku yang ingin dijual di situs web. Fitur-fitur utama dari modul ini akan meliputi:
+Modul ini memungkinkan admin untuk mendaftarkan buku yang ingin dijual di situs aplikasi mobile. Fitur-fitur utama dari modul ini akan meliputi:
 - Sebuah form yang harus diisi dengan informasi detail buku seperti judul, penulis, harga, dan lainnya
 - Proses verifikasi oleh admin sebelum buku ditampilkan di katalog untuk dijual
 
