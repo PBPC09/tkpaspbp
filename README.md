@@ -13,13 +13,13 @@ LembarPena adalah tempat seluruh komunitas literasi berkumpul. Pembaca dapat mem
 
 
 ## Daftar modul yang akan diimplementasikan
-### 📚 Modul Buy Book 📚 - Rifqi Rahmatuloh - 2206820365
+### 📚 Modul Buy Book 📚 - Sabrina Aviana Dewi - 2206030520
 Modul ini memungkinkan pengguna untuk memilih dan membeli buku dari katalog yang tersedia di aplikasi mobile. Fitur-fitur utama dari modul ini akan meliputi:
 - Menampilkan daftar buku yang tersedia untuk dibeli. Pengguna bisa melakukan add to cart. Jendela cart akan menampilkan keranjang belanja dan bisa meminta input jumlah dan akan mengoperasikan total harga.
 - Opsi untuk pengguna mencari buku berdasarkan rating buku.
 - Saat pengguna mengklik buku tertentu, halaman detail buku akan menampilkan informasi yang lebih lengkap
 
-### 🛒 Modul Checkout Book 🛒 - Sabrina Aviana Dewi - 2206030520
+### 🛒 Modul Checkout Book 🛒 - Rifqi Rahmatuloh - 2206820365 
 Modul ini untuk proses finalisasi pembelian buku yang telah dipilih oleh pengguna. Fitur-fitur utama dari modul ini akan meliputi:
 - Menyimpan buku yang dipilih oleh pengguna sebelum melakukan pembayaran
 - Memberi konfirmasi kepada pengguna untuk mengisi form, seperti alamat dan pilihan pembayaran
