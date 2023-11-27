@@ -19,7 +19,7 @@ Sabrina Aviana Dewi - 2206030520</br>
 Rifqi Rahmatuloh - 2206820365</br>
 
 ## Nama Aplikasi
-LembarPena
+LembarPena  
 
 ## Deskripsi Aplikasi
 LembarPena adalah tempat seluruh komunitas literasi berkumpul. Pembaca dapat membeli buku incaran mereka. Perusahaan memiliki banyak administrator yang akan membantu menjual buku. Penulis buku dapat mempromosikan karya mereka pada satu aplikasi ini melalui fitur forum diskusi. Terdapat juga fitur wishlist sehingga pembaca bisa menyimpan buku yang hendak dibeli. Aplikasi ini ditujukan kepada para peminat literasi yang selama ini harus mencari, membeli, menyimpan, dan mengulas buku pada platform yang berbeda-beda sehingga menimbulkan anggapan bahwa untuk menjadi penggiat literasi itu rumit dan ribet. Dengan efisiensi yang ditawarkan, aplikasi ini bermanfaat untuk meningkatkan minat literasi di kalangan masyarakat, meningkatkan daya beli buku, dan menyediakan tempat untuk pembaca serta penulis berinteraksi.
