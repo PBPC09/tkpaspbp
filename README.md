@@ -19,20 +19,20 @@ Sabrina Aviana Dewi - 2206030520</br>
 Rifqi Rahmatuloh - 2206820365</br>
 
 ## Nama Aplikasi
-LembarPena
+LembarPena  
 
 ## Deskripsi Aplikasi
 LembarPena adalah tempat seluruh komunitas literasi berkumpul. Pembaca dapat membeli buku incaran mereka. Perusahaan memiliki banyak administrator yang akan membantu menjual buku. Penulis buku dapat mempromosikan karya mereka pada satu aplikasi ini melalui fitur forum diskusi. Terdapat juga fitur wishlist sehingga pembaca bisa menyimpan buku yang hendak dibeli. Aplikasi ini ditujukan kepada para peminat literasi yang selama ini harus mencari, membeli, menyimpan, dan mengulas buku pada platform yang berbeda-beda sehingga menimbulkan anggapan bahwa untuk menjadi penggiat literasi itu rumit dan ribet. Dengan efisiensi yang ditawarkan, aplikasi ini bermanfaat untuk meningkatkan minat literasi di kalangan masyarakat, meningkatkan daya beli buku, dan menyediakan tempat untuk pembaca serta penulis berinteraksi.
 
 
 ## Daftar modul yang akan diimplementasikan
-### 📚 Modul Buy Book 📚 - Sabrina Aviana Dewi - 2206030520
+### 📚 Modul Buy Book 📚 - Rifqi Rahmatuloh - 2206820365
 Modul ini memungkinkan pengguna untuk memilih dan membeli buku dari katalog yang tersedia di aplikasi mobile. Fitur-fitur utama dari modul ini akan meliputi:
 - Menampilkan daftar buku yang tersedia untuk dibeli. Pengguna bisa melakukan add to cart. Jendela cart akan menampilkan keranjang belanja dan bisa meminta input jumlah dan akan mengoperasikan total harga.
 - Opsi untuk pengguna mencari buku berdasarkan rating buku.
 - Saat pengguna mengklik buku tertentu, halaman detail buku akan menampilkan informasi yang lebih lengkap
 
-### 🛒 Modul Checkout Book 🛒 - Rifqi Rahmatuloh - 2206820365
+### 🛒 Modul Checkout Book 🛒 - Sabrina Aviana Dewi - 2206030520
 Modul ini untuk proses finalisasi pembelian buku yang telah dipilih oleh pengguna. Fitur-fitur utama dari modul ini akan meliputi:
 - Menyimpan buku yang dipilih oleh pengguna sebelum melakukan pembayaran
 - Memberi konfirmasi kepada pengguna untuk mengisi form, seperti alamat dan pilihan pembayaran
