@@ -68,7 +68,7 @@ class _LoginPageState extends State<LoginPage> {
                 // Untuk menyambungkan Android emulator dengan Django pada localhost,
                 // gunakan URL http://10.0.2.2/
                 final response =
-                    await request.login("127.0.0.1:8000/auth/login/", {
+                    await request.login("http://127.0.0.1:8000/auth/login/", {
                   'username': username,
                   'password': password,
                 });
@@ -79,7 +79,7 @@ class _LoginPageState extends State<LoginPage> {
                   String uname = LoginPage.uname;
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => MyHomePage(title: "LembarPena")),
+                    MaterialPageRoute(builder: (context) => MyApp()),
                   );
                   ScaffoldMessenger.of(context)
                     ..hideCurrentSnackBar()
