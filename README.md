@@ -1,3 +1,16 @@
+# LembarPena 📖
+
+[![Develop](https://github.com/PBPC09/tkpaspbp/actions/workflows/develop.yml/badge.svg?branch=main)](https://github.com/PBPC09/tkpaspbp/actions/workflows/develop.yml)
+[![Pre-Release](https://github.com/PBPC09/tkpaspbp/actions/workflows/pre-release.yml/badge.svg?branch=main)](https://github.com/PBPC09/tkpaspbp/actions/workflows/pre-release.yml)
+[![Release](https://github.com/PBPC09/tkpaspbp/actions/workflows/release.yml/badge.svg?branch=main)](https://github.com/PBPC09/tkpaspbp/actions/workflows/release.yml)
+[![Build status](https://build.appcenter.ms/v0.1/apps/272d2892-6343-403a-b952-c497ff4e2559/branches/main/badge)](https://appcenter.ms)
+
+## Seputar LembarPena
+
+📱 File APK dapat diunduh di halaman [releases](https://github.com/PBPC09/tkpaspbp/releases) repositori atau melalui [Microsoft Visual Studio App Center](https://install.appcenter.ms/orgs/c09/apps/lembarpena/distribution_groups/public).
+Untuk saat ini, *LembarPena* hanya tersedia di platform Android.  
+🌐 Untuk versi web, kunjungi website kami di [LembarPena](https://lembarpena-c09-tk.pbp.cs.ui.ac.id/).
+
 ## Nama-nama anggota kelompok
 Bryan Jeshua Mario Timung - 2206027021</br>
 Clarista - 2206815541</br>
@@ -19,7 +32,7 @@ Modul ini memungkinkan pengguna untuk memilih dan membeli buku dari katalog yang
 - Opsi untuk pengguna mencari buku berdasarkan rating buku.
 - Saat pengguna mengklik buku tertentu, halaman detail buku akan menampilkan informasi yang lebih lengkap
 
-### 🛒 Modul Checkout Book 🛒 - Rifqi Rahmatuloh - 2206820365 
+### 🛒 Modul Checkout Book 🛒 - Rifqi Rahmatuloh - 2206820365
 Modul ini untuk proses finalisasi pembelian buku yang telah dipilih oleh pengguna. Fitur-fitur utama dari modul ini akan meliputi:
 - Menyimpan buku yang dipilih oleh pengguna sebelum melakukan pembayaran
 - Memberi konfirmasi kepada pengguna untuk mengisi form, seperti alamat dan pilihan pembayaran
@@ -63,4 +76,3 @@ Buyer atau pembeli ini dapat membeli buku yang dicari dan diinginkan dari para p
 
 ## Tautan berita acara
 https://docs.google.com/spreadsheets/d/1aLd6a_5FYw1JCtUQhUpf20rKJz-rOGFrzNmi5X7d4zQ/edit?usp=sharing
-
