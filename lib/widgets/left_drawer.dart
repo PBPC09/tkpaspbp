@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:lembarpena/bookforum/models/forumhead.dart';
+import 'package:lembarpena/bookforum/screens/forumpage.dart';
 import 'package:lembarpena/screens/menu.dart';
 import 'package:lembarpena/screens/menu.dart';
 
@@ -93,6 +95,9 @@ class LeftDrawer extends StatelessWidget {
             leading: const Icon(Icons.chat),
             title: const Text('Book Forum'),
             onTap: () {
+                Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const ForumPage()));
             },
           ),
           ListTile(
