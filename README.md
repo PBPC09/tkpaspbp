@@ -1,4 +1,3 @@
-# tkpaspbp
 # LembarPena 📖
 
 [![Develop](https://github.com/PBPC09/tkpaspbp/actions/workflows/develop.yml/badge.svg?branch=main)](https://github.com/PBPC09/tkpaspbp/actions/workflows/develop.yml)
@@ -6,7 +5,7 @@
 [![Release](https://github.com/PBPC09/tkpaspbp/actions/workflows/release.yml/badge.svg?branch=main)](https://github.com/PBPC09/tkpaspbp/actions/workflows/release.yml)
 [![Build status](https://build.appcenter.ms/v0.1/apps/272d2892-6343-403a-b952-c497ff4e2559/branches/main/badge)](https://appcenter.ms)
 
-# Aplikasi
+## Seputar LembarPena
 
 📱 File APK dapat diunduh di halaman [releases](https://github.com/PBPC09/tkpaspbp/releases) repositori atau melalui [Microsoft Visual Studio App Center](https://install.appcenter.ms/orgs/c09/apps/lembarpena/distribution_groups/public).
 Untuk saat ini, *LembarPena* hanya tersedia di platform Android.  

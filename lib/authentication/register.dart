@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:lembarpena/authentication/login_page.dart';
+// import 'package:lembarpena/screens/login.dart';
 
 
 class RegistrationPage extends StatefulWidget {
@@ -16,8 +16,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
   String _selectedRole = 'buyer';
 
 
-  Future<void> _registerUser() async {
-    final url = Uri.parse("http://127.0.0.1:8000/auth/register/"
+  Future<void> _registerUser() async { // nunggu yang login TKT SALAHHH
+    final url = Uri.parse("http://localhost:8000/auth/register/"
         );
     final response = await http.post(
       url,
