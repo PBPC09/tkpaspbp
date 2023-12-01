@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lembarpena/authentication/login_page.dart';
+import 'package:lembarpena/buybooks/screens/cart_page.dart';
+import 'package:lembarpena/buybooks/screens/buybooks_page.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 
@@ -23,9 +25,9 @@ class MyApp extends StatelessWidget {
                 theme: ThemeData(
                     primarySwatch: Colors.deepPurple,
                 ),
-                home: LoginPage(),
+                home: BuyBooksPage(),
                 routes: {
-                    "/login": (BuildContext context) => const LoginPage(),
+                    "/home": (BuildContext context) => const CartPage(),
                 },
             ),
         );
