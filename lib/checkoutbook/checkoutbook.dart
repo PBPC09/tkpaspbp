@@ -29,7 +29,7 @@ class CheckoutPage extends StatelessWidget {
                 style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
               ),
             ),
-             DataTable(
+            DataTable(
               columns: [
                 DataColumn(label: Text('Produk')),
                 DataColumn(label: Text('Harga Satuan')),
@@ -39,16 +39,17 @@ class CheckoutPage extends StatelessWidget {
               rows: cartItems.map((product) {
                 return DataRow(cells: [
                   DataCell(Text(product['book']['title'])),
-                  DataCell(Text('${product['book']['currency']} ${product['book']['price']}')),
+                  DataCell(Text(
+                      '${product['book']['currency']} ${product['book']['price']}')),
                   DataCell(Text('${product['quantity']}')),
                   DataCell(Text('${product['subtotal']}')),
                 ]);
               }).toList(),
             ),
-            const Padding(
+            Padding(
               padding: EdgeInsets.symmetric(vertical: 10.0),
               child: Text(
-                'Total Harga: $currency $totalPrice',
+                'Total Harga: ${currency} ${totalPrice}',
                 style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
               ),
             ),

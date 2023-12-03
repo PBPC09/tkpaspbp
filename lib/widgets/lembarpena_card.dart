@@ -32,8 +32,7 @@ class ShopCard extends StatelessWidget {
             // TODO: Implement forum button functionality.
           } else if (item.name == "MY ORDER") {
             // TODO: Implement my order button functionality.
-          } else if (item.name == "LOGOUT") {
-          }
+          } else if (item.name == "LOGOUT") {}
         },
         child: Container(
           // Container untuk menyimpan Icon dan Text
