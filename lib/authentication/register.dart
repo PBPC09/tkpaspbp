@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-// import 'package:tkp/screens/login.dart';
+import 'package:lembarpena/authentication/login_page.dart';
 
 
 class RegistrationPage extends StatefulWidget {
@@ -12,6 +12,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+
+  String _selectedRole = 'buyer';
+
 
   Future<void> _registerUser() async { // nunggu yang login TKT SALAHHH
     final url = Uri.parse("http://localhost:8000/auth/register/"
@@ -25,31 +28,33 @@ class _RegistrationPageState extends State<RegistrationPage> {
             _passwordController.text,
         'password2':
             _passwordController.text, 
+        'role' :
+          _selectedRole,
       },
     );
 
     if (response.statusCode == 200) {
       // Handle successful registration
-      // showDialog(
-      //   context: context,
-      //   builder: (BuildContext context) {
-      //     return AlertDialog(
-      //       title: Text('Success'),
-      //       content: Text('User registered successfully.'),
-      //       actions: <Widget>[
-      //         TextButton(
-      //           onPressed: () {
-      //             Navigator.of(context).pop();
-      //             Navigator.of(context).pushReplacement(MaterialPageRoute(
-      //               builder: (BuildContext context) => LoginPage(),
-      //             ));
-      //           },
-      //           child: Text('OK'),
-      //         ),
-      //       ],
-      //     );
-      //   },
-      // );
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Success'),
+            content: Text('User registered successfully.'),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (BuildContext context) => LoginPage(),
+                  ));
+                },
+                child: Text('OK'),
+              ),
+            ],
+          );
+        },
+      );
     } else {
       // Handle registration errors
       showDialog(
@@ -104,6 +109,28 @@ class _RegistrationPageState extends State<RegistrationPage> {
               ),
               obscureText: true,
             ),
+             DropdownButtonFormField<String>(
+              value: _selectedRole,
+              items: [
+                DropdownMenuItem<String>(
+                  value: 'buyer',
+                  child: Text('Buyer'),
+                ),
+                DropdownMenuItem<String>(
+                  value: 'admin',
+                  child: Text('Admin'),
+                ),
+              ],
+              onChanged: (value) {
+                setState(() {
+                  _selectedRole = value!;
+                });
+              },
+              decoration: InputDecoration(
+                labelText: 'Role',
+              ),
+            ),
+            SizedBox(height: 24.0),
             const SizedBox(height: 24.0),
             ElevatedButton(
               onPressed: () async {

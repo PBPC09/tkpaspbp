@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:lembarpena/screens/menu.dart';
+import 'package:lembarpena/authentication/login_page.dart';
+import 'package:lembarpena/buybooks/screens/cart_page.dart';
+import 'package:lembarpena/buybooks/screens/buybooks_page.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,6 +14,7 @@ class MyApp extends StatelessWidget {
 
   // This widget is the root of your application.
   @override
+<<<<<<< HEAD
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'LembarPena',
@@ -124,3 +129,24 @@ class MyApp extends StatelessWidget {
 //     );
 //   }
 // }
+=======
+    Widget build(BuildContext context) {
+        return Provider(
+            create: (_) {
+                CookieRequest request = CookieRequest();
+                return request;
+            },
+            child: MaterialApp(
+                title: 'TOKO PBP',
+                theme: ThemeData(
+                    primarySwatch: Colors.deepPurple,
+                ),
+                home: BuyBooksPage(),
+                routes: {
+                    "/home": (BuildContext context) => const CartPage(),
+                },
+            ),
+        );
+    }
+}
+>>>>>>> 39665096211ebb556ac4fb532e46eedfcf0ef02f
