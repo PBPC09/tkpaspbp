@@ -16,7 +16,7 @@ class MyHomePage extends StatelessWidget {
     final List<ShopItem> items = [
     ShopItem("Buy Books", Icons.shopping_bag),
     ShopItem("Wishlist", Icons.favorite),
-    ShopItem("Book Profile", Icons.book),
+    ShopItem("Explore Book", Icons.book),
     ShopItem("Book Forum", Icons.chat),
     ShopItem("Logout", Icons.logout),
 ];

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:lembarpena/authentication/login_page.dart';
 // import 'package:lembarpena/screens/login.dart';
 
 
@@ -18,6 +19,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
 
   Future<void> _registerUser() async { // nunggu yang login TKT SALAHHH
     final url = Uri.parse("http://localhost:8000/auth/register/"
+    // final url = Uri.parse("https://lembarpena-c09-tk.pbp.cs.ui.ac.id/auth/register/"
         );
     final response = await http.post(
       url,
