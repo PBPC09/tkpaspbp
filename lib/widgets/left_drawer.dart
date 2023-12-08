@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:lembarpena/bookforum/models/forumhead.dart';
+import 'package:lembarpena/bookforum/screens/forumpage.dart';
 import 'package:lembarpena/screens/menu.dart';
 
 class LeftDrawer extends StatelessWidget {
@@ -27,7 +29,7 @@ class LeftDrawer extends StatelessWidget {
                 ),
                 Padding(padding: EdgeInsets.all(10)),
                 Text(
-                  "cari buku disini bro",
+                  "Cari buku disini bro",
                   // Tambahkan gaya teks dengan center alignment, font ukuran 15, warna putih, dan weight biasa
                   textAlign: TextAlign.center,
                   style: TextStyle(
@@ -86,7 +88,10 @@ class LeftDrawer extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.chat),
             title: const Text('Book Forum'),
-            onTap: () {},
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const ForumPage()));
+            },
           ),
           ListTile(
             leading: const Icon(Icons.receipt),
