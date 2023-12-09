@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:lembarpena/Authentication/login_page.dart';
@@ -140,6 +139,21 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 await _registerUser();
               },
               child: const Text('Register'),
+            ),
+            const SizedBox(height: 24.0),
+            GestureDetector(
+              onTap: () {
+                // Route menu ke counter
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => LoginPage()),
+                );
+              },
+              child: Container(
+                decoration: const BoxDecoration(
+                    border: Border(bottom: BorderSide(width: 1))),
+                child: const Text("Already have an account? Log in"),
+              ),
             ),
           ],
         ),

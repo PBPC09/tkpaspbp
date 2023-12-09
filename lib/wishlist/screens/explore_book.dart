@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:lembarpena/Wishlist/models/book.dart';
+import 'package:lembarpena/AdminRegisterBook/models/book.dart';
 import 'package:lembarpena/Main/widgets/left_drawer.dart';
 import 'package:lembarpena/Wishlist/screens/detail_buku.dart';
 // import 'package:pbp_django_auth/pbp_django_auth.dart';
