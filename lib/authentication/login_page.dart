@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
-// import 'package:lembarpena/main.dart';
+import 'package:lembarpena/main.dart';
 import 'package:lembarpena/authentication/register.dart';
 import 'package:lembarpena/screens/menu.dart';
 import 'package:lembarpena/AdminRegisterBook/screens/admin_menu.dart';
+
 
 void main() {
   runApp(const LoginApp());
@@ -66,8 +67,12 @@ class _LoginPageState extends State<LoginPage> {
                 String username = _usernameController.text;
                 String password = _passwordController.text;
 
+                // Cek kredensial
+                // Untuk menyambungkan Android emulator dengan Django pada localhost,
+                // gunakan URL http://10.0.2.2/
                 final response =
-                    await request.login("http://127.0.0.1:8000/auth/login/", {
+                    await request.login("http://localhost:8000/auth/login/", {
+
                   'username': username,
                   'password': password,
                 });
@@ -76,7 +81,7 @@ class _LoginPageState extends State<LoginPage> {
                   String message = response['message'];
                   LoginPage.uname = response['username'];
                   String uname = LoginPage.uname;
-
+                  
                   // Ambil peran (role) pengguna dari respons server
                   String role = response['role'];
 
@@ -92,7 +97,7 @@ class _LoginPageState extends State<LoginPage> {
                       MaterialPageRoute(builder: (context) => MyHomePage()),
                     );
                   }
-
+                  
                   ScaffoldMessenger.of(context)
                     ..hideCurrentSnackBar()
                     ..showSnackBar(SnackBar(
@@ -123,12 +128,15 @@ class _LoginPageState extends State<LoginPage> {
                 // Route menu ke counter
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => RegistrationPage()),
+                  MaterialPageRoute(
+                      builder: (context) => RegistrationPage()),
                 );
               },
               child: Container(
                 decoration: const BoxDecoration(
-                    border: Border(bottom: BorderSide(width: 1))),
+                    border: Border(
+                        bottom:
+                            BorderSide(width: 1))),
                 child: const Text('Create New Account'),
               ),
             ),
@@ -138,3 +146,4 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 }
+
