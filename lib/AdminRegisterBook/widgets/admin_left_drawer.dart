@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lembarpena/AdminRegisterBook/screens/order_notifications.dart';
 import 'package:lembarpena/AdminRegisterBook/screens/book_collections.dart';
+import 'package:lembarpena/AdminRegisterBook/screens/book_form.dart';
 import 'package:lembarpena/AdminRegisterBook/screens/admin_menu.dart';
 import 'package:lembarpena/authentication/login_page.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
@@ -23,7 +24,7 @@ class LeftDrawer extends StatelessWidget {
             child: Column(
               children: [
                 Text(
-                  'Admin LembarPena',
+                  'Admin Dashboard',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 30,
@@ -55,6 +56,18 @@ class LeftDrawer extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) => AdminPage(),
+                  ));
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.add_circle),
+            title: const Text('Book Form'),
+            // Bagian redirection ke MyHomePage
+            onTap: () {
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => BookFormPage(),
                   ));
             },
           ),

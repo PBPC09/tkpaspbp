@@ -10,9 +10,10 @@ import 'package:lembarpena/AdminRegisterBook/widgets/admin_menu_card.dart';
 class AdminPage extends StatelessWidget {
   AdminPage({Key? key}) : super(key: key);
 
-  final List<AdminMenuItem> items = [
+  final List<AdminMenuItem> pages = [
     AdminMenuItem("Book Collections", Icons.book, Colors.blue),
     AdminMenuItem("Notification", Icons.notifications, Colors.green),
+    AdminMenuItem("Book Form", Icons.add_circle, Colors.indigo),
     AdminMenuItem("Logout", Icons.logout, Colors.red),
   ];
 
@@ -56,7 +57,7 @@ class AdminPage extends StatelessWidget {
                 mainAxisSpacing: 10,
                 crossAxisCount: 3,
                 shrinkWrap: true,
-                children: items.map((AdminMenuItem item) {
+                children: pages.map((AdminMenuItem item) {
                   // Iterasi untuk setiap item
                   return AdminMenuCard(item);
                 }).toList(),
