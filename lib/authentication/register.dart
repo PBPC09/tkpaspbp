@@ -1,12 +1,14 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:lembarpena/authentication/login_page.dart';
+import 'package:lembarpena/Authentication/login_page.dart';
 
 
 class RegistrationPage extends StatefulWidget {
+  const RegistrationPage({super.key});
+
   @override
+  // ignore: library_private_types_in_public_api
   _RegistrationPageState createState() => _RegistrationPageState();
 }
 
@@ -17,16 +19,18 @@ class _RegistrationPageState extends State<RegistrationPage> {
 
   String _selectedRole = 'buyer';
 
-
-  Future<void> _registerUser() async { // nunggu yang login TKT SALAHHH
+  Future<void> _registerUser() async {
+    // nunggu yang login TKT SALAHHH
     final url = Uri.parse("http://localhost:8000/auth/register/"
-    // final url = Uri.parse("https://lembarpena-c09-tk.pbp.cs.ui.ac.id/auth/register/"
+        // final url = Uri.parse("https://lembarpena-c09-tk.pbp.cs.ui.ac.id/auth/register/"
         );
-    
+
     final response = await http.post(
       url,
-      headers: {'Content-Type': 'application/json'},  // Set the content type to JSON
-      body: jsonEncode ({
+      headers: {
+        'Content-Type': 'application/json'
+      }, // Set the content type to JSON
+      body: jsonEncode({
         'username': _usernameController.text,
         'email': _emailController.text,
         'password1':

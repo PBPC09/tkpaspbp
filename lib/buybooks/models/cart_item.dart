@@ -3,7 +3,7 @@
 //     final cartItem = cartItemFromJson(jsonString);
 
 import 'dart:convert';
-import 'package:lembarpena/buybooks/models/book.dart';
+import 'package:lembarpena/BuyBooks/models/book.dart';
 
 List<CartItem> cartItemFromJson(String str) =>
     List<CartItem>.from(json.decode(str).map((x) => CartItem.fromJson(x)));

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:lembarpena/wishlist/models/book.dart';
-import 'package:lembarpena/widgets/left_drawer.dart';
-import 'package:lembarpena/wishlist/screens/detail_buku.dart';
+import 'package:lembarpena/Wishlist/models/book.dart';
+import 'package:lembarpena/Main/widgets/left_drawer.dart';
+import 'package:lembarpena/Wishlist/screens/detail_buku.dart';
 // import 'package:pbp_django_auth/pbp_django_auth.dart';
 // import 'package:provider/provider.dart';
 
@@ -60,11 +60,12 @@ class _ExploreBooksPageState extends State<ExploreBooksPage> {
                   ],
                 );
               } else {
-               return ListView.builder(
+                return ListView.builder(
                   itemCount: snapshot.data!.length,
                   itemBuilder: (_, index) => InkWell(
                     child: Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 16, vertical: 12),
                       padding: const EdgeInsets.all(20.0),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -126,7 +127,6 @@ class _ExploreBooksPageState extends State<ExploreBooksPage> {
                     ),
                   ),
                 );
-
               }
             }));
   }

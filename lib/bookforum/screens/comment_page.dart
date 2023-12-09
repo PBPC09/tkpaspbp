@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lembarpena/bookforum/models/forumhead.dart';
+import 'package:lembarpena/BookForum/models/forumhead.dart';
 import 'package:intl/intl.dart';
 class CommentPage extends StatelessWidget {
   late final Fields fields;

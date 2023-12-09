@@ -12,8 +12,8 @@ class AdminPage extends StatelessWidget {
 
   final List<AdminMenuItem> pages = [
     AdminMenuItem("Book Form", Icons.add_circle, Colors.indigo),
-    AdminMenuItem("Book Collections", Icons.book, Colors.blue),
-    AdminMenuItem("Order Notifications", Icons.notifications, Colors.green),
+    AdminMenuItem("Book Collections", Icons.book, Colors.indigo),
+    AdminMenuItem("Order Notifications", Icons.notifications, Colors.indigo),
     AdminMenuItem("Logout", Icons.logout, Colors.red),
   ];
 

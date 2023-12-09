@@ -3,9 +3,9 @@ import 'package:http/http.dart' as http;
 import 'package:lembarpena/authentication/login_page.dart';
 import 'dart:convert';
 
-import 'package:lembarpena/bookforum/models/forumhead.dart';
-import 'package:lembarpena/bookforum/screens/commentpage.dart';
-import 'package:lembarpena/widgets/left_drawer.dart';
+import 'package:lembarpena/BookForum/models/forumhead.dart';
+import 'package:lembarpena/BookForum/screens/comment_page.dart';
+import 'package:lembarpena/Main/widgets/left_drawer.dart';
 
 class ForumPage extends StatefulWidget {
   const ForumPage({Key? key}) : super(key: key);
