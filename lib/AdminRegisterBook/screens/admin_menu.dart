@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lembarpena/AdminRegisterBook/widgets/admin_left_drawer.dart';
 import 'package:lembarpena/AdminRegisterBook/widgets/admin_menu_card.dart';
 // import 'package:inventory_app_mobile/screens/book_collections.dart'; // Gantilah dengan nama halaman "Book Collections" yang sesuai
 // import 'package:inventory_app_mobile/screens/notifications.dart'; // Gantilah dengan nama halaman "Notification" yang sesuai
@@ -7,28 +8,62 @@ import 'package:lembarpena/AdminRegisterBook/widgets/admin_menu_card.dart';
 // import 'package:provider/provider.dart';
 
 class AdminPage extends StatelessWidget {
+  AdminPage({Key? key}) : super(key: key);
+
+  final List<AdminMenuItem> items = [
+    AdminMenuItem("Book Collections", Icons.book, Colors.blue),
+    AdminMenuItem("Notification", Icons.notifications, Colors.green),
+    AdminMenuItem("Logout", Icons.logout, Colors.red),
+  ];
+
   @override
   Widget build(BuildContext context) {
-    final List<AdminMenuItem> adminMenuItems = [
-      AdminMenuItem("Book Collections", Icons.book, Colors.blue),
-      AdminMenuItem("Notification", Icons.notifications, Colors.green),
-    ];
-
-    // final request = context.watch<CookieRequest>();
-
     return Scaffold(
       appBar: AppBar(
-        title: Text("Admin Page"),
-      ),
-      body: GridView.builder(
-        itemCount: adminMenuItems.length,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
+        centerTitle: false,
+        title: const Text(
+          'Admin Dashboard',
         ),
-        itemBuilder: (BuildContext context, int index) {
-          final item = adminMenuItems[index];
-          return AdminMenuCard(item);
-        },
+        backgroundColor: Colors.indigo,
+        foregroundColor: Colors.white,
+      ),
+      drawer: const LeftDrawer(),
+      body: SingleChildScrollView(
+        // Widget wrapper yang dapat discroll
+        child: Padding(
+          padding: const EdgeInsets.all(10.0), // Set padding dari halaman
+          child: Column(
+            // Widget untuk menampilkan children secara vertikal
+            children: <Widget>[
+              const Padding(
+                padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
+                // Widget Text untuk menampilkan tulisan dengan alignment center dan style yang sesuai
+                child: Text(
+                  'Welcome to LembarPena', // Text yang menandakan toko
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              // Grid layout
+              GridView.count(
+                // Container pada card kita.
+                primary: true,
+                padding: const EdgeInsets.all(20),
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+                crossAxisCount: 3,
+                shrinkWrap: true,
+                children: items.map((AdminMenuItem item) {
+                  // Iterasi untuk setiap item
+                  return AdminMenuCard(item);
+                }).toList(),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

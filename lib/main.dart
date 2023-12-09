@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 // import 'package:google_fonts/google_fonts.dart';
 // import 'package:litera_land_mobile/BrowseBooks/screens/browse_books_page.dart';
+import 'package:lembarpena/AdminRegisterBook/screens/admin_menu.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
           //   Theme.of(context).textTheme,
           // ),
         ),
-        //home: const BrowseBooksPage(),
+        home: AdminPage(),
       ),
     );
   }
