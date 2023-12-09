@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lembarpena/screens/menu.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:lembarpena/main.dart';
@@ -79,7 +80,7 @@ class _LoginPageState extends State<LoginPage> {
                   String uname = LoginPage.uname;
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => MyApp()),
+                    MaterialPageRoute(builder: (context) => MyHomePage()),
                   );
                   ScaffoldMessenger.of(context)
                     ..hideCurrentSnackBar()

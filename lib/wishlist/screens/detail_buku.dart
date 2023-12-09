@@ -1,65 +1,40 @@
-// // detail_buku.dart
+import 'package:flutter/material.dart';
+import 'package:lembarpena/wishlist/models/book.dart';
 
-// import 'package:flutter/material.dart';
-// import 'package:lembarpena/wishlist/models/book.dart'; // Make sure to import the correct model
+class DetailBukuPage extends StatelessWidget {
+  final Book book;
 
-// class DetailPage extends StatelessWidget {
-//   final String itemName;
-//   final String price;
-//   final String itemDescription;
-//   final int itemAmount;
+  const DetailBukuPage({required this.book});
 
-//   DetailPage({
-//     required this.itemName,
-//     required this.price,
-//     required this.itemDescription,
-//     required this.itemAmount,
-//   });
-
-//   factory DetailPage.fromProduct(Product product) {
-//     return DetailPage(
-//       itemName: product.fields.title,
-//       price: product.fields.price,
-//       itemDescription: product.fields.description,
-//       itemAmount: product.fields.pageCount,
-//     );
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       body: Padding(
-//         padding: const EdgeInsets.all(16.0),
-//         child: Column(
-//           crossAxisAlignment: CrossAxisAlignment.start,
-//           children: [
-//             // Custom back button
-//             GestureDetector(
-//               onTap: () {
-//                 // Navigate back to the previous screen
-//                 Navigator.pop(context);
-//               },
-//               child: Row(
-//                 children: [
-//                   Icon(Icons.arrow_back),
-//                   Text(' Back', style: TextStyle(fontSize: 16)),
-//                 ],
-//               ),
-//             ),
-//             const SizedBox(height: 20),
-//             Text(
-//               '$itemName',
-//               style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-//             ),
-//             const SizedBox(height: 10),
-//             Text('Price: $price'),
-//             const SizedBox(height: 10),
-//             Text('Description: $itemDescription'),
-//             const SizedBox(height: 10),
-//             Text('Amount: $itemAmount'),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(book.fields.title),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text("Author: ${book.fields.author}"),
+            const SizedBox(height: 10),
+            Text("Rating: ${book.fields.rating}"),
+            const SizedBox(height: 10),
+            Text("Voters: ${book.fields.voters}"),
+            const SizedBox(height: 10),
+            Text("Price: ${book.fields.price} ${book.fields.currency}"),
+            const SizedBox(height: 10),
+            Text("Description: ${book.fields.description}"),
+            const SizedBox(height: 10),
+            Text("Publisher: ${book.fields.publisher}"),
+            const SizedBox(height: 10),
+            Text("Page Count: ${book.fields.pageCount}"),
+            const SizedBox(height: 10),
+            Text("Genres: ${book.fields.genres}"),
+          ],
+        ),
+      ),
+    );
+  }
+}

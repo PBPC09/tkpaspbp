@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lembarpena/screens/menu.dart';
 import 'package:lembarpena/wishlist/models/book.dart';
 import 'package:lembarpena/wishlist/screens/explore_book.dart';
+import 'package:lembarpena/wishlist/screens/my_wishlist.dart';
 
 class ShopCard extends StatelessWidget {
   final ShopItem item;
@@ -32,7 +33,7 @@ class ShopCard extends StatelessWidget {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const ProductPage(),
+                  builder: (context) => const ExploreBooksPage(),
                 ),
               );
           } else if (item.name == "WISHLIST") {
@@ -40,7 +41,7 @@ class ShopCard extends StatelessWidget {
               // Navigator.pushReplacement(
               //   context,
               //   MaterialPageRoute(
-              //     builder: (context) => WishlistPage(),
+              //     builder: (context) => const WishlistPage(),
               //   ));
           } else if (item.name == "CART") {
             // TODO: Implement cart button functionality.

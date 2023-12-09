@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:lembarpena/authentication/login_page.dart';
 // Impor drawer widget
 import 'package:lembarpena/widgets/left_drawer.dart';
 // Impor shop_card
@@ -22,10 +23,11 @@ class MyHomePage extends StatelessWidget {
 ];
     @override
     Widget build(BuildContext context) {
+      String uname = LoginPage.uname;
        return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Hi - Username',
+        title: Text(
+          'Hi - $uname !',
         ),
         backgroundColor: Colors.indigo,
         foregroundColor: Colors.white,
