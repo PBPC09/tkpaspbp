@@ -1,16 +1,15 @@
-// RAW TEMPLATE FROM JESHUAMART
 // To parse this JSON data, do
 //
-//     final product = productFromJson(jsonString);
+//     final forumComment = forumCommentFromJson(jsonString);
 
 import 'dart:convert';
 
-List<ForumComment> productFromJson(String str) => List<ForumComment>.from(json.decode(str).map((x) => ForumComment.fromJson(x)));
+List<ForumComment> forumCommentFromJson(String str) => List<ForumComment>.from(json.decode(str).map((x) => ForumComment.fromJson(x)));
 
-String productToJson(List<ForumComment> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String forumCommentToJson(List<ForumComment> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class ForumComment {
-    Model model;
+    String model;
     int pk;
     Fields fields;
 
@@ -21,13 +20,13 @@ class ForumComment {
     });
 
     factory ForumComment.fromJson(Map<String, dynamic> json) => ForumComment(
-        model: modelValues.map[json["model"]]!,
+        model: json["model"],
         pk: json["pk"],
         fields: Fields.fromJson(json["fields"]),
     );
 
     Map<String, dynamic> toJson() => {
-        "model": modelValues.reverse[model],
+        "model": model,
         "pk": pk,
         "fields": fields.toJson(),
     };
@@ -35,65 +34,28 @@ class ForumComment {
 
 class Fields {
     int user;
-    String name;
-    int amount;
-    int price;
-    String description;
-    DateTime dateIn;
-    bool stock;
-    String categories;
+    int commentTo;
+    DateTime date;
+    String answer;
 
     Fields({
         required this.user,
-        required this.name,
-        required this.amount,
-        required this.price,
-        required this.description,
-        required this.dateIn,
-        required this.stock,
-        required this.categories,
+        required this.commentTo,
+        required this.date,
+        required this.answer,
     });
 
     factory Fields.fromJson(Map<String, dynamic> json) => Fields(
         user: json["user"],
-        name: json["name"],
-        amount: json["amount"],
-        price: json["price"],
-        description: json["description"],
-        dateIn: DateTime.parse(json["date_in"]),
-        stock: json["stock"],
-        categories: json["categories"],
+        commentTo: json["comment_to"],
+        date: DateTime.parse(json["date"]),
+        answer: json["answer"],
     );
 
     Map<String, dynamic> toJson() => {
         "user": user,
-        "name": name,
-        "amount": amount,
-        "price": price,
-        "description": description,
-        "date_in": "${dateIn.year.toString().padLeft(4, '0')}-${dateIn.month.toString().padLeft(2, '0')}-${dateIn.day.toString().padLeft(2, '0')}",
-        "stock": stock,
-        "categories": categories,
+        "comment_to": commentTo,
+        "date": "${date.year.toString().padLeft(4, '0')}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}",
+        "answer": answer,
     };
-}
-
-enum Model {
-    // ignore: constant_identifier_names
-    MAIN_PRODUCT
-}
-
-final modelValues = EnumValues({
-    "main.product": Model.MAIN_PRODUCT
-});
-
-class EnumValues<T> {
-    Map<String, T> map;
-    late Map<T, String> reverseMap;
-
-    EnumValues(this.map);
-
-    Map<T, String> get reverse {
-        reverseMap = map.map((k, v) => MapEntry(v, k));
-        return reverseMap;
-    }
 }

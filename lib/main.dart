@@ -22,11 +22,11 @@ class MyApp extends StatelessWidget {
                 return request;
             },
             child: MaterialApp(
-                title: 'TOKO PBP',
+                title: 'LembarPena',
                 theme: ThemeData(
                     primarySwatch: Colors.deepPurple,
                 ),
-                home: LoginPage(),
+                home: const LoginPage(),
                 routes: {
                     "/home": (BuildContext context) => const LoginPage(),
                 },

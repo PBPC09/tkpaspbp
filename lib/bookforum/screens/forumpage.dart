@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:lembarpena/authentication/login_page.dart';
 import 'dart:convert';
 
 import 'package:lembarpena/bookforum/models/forumhead.dart';
@@ -14,39 +15,62 @@ class ForumPage extends StatefulWidget {
 }
 
 class _ForumPageState extends State<ForumPage> {
-  Future<List<ForumHead>> fetchProduct() async {
-    var url = Uri.parse('http://127.0.0.1:8000/json/');
+  late String loggedInUser = LoginPage.uname; // Tambahkan variabel untuk menyimpan username pengguna yang login
+  List<ForumHead> forumHeads = [];
+
+
+  Future<List<ForumHead>> fetchForumHeads() async {
+    var url = Uri.parse('http://127.0.0.1:8000/bookforum/forum/json/'); // Sesuaikan dengan URL endpoint Anda
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},
     );
 
     var data = jsonDecode(utf8.decode(response.bodyBytes));
-    List<ForumHead> list_product = [];
+    forumHeads = [];
     for (var d in data) {
-      if (d != null) {
-        list_product.add(ForumHead.fromJson(d));
+      forumHeads.add(ForumHead.fromJson(d));
+    }
+    return forumHeads;
+  }
+
+
+  Future<void> deleteQuestion(String username, int id) async {
+      var url = Uri.parse('http://127.0.0.1:8000/delete_question/$username/$id');
+      var response = await http.delete(url);
+
+      if (response.statusCode == 201) {
+        setState(() {
+          // Memuat ulang data ForumHead
+          fetchForumHeads().then((newData) {
+            // Update state dengan data yang baru
+            setState(() {
+              forumHeads = newData;
+            });
+          });
+        });
+      } else {
+        // Handle error
       }
     }
-    return list_product;
-  }
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('ForumHead'),
+        title: const Text('Forum LembarPena'),
       ),
       drawer: const LeftDrawer(),
       body: FutureBuilder(
-        future: fetchProduct(),
-        builder: (context, AsyncSnapshot snapshot) {
+        future: fetchForumHeads(),
+        builder: (context, AsyncSnapshot<List<ForumHead>> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
-          } else if (!snapshot.hasData) {
+          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
             return const Center(
               child: Text(
-                "Tidak ada data produk.",
+                "Tidak ada forum diskusi.",
                 style: TextStyle(color: Color(0xff59A5D8), fontSize: 20),
               ),
             );
@@ -54,16 +78,14 @@ class _ForumPageState extends State<ForumPage> {
             return ListView.builder(
               itemCount: snapshot.data!.length,
               itemBuilder: (context, index) {
-                var barang = snapshot.data![index].fields; // Assuming fields has the necessary properties
+                var forumHeadData = snapshot.data![index];
+                var forumHeadFields = forumHeadData.fields;
+
                 return Card(
                   child: InkWell(
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => CommentPage(fields: barang),
-                        ),
-                      );
+                      // Sesuaikan dengan navigasi ke halaman komentar
+
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -71,13 +93,23 @@ class _ForumPageState extends State<ForumPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "${barang.name}",
+                            forumHeadFields.title, // Judul Topik
                             style: const TextStyle(
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          Text("Kategori: ${barang.categories}"),
-                          Text("Deskripsi: ${barang.description}"),
+                          Text("Buku: ${forumHeadFields.book}"), // Buku
+                          Text("Penanya: ${forumHeadFields.user}"), // Penanya
+                          Text("Tanggal: ${forumHeadFields.date}"), // Tanggal
+                          // Tampilkan jumlah komentar jika tersedia
+                          Text("Jumlah Komentar: ${forumHeadFields.commentCounts}"),
+                          if (forumHeadFields.user == loggedInUser) // Cek apakah pengguna yang login adalah pembuat
+                            ElevatedButton(
+                              onPressed: () {
+                                deleteQuestion(forumHeadFields.user, forumHeadData.pk);
+                              },
+                              child: const Text('Hapus'),
+                            ),
                         ],
                       ),
                     ),

@@ -44,23 +44,19 @@ class CommentPage extends StatelessWidget {
                         // child: Image.network(fields.imageUrl), // Assuming `fields` has an `imageUrl`
                       ),
                       const SizedBox(height: 16),
-                      Text(
-                        fields.name,
-                        style: const TextStyle(
-                          fontSize: 28.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
+                      // Text(
+                      //   fields.name,
+                      //   style: const TextStyle(
+                      //     fontSize: 28.0,
+                      //     fontWeight: FontWeight.bold,
+                      //   ),
+                      // ),
                     ],
                   ),
                 ),
               ),
               const Divider(height: 30),
-              _buildDetailSection('Harga', 'Rp${formatter.format(fields.price)}', Icons.monetization_on),
-              _buildDetailSection('Jumlah', '${fields.amount}', Icons.storage),
-              _buildDetailSection('Tanggal masuk', '${fields.dateIn}', Icons.date_range),
-              _buildDetailSection('Stok kurang dari 5 hari', '${fields.stock}', Icons.check),
-              _buildDetailSection('Deskripsi', fields.description, Icons.description),
+              // _buildDetailSection('Harga', 'Rp${formatter.format(fields.price)}', Icons.monetization_on),
             ],
           ),
         ),
@@ -74,14 +70,14 @@ class CommentPage extends StatelessWidget {
       child: Row(
         children: <Widget>[
           Icon(icon, color: Colors.grey),
-          SizedBox(width: 10),
+          const SizedBox(width: 10),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
                   title,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 20,
                   ),

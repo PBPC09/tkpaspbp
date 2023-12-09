@@ -1,100 +1,73 @@
-  // RAW TEMPLATE FROM JESHUAMART
+// To parse this JSON data, do
+//
+//     final forumHead = forumHeadFromJson(jsonString);
 
-  // To parse this JSON data, do
-  //
-  //     final product = productFromJson(jsonString);
+import 'dart:convert';
 
-  import 'dart:convert';
+List<ForumHead> forumHeadFromJson(String str) => List<ForumHead>.from(json.decode(str).map((x) => ForumHead.fromJson(x)));
 
-  List<ForumHead> productFromJson(String str) => List<ForumHead>.from(json.decode(str).map((x) => ForumHead.fromJson(x)));
+String forumHeadToJson(List<ForumHead> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-  String productToJson(List<ForumHead> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+class ForumHead {
+    String model;
+    int pk;
+    Fields fields;
 
-  class ForumHead {
-      Model model;
-      int pk;
-      Fields fields;
+    ForumHead({
+        required this.model,
+        required this.pk,
+        required this.fields,
+    });
 
-      ForumHead({
-          required this.model,
-          required this.pk,
-          required this.fields,
-      });
+    factory ForumHead.fromJson(Map<String, dynamic> json) => ForumHead(
+        model: json["model"],
+        pk: json["pk"],
+        fields: Fields.fromJson(json["fields"]),
+    );
 
-      factory ForumHead.fromJson(Map<String, dynamic> json) => ForumHead(
-          model: modelValues.map[json["model"]]!,
-          pk: json["pk"],
-          fields: Fields.fromJson(json["fields"]),
-      );
+    Map<String, dynamic> toJson() => {
+        "model": model,
+        "pk": pk,
+        "fields": fields.toJson(),
+    };
+}
 
-      Map<String, dynamic> toJson() => {
-          "model": modelValues.reverse[model],
-          "pk": pk,
-          "fields": fields.toJson(),
-      };
-  }
+class Fields {
+    String book;
+    String user;
+    DateTime date;
+    String title;
+    String question;
+    int commentCounts;
+    bool ownedByCurrentUser;
 
-  class Fields {
-      int user;
-      String name;
-      int amount;
-      int price;
-      String description;
-      DateTime dateIn;
-      bool stock;
-      String categories;
+    Fields({
+        required this.book,
+        required this.user,
+        required this.date,
+        required this.title,
+        required this.question,
+        required this.commentCounts,
+        required this.ownedByCurrentUser,
+    });
 
-      Fields({
-          required this.user,
-          required this.name,
-          required this.amount,
-          required this.price,
-          required this.description,
-          required this.dateIn,
-          required this.stock,
-          required this.categories,
-      });
+    factory Fields.fromJson(Map<String, dynamic> json) => Fields(
+        book: json["book"],
+        user: json["user"],
+        date: DateTime.parse(json["date"]),
+        title: json["title"],
+        question: json["question"],
+        commentCounts: json["comment_counts"],
+        ownedByCurrentUser: json["owned_by_current_user"],
+    );
 
-      factory Fields.fromJson(Map<String, dynamic> json) => Fields(
-          user: json["user"],
-          name: json["name"],
-          amount: json["amount"],
-          price: json["price"],
-          description: json["description"],
-          dateIn: DateTime.parse(json["date_in"]),
-          stock: json["stock"],
-          categories: json["categories"],
-      );
-
-      Map<String, dynamic> toJson() => {
-          "user": user,
-          "name": name,
-          "amount": amount,
-          "price": price,
-          "description": description,
-          "date_in": "${dateIn.year.toString().padLeft(4, '0')}-${dateIn.month.toString().padLeft(2, '0')}-${dateIn.day.toString().padLeft(2, '0')}",
-          "stock": stock,
-          "categories": categories,
-      };
-  }
-
-  enum Model {
-      // ignore: constant_identifier_names
-      MAIN_PRODUCT
-  }
-
-  final modelValues = EnumValues({
-      "main.product": Model.MAIN_PRODUCT
-  });
-
-  class EnumValues<T> {
-      Map<String, T> map;
-      late Map<T, String> reverseMap;
-
-      EnumValues(this.map);
-
-      Map<T, String> get reverse {
-          reverseMap = map.map((k, v) => MapEntry(v, k));
-          return reverseMap;
-      }
-  }
+    Map<String, dynamic> toJson() => {
+        "book": book,
+        "user": user,
+        "date": "${date.year.toString().padLeft(4, '0')}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}",
+        "title": title,
+        "question": question,
+        "comment_counts": commentCounts,
+        "owned_by_current_user": ownedByCurrentUser,
+    };
+}
