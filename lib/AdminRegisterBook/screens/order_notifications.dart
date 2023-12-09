@@ -14,7 +14,7 @@ class NotificationPage extends StatefulWidget {
 class _NotificationPageState extends State<NotificationPage> {
   Future<List<OrderNotifications>> fetchNotifications(request) async {
     var data = await request.get(
-        'http://127.0.0.1:8000/get-notif/'); // Replace with your API endpoint
+        'http://127.0.0.1:8000/registerbook/get-notif/'); // Replace with your API endpoint
 
     // Convert JSON data to Notification objects
     List<OrderNotifications> notificationList = [];
@@ -78,17 +78,14 @@ class _NotificationPageState extends State<NotificationPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "${snapshot.data![index].fields.name}",
+                            "Pesanan masuk dari ${snapshot.data![index].fields.buyer}.",
                             style: const TextStyle(
                               fontSize: 18.0,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                           const SizedBox(height: 10),
-                          Text(
-                              "Amount : ${snapshot.data![index].fields.genres}"),
-                          Text(
-                              "Description : ${snapshot.data![index].fields.description}"),
+                          Text("${snapshot.data![index].fields.message}"),
                           const SizedBox(height: 10),
                         ],
                       ),
