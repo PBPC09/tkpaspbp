@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:lembarpena/Wishlist/models/book.dart';
 import 'package:lembarpena/authentication/login_page.dart';
 import 'dart:convert';
-
+import 'package:lembarpena/BookForum/screens/create_forum_page.dart'; // Pastikan import ini benar
 import 'package:lembarpena/BookForum/models/forumhead.dart';
 import 'package:lembarpena/BookForum/screens/comment_page.dart';
 import 'package:lembarpena/Main/widgets/left_drawer.dart';
@@ -36,7 +37,7 @@ class _ForumPageState extends State<ForumPage> {
 
 
   Future<void> deleteQuestion(String username, int id) async {
-      var url = Uri.parse('http://127.0.0.1:8000/delete_question/$username/$id');
+      var url = Uri.parse('http://127.0.0.1:8000/bookforum/delete_question/$username/$id');
       var response = await http.delete(url);
 
       if (response.statusCode == 201) {
@@ -84,8 +85,17 @@ class _ForumPageState extends State<ForumPage> {
                 return Card(
                   child: InkWell(
                     onTap: () {
-                      // Sesuaikan dengan navigasi ke halaman komentar
-
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ForumCommentsPage(
+                            forumHeadId: forumHeadData.pk,
+                            title: forumHeadFields.title,
+                            question: forumHeadFields.question,
+                            bookId: forumHeadData.fields.bookId // Misalnya
+                          ),
+                        ),
+                      );
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -120,6 +130,17 @@ class _ForumPageState extends State<ForumPage> {
           }
         },
       ),
-    );
+      floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            // Navigasi ke CreateForumPage
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const CreateForumPage()),
+            );
+          },
+          child: const Icon(Icons.add),
+          tooltip: 'Buat Forum Baru',
+        ),
+      );
   }
 }
