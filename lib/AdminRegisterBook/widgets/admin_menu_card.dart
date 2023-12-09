@@ -41,19 +41,19 @@ class AdminMenuCard extends StatelessWidget {
                   builder: (context) =>
                       const BookCollectionsPage(), // Gantilah dengan nama halaman "Book Collections" yang sesuai
                 ));
-          } else if (page.name == "Notification") {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) =>
-                      const NotificationPage(), // Gantilah dengan nama halaman "Notification" yang sesuai
-                ));
           } else if (page.name == "Book Form") {
             Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) =>
                       const BookFormPage(), // Gantilah dengan nama halaman "Notification" yang sesuai
+                ));
+          } else if (page.name == "Order Notifications") {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      const NotificationPage(), // Gantilah dengan nama halaman "Notification" yang sesuai
                 ));
           } else if (page.name == "Logout") {
             final response =

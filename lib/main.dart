@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:lembarpena/authentication/login_page.dart';
+<<<<<<< HEAD
 // import 'package:google_fonts/google_fonts.dart';
 // import 'package:litera_land_mobile/BrowseBooks/screens/browse_books_page.dart';
 import 'package:lembarpena/AdminRegisterBook/screens/admin_menu.dart';
+=======
+>>>>>>> 09b7086de19b1fc76b799359cd8bfb045191bfc4
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 
