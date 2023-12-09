@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:lembarpena/authentication/login_page.dart';
-// Impor drawer widget
-import 'package:lembarpena/widgets/left_drawer.dart';
-// Impor shop_card
-import 'package:lembarpena/widgets/lembarpena_card.dart';
+import 'package:lembarpena/Authentication/login_page.dart';
+import 'package:lembarpena/Main/widgets/left_drawer.dart';
+import 'package:lembarpena/Main/widgets/lembarpena_card.dart';
 
 class ShopItem {
   final String name;

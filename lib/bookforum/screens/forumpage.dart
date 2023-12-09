@@ -4,7 +4,7 @@ import 'dart:convert';
 
 import 'package:lembarpena/bookforum/models/forumhead.dart';
 import 'package:lembarpena/bookforum/screens/commentpage.dart';
-import 'package:lembarpena/widgets/left_drawer.dart';
+import 'package:lembarpena/Main/widgets/left_drawer.dart';
 
 class ForumPage extends StatefulWidget {
   const ForumPage({Key? key}) : super(key: key);
@@ -54,7 +54,8 @@ class _ForumPageState extends State<ForumPage> {
             return ListView.builder(
               itemCount: snapshot.data!.length,
               itemBuilder: (context, index) {
-                var barang = snapshot.data![index].fields; // Assuming fields has the necessary properties
+                var barang = snapshot.data![index]
+                    .fields; // Assuming fields has the necessary properties
                 return Card(
                   child: InkWell(
                     onTap: () {

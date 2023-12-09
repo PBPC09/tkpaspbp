@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:lembarpena/screens/menu.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
-import 'package:lembarpena/main.dart';
-import 'package:lembarpena/authentication/register.dart';
-import 'package:lembarpena/screens/menu.dart';
-import 'package:lembarpena/AdminRegisterBook/screens/admin_menu.dart';
-
+import 'package:lembarpena/Authentication/register.dart';
+import 'package:lembarpena/Main/screens/menu.dart';
+// import 'package:lembarpena/AdminRegisterBook/screens/admin_menu.dart';
 
 void main() {
   runApp(const LoginApp());
@@ -73,7 +70,6 @@ class _LoginPageState extends State<LoginPage> {
                 // gunakan URL http://10.0.2.2/
                 final response =
                     await request.login("http://localhost:8000/auth/login/", {
-
                   'username': username,
                   'password': password,
                 });
@@ -116,15 +112,12 @@ class _LoginPageState extends State<LoginPage> {
                 // Route menu ke counter
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(
-                      builder: (context) => RegistrationPage()),
+                  MaterialPageRoute(builder: (context) => RegistrationPage()),
                 );
               },
               child: Container(
                 decoration: const BoxDecoration(
-                    border: Border(
-                        bottom:
-                            BorderSide(width: 1))),
+                    border: Border(bottom: BorderSide(width: 1))),
                 child: const Text('Create New Account'),
               ),
             ),
@@ -134,4 +127,3 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 }
-
