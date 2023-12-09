@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:lembarpena/authentication/login_page.dart';
-// import 'package:lembarpena/screens/login.dart';
-
 
 class RegistrationPage extends StatefulWidget {
   @override
@@ -16,22 +14,19 @@ class _RegistrationPageState extends State<RegistrationPage> {
 
   String _selectedRole = 'buyer';
 
-
   Future<void> _registerUser() async { // nunggu yang login TKT SALAHHH
     final url = Uri.parse("http://localhost:8000/auth/register/"
     // final url = Uri.parse("https://lembarpena-c09-tk.pbp.cs.ui.ac.id/auth/register/"
         );
+    
     final response = await http.post(
       url,
       body: {
         'username': _usernameController.text,
         'email': _emailController.text,
-        'password1':
-            _passwordController.text,
-        'password2':
-            _passwordController.text, 
-        'role' :
-          _selectedRole,
+        'password1': _passwordController.text,
+        'password2': _passwordController.text,
+        'role': _selectedRole,
       },
     );
 
@@ -111,6 +106,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
               ),
               obscureText: true,
             ),
+
              DropdownButtonFormField<String>(
               value: _selectedRole,
               items: [

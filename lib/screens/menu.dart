@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 // Impor drawer widget
 import 'package:lembarpena/widgets/left_drawer.dart';
@@ -11,18 +10,20 @@ class ShopItem {
 
   ShopItem(this.name, this.icon);
 }
+
 class MyHomePage extends StatelessWidget {
-    MyHomePage({Key? key}) : super(key: key);
-    final List<ShopItem> items = [
+  MyHomePage({Key? key}) : super(key: key);
+  final List<ShopItem> items = [
     ShopItem("Buy Books", Icons.shopping_bag),
     ShopItem("Wishlist", Icons.favorite),
     ShopItem("Explore Book", Icons.book),
     ShopItem("Book Forum", Icons.chat),
+    ShopItem("Admin Page", Icons.admin_panel_settings),
     ShopItem("Logout", Icons.logout),
-];
-    @override
-    Widget build(BuildContext context) {
-       return Scaffold(
+  ];
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
       appBar: AppBar(
         title: const Text(
           'Hi - Username',
@@ -69,5 +70,5 @@ class MyHomePage extends StatelessWidget {
         ),
       ),
     );
-    }
+  }
 }
