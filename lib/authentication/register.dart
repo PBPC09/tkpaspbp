@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:lembarpena/authentication/login_page.dart';
@@ -21,13 +23,14 @@ class _RegistrationPageState extends State<RegistrationPage> {
     
     final response = await http.post(
       url,
-      body: {
+      headers: {'Content-Type': 'application/json'},  // Set the content type to JSON
+      body: jsonEncode ({
         'username': _usernameController.text,
         'email': _emailController.text,
         'password1': _passwordController.text,
         'password2': _passwordController.text,
         'role': _selectedRole,
-      },
+      }),
     );
 
     if (response.statusCode == 200) {

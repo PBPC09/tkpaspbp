@@ -4,6 +4,7 @@ import 'package:lembarpena/registerbook/screens/adminpage.dart';
 import 'package:lembarpena/screens/menu.dart';
 import 'package:lembarpena/wishlist/models/book.dart';
 import 'package:lembarpena/wishlist/screens/explore_book.dart';
+import 'package:lembarpena/wishlist/screens/my_wishlist.dart';
 
 class ShopCard extends StatelessWidget {
   final ShopItem item;
@@ -24,6 +25,27 @@ class ShopCard extends StatelessWidget {
                 content: Text("Kamu telah menekan tombol ${item.name}!")));
           if (item.name == "Home") {
             // TODO: Implement home button functionality.
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => MyHomePage(),
+                  ));
+          } else if (item.name == "Explore Book") {
+            // TODO: Implement explore book button functionality.
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ExploreBooksPage(),
+                ),
+              );
+          } else if (item.name == "WISHLIST") {
+            // TODO: Implement wishlist button functionality.
+              // Navigator.pushReplacement(
+              //   context,
+              //   MaterialPageRoute(
+              //     builder: (context) => const WishlistPage(),
+              //   ));
+          } else if (item.name == "CART") {
             // TODO: Implement cart button functionality.
           } else if (item.name == "Buy Books") {
             // TODO: Implement buy books button functionality.

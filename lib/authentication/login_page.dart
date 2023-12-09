@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lembarpena/screens/menu.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:lembarpena/main.dart';
@@ -81,23 +82,10 @@ class _LoginPageState extends State<LoginPage> {
                   String message = response['message'];
                   LoginPage.uname = response['username'];
                   String uname = LoginPage.uname;
-                  
-                  // Ambil peran (role) pengguna dari respons server
-                  String role = response['role'];
-
-                  // Tentukan halaman tujuan berdasarkan peran (role)
-                  if (role == 'admin') {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (context) => AdminPage()),
-                    );
-                  } else if (role == 'buyer') {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (context) => MyHomePage()),
-                    );
-                  }
-                  
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => MyHomePage()),
+                  );
                   ScaffoldMessenger.of(context)
                     ..hideCurrentSnackBar()
                     ..showSnackBar(SnackBar(
