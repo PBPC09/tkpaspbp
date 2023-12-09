@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-// import 'package:google_fonts/google_fonts.dart';
-// import 'package:litera_land_mobile/BrowseBooks/screens/browse_books_page.dart';
-import 'package:lembarpena/AdminRegisterBook/screens/admin_menu.dart';
+import 'package:lembarpena/authentication/login_page.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 
@@ -11,7 +9,6 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-  
 
   // This widget is the root of your application.
   @override
@@ -22,15 +19,14 @@ class MyApp extends StatelessWidget {
         return request;
       },
       child: MaterialApp(
-        title: 'LembarPena',
+        title: 'TOKO PBP',
         theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.black),
-          useMaterial3: true,
-          // textTheme: GoogleFonts.tiltNeonTextTheme(
-          //   Theme.of(context).textTheme,
-          // ),
+          primarySwatch: Colors.deepPurple,
         ),
-        home: AdminPage(),
+        home: LoginPage(),
+        routes: {
+          "/home": (BuildContext context) => const LoginPage(),
+        },
       ),
     );
   }
