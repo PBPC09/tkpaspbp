@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-// import 'package:inventory_app_mobile/screens/book_collections.dart'; // Gantilah dengan nama halaman "Book Collections" yang sesuai
-// import 'package:inventory_app_mobile/screens/notifications.dart'; // Gantilah dengan nama halaman "Notification" yang sesuai
-// import 'package:lembarpena/authentication/login_page.dart';
 import 'package:lembarpena/AdminRegisterBook/screens/book_collections.dart';
+import 'package:lembarpena/AdminRegisterBook/screens/book_form.dart';
 import 'package:lembarpena/AdminRegisterBook/screens/order_notifications.dart';
-// import 'package:pbp_django_auth/pbp_django_auth.dart';
-// import 'package:provider/provider.dart';
+import 'package:lembarpena/authentication/login_page.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
 
 class AdminMenuItem {
   final String name;
@@ -16,16 +15,16 @@ class AdminMenuItem {
 }
 
 class AdminMenuCard extends StatelessWidget {
-  final AdminMenuItem item;
+  final AdminMenuItem page;
 
-  const AdminMenuCard(this.item, {super.key}); // Constructor
+  const AdminMenuCard(this.page, {super.key}); // Constructor
 
   @override
   Widget build(BuildContext context) {
-    // final request = context.watch<CookieRequest>();
+    final request = context.watch<CookieRequest>();
 
     return Material(
-      color: item.color,
+      color: page.color,
       child: InkWell(
         // Area responsive terhadap sentuhan
         onTap: () async {
@@ -33,22 +32,48 @@ class AdminMenuCard extends StatelessWidget {
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(SnackBar(
-                content: Text("Kamu telah menekan tombol ${item.name}!")));
+                content: Text("Kamu telah menekan tombol ${page.name}!")));
 
-          if (item.name == "Book Collections") {
+          if (page.name == "Book Collections") {
             Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) =>
-                      BookCollectionsPage(), // Gantilah dengan nama halaman "Book Collections" yang sesuai
+                      const BookCollectionsPage(), // Gantilah dengan nama halaman "Book Collections" yang sesuai
                 ));
-          } else if (item.name == "Notification") {
+          } else if (page.name == "Notification") {
             Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) =>
-                      NotificationPage(), // Gantilah dengan nama halaman "Notification" yang sesuai
+                      const NotificationPage(), // Gantilah dengan nama halaman "Notification" yang sesuai
                 ));
+          } else if (page.name == "Book Form") {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      const BookFormPage(), // Gantilah dengan nama halaman "Notification" yang sesuai
+                ));
+          } else if (page.name == "Logout") {
+            final response =
+                await request.logout("http://127.0.0.1:8000/auth/logout/");
+            //"https://muhammad-hilal21-tugas.pbp.cs.ui.ac.id/auth/logout/");
+            String message = response["message"];
+            if (response['status']) {
+              String uname = response["username"];
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Text("$message Sampai jumpa, $uname."),
+              ));
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => const LoginPage()),
+              );
+            } else {
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Text("$message"),
+              ));
+            }
           }
         },
         child: Container(
@@ -59,13 +84,13 @@ class AdminMenuCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
-                  item.icon,
+                  page.icon,
                   color: Colors.white,
                   size: 30.0,
                 ),
                 const Padding(padding: EdgeInsets.all(3)),
                 Text(
-                  item.name,
+                  page.name,
                   textAlign: TextAlign.center,
                   style: const TextStyle(color: Colors.white),
                 ),
