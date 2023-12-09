@@ -14,9 +14,11 @@ class _RegistrationPageState extends State<RegistrationPage> {
 
   String _selectedRole = 'buyer';
 
-  Future<void> _registerUser() async {
-    // nunggu yang login TKT SALAHHH
-    final url = Uri.parse("http://localhost:8000/auth/register/");
+  Future<void> _registerUser() async { // nunggu yang login TKT SALAHHH
+    final url = Uri.parse("http://localhost:8000/auth/register/"
+    // final url = Uri.parse("https://lembarpena-c09-tk.pbp.cs.ui.ac.id/auth/register/"
+        );
+    
     final response = await http.post(
       url,
       body: {
@@ -104,7 +106,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
               ),
               obscureText: true,
             ),
-            DropdownButtonFormField<String>(
+
+             DropdownButtonFormField<String>(
               value: _selectedRole,
               items: [
                 DropdownMenuItem<String>(

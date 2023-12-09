@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:lembarpena/bookforum/screens/forumpage.dart';
 import 'package:lembarpena/registerbook/screens/adminpage.dart';
 import 'package:lembarpena/screens/menu.dart';
+import 'package:lembarpena/wishlist/models/book.dart';
+import 'package:lembarpena/wishlist/screens/explore_book.dart';
 
 class ShopCard extends StatelessWidget {
   final ShopItem item;
@@ -22,11 +24,6 @@ class ShopCard extends StatelessWidget {
                 content: Text("Kamu telah menekan tombol ${item.name}!")));
           if (item.name == "Home") {
             // TODO: Implement home button functionality.
-          } else if (item.name == "Explore Book") {
-            // TODO: Implement explore book button functionality.
-          } else if (item.name == "Wishlist") {
-            // TODO: Implement wishlist button functionality.
-          } else if (item.name == "Cart") {
             // TODO: Implement cart button functionality.
           } else if (item.name == "Buy Books") {
             // TODO: Implement buy books button functionality.
