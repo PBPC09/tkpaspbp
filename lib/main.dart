@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import 'package:lembarpena/authentication/login_page.dart';
+=======
+// import 'package:google_fonts/google_fonts.dart';
+// import 'package:litera_land_mobile/BrowseBooks/screens/browse_books_page.dart';
+>>>>>>> 36f857c74b8d8093b98dbe287d16085fa417c1d6
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 
@@ -12,6 +17,7 @@ class MyApp extends StatelessWidget {
 
   // This widget is the root of your application.
   @override
+<<<<<<< HEAD
     Widget build(BuildContext context) {
         return Provider(
             create: (_) {
@@ -31,3 +37,25 @@ class MyApp extends StatelessWidget {
         );
     }
 }
+=======
+  Widget build(BuildContext context) {
+    return Provider(
+      create: (_) {
+        CookieRequest request = CookieRequest();
+        return request;
+      },
+      child: MaterialApp(
+        title: 'LembarPena',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.black),
+          useMaterial3: true,
+          // textTheme: GoogleFonts.tiltNeonTextTheme(
+          //   Theme.of(context).textTheme,
+          // ),
+        ),
+        //home: const BrowseBooksPage(),
+      ),
+    );
+  }
+}
+>>>>>>> 36f857c74b8d8093b98dbe287d16085fa417c1d6

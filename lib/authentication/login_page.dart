@@ -4,6 +4,9 @@ import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:lembarpena/main.dart';
 import 'package:lembarpena/authentication/register.dart';
+import 'package:lembarpena/screens/menu.dart';
+import 'package:lembarpena/AdminRegisterBook/screens/admin_menu.dart';
+
 
 void main() {
   runApp(const LoginApp());
@@ -70,6 +73,7 @@ class _LoginPageState extends State<LoginPage> {
                 // gunakan URL http://10.0.2.2/
                 final response =
                     await request.login("http://localhost:8000/auth/login/", {
+
                   'username': username,
                   'password': password,
                 });
@@ -130,3 +134,4 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 }
+
