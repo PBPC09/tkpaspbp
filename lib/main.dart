@@ -3,6 +3,8 @@ import 'package:lembarpena/authentication/login_page.dart';
 // import 'package:google_fonts/google_fonts.dart';
 // import 'package:litera_land_mobile/BrowseBooks/screens/browse_books_page.dart';
 import 'package:lembarpena/AdminRegisterBook/screens/admin_menu.dart';
+import 'package:lembarpena/buybooks/screens/cart_page.dart';
+import 'package:lembarpena/buybooks/screens/buybooks_page.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 

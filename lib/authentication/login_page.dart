@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:lembarpena/main.dart';
 import 'package:lembarpena/screens/menu.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
-import 'package:lembarpena/main.dart';
 import 'package:lembarpena/authentication/register.dart';
-import 'package:lembarpena/screens/menu.dart';
-import 'package:lembarpena/AdminRegisterBook/screens/admin_menu.dart';
 
 void main() {
   runApp(const LoginApp());
@@ -80,15 +78,18 @@ class _LoginPageState extends State<LoginPage> {
                   String message = response['message'];
                   LoginPage.uname = response['username'];
                   String uname = LoginPage.uname;
+                  // ignore: use_build_context_synchronously
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(builder: (context) => MyHomePage()),
                   );
+                  // ignore: use_build_context_synchronously
                   ScaffoldMessenger.of(context)
                     ..hideCurrentSnackBar()
                     ..showSnackBar(SnackBar(
                         content: Text("$message Selamat datang, $uname.")));
                 } else {
+                  // ignore: use_build_context_synchronously
                   showDialog(
                     context: context,
                     builder: (context) => AlertDialog(
@@ -119,7 +120,9 @@ class _LoginPageState extends State<LoginPage> {
               },
               child: Container(
                 decoration: const BoxDecoration(
-                    border: Border(bottom: BorderSide(width: 1))),
+                    border: Border(
+                        bottom:
+                            BorderSide(width: 1))),
                 child: const Text('Create New Account'),
               ),
             ),

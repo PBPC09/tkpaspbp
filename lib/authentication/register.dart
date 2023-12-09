@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:lembarpena/authentication/login_page.dart';
 
+
 class RegistrationPage extends StatefulWidget {
   @override
   _RegistrationPageState createState() => _RegistrationPageState();
@@ -16,6 +17,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
 
   String _selectedRole = 'buyer';
 
+
   Future<void> _registerUser() async { // nunggu yang login TKT SALAHHH
     final url = Uri.parse("http://localhost:8000/auth/register/"
     // final url = Uri.parse("https://lembarpena-c09-tk.pbp.cs.ui.ac.id/auth/register/"
@@ -27,14 +29,18 @@ class _RegistrationPageState extends State<RegistrationPage> {
       body: jsonEncode ({
         'username': _usernameController.text,
         'email': _emailController.text,
-        'password1': _passwordController.text,
-        'password2': _passwordController.text,
-        'role': _selectedRole,
-      }),
-    );
+        'password1':
+            _passwordController.text,
+        'password2':
+            _passwordController.text, 
+        'role' :
+          _selectedRole,
+      },
+    ));
 
     if (response.statusCode == 200) {
       // Handle successful registration
+      // ignore: use_build_context_synchronously
       showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -57,6 +63,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
       );
     } else {
       // Handle registration errors
+      // ignore: use_build_context_synchronously
       showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -110,9 +117,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
               obscureText: true,
             ),
 
-             DropdownButtonFormField<String>(
+            DropdownButtonFormField<String>(
               value: _selectedRole,
-              items: [
+              items: const [
                 DropdownMenuItem<String>(
                   value: 'buyer',
                   child: Text('Buyer'),
@@ -127,11 +134,11 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   _selectedRole = value!;
                 });
               },
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Role',
               ),
             ),
-            SizedBox(height: 24.0),
+            const SizedBox(height: 24.0),
             const SizedBox(height: 24.0),
             ElevatedButton(
               onPressed: () async {
