@@ -9,6 +9,7 @@ import 'package:lembarpena/BookForum/screens/comment_page.dart';
 import 'package:lembarpena/Main/widgets/left_drawer.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
+import 'package:intl/intl.dart';
 
 class ForumPage extends StatefulWidget {
   const ForumPage({Key? key}) : super(key: key);
@@ -106,28 +107,60 @@ class _ForumPageState extends State<ForumPage> {
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center, // Tengah
                         children: [
                           Text(
                             forumHeadFields.title, // Judul Topik
                             style: const TextStyle(
                               fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            
                             ),
+                            
                           ),
-                          Text("Buku: ${forumHeadFields.book}"), // Buku
-                          Text("Penanya: ${forumHeadFields.user}"), // Penanya
-                          Text("Tanggal: ${forumHeadFields.date}"), // Tanggal
-                          // Tampilkan jumlah komentar jika tersedia
-                          Text("Jumlah Komentar: ${forumHeadFields.commentCounts}"),
-                          // Text("forumHeadFields: ${forumHeadFields.user}"),
-                          // Text("loggedIn: $loggedInUser"),
-
-                          if (forumHeadFields.user == loggedInUser) // Cek apakah pengguna yang login adalah pembuat
-                            ElevatedButton(
-                              onPressed: () {
-                                deleteQuestion(request,forumHeadFields.user, forumHeadData.pk);
-                              },
-                              child: const Text('Hapus'),
+                          const SizedBox(height: 10,),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Icon(Icons.book), // Ikon Buku
+                              Expanded(
+                                child: Text(
+                                  forumHeadFields.book,
+                                  overflow: TextOverflow.ellipsis, // Tambahkan ellipsis
+                                ),
+                              ),                              
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Icon(Icons.calendar_today), // Ikon Kalender
+                              Text(DateFormat('yyyy-MM-dd').format(forumHeadFields.date)), // Format Tanggal
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Icon(Icons.person), // Ikon Penanya
+                              Text(forumHeadFields.user),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Icon(Icons.comment), // Ikon Komentar
+                              Text("${forumHeadFields.commentCounts}"),
+                            ],
+                          ),
+                          if (forumHeadFields.user == loggedInUser) // Tombol Hapus
+                            Align(
+                              alignment: Alignment.centerRight,
+                              child: IconButton(
+                                icon: Icon(Icons.delete), // Ikon Tong Sampah
+                                onPressed: () {
+                                  deleteQuestion(request, forumHeadFields.user, forumHeadData.pk);
+                                },
+                              ),
                             ),
                         ],
                       ),

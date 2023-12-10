@@ -114,7 +114,7 @@ class _ForumCommentsPageState extends State<ForumCommentsPage> {
             children: [
               ListTile(
                   title: Text(widget.title + widget.question), // Judul ForumHead
-                  subtitle: Text(book.fields.title +
+                   subtitle: Text(book.fields.title +
                       book.fields.description), // Judul Buku
                 ),
               const Text("Belum ada Komentar"),
