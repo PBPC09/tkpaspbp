@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
         return request;
       },
       child: MaterialApp(
-        title: 'TOKO PBP',
+        title: 'LembarPena',
         theme: ThemeData(
           primarySwatch: Colors.deepPurple,
         ),

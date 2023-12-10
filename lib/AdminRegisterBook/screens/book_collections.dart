@@ -14,8 +14,8 @@ class BookCollectionsPage extends StatefulWidget {
 
 class _BookCollectionsPageState extends State<BookCollectionsPage> {
   Future<List<Book>> fetchBooks(request) async {
-    var data = await request.get(
-        'http://127.0.0.1:8000/registerbook/get-book/'); // Gantilah dengan URL yang sesuai
+    var data =
+        await request.get('http://127.0.0.1:8000/registerbook/get-book/');
 
     // Melakukan konversi data JSON menjadi objek Book
     List<Book> bookList = [];

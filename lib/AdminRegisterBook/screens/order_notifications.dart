@@ -13,8 +13,8 @@ class NotificationPage extends StatefulWidget {
 
 class _NotificationPageState extends State<NotificationPage> {
   Future<List<OrderNotifications>> fetchNotifications(request) async {
-    var data = await request.get(
-        'http://127.0.0.1:8000/registerbook/get-notif/'); // Replace with your API endpoint
+    var data =
+        await request.get('http://127.0.0.1:8000/registerbook/get-notif/');
 
     // Convert JSON data to Notification objects
     List<OrderNotifications> notificationList = [];
