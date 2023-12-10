@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:lembarpena/BookForum/screens/comment_page.dart';
 import 'dart:convert';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 
 class CreateCommentPage extends StatefulWidget {
   final int forumHeadId;
-
-  const CreateCommentPage({Key? key, required this.forumHeadId}) : super(key: key);
+  final String title;
+  final String question;
+  final int bookId;
+  const CreateCommentPage({Key? key, 
+    required this.forumHeadId,
+    required this.title,
+    required this.question,
+    required this.bookId,}) : super(key: key);
 
   @override
   _CreateCommentPageState createState() => _CreateCommentPageState();
@@ -68,7 +75,12 @@ class _CreateCommentPageState extends State<CreateCommentPage> {
                             content: Text("Komentar berhasil ditambahkan!"),
                           ),
                         );
-                        Navigator.pop(context); // Kembali ke halaman sebelumnya
+                        // Navigator.pop(context); // Kembali ke halaman sebelumnya
+                          // ignore: use_build_context_synchronously
+                          Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(builder: (context) => ForumCommentsPage(forumHeadId: widget.forumHeadId, bookId: widget.bookId, question: widget.question, title: widget.title,)),
+                          ); // Kembali ke halaman sebelumnya
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(

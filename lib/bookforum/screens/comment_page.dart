@@ -7,6 +7,8 @@ import 'package:lembarpena/BookForum/models/forumcomment.dart';
 import 'package:lembarpena/BookForum/models/forumhead.dart';
 import 'package:lembarpena/BookForum/screens/create_comment_page.dart';
 import 'package:lembarpena/Wishlist/models/book.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
 
 // Definisikan model ForumComment Anda di sini atau import dari file model
 
@@ -85,12 +87,11 @@ class _ForumCommentsPageState extends State<ForumCommentsPage> {
     });
   }
 
-  Future<void> deleteComment(String username, int commentId) async {
-    var url = Uri.parse(
-        'http://127.0.0.1:8000/bookforum/delete_comments/$username/$commentId'); // Sesuaikan dengan URL API Anda
-    var response = await http.delete(url);
+  Future<void> deleteComment(CookieRequest request,String username, int commentId) async { // Sesuaikan dengan URL API Anda
+    final response = await request.postJson('http://127.0.0.1:8000/bookforum/delete_comments_flutter/$username/$commentId', 
+    jsonEncode({}));
 
-    if (response.statusCode == 200) {
+    if (response['status'] == 'success') {
       // Handle berhasil menghapus
       fetchComments(); // Muat ulang komentar
     } else {
@@ -100,6 +101,8 @@ class _ForumCommentsPageState extends State<ForumCommentsPage> {
 
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Komentar Forum'),
@@ -140,7 +143,7 @@ class _ForumCommentsPageState extends State<ForumCommentsPage> {
                                   icon: Icon(Icons.delete),
                                   onPressed: () {
                                     // Implementasikan fungsi untuk menghapus komentar
-                                    deleteComment(loggedInUser, comment.pk);
+                                    deleteComment(request,loggedInUser, comment.pk);
                                   },
                                 )
                               : null,
@@ -155,7 +158,7 @@ class _ForumCommentsPageState extends State<ForumCommentsPage> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => CreateCommentPage(forumHeadId: widget.forumHeadId)),
+                  MaterialPageRoute(builder: (context) => CreateCommentPage(forumHeadId: widget.forumHeadId, title: widget.title, question: widget.question, bookId: widget.bookId,)),
                 );
               },
               child: const Icon(Icons.add),
