@@ -23,7 +23,7 @@ class _ForumPageState extends State<ForumPage> {
 
 
   Future<List<ForumHead>> fetchForumHeads() async {
-    var url = Uri.parse('http://127.0.0.1:8000/bookforum/forum/json/'); // Sesuaikan dengan URL endpoint Anda
+    var url = Uri.parse('http://10.0.2.2:8000/bookforum/forum/json/'); // Sesuaikan dengan URL endpoint Anda
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},
@@ -39,7 +39,7 @@ class _ForumPageState extends State<ForumPage> {
 
 
   Future<void> deleteQuestion(CookieRequest request,String username, int id) async {
-    final response = await request.postJson('http://127.0.0.1:8000/bookforum/delete_question_flutter/$username/$id', 
+    final response = await request.postJson('http://10.0.2.2:8000/bookforum/delete_question_flutter/$username/$id', 
     jsonEncode({}));
 
     if (response['status'] == 'success') {
