@@ -57,22 +57,6 @@ class _ForumPageState extends State<ForumPage> {
       // Handle error
 
     }
-      // var url = Uri.parse('http://127.0.0.1:8000/bookforum/delete_question/$username/$id');
-      // var response = await http.delete(url);
-
-      // if (response.statusCode == 201) {
-      //   setState(() {
-      //     // Memuat ulang data ForumHead
-      //     fetchForumHeads().then((newData) {
-      //       // Update state dengan data yang baru
-      //       setState(() {
-      //         forumHeads = newData;
-      //       });
-      //     });
-      //   });
-      // } else {
-      //   // Handle error
-      // }
   }
 
 
