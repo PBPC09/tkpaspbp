@@ -5,6 +5,7 @@ import 'dart:convert';
 
 import 'package:lembarpena/BookForum/models/forumcomment.dart';
 import 'package:lembarpena/BookForum/models/forumhead.dart';
+import 'package:lembarpena/BookForum/screens/create_comment_page.dart';
 import 'package:lembarpena/Wishlist/models/book.dart';
 
 // Definisikan model ForumComment Anda di sini atau import dari file model
@@ -150,6 +151,17 @@ class _ForumCommentsPageState extends State<ForumCommentsPage> {
                 ),
               ],
             ),
+            floatingActionButton: FloatingActionButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => CreateCommentPage(forumHeadId: widget.forumHeadId)),
+                );
+              },
+              child: const Icon(Icons.add),
+              tooltip: 'Tambah Komentar',
+            ),
     );
+    
   }
 }
