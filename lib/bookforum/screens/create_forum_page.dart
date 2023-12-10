@@ -61,29 +61,29 @@ class _CreateForumPageState extends State<CreateForumPage> {
     return listItem;
   }
 
-  void createForumHead() async {
-    var url = Uri.parse('http://10.0.2.2:8000/create_question/');
-    var response = await http.post(
-      url,
-      headers: {
-        "Content-Type": "application/json",
-        // Jika autentikasi diperlukan, tambahkan header untuk token autentikasi
-      },
-      body: json.encode({
-        'title': _title,
-        'book_id': _selectedBook?.pk,
-        'question': _question,
-      }),
-    );
+  // void createForumHead() async {
+  //   var url = Uri.parse('http://10.0.2.2:8000/create_question/');
+  //   var response = await http.post(
+  //     url,
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       // Jika autentikasi diperlukan, tambahkan header untuk token autentikasi
+  //     },
+  //     body: json.encode({
+  //       'title': _title,
+  //       'book_id': _selectedBook?.pk,
+  //       'question': _question,
+  //     }),
+  //   );
 
-    if (response.statusCode == 200) {
-      // Handle sukses
-      // menampilkan pesan sukses atau navigasi ke halaman lain
-    } else {
-      // Handle error
-      // menampilkan pesan error
-    }
-  }
+  //   if (response.statusCode == 200) {
+  //     // Handle sukses
+  //     // menampilkan pesan sukses atau navigasi ke halaman lain
+  //   } else {
+  //     // Handle error
+  //     // menampilkan pesan error
+  //   }
+  // }
 
 
   @override
@@ -113,8 +113,10 @@ class _CreateForumPageState extends State<CreateForumPage> {
                   return null;
                 },
               ),
+
               DropdownButtonFormField<Book>(
                 value: _selectedBook,
+                isExpanded: true,
                 onChanged: (Book? newValue) {
                   setState(() {
                     _selectedBook = newValue!;
@@ -126,11 +128,21 @@ class _CreateForumPageState extends State<CreateForumPage> {
                     child: Text("${book.fields.title} oleh ${book.fields.author}"),
                   );
                 }).toList(),
+                selectedItemBuilder: (BuildContext context) {
+                  return _books.map<Widget>((Book book) {
+                    return Text(
+                      "${book.fields.title} oleh ${book.fields.author}",
+                      overflow: TextOverflow.ellipsis, // Menambahkan ellipsis
+                      maxLines: 1,
+                    );
+                  }).toList();
+                },
                 validator: (value) => value == null ? 'Pilih buku' : null,
                 decoration: const InputDecoration(
                   labelText: 'Buku',
                 ),
               ),
+
 
               TextFormField(
                 decoration: const InputDecoration(

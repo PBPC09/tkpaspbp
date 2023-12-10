@@ -9,6 +9,7 @@ import 'package:lembarpena/BookForum/screens/create_comment_page.dart';
 import 'package:lembarpena/Wishlist/models/book.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
+import 'package:intl/intl.dart';
 
 // Definisikan model ForumComment Anda di sini atau import dari file model
 
@@ -108,63 +109,96 @@ class _ForumCommentsPageState extends State<ForumCommentsPage> {
         title: const Text('Komentar Forum'),
       ),
       body: !isBookLoaded
-        ? const Center(child: CircularProgressIndicator())
-        : comments.isEmpty
-          ? Column(
-            children: [
-              ListTile(
-                  title: Text(widget.title + widget.question), // Judul ForumHead
-                   subtitle: Text(book.fields.title +
-                      book.fields.description), // Judul Buku
-                ),
-              const Text("Belum ada Komentar"),
-            ],
-          )           
-          : Column(
-              children: [
-                ListTile(
-                  title: Text(widget.title + widget.question), // Judul ForumHead
-                  subtitle: Text(book.fields.title +
-                      book.fields.description), // Judul Buku
-                ),
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: comments.length,
-                    itemBuilder: (context, index) {
-                      var comment = comments[index];
-                      return Card(
-                        child: ListTile(
-                          title: Text(comment.fields.answer),
-                          subtitle: Text(
-                              "Dikirim oleh: ${comment.fields.user} pada ${comment.fields.date}"),
-                          trailing: comment.fields.user ==
-                                  loggedInUser // Ganti dengan username pengguna yang login
-                              ? IconButton(
-                                  icon: Icon(Icons.delete),
+          ? const Center(child: CircularProgressIndicator())
+          : Center(
+              child : Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                child : Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(height: 10),
+                    Text(
+                      widget.title, // Judul Forum
+                      style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.center,
+                    ),
+                    SizedBox(height: 5),
+                    Text(
+                      widget.question, // Pertanyaan
+                      style: TextStyle(fontSize: 18),
+                      textAlign: TextAlign.left,
+                    ),
+                    SizedBox(height: 5),
+                    InkWell(
+                      child: Text(
+                        book.fields.title, // Judul Buku
+                        style: TextStyle(fontSize: 16, color: Color.fromARGB(255, 13, 90, 154)),
+                      ),
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: Text(book.fields.title),
+                              content: SingleChildScrollView( // Membuat konten scrollable
+                                child: Text(book.fields.description),
+                              ),
+
+                              actions: <Widget>[
+                                TextButton(
+                                  child: const Text('Close'),
                                   onPressed: () {
-                                    // Implementasikan fungsi untuk menghapus komentar
-                                    deleteComment(request,loggedInUser, comment.pk);
+                                    Navigator.of(context).pop();
                                   },
-                                )
-                              : null,
-                        ),
-                      );
-                    },
-                  ),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      },
+                    ),
+                    SizedBox(height: 10),
+                    Expanded(
+                      child: comments.isEmpty
+                        ? const Text("Belum ada Komentar")
+                        : ListView.builder(
+                            itemCount: comments.length,
+                            itemBuilder: (context, index) {
+                              var comment = comments[index];
+                              var date = DateFormat('yyyy-MM-dd').format(comment.fields.date);
+                              return Card(
+                                child: ListTile(
+                                  title: Text(comment.fields.answer),
+                                  subtitle: Text(
+                                    
+                                      "Dikirim oleh: ${comment.fields.user} pada $date"),
+                                  trailing: comment.fields.user == loggedInUser
+                                      ? IconButton(
+                                          icon: Icon(Icons.delete),
+                                          onPressed: () {
+                                            deleteComment(request, loggedInUser, comment.pk);
+                                          },
+                                        )
+                                      : null,
+                                ),
+                              );
+                            },
+                          ),
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
-            floatingActionButton: FloatingActionButton(
-              onPressed: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => CreateCommentPage(forumHeadId: widget.forumHeadId, title: widget.title, question: widget.question, bookId: widget.bookId,)),
-                );
-              },
-              child: const Icon(Icons.add),
-              tooltip: 'Tambah Komentar',
-            ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => CreateCommentPage(forumHeadId: widget.forumHeadId, title: widget.title, question: widget.question, bookId: widget.bookId)),
+          );
+        },
+        child: const Icon(Icons.add),
+        tooltip: 'Tambah Komentar',
+      ),
     );
-    
   }
 }
