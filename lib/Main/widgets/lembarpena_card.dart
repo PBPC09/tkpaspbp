@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lembarpena/BookForum/screens/forum_page.dart';
+import 'package:lembarpena/Main/screens/landing_page.dart';
 import 'package:lembarpena/Main/screens/menu.dart';
 import 'package:lembarpena/Authentication/login_page.dart';
 import 'package:lembarpena/Wishlist/screens/explore_book.dart';
@@ -58,8 +59,10 @@ class ShopCard extends StatelessWidget {
             Navigator.push(
                 context, MaterialPageRoute(builder: (context) => AdminPage()));
           } else if (item.name == "Logout") {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const LoginPage()));
+              Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(builder: (context) => LandingPage()),
+                (Route<dynamic> route) => false,
+              );
           }
         },
         child: Container(
