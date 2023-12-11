@@ -34,6 +34,7 @@ class ForumHead {
 
 class Fields {
     String book;
+    int bookId;
     String user;
     DateTime date;
     String title;
@@ -43,6 +44,7 @@ class Fields {
 
     Fields({
         required this.book,
+        required this.bookId,
         required this.user,
         required this.date,
         required this.title,
@@ -53,6 +55,7 @@ class Fields {
 
     factory Fields.fromJson(Map<String, dynamic> json) => Fields(
         book: json["book"],
+        bookId: json["book_id"],
         user: json["user"],
         date: DateTime.parse(json["date"]),
         title: json["title"],
@@ -63,6 +66,7 @@ class Fields {
 
     Map<String, dynamic> toJson() => {
         "book": book,
+        "book_id": bookId,
         "user": user,
         "date": "${date.year.toString().padLeft(4, '0')}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}",
         "title": title,

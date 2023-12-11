@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lembarpena/Wishlist/models/book.dart';
+import 'package:lembarpena/AdminRegisterBook/models/book.dart';
 
 class WishlistPage extends StatefulWidget {
   final List<Book> wishlist;

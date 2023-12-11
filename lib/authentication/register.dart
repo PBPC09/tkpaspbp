@@ -21,7 +21,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
 
   Future<void> _registerUser() async {
     // nunggu yang login TKT SALAHHH
-    final url = Uri.parse("http://localhost:8000/auth/register/"
+    final url = Uri.parse("http://10.0.2.2:8000/auth/register/"
         // final url = Uri.parse("https://lembarpena-c09-tk.pbp.cs.ui.ac.id/auth/register/"
         );
 
@@ -149,6 +149,21 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 await _registerUser();
               },
               child: const Text('Register'),
+            ),
+            const SizedBox(height: 24.0),
+            GestureDetector(
+              onTap: () {
+                // Route menu ke counter
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => LoginPage()),
+                );
+              },
+              child: Container(
+                decoration: const BoxDecoration(
+                    border: Border(bottom: BorderSide(width: 1))),
+                child: const Text("Already have an account? Log in"),
+              ),
             ),
           ],
         ),

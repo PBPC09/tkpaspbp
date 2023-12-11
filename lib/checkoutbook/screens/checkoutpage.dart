@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:lembarpena/Main/widgets/left_drawer.dart';
 import 'dart:convert';
 import 'package:lembarpena/authentication/login_page.dart';
-import 'package:lembarpena/BuyBooks/screens/cart_page.dart';
-import 'package:lembarpena/BuyBooks/models/book.dart';
+import 'package:lembarpena/buybooks/models/cart_item.dart';
+// import 'package:lembarpena/Main/widgets/left_drawer.dart';
+// import 'package:lembarpena/BuyBooks/screens/cart_page.dart';
+// import 'package:lembarpena/BuyBooks/models/book.dart';
+
 
 class CheckoutPage extends StatefulWidget {
   const CheckoutPage({Key? key}) : super(key: key);
@@ -53,30 +55,30 @@ class _CheckoutPageState extends State<CheckoutPage> {
                 style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
               ),
             ),
-            DataTable(
-              columns: [
-                DataColumn(label: Text('Produk')),
-                DataColumn(label: Text('Harga Satuan')),
-                DataColumn(label: Text('Jumlah')),
-                DataColumn(label: Text('Subtotal Harga')),
-              ],
-              rows: cartItems.map((product) {
-                return DataRow(cells: [
-                  DataCell(Text(product['book']['title'])),
-                  DataCell(Text(
-                      '${product['book']['currency']} ${product['book']['price']}')),
-                  DataCell(Text('${product['quantity']}')),
-                  DataCell(Text('${product['subtotal']}')),
-                ]);
-              }).toList(),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 10.0),
-              child: Text(
-                'Total Harga: ${currency} ${totalPrice}',
-                style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-              ),
-            ),
+            // DataTable(
+            //   columns: [
+            //     DataColumn(label: Text('Produk')),
+            //     DataColumn(label: Text('Harga Satuan')),
+            //     DataColumn(label: Text('Jumlah')),
+            //     DataColumn(label: Text('Subtotal Harga')),
+            //   ],
+            //   rows: cartItemFromJson.((product) {
+            //     return DataRow(cells: [
+            //       DataCell(Text(product['book']['title'])),
+            //       DataCell(Text(
+            //           '${product['book']['currency']} ${product['book']['price']}')),
+            //       DataCell(Text('${product['quantity']}')),
+            //       DataCell(Text('${product['subtotal']}')),
+            //     ]);
+            //   }).toList(),
+            // ),
+            // Padding(
+            //   padding: EdgeInsets.symmetric(vertical: 10.0),
+            //   child: Text(
+            //     'Total Harga: ${Currency} ${totalPrice}',
+            //     style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+            //   ),
+            // ),
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: TextFormField(

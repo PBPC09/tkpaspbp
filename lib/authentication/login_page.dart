@@ -69,7 +69,8 @@ class _LoginPageState extends State<LoginPage> {
                 // Untuk menyambungkan Android emulator dengan Django pada localhost,
                 // gunakan URL http://10.0.2.2/
                 final response =
-                    await request.login("http://localhost:8000/auth/login/", {
+                      // await request.login("http://10.0.2.2:8000/auth/login/", {
+                      await request.login("http://localhost:8000/auth/login/", {
                   'username': username,
                   'password': password,
                 });
@@ -121,7 +122,7 @@ class _LoginPageState extends State<LoginPage> {
               child: Container(
                 decoration: const BoxDecoration(
                     border: Border(bottom: BorderSide(width: 1))),
-                child: const Text('Create New Account'),
+                child: const Text("Don't have an account yet? Sign up"),
               ),
             ),
           ],
