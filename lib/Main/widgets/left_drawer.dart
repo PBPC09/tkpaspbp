@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+<<<<<<< HEAD:lib/widgets/left_drawer.dart
 import 'package:lembarpena/screens/menu.dart';
+=======
+import 'package:lembarpena/BookForum/screens/forum_page.dart';
+import 'package:lembarpena/Main/screens/menu.dart';
+>>>>>>> 7cd3c98b6f288548df97b43e7001990727b67d1d:lib/Main/widgets/left_drawer.dart
 
 class LeftDrawer extends StatelessWidget {
   const LeftDrawer({super.key});
@@ -26,14 +31,15 @@ class LeftDrawer extends StatelessWidget {
                   ),
                 ),
                 Padding(padding: EdgeInsets.all(10)),
-                Text("cari buku disini bro",
-                    // Tambahkan gaya teks dengan center alignment, font ukuran 15, warna putih, dan weight biasa
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 15,
-                      color: Colors.white,
-                      fontWeight: FontWeight.normal,
-                    ),
+                Text(
+                  "Cari buku disini bro",
+                  // Tambahkan gaya teks dengan center alignment, font ukuran 15, warna putih, dan weight biasa
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: Colors.white,
+                    fontWeight: FontWeight.normal,
+                  ),
                 ),
               ],
             ),
@@ -70,35 +76,30 @@ class LeftDrawer extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.favorite),
             title: const Text('Wishlist'),
-
-            onTap: () {
-            },
+            onTap: () {},
           ),
           ListTile(
             leading: const Icon(Icons.add_shopping_cart),
             title: const Text('Cart'),
-
-            onTap: () {
-            },
+            onTap: () {},
           ),
           ListTile(
             leading: const Icon(Icons.shopping_bag),
             title: const Text('Buy Books'),
-
-            onTap: () {
-            },
+            onTap: () {},
           ),
           ListTile(
             leading: const Icon(Icons.chat),
             title: const Text('Book Forum'),
             onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const ForumPage()));
             },
           ),
           ListTile(
             leading: const Icon(Icons.receipt),
             title: const Text('My Order'),
-            onTap: () {
-            },
+            onTap: () {},
           ),
         ],
       ),

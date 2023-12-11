@@ -1,9 +1,7 @@
-
 import 'package:flutter/material.dart';
-// Impor drawer widget
-import 'package:lembarpena/widgets/left_drawer.dart';
-// Impor shop_card
-import 'package:lembarpena/widgets/lembarpena_card.dart';
+import 'package:lembarpena/Authentication/login_page.dart';
+import 'package:lembarpena/Main/widgets/left_drawer.dart';
+import 'package:lembarpena/Main/widgets/lembarpena_card.dart';
 
 class ShopItem {
   final String name;
@@ -11,21 +9,24 @@ class ShopItem {
 
   ShopItem(this.name, this.icon);
 }
+
 class MyHomePage extends StatelessWidget {
-    MyHomePage({Key? key}) : super(key: key);
-    final List<ShopItem> items = [
+  MyHomePage({Key? key}) : super(key: key);
+  final List<ShopItem> items = [
     ShopItem("Buy Books", Icons.shopping_bag),
     ShopItem("Wishlist", Icons.favorite),
-    ShopItem("Book Profile", Icons.book),
+    ShopItem("Explore Book", Icons.book),
     ShopItem("Book Forum", Icons.chat),
+    ShopItem("Admin Page", Icons.admin_panel_settings),
     ShopItem("Logout", Icons.logout),
-];
-    @override
-    Widget build(BuildContext context) {
-       return Scaffold(
+  ];
+  @override
+  Widget build(BuildContext context) {
+    String uname = LoginPage.uname;
+    return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Hi - Username',
+        title: Text(
+          'Hi - $uname !',
         ),
         backgroundColor: Colors.indigo,
         foregroundColor: Colors.white,
@@ -69,5 +70,5 @@ class MyHomePage extends StatelessWidget {
         ),
       ),
     );
-    }
+  }
 }

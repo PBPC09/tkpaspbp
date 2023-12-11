@@ -1,15 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:lembarpena/Main/widgets/left_drawer.dart';
+import 'dart:convert';
+import 'package:lembarpena/authentication/login_page.dart';
+import 'package:lembarpena/BuyBooks/screens/cart_page.dart';
+import 'package:lembarpena/BuyBooks/models/book.dart';
 
-class CheckoutPage extends StatelessWidget {
-  final List<Map<String, dynamic>> cartItems;
-  final String currency;
-  final double totalPrice;
+class CheckoutPage extends StatefulWidget {
+  const CheckoutPage({Key? key}) : super(key: key);
 
-  CheckoutPage({
-    required this.cartItems,
-    required this.currency,
-    required this.totalPrice,
-  });
+  @override
+  _CheckoutPageState createState() => _CheckoutPageState();
+}
+
+class _CheckoutPageState extends State<CheckoutPage> {
+  Future<List<CartItem>> fetchProduct() async {
+    String uname = LoginPage.uname;
+    var url = Uri.parse('http://127.0.0.1:8000/show_cart_json/$uname/');
+    var response = await http.get(
+      url,
+      headers: {"Content-Type": "application/json"},
+    );
+
+    // melakukan decode response menjadi bentuk json
+    var data = jsonDecode(utf8.decode(response.bodyBytes));
+
+    // melakukan konversi data json menjadi object Product
+    List<CartItem> listItem = [];
+    for (var d in data) {
+      if (d != null) {
+        listItem.add(CartItem.fromJson(d));
+      }
+    }
+    return listItem;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +92,9 @@ class CheckoutPage extends StatelessWidget {
               contentPadding: EdgeInsets.all(0.0),
             ),
             RadioListTile(
-              title: const Text('Kartu Kredit'),
+              title: const Text(
+                'Kartu Kredit',
+              ),
               value: 'Kartu Kredit',
               groupValue: null,
               onChanged: (value) {
@@ -110,6 +136,7 @@ class CheckoutPage extends StatelessWidget {
                 child: const Text('Checkout'),
               ),
             ),
+            ElevatedButton(onPressed: () {}, child: const Text('Berhasil'))
           ],
         ),
       ),
