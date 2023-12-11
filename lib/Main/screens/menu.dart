@@ -11,7 +11,7 @@ class MenuItem {
   MenuItem(this.name, this.icon, this.color);
 }
 
-class MyHomePage extends StatefulWidget {
+class MyHomePage extends StatelessWidget {
   MyHomePage({Key? key}) : super(key: key);
   final List<MenuItem> pages = [
     MenuItem("Buy Books", Icons.shopping_bag, Colors.indigo),
@@ -76,9 +76,4 @@ class MyHomePage extends StatefulWidget {
     );
   }
   
-  @override
-  State<StatefulWidget> createState() {
-    // TODO: implement createState
-    throw UnimplementedError();
-  }
 }

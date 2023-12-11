@@ -5,19 +5,24 @@ import 'package:lembarpena/Main/screens/menu.dart';
 import 'package:lembarpena/Authentication/login_page.dart';
 import 'package:lembarpena/Wishlist/screens/explore_book.dart';
 import 'package:lembarpena/AdminRegisterBook/screens/admin_menu.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
 
 class MenuCard extends StatelessWidget {
   final MenuItem page;
 
-  const MenuCard(this.page, {super.key}); // Constructor
+  const MenuCard(this.page, {super.key});
+  
+  get request => null; // Constructor
 
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
     return Material(
       color: page.color,
       child: InkWell(
         // Area responsive terhadap sentuhan
-        onTap: () {
+        onTap: () async {
           // Memunculkan SnackBar ketika diklik
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
@@ -59,10 +64,23 @@ class MenuCard extends StatelessWidget {
             Navigator.push(
                 context, MaterialPageRoute(builder: (context) => AdminPage()));
           } else if (page.name == "Logout") {
-              Navigator.of(context).pushAndRemoveUntil(
+              final response =
+                  // await request.login("http://10.0.2.2:8000/auth/login/", {
+                  await request.logout("http://localhost:8000/auth/logout/");
+              if(request.loggedIn == false){
+                // ignore: use_build_context_synchronously
+                Navigator.of(context).pushAndRemoveUntil(
                 MaterialPageRoute(builder: (context) => LandingPage()),
                 (Route<dynamic> route) => false,
               );
+              }
+              else{
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text("Terdapat kesalahan, silakan coba lagi."),
+                  ),
+                );
+              }
           }
         },
         child: Container(
