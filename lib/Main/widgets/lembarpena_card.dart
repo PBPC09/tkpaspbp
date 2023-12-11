@@ -58,7 +58,7 @@ class MenuCard extends StatelessWidget {
           } else if (page.name == "Admin Page") {
             Navigator.push(
                 context, MaterialPageRoute(builder: (context) => AdminPage()));
-          } else if (item.name == "Logout") {
+          } else if (page.name == "Logout") {
               Navigator.of(context).pushAndRemoveUntil(
                 MaterialPageRoute(builder: (context) => LandingPage()),
                 (Route<dynamic> route) => false,
