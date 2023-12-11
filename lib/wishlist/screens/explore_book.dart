@@ -133,10 +133,10 @@ class _ExploreBooksPageState extends State<ExploreBooksPage> {
             }),
             bottomNavigationBar: BottomNavigationBar(
               type: BottomNavigationBarType.fixed,
-              currentIndex: 0,
+              currentIndex: 1,
               backgroundColor: Colors.indigo,
-              selectedItemColor: Color(0xFFFFECB6),
-              unselectedItemColor: Color(0xFFFFECB6),
+              selectedItemColor: Color.fromARGB(255, 255, 255, 255),
+              unselectedItemColor:Color.fromARGB(255, 156, 143, 255),
               items: const [
                 BottomNavigationBarItem(
                   icon: Icon(Icons.home), // Ganti dengan path gambar yang sesuai

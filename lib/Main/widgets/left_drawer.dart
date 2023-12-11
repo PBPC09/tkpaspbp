@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lembarpena/BookForum/screens/forum_page.dart';
+import 'package:lembarpena/Main/screens/landing_page.dart';
 import 'package:lembarpena/Main/screens/menu.dart';
 import 'package:lembarpena/Wishlist/screens/explore_book.dart';
 import 'package:lembarpena/Authentication/login_page.dart';
@@ -103,23 +104,27 @@ class LeftDrawer extends StatelessWidget {
             title: const Text('Logout'),
             // Bagian redirection ke ShopFormPage
             onTap: () async {
-              final response =
-                  await request.logout("http://127.0.0.1:8000/auth/logout/");
-              String message = response["message"];
-              if (response['status']) {
-                String uname = response["username"];
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                  content: Text("$message See you again, $uname!"),
-                ));
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => const LoginPage()),
-                );
-              } else {
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                  content: Text("$message"),
-                ));
-              }
+                final response = await request.logout("http://localhost:8000/auth/logout/");
+                // await request.login("http://10.0.2.2:8000/auth/login/", {
+                String message = response["message"];
+                if (response['status']) {
+                  String uname = response["username"];
+                  // ignore: use_build_context_synchronously
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: Text("$message Sampai jumpa, $uname!"),
+                  ));
+                  // ignore: use_build_context_synchronously
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => LandingPage()),
+                    (Route<dynamic> route) => false,
+                  );
+                } else {
+                  // ignore: use_build_context_synchronously
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: Text(message),
+                  ));
+                }              
             },
           ),
         ],

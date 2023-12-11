@@ -131,7 +131,7 @@ class _ForumCommentsPageState extends State<ForumCommentsPage> {
                     Text(
                       widget.question, // Pertanyaan
                       style: TextStyle(fontSize: 18),
-                      textAlign: TextAlign.left,
+                      textAlign: TextAlign.center,
                     ),
                     SizedBox(height: 5),
                     InkWell(
@@ -146,7 +146,13 @@ class _ForumCommentsPageState extends State<ForumCommentsPage> {
                             return AlertDialog(
                               title: Text(book.fields.title),
                               content: SingleChildScrollView( // Membuat konten scrollable
-                                child: Text(book.fields.description),
+                                child: Text(book.fields.description,
+                                  textAlign: TextAlign.justify,
+                                  style: const TextStyle(
+                                    fontSize: 14,
+                                  ),
+                                
+                                ),
                               ),
 
                               actions: <Widget>[

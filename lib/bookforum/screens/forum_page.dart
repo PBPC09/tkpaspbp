@@ -86,13 +86,13 @@ class _ForumPageState extends State<ForumPage> {
     final request = context.watch<CookieRequest>();
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Forum LembarPena'),
+        title: const Text('Forum Buku'),
       ),
       drawer: const LeftDrawer(),
       body: Column(
           children : [
             ListTile(
-            title: const Text("Tampilkan Forum Populer"),
+            title: const Text("Tampilkan forum buku populer saja"),
             leading: Checkbox(
               value: isChecked,
               onChanged: (bool? value) {
@@ -156,10 +156,13 @@ class _ForumPageState extends State<ForumPage> {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     const Icon(Icons.book), // Ikon Buku
+                                    const Text("  "),// Ikon Kalender
                                     Expanded(
                                       child: Text(
                                         forumHeadFields.book,
-                                        overflow: TextOverflow.ellipsis, // Tambahkan ellipsis
+                                        overflow: TextOverflow.ellipsis,
+                                         // Tambahkan ellipsis
+                                        style: const TextStyle(fontSize: 18), // Format Tanggal
                                       ),
                                     ),                              
                                   ],
@@ -167,29 +170,38 @@ class _ForumPageState extends State<ForumPage> {
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
-                                    Icon(Icons.calendar_today), // Ikon Kalender
-                                    Text(DateFormat('yyyy-MM-dd').format(forumHeadFields.date)), // Format Tanggal
+                                    const Icon(Icons.calendar_today),
+                                    const Text("  "),// Ikon Kalender
+                                    Text(DateFormat('yyyy-MM-dd').format(forumHeadFields.date), 
+                                    style: const TextStyle(fontSize: 18),
+                                    ), // Format Tanggal
                                   ],
                                 ),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     Icon(Icons.person), // Ikon Penanya
-                                    Text(forumHeadFields.user),
+                                    const Text("  "),// Ikon Kalender
+                                    Text(forumHeadFields.user,
+                                      style: const TextStyle(fontSize: 18),
+                                    ),
                                   ],
                                 ),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
-                                    Icon(Icons.comment), // Ikon Komentar
-                                    Text("${forumHeadFields.commentCounts}"),
+                                    const Icon(Icons.comment), // Ikon Komentar
+                                    const Text("  "),// Ikon Kalender
+                                    Text("${forumHeadFields.commentCounts}",
+                                      style: const TextStyle(fontSize: 18),
+                                    ),
                                   ],
                                 ),
                                 if (forumHeadFields.user == loggedInUser) // Tombol Hapus
                                   Align(
                                     alignment: Alignment.centerRight,
                                     child: IconButton(
-                                      icon: Icon(Icons.delete), // Ikon Tong Sampah
+                                      icon: const Icon(Icons.delete), // Ikon Tong Sampah
                                       onPressed: () {
                                         deleteQuestion(request, forumHeadFields.user, forumHeadData.pk);
                                       },
@@ -210,10 +222,10 @@ class _ForumPageState extends State<ForumPage> {
       ),
       bottomNavigationBar: BottomNavigationBar(
               type: BottomNavigationBarType.fixed,
-              currentIndex: 0,
+              currentIndex: 2,
               backgroundColor: Colors.indigo,
-              selectedItemColor: Color(0xFFFFECB6),
-              unselectedItemColor: Color(0xFFFFECB6),
+              selectedItemColor: Color.fromARGB(255, 255, 255, 255),
+              unselectedItemColor:Color.fromARGB(255, 156, 143, 255),
               items: const [
                 BottomNavigationBarItem(
                   icon: Icon(Icons.home), // Ganti dengan path gambar yang sesuai
