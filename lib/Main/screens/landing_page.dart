@@ -24,20 +24,42 @@ class _LandingPageState extends State<LandingPage> {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            const Stack(
+            Stack(
               alignment: Alignment.center,
               children: <Widget>[
-                Placeholder(
-                  fallbackHeight: 200,
+                Image.asset(
+                  'image/imagecover.jpg',
+                  height: 400,
+                  fit: BoxFit.cover, // Menyesuaikan bagaimana gambar diisi dalam ruang yang tersedia
                 ),
-                Text(
-                  'Nikmati buku, semua dalam 1 aplikasi',
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
+                Container(
+                  height: 400,
+                  color: Color.fromARGB(255, 1, 37, 158).withOpacity(0.5), // Warna dengan opacity
                 ),
+                const Column(
+                  children: 
+                  [
+                    Text(
+                    'Nikmati buku,',
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                    ),
+                    Text(
+                    'semua dalam 1 aplikasi',
+                    textAlign: TextAlign.left,
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                        fontStyle: FontStyle.italic,
+                      ),
+                    ),
+                  ],
+                ) 
               ],
             ),
             const SizedBox(height: 20),
