@@ -137,6 +137,7 @@ class _ForumCommentsPageState extends State<ForumCommentsPage> {
                     InkWell(
                       child: Text(
                         book.fields.title, // Judul Buku
+                        textAlign: TextAlign.center,
                         style: TextStyle(fontSize: 16, color: Color.fromARGB(255, 13, 90, 154)),
                       ),
                       onTap: () {
