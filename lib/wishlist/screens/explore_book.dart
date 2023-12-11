@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:lembarpena/AdminRegisterBook/widgets/admin_left_drawer.dart';
+import 'package:lembarpena/BookForum/screens/forum_page.dart';
+import 'package:lembarpena/Main/screens/menu.dart';
+import 'package:lembarpena/Main/widgets/left_drawer.dart';
 import 'dart:convert';
 import 'package:lembarpena/wishlist/models/book.dart';
 import 'package:lembarpena/wishlist/screens/detail_buku.dart';
@@ -128,6 +130,60 @@ class _ExploreBooksPageState extends State<ExploreBooksPage> {
                 );
 
               }
-            }));
+            }),
+            bottomNavigationBar: BottomNavigationBar(
+              type: BottomNavigationBarType.fixed,
+              currentIndex: 0,
+              backgroundColor: Colors.indigo,
+              selectedItemColor: Color(0xFFFFECB6),
+              unselectedItemColor: Color(0xFFFFECB6),
+              items: const [
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.home), // Ganti dengan path gambar yang sesuai
+                  label: 'Home',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.search), // Ganti dengan path gambar yang sesuai
+                  label: 'Explore Book',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.forum), // Ganti dengan path gambar yang sesuai
+                  label: 'Book Forum',
+                ),
+              ],
+              onTap: (index) {
+                switch (index) {
+                  case 0:
+                    Navigator.pushReplacement(
+                      context,
+                      PageRouteBuilder(
+                        pageBuilder: (_, __, ___) => MyHomePage(),
+                        transitionDuration: Duration.zero,
+                      ),
+                    );
+                    break;
+                  case 1:
+                    Navigator.pushReplacement(
+                      context,
+                      PageRouteBuilder(
+                        pageBuilder: (_, __, ___) => const ExploreBooksPage(),
+                        transitionDuration: Duration.zero,
+                      ),
+                    );
+                    break;
+                  case 2:
+                    Navigator.pushReplacement(
+                      context,
+                      PageRouteBuilder(
+                        pageBuilder: (_, __, ___) => const ForumPage(),
+                        transitionDuration: Duration.zero,
+                      ),
+                    );
+                    break;
+                }
+              },
+            ),
+            );
+    
   }
 }

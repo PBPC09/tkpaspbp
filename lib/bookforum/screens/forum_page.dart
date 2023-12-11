@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:lembarpena/Main/screens/menu.dart';
 import 'package:lembarpena/Wishlist/models/book.dart';
 import 'package:lembarpena/Authentication/login_page.dart';
 import 'dart:convert';
@@ -7,6 +8,7 @@ import 'package:lembarpena/BookForum/screens/create_forum_page.dart'; // Pastika
 import 'package:lembarpena/BookForum/models/forumhead.dart';
 import 'package:lembarpena/BookForum/screens/comment_page.dart';
 import 'package:lembarpena/Main/widgets/left_drawer.dart';
+import 'package:lembarpena/Wishlist/screens/explore_book.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
@@ -206,7 +208,58 @@ class _ForumPageState extends State<ForumPage> {
           )
         ]
       ),
-      
+      bottomNavigationBar: BottomNavigationBar(
+              type: BottomNavigationBarType.fixed,
+              currentIndex: 0,
+              backgroundColor: Colors.indigo,
+              selectedItemColor: Color(0xFFFFECB6),
+              unselectedItemColor: Color(0xFFFFECB6),
+              items: const [
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.home), // Ganti dengan path gambar yang sesuai
+                  label: 'Home',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.search), // Ganti dengan path gambar yang sesuai
+                  label: 'Explore Book',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.forum), // Ganti dengan path gambar yang sesuai
+                  label: 'Book Forum',
+                ),
+              ],
+              onTap: (index) {
+                switch (index) {
+                  case 0:
+                    Navigator.pushReplacement(
+                      context,
+                      PageRouteBuilder(
+                        pageBuilder: (_, __, ___) => MyHomePage(),
+                        transitionDuration: Duration.zero,
+                      ),
+                    );
+                    break;
+                  case 1:
+                    Navigator.pushReplacement(
+                      context,
+                      PageRouteBuilder(
+                        pageBuilder: (_, __, ___) => const ExploreBooksPage(),
+                        transitionDuration: Duration.zero,
+                      ),
+                    );
+                    break;
+                  case 2:
+                    Navigator.pushReplacement(
+                      context,
+                      PageRouteBuilder(
+                        pageBuilder: (_, __, ___) => const ForumPage(),
+                        transitionDuration: Duration.zero,
+                      ),
+                    );
+                    break;
+                }
+              },
+            ),
       floatingActionButton: FloatingActionButton(
           onPressed: () {
             // Navigasi ke CreateForumPage

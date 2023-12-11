@@ -2,7 +2,9 @@
     <application
         android:label="lembarpena"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ic_launcher"
+        android:usesCleartextTraffic="true">
+        <!-- baris terakhir baru bryan tambahin -->
         <activity
             android:name=".MainActivity"
             android:exported="true"
