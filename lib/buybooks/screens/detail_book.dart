@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lembarpena/buybooks/models/book.dart';
+import 'package:lembarpena/BuyBooks/models/book.dart';
+import 'package:lembarpena/buybooks/screens/add_to_cart_form.dart';
 
 class ItemDetailPage extends StatelessWidget {
   final Book item;
@@ -35,6 +36,18 @@ class ItemDetailPage extends StatelessWidget {
             Text('Page Count: ${item.fields.pageCount}'),
             SizedBox(height: 10),
             Text('Description: ${item.fields.description}'),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => CartFormPage(book: item),
+                  ),
+                );
+              },
+              child: Text('Tambah ke Keranjang'),
+            ),
           ],
         ),
       ),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lembarpena/BookForum/screens/forum_page.dart';
+import 'package:lembarpena/BuyBooks/screens/buybooks_page.dart';
+import 'package:lembarpena/BuyBooks/screens/cart_page.dart';
 import 'package:lembarpena/Main/screens/menu.dart';
 
 class LeftDrawer extends StatelessWidget {
@@ -77,12 +79,24 @@ class LeftDrawer extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.add_shopping_cart),
             title: const Text('Cart'),
-            onTap: () {},
+            onTap: () {
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const CartPage(),
+                  ));
+            },
           ),
           ListTile(
             leading: const Icon(Icons.shopping_bag),
             title: const Text('Buy Books'),
-            onTap: () {},
+            onTap: () {
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const BuyBooksPage(),
+                  ));
+            },
           ),
           ListTile(
             leading: const Icon(Icons.chat),

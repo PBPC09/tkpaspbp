@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lembarpena/BookForum/screens/forum_page.dart';
+import 'package:lembarpena/BuyBooks/screens/buybooks_page.dart';
+import 'package:lembarpena/BuyBooks/screens/cart_page.dart';
 import 'package:lembarpena/Main/screens/menu.dart';
 import 'package:lembarpena/Authentication/login_page.dart';
 import 'package:lembarpena/Wishlist/screens/explore_book.dart';
@@ -45,9 +47,17 @@ class ShopCard extends StatelessWidget {
             //     builder: (context) => const WishlistPage(),
             //   ));
           } else if (item.name == "CART") {
-            // TODO: Implement cart button functionality.
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const CartPage(),
+                ));
           } else if (item.name == "Buy Books") {
-            // TODO: Implement buy books button functionality.
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const BuyBooksPage(),
+                ));
           } else if (item.name == "Book Forum") {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => const ForumPage()));
