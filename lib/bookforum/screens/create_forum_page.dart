@@ -124,10 +124,26 @@ class _CreateForumPageState extends State<CreateForumPage> {
                   });
                 },
                 items: _books.map<DropdownMenuItem<Book>>((Book book) {
-                  return DropdownMenuItem<Book>(
-                    value: book,
-                    child: Text("${book.fields.title} oleh ${book.fields.author}"),
-                  );
+                return DropdownMenuItem<Book>(
+                  value: book,
+                  child: Container(
+                    width: 400,
+                    padding: EdgeInsets.all(8.0), // Menambahkan padding di dalam border
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.grey, // Warna border, sesuaikan sesuai kebutuhan
+                        width: 1.0, // Ketebalan border
+                      ),
+                      borderRadius: BorderRadius.circular(5.0), // Memberikan sudut yang membulat
+                    ),
+                    child: Column(
+                      children: [
+                        Text("${book.fields.title} oleh ${book.fields.author}"),
+                        Text("Rating ${book.fields.rating} - SAR ${book.fields.price} "),
+                      ],
+                    ),
+                  ),
+                );
                 }).toList(),
                 selectedItemBuilder: (BuildContext context) {
                   return _books.map<Widget>((Book book) {
