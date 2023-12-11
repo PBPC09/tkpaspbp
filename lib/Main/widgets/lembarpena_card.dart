@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:lembarpena/BookForum/screens/forum_page.dart';
 import 'package:lembarpena/Main/screens/landing_page.dart';
 import 'package:lembarpena/Main/screens/menu.dart';
+import 'package:lembarpena/Authentication/login_page.dart';
 import 'package:lembarpena/Wishlist/screens/explore_book.dart';
+import 'package:lembarpena/AdminRegisterBook/screens/admin_menu.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 
@@ -58,23 +60,25 @@ class MenuCard extends StatelessWidget {
             // TODO: Implement forum button functionality.
           } else if (page.name == "My Order") {
             // TODO: Implement my order button functionality.
+          } else if (page.name == "Admin Page") {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => AdminPage()));
           } else if (page.name == "Logout") {
             final response =
+                // await request.login("http://10.0.2.2:8000/auth/login/", {
                 await request.logout("http://localhost:8000/auth/logout/");
-            String message = response["message"];
-            if (response['status']) {
-              String uname = response["username"];
-              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                content: Text("$message Sampai jumpa, $uname."),
-              ));
-              Navigator.pushReplacement(
-                context,
+            if (request.loggedIn == false) {
+              // ignore: use_build_context_synchronously
+              Navigator.of(context).pushAndRemoveUntil(
                 MaterialPageRoute(builder: (context) => LandingPage()),
+                (Route<dynamic> route) => false,
               );
             } else {
-              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                content: Text("$message"),
-              ));
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text("Terdapat kesalahan, silakan coba lagi."),
+                ),
+              );
             }
           }
         },

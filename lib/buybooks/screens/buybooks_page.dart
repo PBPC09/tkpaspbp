@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:lembarpena/Main/widgets/left_drawer.dart';
 import 'dart:convert';
-import 'package:lembarpena/authentication/login_page.dart';
-import 'package:lembarpena/BuyBooks/screens/cart_page.dart';
 import 'package:lembarpena/BuyBooks/models/book.dart';
 
 // class BuyBooksPage extends StatelessWidget {

@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lembarpena/AdminRegisterBook/widgets/admin_left_drawer.dart';
 import 'package:lembarpena/AdminRegisterBook/widgets/admin_menu_card.dart';
-// import 'package:inventory_app_mobile/screens/book_collections.dart'; // Gantilah dengan nama halaman "Book Collections" yang sesuai
-// import 'package:inventory_app_mobile/screens/notifications.dart'; // Gantilah dengan nama halaman "Notification" yang sesuai
-// import 'package:lembarpena/authentication/login_page.dart';
-// import 'package:pbp_django_auth/pbp_django_auth.dart';
-// import 'package:provider/provider.dart';
+import 'package:lembarpena/Authentication/login_page.dart';
 
 class AdminPage extends StatelessWidget {
   AdminPage({Key? key}) : super(key: key);
@@ -19,11 +15,12 @@ class AdminPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String uname = LoginPage.uname;
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,
-        title: const Text(
-          'Admin Dashboard',
+        title: Text(
+          'Hi, $uname!',
         ),
         backgroundColor: Colors.indigo,
         foregroundColor: Colors.white,
