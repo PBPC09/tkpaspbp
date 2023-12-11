@@ -18,7 +18,7 @@ class _BookFormPageState extends State<BookFormPage> {
   String _author = "";
   double _rating = 0.0;
   int _voters = 0;
-  int _price = 0;
+  double _price = 0;
   String _currency = "";
   String _description = "";
   String _publisher = "";
@@ -168,14 +168,14 @@ class _BookFormPageState extends State<BookFormPage> {
                 ),
                 onChanged: (String? value) {
                   setState(() {
-                    _price = int.parse(value!);
+                    _price = double.parse(value!);
                   });
                 },
                 validator: (String? value) {
                   if (value == null || value.isEmpty) {
                     return "Price cannot be empty!";
                   }
-                  if (int.tryParse(value) == null) {
+                  if (double.tryParse(value) == null) {
                     return "Price must be a valid integer!";
                   }
                   return null;

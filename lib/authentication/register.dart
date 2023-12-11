@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:lembarpena/Authentication/login_page.dart';
 
-
 class RegistrationPage extends StatefulWidget {
   const RegistrationPage({super.key});
 
@@ -20,27 +19,23 @@ class _RegistrationPageState extends State<RegistrationPage> {
   String _selectedRole = 'buyer';
 
   Future<void> _registerUser() async {
-    // nunggu yang login TKT SALAHHH
     final url = Uri.parse("http://10.0.2.2:8000/auth/register/"
         // final url = Uri.parse("https://lembarpena-c09-tk.pbp.cs.ui.ac.id/auth/register/"
         );
 
-    final response = await http.post(
-      url,
-      headers: {
-        'Content-Type': 'application/json'
-      }, // Set the content type to JSON
-      body: jsonEncode({
-        'username': _usernameController.text,
-        'email': _emailController.text,
-        'password1':
-            _passwordController.text,
-        'password2':
-            _passwordController.text, 
-        'role' :
-          _selectedRole,
-      },
-    ));
+    final response = await http.post(url,
+        headers: {
+          'Content-Type': 'application/json'
+        }, // Set the content type to JSON
+        body: jsonEncode(
+          {
+            'username': _usernameController.text,
+            'email': _emailController.text,
+            'password1': _passwordController.text,
+            'password2': _passwordController.text,
+            'role': _selectedRole,
+          },
+        ));
 
     if (response.statusCode == 200) {
       // Handle successful registration
@@ -120,7 +115,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
               ),
               obscureText: true,
             ),
-
             DropdownButtonFormField<String>(
               value: _selectedRole,
               items: const [
