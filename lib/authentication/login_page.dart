@@ -122,7 +122,7 @@ class _LoginPageState extends State<LoginPage> {
               child: Container(
                 decoration: const BoxDecoration(
                     border: Border(bottom: BorderSide(width: 1))),
-                child: const Text('Create New Account'),
+                child: const Text("Don't have an account yet? Sign up"),
               ),
             ),
           ],

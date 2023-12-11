@@ -6,15 +6,15 @@ import 'package:lembarpena/Authentication/login_page.dart';
 import 'package:lembarpena/Wishlist/screens/explore_book.dart';
 import 'package:lembarpena/AdminRegisterBook/screens/admin_menu.dart';
 
-class ShopCard extends StatelessWidget {
-  final ShopItem item;
+class MenuCard extends StatelessWidget {
+  final MenuItem page;
 
-  const ShopCard(this.item, {super.key}); // Constructor
+  const MenuCard(this.page, {super.key}); // Constructor
 
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Colors.indigo,
+      color: page.color,
       child: InkWell(
         // Area responsive terhadap sentuhan
         onTap: () {
@@ -22,15 +22,15 @@ class ShopCard extends StatelessWidget {
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(SnackBar(
-                content: Text("Kamu telah menekan tombol ${item.name}!")));
-          if (item.name == "Home") {
+                content: Text("Kamu telah menekan tombol ${page.name}!")));
+          if (page.name == "Home") {
             // TODO: Implement home button functionality.
             Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => MyHomePage(),
                 ));
-          } else if (item.name == "Explore Book") {
+          } else if (page.name == "Explore Book") {
             // TODO: Implement explore book button functionality.
             Navigator.push(
               context,
@@ -38,24 +38,24 @@ class ShopCard extends StatelessWidget {
                 builder: (context) => const ExploreBooksPage(),
               ),
             );
-          } else if (item.name == "WISHLIST") {
+          } else if (page.name == "Wishlist") {
             // TODO: Implement wishlist button functionality.
             // Navigator.pushReplacement(
             //   context,
             //   MaterialPageRoute(
             //     builder: (context) => const WishlistPage(),
             //   ));
-          } else if (item.name == "CART") {
+          } else if (page.name == "Cart") {
             // TODO: Implement cart button functionality.
-          } else if (item.name == "Buy Books") {
+          } else if (page.name == "Buy Books") {
             // TODO: Implement buy books button functionality.
-          } else if (item.name == "Book Forum") {
+          } else if (page.name == "Book Forum") {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => const ForumPage()));
             // TODO: Implement forum button functionality.
-          } else if (item.name == "My Order") {
+          } else if (page.name == "My Order") {
             // TODO: Implement my order button functionality.
-          } else if (item.name == "Admin Page") {
+          } else if (page.name == "Admin Page") {
             Navigator.push(
                 context, MaterialPageRoute(builder: (context) => AdminPage()));
           } else if (item.name == "Logout") {
@@ -73,13 +73,13 @@ class ShopCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
-                  item.icon,
+                  page.icon,
                   color: Colors.white,
                   size: 30.0,
                 ),
                 const Padding(padding: EdgeInsets.all(3)),
                 Text(
-                  item.name,
+                  page.name,
                   textAlign: TextAlign.center,
                   style: const TextStyle(color: Colors.white),
                 ),

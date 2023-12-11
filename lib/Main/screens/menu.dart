@@ -3,23 +3,27 @@ import 'package:lembarpena/Authentication/login_page.dart';
 import 'package:lembarpena/Main/widgets/left_drawer.dart';
 import 'package:lembarpena/Main/widgets/lembarpena_card.dart';
 
-class ShopItem {
+class MenuItem {
   final String name;
   final IconData icon;
+  final Color color;
 
-  ShopItem(this.name, this.icon);
+  MenuItem(this.name, this.icon, this.color);
 }
 
 class MyHomePage extends StatelessWidget {
   MyHomePage({Key? key}) : super(key: key);
-  final List<ShopItem> items = [
-    ShopItem("Buy Books", Icons.shopping_bag),
-    ShopItem("Wishlist", Icons.favorite),
-    ShopItem("Explore Book", Icons.book),
-    ShopItem("Book Forum", Icons.chat),
-    ShopItem("Admin Page", Icons.admin_panel_settings),
-    ShopItem("Logout", Icons.logout),
+  final List<MenuItem> pages = [
+    MenuItem("Buy Books", Icons.shopping_bag, Colors.indigo),
+    MenuItem("Wishlist", Icons.favorite, Colors.indigo),
+    MenuItem("Explore Book", Icons.search, Colors.indigo),
+    MenuItem("Cart", Icons.add_shopping_cart, Colors.indigo),
+    MenuItem("Book Forum", Icons.chat, Colors.indigo),
+    MenuItem("My Order", Icons.receipt, Colors.indigo),
+    MenuItem("Admin Page", Icons.admin_panel_settings, Colors.indigo),
+    MenuItem("Logout", Icons.logout, Colors.red),
   ];
+
   @override
   Widget build(BuildContext context) {
     String uname = LoginPage.uname;
@@ -43,7 +47,7 @@ class MyHomePage extends StatelessWidget {
                 padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
                 // Widget Text untuk menampilkan tulisan dengan alignment center dan style yang sesuai
                 child: Text(
-                  'Lembar Pena', // Text yang menandakan toko
+                  'Welcome to Lembar Pena', // Text yang menandakan toko
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 30,
@@ -60,9 +64,9 @@ class MyHomePage extends StatelessWidget {
                 mainAxisSpacing: 10,
                 crossAxisCount: 3,
                 shrinkWrap: true,
-                children: items.map((ShopItem item) {
+                children: pages.map((MenuItem item) {
                   // Iterasi untuk setiap item
-                  return ShopCard(item);
+                  return MenuCard(item);
                 }).toList(),
               ),
             ],

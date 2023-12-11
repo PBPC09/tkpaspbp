@@ -186,32 +186,6 @@ class _BookFormPageState extends State<BookFormPage> {
               padding: const EdgeInsets.all(8.0),
               child: TextFormField(
                 decoration: InputDecoration(
-                  hintText: "Price",
-                  labelText: "Price",
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(5.0),
-                  ),
-                ),
-                onChanged: (String? value) {
-                  setState(() {
-                    _price = int.parse(value!);
-                  });
-                },
-                validator: (String? value) {
-                  if (value == null || value.isEmpty) {
-                    return "Price cannot be empty!";
-                  }
-                  if (int.tryParse(value) == null) {
-                    return "Price must be a valid integer!";
-                  }
-                  return null;
-                },
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextFormField(
-                decoration: InputDecoration(
                   hintText: "Currency",
                   labelText: "Currency",
                   border: OutlineInputBorder(
@@ -367,7 +341,7 @@ class _BookFormPageState extends State<BookFormPage> {
                       // DONE: Ganti URL dan jangan lupa tambahkan trailing slash (/) di akhir URL!
                       final response = await request.postJson(
                           //"https://muhammad-hilal21-tugas.pbp.cs.ui.ac.id/create-flutter/",
-                          "http://127.0.0.1:8000/create-flutter/",
+                          "http://127.0.0.1:8000/registerbook/create-book-flutter/",
                           jsonEncode(<String, String>{
                             'title': _title,
                             'author': _author,
@@ -377,11 +351,10 @@ class _BookFormPageState extends State<BookFormPage> {
                             'currency': _currency,
                             'description': _description,
                             'publisher': _publisher,
-                            'pageCount': _pageCount.toString(),
+                            'page_count': _pageCount.toString(),
                             'genres': _genres,
                           }));
                       if (response['status'] == 'success') {
-                        print(response['status']);
                         ScaffoldMessenger.of(context)
                             .showSnackBar(const SnackBar(
                           content: Text("New book has been saved!"),

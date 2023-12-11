@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lembarpena/AdminRegisterBook/models/book.dart';
 import 'package:lembarpena/AdminRegisterBook/widgets/admin_left_drawer.dart';
+import 'package:lembarpena/Wishlist/screens/detail_buku.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 
@@ -13,8 +14,8 @@ class BookCollectionsPage extends StatefulWidget {
 
 class _BookCollectionsPageState extends State<BookCollectionsPage> {
   Future<List<Book>> fetchBooks(request) async {
-    var data = await request.get(
-        'http://127.0.0.1:8000/get-books/'); // Gantilah dengan URL yang sesuai
+    var data =
+        await request.get('http://127.0.0.1:8000/registerbook/get-book/');
 
     // Melakukan konversi data JSON menjadi objek Book
     List<Book> bookList = [];
@@ -60,13 +61,14 @@ class _BookCollectionsPageState extends State<BookCollectionsPage> {
                 itemCount: snapshot.data!.length,
                 itemBuilder: (_, index) => InkWell(
                   onTap: () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) =>
-                    //         DetailItemPage(item: snapshot.data![index]),
-                    //   ),
-                    // );
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DetailBukuPage(
+                          book: snapshot.data![index],
+                        ),
+                      ),
+                    );
                   },
                   child: Card(
                     margin: const EdgeInsets.symmetric(
@@ -78,7 +80,7 @@ class _BookCollectionsPageState extends State<BookCollectionsPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "${snapshot.data![index].fields.name}",
+                            "${snapshot.data![index].fields.title}",
                             style: const TextStyle(
                               fontSize: 18.0,
                               fontWeight: FontWeight.bold,
@@ -86,10 +88,16 @@ class _BookCollectionsPageState extends State<BookCollectionsPage> {
                           ),
                           const SizedBox(height: 10),
                           Text(
-                              "Genre : ${snapshot.data![index].fields.genres}"),
-                          Text(
-                              "Description : ${snapshot.data![index].fields.description}"),
+                              "Author : ${snapshot.data![index].fields.author}"),
                           const SizedBox(height: 10),
+                          Text(
+                              "Rating : ${snapshot.data![index].fields.rating}"),
+                          const SizedBox(height: 10),
+                          Text(
+                              "Price : ${snapshot.data![index].fields.price} SAR"),
+                          const SizedBox(height: 10),
+                          Text(
+                              "Genre : ${snapshot.data![index].fields.genres}"),
                         ],
                       ),
                     ),
