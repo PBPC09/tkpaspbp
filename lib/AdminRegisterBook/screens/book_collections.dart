@@ -30,6 +30,7 @@ class _BookCollectionsPageState extends State<BookCollectionsPage> {
   @override
   Widget build(BuildContext context) {
     final request = context.watch<CookieRequest>();
+
     return Scaffold(
       appBar: AppBar(
         title: const Text(

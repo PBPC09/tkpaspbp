@@ -16,12 +16,11 @@ class _RegistrationPageState extends State<RegistrationPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  String _selectedRole = 'buyer';
+  String _selectedRole = 'B';
 
   Future<void> _registerUser() async {
-    final url = Uri.parse("http://10.0.2.2:8000/auth/register/"
-        // final url = Uri.parse("https://lembarpena-c09-tk.pbp.cs.ui.ac.id/auth/register/"
-        );
+    // nunggu yang login TKT SALAHHH
+    final url = Uri.parse("http://localhost:8000/auth/register/");
 
     final response = await http.post(url,
         headers: {
@@ -119,11 +118,11 @@ class _RegistrationPageState extends State<RegistrationPage> {
               value: _selectedRole,
               items: const [
                 DropdownMenuItem<String>(
-                  value: 'buyer',
+                  value: 'B',
                   child: Text('Buyer'),
                 ),
                 DropdownMenuItem<String>(
-                  value: 'admin',
+                  value: 'A',
                   child: Text('Admin'),
                 ),
               ],

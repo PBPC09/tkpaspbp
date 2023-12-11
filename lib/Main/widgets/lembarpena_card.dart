@@ -2,22 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:lembarpena/BookForum/screens/forum_page.dart';
 import 'package:lembarpena/Main/screens/landing_page.dart';
 import 'package:lembarpena/Main/screens/menu.dart';
-import 'package:lembarpena/Authentication/login_page.dart';
 import 'package:lembarpena/Wishlist/screens/explore_book.dart';
-import 'package:lembarpena/AdminRegisterBook/screens/admin_menu.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
 
 class MenuCard extends StatelessWidget {
   final MenuItem page;
 
-  const MenuCard(this.page, {super.key}); // Constructor
+  const MenuCard(this.page, {super.key});
+
+  get request => null; // Constructor
 
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
     return Material(
       color: page.color,
       child: InkWell(
         // Area responsive terhadap sentuhan
-        onTap: () {
+        onTap: () async {
           // Memunculkan SnackBar ketika diklik
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
@@ -55,14 +58,24 @@ class MenuCard extends StatelessWidget {
             // TODO: Implement forum button functionality.
           } else if (page.name == "My Order") {
             // TODO: Implement my order button functionality.
-          } else if (page.name == "Admin Page") {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => AdminPage()));
           } else if (page.name == "Logout") {
-              Navigator.of(context).pushAndRemoveUntil(
+            final response =
+                await request.logout("http://localhost:8000/auth/logout/");
+            String message = response["message"];
+            if (response['status']) {
+              String uname = response["username"];
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Text("$message Sampai jumpa, $uname."),
+              ));
+              Navigator.pushReplacement(
+                context,
                 MaterialPageRoute(builder: (context) => LandingPage()),
-                (Route<dynamic> route) => false,
               );
+            } else {
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Text("$message"),
+              ));
+            }
           }
         },
         child: Container(

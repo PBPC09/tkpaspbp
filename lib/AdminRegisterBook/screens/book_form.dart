@@ -341,7 +341,7 @@ class _BookFormPageState extends State<BookFormPage> {
                       // DONE: Ganti URL dan jangan lupa tambahkan trailing slash (/) di akhir URL!
                       final response = await request.postJson(
                           //"https://muhammad-hilal21-tugas.pbp.cs.ui.ac.id/create-flutter/",
-                          "http://127.0.0.1:8000/registerbook/create-book-flutter/",
+                          "http://localhost:8000/registerbook/create-book-flutter/",
                           jsonEncode(<String, String>{
                             'title': _title,
                             'author': _author,

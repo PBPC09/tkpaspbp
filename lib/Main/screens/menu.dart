@@ -20,7 +20,6 @@ class MyHomePage extends StatelessWidget {
     MenuItem("Cart", Icons.add_shopping_cart, Colors.indigo),
     MenuItem("Book Forum", Icons.chat, Colors.indigo),
     MenuItem("My Order", Icons.receipt, Colors.indigo),
-    MenuItem("Admin Page", Icons.admin_panel_settings, Colors.indigo),
     MenuItem("Logout", Icons.logout, Colors.red),
   ];
 
