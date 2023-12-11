@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:lembarpena/Wishlist/models/book.dart';
+import 'package:lembarpena/Main/screens/menu.dart';
 import 'package:lembarpena/Authentication/login_page.dart';
 import 'dart:convert';
 import 'package:lembarpena/BookForum/screens/create_forum_page.dart'; // Pastikan import ini benar
 import 'package:lembarpena/BookForum/models/forumhead.dart';
 import 'package:lembarpena/BookForum/screens/comment_page.dart';
 import 'package:lembarpena/Main/widgets/left_drawer.dart';
+import 'package:lembarpena/Wishlist/screens/explore_book.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
@@ -85,12 +86,12 @@ class _ForumPageState extends State<ForumPage> {
     final request = context.watch<CookieRequest>();
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Forum LembarPena'),
+        title: const Text('Forum Buku'),
       ),
       drawer: const LeftDrawer(),
       body: Column(children: [
         ListTile(
-          title: const Text("Tampilkan Forum Populer"),
+          title: const Text("Tampilkan forum buku populer saja"),
           leading: Checkbox(
             value: isChecked,
             onChanged: (bool? value) {
@@ -156,11 +157,14 @@ class _ForumPageState extends State<ForumPage> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   const Icon(Icons.book), // Ikon Buku
+                                  const Text("  "), // Ikon Kalender
                                   Expanded(
                                     child: Text(
                                       forumHeadFields.book,
-                                      overflow: TextOverflow
-                                          .ellipsis, // Tambahkan ellipsis
+                                      overflow: TextOverflow.ellipsis,
+                                      // Tambahkan ellipsis
+                                      style: const TextStyle(
+                                          fontSize: 18), // Format Tanggal
                                     ),
                                   ),
                                 ],
@@ -168,23 +172,35 @@ class _ForumPageState extends State<ForumPage> {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  Icon(Icons.calendar_today), // Ikon Kalender
-                                  Text(DateFormat('yyyy-MM-dd').format(
-                                      forumHeadFields.date)), // Format Tanggal
+                                  const Icon(Icons.calendar_today),
+                                  const Text("  "), // Ikon Kalender
+                                  Text(
+                                    DateFormat('yyyy-MM-dd')
+                                        .format(forumHeadFields.date),
+                                    style: const TextStyle(fontSize: 18),
+                                  ), // Format Tanggal
                                 ],
                               ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   Icon(Icons.person), // Ikon Penanya
-                                  Text(forumHeadFields.user),
+                                  const Text("  "), // Ikon Kalender
+                                  Text(
+                                    forumHeadFields.user,
+                                    style: const TextStyle(fontSize: 18),
+                                  ),
                                 ],
                               ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  Icon(Icons.comment), // Ikon Komentar
-                                  Text("${forumHeadFields.commentCounts}"),
+                                  const Icon(Icons.comment), // Ikon Komentar
+                                  const Text("  "), // Ikon Kalender
+                                  Text(
+                                    "${forumHeadFields.commentCounts}",
+                                    style: const TextStyle(fontSize: 18),
+                                  ),
                                 ],
                               ),
                               if (forumHeadFields.user ==
@@ -192,8 +208,8 @@ class _ForumPageState extends State<ForumPage> {
                                 Align(
                                   alignment: Alignment.centerRight,
                                   child: IconButton(
-                                    icon:
-                                        Icon(Icons.delete), // Ikon Tong Sampah
+                                    icon: const Icon(
+                                        Icons.delete), // Ikon Tong Sampah
                                     onPressed: () {
                                       deleteQuestion(
                                           request,
@@ -214,6 +230,58 @@ class _ForumPageState extends State<ForumPage> {
           ),
         )
       ]),
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        currentIndex: 2,
+        backgroundColor: Colors.indigo,
+        selectedItemColor: Color.fromARGB(255, 255, 255, 255),
+        unselectedItemColor: Color.fromARGB(255, 156, 143, 255),
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home), // Ganti dengan path gambar yang sesuai
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search), // Ganti dengan path gambar yang sesuai
+            label: 'Explore Book',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.forum), // Ganti dengan path gambar yang sesuai
+            label: 'Book Forum',
+          ),
+        ],
+        onTap: (index) {
+          switch (index) {
+            case 0:
+              Navigator.pushReplacement(
+                context,
+                PageRouteBuilder(
+                  pageBuilder: (_, __, ___) => MyHomePage(),
+                  transitionDuration: Duration.zero,
+                ),
+              );
+              break;
+            case 1:
+              Navigator.pushReplacement(
+                context,
+                PageRouteBuilder(
+                  pageBuilder: (_, __, ___) => const ExploreBooksPage(),
+                  transitionDuration: Duration.zero,
+                ),
+              );
+              break;
+            case 2:
+              Navigator.pushReplacement(
+                context,
+                PageRouteBuilder(
+                  pageBuilder: (_, __, ___) => const ForumPage(),
+                  transitionDuration: Duration.zero,
+                ),
+              );
+              break;
+          }
+        },
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           // Navigasi ke CreateForumPage

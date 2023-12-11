@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'dart:convert';
-import 'package:lembarpena/AdminRegisterBook/models/book.dart';
+import 'package:lembarpena/BookForum/screens/forum_page.dart';
+import 'package:lembarpena/Main/screens/menu.dart';
 import 'package:lembarpena/Main/widgets/left_drawer.dart';
-import 'package:lembarpena/Wishlist/screens/detail_buku.dart';
+import 'dart:convert';
+import 'package:lembarpena/wishlist/models/book.dart';
+import 'package:lembarpena/wishlist/screens/detail_buku.dart';
 // import 'package:pbp_django_auth/pbp_django_auth.dart';
 // import 'package:provider/provider.dart';
 
@@ -60,12 +62,11 @@ class _ExploreBooksPageState extends State<ExploreBooksPage> {
                   ],
                 );
               } else {
-                return ListView.builder(
+               return ListView.builder(
                   itemCount: snapshot.data!.length,
                   itemBuilder: (_, index) => InkWell(
                     child: Container(
-                      margin: const EdgeInsets.symmetric(
-                          horizontal: 16, vertical: 12),
+                      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                       padding: const EdgeInsets.all(20.0),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -127,7 +128,62 @@ class _ExploreBooksPageState extends State<ExploreBooksPage> {
                     ),
                   ),
                 );
+
               }
-            }));
+            }),
+            bottomNavigationBar: BottomNavigationBar(
+              type: BottomNavigationBarType.fixed,
+              currentIndex: 1,
+              backgroundColor: Colors.indigo,
+              selectedItemColor: Color.fromARGB(255, 255, 255, 255),
+              unselectedItemColor:Color.fromARGB(255, 156, 143, 255),
+              items: const [
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.home), // Ganti dengan path gambar yang sesuai
+                  label: 'Home',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.search), // Ganti dengan path gambar yang sesuai
+                  label: 'Explore Book',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.forum), // Ganti dengan path gambar yang sesuai
+                  label: 'Book Forum',
+                ),
+              ],
+              onTap: (index) {
+                switch (index) {
+                  case 0:
+                    Navigator.pushReplacement(
+                      context,
+                      PageRouteBuilder(
+                        pageBuilder: (_, __, ___) => MyHomePage(),
+                        transitionDuration: Duration.zero,
+                      ),
+                    );
+                    break;
+                  case 1:
+                    Navigator.pushReplacement(
+                      context,
+                      PageRouteBuilder(
+                        pageBuilder: (_, __, ___) => const ExploreBooksPage(),
+                        transitionDuration: Duration.zero,
+                      ),
+                    );
+                    break;
+                  case 2:
+                    Navigator.pushReplacement(
+                      context,
+                      PageRouteBuilder(
+                        pageBuilder: (_, __, ___) => const ForumPage(),
+                        transitionDuration: Duration.zero,
+                      ),
+                    );
+                    break;
+                }
+              },
+            ),
+            );
+    
   }
 }

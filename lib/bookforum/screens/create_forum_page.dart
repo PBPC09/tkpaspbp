@@ -177,6 +177,7 @@ class _CreateForumPageState extends State<CreateForumPage> {
                 maxLines: null,
                 keyboardType: TextInputType.multiline,
               ),
+              const SizedBox(height: 20,),
               ElevatedButton(
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
