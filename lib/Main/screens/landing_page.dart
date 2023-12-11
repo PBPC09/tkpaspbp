@@ -68,10 +68,10 @@ class _LandingPageState extends State<LandingPage> {
 
   Widget buildHorizontalScrollCards() {
     List<Widget> cards = [
-      buildCard('Judul 1', 'Deskripsi singkat 1'),
-      buildCard('Judul 2', 'Deskripsi singkat 2'),
-      buildCard('Judul 3', 'Deskripsi singkat 3'),
-      buildCard('Judul 4', 'Deskripsi singkat 4'),
+      buildCard('Beli Buku', 'Perluas cakrawala, miliki buku yang hendak Anda baca'),
+      buildCard('Simpan Keinginan', 'Temukan bacaan terbaik dan simpan pada koleksi Anda!'),
+      buildCard('Lihat Profil Buku', 'Amati profil buku-buku terbaik dan bagaimana mereka akan menghibur Anda!'),
+      buildCard('Forum Buku', 'Temukan komunitas yang akan membantu Anda memahami bacaan terbaik!'),
     ];
 
     return SizedBox(
@@ -106,9 +106,9 @@ class _LandingPageState extends State<LandingPage> {
   Widget _buildAccordion() {
     return Column(
       children: <Item>[
-        Item(headerValue: 'Pertanyaan 1', expandedValue: 'Jawaban untuk pertanyaan 1.'),
-        Item(headerValue: 'Pertanyaan 2', expandedValue: 'Jawaban untuk pertanyaan 2.'),
-        Item(headerValue: 'Pertanyaan 3', expandedValue: 'Jawaban untuk pertanyaan 3.'),
+        Item(headerValue: 'Apa itu LembarPena', expandedValue: 'LembarPena adalah sebuah aplikasi marketplace belanja buku yang memungkinkan Anda untuk menjelajahi, mencari, dan membeli berbagai jenis buku secara online. Kami menyediakan akses ke koleksi buku yang luas, termasuk buku-buku terbaru, buku terlaris, buku bekas, dan banyak lagi. Dengan LembarPena, Anda dapat dengan mudah menemukan buku-buku favorit Anda dan melakukan pembelian secara praktis melalui aplikasi kami.'),
+        Item(headerValue: 'Apa itu Fitur Forum Buku di LembarPena?', expandedValue: 'Fitur Forum Buku di LembarPena adalah wadah interaktif tempat pengguna aplikasi dapat berpartisipasi dalam diskusi, berbagi pendapat, dan berkomunikasi tentang buku. Ini adalah ruang online di mana pembaca, penulis, dan penggemar buku dapat bertukar pikiran, merekomendasikan buku, dan berbicara tentang berbagai aspek buku yang mereka baca.'),
+        Item(headerValue: ' Apakah Wishlist Book bersifat pribadi atau dapat dibagikan dengan pengguna lain?', expandedValue: 'Wishlist Book pada LembarPena</strong> bersifat pribadi secara default. Ini berarti daftar buku yang disimpan hanya dapat diakses oleh pengguna yang menyimpannya.'),
       ].map<Widget>((Item item) {
         return ExpansionTile(
           title: Text(item.headerValue),

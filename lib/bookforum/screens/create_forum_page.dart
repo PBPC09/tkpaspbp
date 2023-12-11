@@ -42,7 +42,8 @@ class _CreateForumPageState extends State<CreateForumPage> {
   // }
 
   Future<List<Book>> fetchBooks() async {
-    var url = Uri.parse('http://10.0.2.2:8000/buybooks/show_books_json');
+    // var url = Uri.parse('http://10.0.2.2:8000/buybooks/show_books_json');
+    var url = Uri.parse('http://localhost:8000/buybooks/show_books_json');
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},
@@ -165,7 +166,8 @@ class _CreateForumPageState extends State<CreateForumPage> {
                     if (_formKey.currentState!.validate()) {
                       _formKey.currentState!.save();
                       final response = await request.postJson(
-                        "http://10.0.2.2:8000/bookforum/create_question_flutter/",
+                        // "http://10.0.2.2:8000/bookforum/create_question_flutter/",
+                        "http://localhost:8000/bookforum/create_question_flutter/",
                         jsonEncode({
                           "question": _question,
                           "book_id" : _selectedBook?.pk,

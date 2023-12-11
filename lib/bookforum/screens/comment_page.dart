@@ -49,7 +49,9 @@ class _ForumCommentsPageState extends State<ForumCommentsPage> {
 
   Future<Book> fetchBookDetails(int bookId) async {
     var url =
-        Uri.parse('http://10.0.2.2:8000/bookforum/book_details/json/$bookId');
+        // Uri.parse('http://10.0.2.2:8000/bookforum/book_details/json/$bookId');
+        Uri.parse('http://localhost:8000/bookforum/book_details/json/$bookId');
+
     var response = await http.get(url);
 
     if (response.statusCode == 200) {
@@ -76,7 +78,9 @@ class _ForumCommentsPageState extends State<ForumCommentsPage> {
 
   Future<void> fetchComments() async {
     var url = Uri.parse(
-        'http://10.0.2.2:8000/bookforum/uniquecomments/json/${widget.forumHeadId}');
+        // 'http://10.0.2.2:8000/bookforum/uniquecomments/json/${widget.forumHeadId}');
+        'http://localhost:8000/bookforum/uniquecomments/json/${widget.forumHeadId}');
+
     var response = await http.get(url);
     var data = jsonDecode(utf8.decode(response.bodyBytes));
 
@@ -89,7 +93,8 @@ class _ForumCommentsPageState extends State<ForumCommentsPage> {
   }
 
   Future<void> deleteComment(CookieRequest request,String username, int commentId) async { // Sesuaikan dengan URL API Anda
-    final response = await request.postJson('http://10.0.2.2:8000/bookforum/delete_comments_flutter/$username/$commentId', 
+    // final response = await request.postJson('http://10.0.2.2:8000/bookforum/delete_comments_flutter/$username/$commentId', 
+    final response = await request.postJson('http://localhost:8000/bookforum/delete_comments_flutter/$username/$commentId', 
     jsonEncode({}));
 
     if (response['status'] == 'success') {
