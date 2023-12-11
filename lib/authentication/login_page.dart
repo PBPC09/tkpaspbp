@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lembarpena/AdminRegisterBook/screens/admin_menu.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:lembarpena/Authentication/register.dart';
@@ -79,11 +80,20 @@ class _LoginPageState extends State<LoginPage> {
                   String message = response['message'];
                   LoginPage.uname = response['username'];
                   String uname = LoginPage.uname;
+                  if(response['logged_in_as'] == 'Buyer'){
                   // ignore: use_build_context_synchronously
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => MyHomePage()),
-                  );
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => MyHomePage()),
+                    );
+                  }
+                  else{
+                    // ignore: use_build_context_synchronously
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => AdminPage()),
+                    );
+                  }
                   // ignore: use_build_context_synchronously
                   ScaffoldMessenger.of(context)
                     ..hideCurrentSnackBar()
