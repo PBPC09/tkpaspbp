@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:lembarpena/Wishlist/models/book.dart';
 import 'package:lembarpena/Main/widgets/left_drawer.dart';
 import 'package:lembarpena/Wishlist/screens/detail_buku.dart';
+import 'package:lembarpena/wishlist/screens/wishlist_form.dart';
 // import 'package:pbp_django_auth/pbp_django_auth.dart';
 // import 'package:provider/provider.dart';
 
@@ -107,15 +108,14 @@ class _ExploreBooksPageState extends State<ExploreBooksPage> {
                                 TextButton(
                                   onPressed: () {
                                     // Handle adding to wishlist logic
-                                    setState(() {
-                                      snapshot.data![index].isInWishlist =
-                                          !snapshot.data![index].isInWishlist;
-                                      if (snapshot.data![index].isInWishlist) {
-                                        wishlist.add(snapshot.data![index]);
-                                      } else {
-                                        wishlist.remove(snapshot.data![index]);
-                                      }
-                                    });
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => WishlistForm(
+                                          book: snapshot.data![index],
+                                        ),
+                                      ),
+                                    );
                                   },
                                   child: Text("Add To Wishlist"),
                                 ),

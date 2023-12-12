@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:lembarpena/BookForum/screens/forum_page.dart';
 import 'package:lembarpena/Main/screens/menu.dart';
 import 'package:lembarpena/Authentication/login_page.dart';
+import 'package:lembarpena/Wishlist/models/book.dart';
 import 'package:lembarpena/Wishlist/screens/explore_book.dart';
 import 'package:lembarpena/AdminRegisterBook/screens/admin_menu.dart';
+import 'package:lembarpena/wishlist/screens/my_wishlist.dart';
 
 class ShopCard extends StatelessWidget {
   final ShopItem item;
@@ -39,11 +41,11 @@ class ShopCard extends StatelessWidget {
             );
           } else if (item.name == "WISHLIST") {
             // TODO: Implement wishlist button functionality.
-            // Navigator.pushReplacement(
-            //   context,
-            //   MaterialPageRoute(
-            //     builder: (context) => const WishlistPage(),
-            //   ));
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => WishlistPage(),
+              ));
           } else if (item.name == "CART") {
             // TODO: Implement cart button functionality.
           } else if (item.name == "Buy Books") {

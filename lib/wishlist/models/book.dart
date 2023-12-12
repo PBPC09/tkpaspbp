@@ -25,6 +25,8 @@ class Book {
         fields: Fields.fromJson(json["fields"]),
     );
 
+  get isInWishlist => null;
+
     Map<String, dynamic> toJson() => {
         "model": modelValues.reverse[model],
         "pk": pk,
