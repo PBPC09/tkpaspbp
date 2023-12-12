@@ -90,32 +90,39 @@ class _LandingPageState extends State<LandingPage> {
   }
 
   Widget buildCard(String title, String description) {
-    return Container(
-      width: 300,
-      margin: EdgeInsets.symmetric(
-          horizontal: 8.0, vertical: 10.0), // Memberikan jarak antar card
-      decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black
-                .withOpacity(0.2), // Warna shadow, dengan sedikit transparansi
-            spreadRadius: 0, // Seberapa jauh shadow menyebar
-            blurRadius: 8, // Seberapa buram atau soft edge shadow
-            offset: Offset(0, 4), // Perubahan posisi shadow (x, y)
-          ),
-        ],
-      ),
-      child: Card(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text(title,
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-              SizedBox(height: 10),
-              Text(description, style: TextStyle(fontSize: 16)),
-            ],
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const LoginPage()),
+        );
+      },
+      child: Container(
+        width: 300,
+        margin: EdgeInsets.symmetric(horizontal: 8.0, vertical: 10.0),
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.2),
+              spreadRadius: 0,
+              blurRadius: 8,
+              offset: Offset(0, 4),
+            ),
+          ],
+        ),
+        child: Card(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(title,
+                    style:
+                        TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                SizedBox(height: 10),
+                Text(description, style: TextStyle(fontSize: 16)),
+              ],
+            ),
           ),
         ),
       ),
