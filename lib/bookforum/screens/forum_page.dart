@@ -102,6 +102,7 @@ class _ForumPageState extends State<ForumPage> {
               },
             ),
           ),
+          
           Expanded(
               child : FutureBuilder(
               future: isChecked? fetchForumHeadsPopular() : fetchForumHeads(),

@@ -1,89 +1,126 @@
-// import 'package:flutter/material.dart';
+import 'dart:convert';
 
-// class WishlistFormPage extends StatefulWidget {
-//   const WishlistFormPage({Key? key}) : super(key: key);
+import 'package:flutter/material.dart';
+import 'package:lembarpena/Wishlist/models/book.dart';
+import 'package:lembarpena/wishlist/screens/my_wishlist.dart';
+import 'package:http/http.dart' as http;
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
 
-//   @override
-//   _WishlistFormPageState createState() => _WishlistFormPageState();
-// }
+class WishlistForm extends StatelessWidget {
+  final Book book;
 
-// class _WishlistFormPageState extends State<WishlistFormPage> {
-//   final _formKey = GlobalKey<FormState>();
-//   late Choice _selectedChoice;
+  const WishlistForm({Key? key, required this.book}) : super(key: key);
 
-//   @override
-//   void initState() {
-//     super.initState();
-//     // Set an initial choice
-//     _selectedChoice = PREFERENCE_CHOICES[0];
-//   }
+  @override
+  Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
+    String? _selectedPreference; 
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: const Center(
-//           child: Text(
-//             'Form Add To Wishlist',
-//           ),
-//         ),
-//         backgroundColor: Colors.indigoAccent[100],
-//         foregroundColor: Colors.black,
-//       ),
-//       body: Padding(
-//         padding: const EdgeInsets.all(16.0),
-//         child: Form(
-//           key: _formKey,
-//           child: Column(
-//             children: [
-//               Text(
-//                 "How much do you like this book?",
-//                 style: TextStyle(fontSize: 18.0),
-//               ),
-//               Column(
-//                 children: PREFERENCE_CHOICES.map((choice) {
-//                   return RadioListTile<Choice>(
-//                     title: Text(choice.label),
-//                     value: choice,
-//                     groupValue: _selectedChoice,
-//                     onChanged: (Choice? value) {
-//                       if (value != null) {
-//                         setState(() {
-//                           _selectedChoice = value;
-//                         });
-//                       }
-//                     },
-//                   );
-//                 }).toList(),
-//               ),
-//               const SizedBox(height: 20),
-//               ElevatedButton(
-//                 style: ButtonStyle(
-//                   backgroundColor: MaterialStateProperty.all(Colors.indigo),
-//                 ),
-//                 onPressed: () async {
-//                   if (_formKey.currentState!.validate()) {
-//                     // Perform the desired action with the selected preference
-//                     print("Selected Preference: ${_selectedChoice.value}");
+    Future<void> sendWishlistData(String preference) async {
+      if (_selectedPreference == null) {
+        print('Error: _selectedPreference is null.');
+        return;
+      }
 
-//                     // Add your logic here to send the data to Django
-//                   }
-//                 },
-//                 child: const Text(
-//                   "Save",
-//                   style: TextStyle(color: Colors.white),
-//                 ),
-//               ),
-//             ],
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
+      final Map<String, dynamic> requestBody = {
+        'book_id': book.pk.toString(),
+        'preference': _selectedPreference!,
+      };
 
-// class Choice {
-// }
+      final response = await request.postJson(
+      "http://localhost:8000/wishlist/add_to_wishlist_flutter/",
 
-// class PREFERENCE_CHOICES {
+      jsonEncode({"book": book}),
+      );
+
+      if (response.statusCode != 201) {
+        throw Exception('Failed to add to wishlist');
+      }
+    }
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Wishlist Form'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Text(
+              'How much do you like this book?',
+              style: TextStyle(fontSize: 18),
+            ),
+            SizedBox(height: 16),
+            DropdownButtonFormField<String>(
+              value: _selectedPreference,
+              onChanged: (String? value) {
+                // No need for setState in a StatelessWidget
+                _selectedPreference = value;
+              },
+              items: [
+                'Not Interested',
+                'Maybe Later',
+                'Interested',
+                'Really Want It',
+                'Must Have',
+              ].map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
+              decoration: InputDecoration(
+                labelText: 'Preference',
+              ),
+            ),
+            SizedBox(height: 16),
+            ElevatedButton(
+              onPressed: () {
+                if (_selectedPreference != null) {
+                  sendWishlistData(_selectedPreference!);
+
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => WishlistPage(),
+                    ),
+                  );
+                } else {
+
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        title: Text('Error'),
+                        content: Text('Please select a preference.'),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: Text('OK'),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                }
+              },
+              child: Text('Save'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// void main() {
+//   runApp(MaterialApp(
+//     WishlistForm(
+  
+//     ),
+//   ));
 // }

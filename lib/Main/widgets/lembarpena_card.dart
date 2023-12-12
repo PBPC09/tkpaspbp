@@ -3,8 +3,10 @@ import 'package:lembarpena/BookForum/screens/forum_page.dart';
 import 'package:lembarpena/Main/screens/landing_page.dart';
 import 'package:lembarpena/Main/screens/menu.dart';
 import 'package:lembarpena/Authentication/login_page.dart';
+import 'package:lembarpena/Wishlist/models/book.dart';
 import 'package:lembarpena/Wishlist/screens/explore_book.dart';
 import 'package:lembarpena/AdminRegisterBook/screens/admin_menu.dart';
+import 'package:lembarpena/Wishlist/screens/my_wishlist.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 class MenuCard extends StatelessWidget {
@@ -48,11 +50,11 @@ class MenuCard extends StatelessWidget {
               );
             } else if (page.name == "Wishlist") {
 
-              // Navigator.pushReplacement(
-              //   context,
-              //   MaterialPageRoute(
-              //     builder: (context) => const WishlistPage(),
-              //   ));
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => WishlistPage(),
+                ));
             } else if (page.name == "Cart") {
 
             } else if (page.name == "Buy Books") {
