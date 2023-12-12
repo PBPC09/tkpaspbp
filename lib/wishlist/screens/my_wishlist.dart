@@ -21,14 +21,26 @@ class _WishlistPageState extends State<WishlistPage> {
   //   super.initState();
   //   _futureWishlistBooks = fetchData();
   // }
+  String getCookieString(CookieRequest cookieRequest) {
+    // Asumsikan cookieRequest memiliki properti 'cookies' yang adalah Map<String, Cookie>
+    Map<String, Cookie> cookies = cookieRequest.cookies;
 
-  Future<List<WishlistBook>> fetchData() async {
+    // Iterasi melalui map dan buat string cookie
+    String cookieString =
+        cookies.values.map((Cookie c) => '${c.name}=${c.value}').join('; ');
+
+    return cookieString;
+  }
+
+  Future<List<WishlistBook>> fetchData(CookieRequest cookie) async {
     var url = Uri.parse(
         'http://localhost:8000/wishlist/mywishlist/json'); // Sesuaikan dengan URL endpoint Anda
+    String cookieString = getCookieString(cookie);
     var response = await http.get(
       url,
       headers: {
         "Content-Type": "application/json",
+        "Cookie": cookieString,
       },
     );
 
@@ -50,7 +62,7 @@ class _WishlistPageState extends State<WishlistPage> {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: FutureBuilder<List<WishlistBook>>(
-          future: fetchData(),
+          future: fetchData(request),
           builder: (context, AsyncSnapshot snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(child: CircularProgressIndicator());
@@ -64,12 +76,13 @@ class _WishlistPageState extends State<WishlistPage> {
                 itemBuilder: (context, index) {
                   var book = snapshot.data![index];
                   var bookFields = book.fields;
-
-                  // Kembalikan widget yang sesuai dengan data buku
-                  return ListTile(
-                    title: Text(bookFields.title),
-                    subtitle: Text('Seberapa suka: ${bookFields.preference}'),
-                  );
+                  if (loggedInUser == bookFields.user) {
+                    // Kembalikan widget yang sesuai dengan data buku
+                    return ListTile(
+                      title: Text(bookFields.title),
+                      subtitle: Text('Seberapa suka: ${bookFields.preference}'),
+                    );
+                  }
                 },
               );
             }
