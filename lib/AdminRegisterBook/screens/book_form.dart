@@ -16,9 +16,9 @@ class _BookFormPageState extends State<BookFormPage> {
   final _formKey = GlobalKey<FormState>();
   String _title = "";
   String _author = "";
-  double _rating = 0.0;
+  String _rating = "";
   int _voters = 0;
-  double _price = 0;
+  String _price = "";
   String _currency = "";
   String _description = "";
   String _publisher = "";
@@ -116,15 +116,18 @@ class _BookFormPageState extends State<BookFormPage> {
                 ),
                 onChanged: (String? value) {
                   setState(() {
-                    _rating = double.parse(value!);
+                    _rating = value!;
+                  });
+                },
+                onSaved: (String? value) {
+                  setState(() {
+                    // Menambahkan variabel yang sesuai
+                    _rating = value!;
                   });
                 },
                 validator: (String? value) {
                   if (value == null || value.isEmpty) {
                     return "Rating cannot be empty!";
-                  }
-                  if (double.tryParse(value) == null) {
-                    return "Rating must be a valid decimal number!";
                   }
                   return null;
                 },
@@ -168,15 +171,18 @@ class _BookFormPageState extends State<BookFormPage> {
                 ),
                 onChanged: (String? value) {
                   setState(() {
-                    _price = double.parse(value!);
+                    _price = value!;
+                  });
+                },
+                onSaved: (String? value) {
+                  setState(() {
+                    // Menambahkan variabel yang sesuai
+                    _price = value!;
                   });
                 },
                 validator: (String? value) {
                   if (value == null || value.isEmpty) {
                     return "Price cannot be empty!";
-                  }
-                  if (double.tryParse(value) == null) {
-                    return "Price must be a valid integer!";
                   }
                   return null;
                 },

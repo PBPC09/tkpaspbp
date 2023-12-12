@@ -37,9 +37,9 @@ class Book {
 class Fields {
   String title;
   String author;
-  double rating;
+  String rating;
   int voters;
-  double price;
+  String price;
   String currency;
   String description;
   String publisher;

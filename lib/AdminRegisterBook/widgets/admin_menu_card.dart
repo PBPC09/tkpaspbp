@@ -37,23 +37,35 @@ class AdminMenuCard extends StatelessWidget {
               if (page.name == "Book Collections") {
                 Navigator.push(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          const BookCollectionsPage(), // Gantilah dengan nama halaman "Book Collections" yang sesuai
+                    PageRouteBuilder(
+                      pageBuilder: (context, animation, secondaryAnimation) =>
+                          const BookCollectionsPage(),
+                      transitionsBuilder:
+                          (context, animation, secondaryAnimation, child) {
+                        return FadeTransition(opacity: animation, child: child);
+                      },
                     ));
               } else if (page.name == "Book Form") {
                 Navigator.push(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          const BookFormPage(), // Gantilah dengan nama halaman "Notification" yang sesuai
+                    PageRouteBuilder(
+                      pageBuilder: (context, animation, secondaryAnimation) =>
+                          const BookFormPage(),
+                      transitionsBuilder:
+                          (context, animation, secondaryAnimation, child) {
+                        return FadeTransition(opacity: animation, child: child);
+                      },
                     ));
               } else if (page.name == "Order Notifications") {
                 Navigator.push(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          const NotificationPage(), // Gantilah dengan nama halaman "Notification" yang sesuai
+                    PageRouteBuilder(
+                      pageBuilder: (context, animation, secondaryAnimation) =>
+                          const NotificationPage(),
+                      transitionsBuilder:
+                          (context, animation, secondaryAnimation, child) {
+                        return FadeTransition(opacity: animation, child: child);
+                      },
                     ));
               } else if (page.name == "Logout") {
                 final response =

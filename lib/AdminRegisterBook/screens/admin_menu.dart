@@ -60,16 +60,17 @@ class AdminPage extends StatelessWidget {
                   )
                 ],
               ),
-              GridView.count(
-                primary: true,
-                padding: const EdgeInsets.all(20),
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10,
-                crossAxisCount: 3,
+              GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3,
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 10,
+                ),
+                itemCount: pages.length,
                 shrinkWrap: true,
-                children: pages.map((AdminMenuItem item) {
-                  return AdminMenuCard(item);
-                }).toList(),
+                itemBuilder: (context, index) {
+                  return AdminMenuCard(pages[index]);
+                },
               ),
             ],
           ),

@@ -73,7 +73,7 @@ class _BookCollectionsPageState extends State<BookCollectionsPage> {
       drawer: const LeftDrawer(),
       body: FutureBuilder(
           future: fetchBooks(),
-          builder: (context, AsyncSnapshot<List<Book>> snapshot) {
+          builder: (context, AsyncSnapshot snapshot) {
             if (snapshot.data == null) {
               return const Center(child: CircularProgressIndicator());
             } else {
