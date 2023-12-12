@@ -34,7 +34,7 @@ class AdminPage extends StatelessWidget {
                 alignment: Alignment.center,
                 children: <Widget>[
                   Image.asset(
-                    'image/imagecover.jpg',
+                    'assets/images/imagecover.jpg',
                     height: 400,
                     fit: BoxFit.cover,
                   ),

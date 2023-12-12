@@ -154,14 +154,19 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                               Container(
                                 padding: EdgeInsets.all(8.0),
+                                decoration: BoxDecoration(
+                                    border: Border(
+                                        bottom: BorderSide(
+                                            color: Color.fromRGBO(
+                                                143, 148, 251, 1)))),
                                 child: TextField(
                                   controller: _passwordController,
-                                  obscureText: true,
                                   decoration: InputDecoration(
                                       border: InputBorder.none,
                                       labelText: "Password",
                                       hintStyle:
                                           TextStyle(color: Colors.grey[700])),
+                                  obscureText: true,
                                 ),
                               )
                             ],
