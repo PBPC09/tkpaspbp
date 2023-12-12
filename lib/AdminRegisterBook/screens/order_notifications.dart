@@ -34,7 +34,7 @@ class _NotificationPageState extends State<NotificationPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Notifications',
+          'Order Notifications',
           style: TextStyle(color: Colors.white),
         ),
         backgroundColor: Colors.indigo[900],
@@ -61,15 +61,6 @@ class _NotificationPageState extends State<NotificationPage> {
               return ListView.builder(
                 itemCount: snapshot.data!.length,
                 itemBuilder: (_, index) => InkWell(
-                  onTap: () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) =>
-                    //         DetailItemPage(item: snapshot.data![index]),
-                    //   ),
-                    // );
-                  },
                   child: Card(
                     margin: const EdgeInsets.symmetric(
                         horizontal: 16, vertical: 12),

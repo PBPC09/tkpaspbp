@@ -12,7 +12,8 @@ class DetailBukuPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(book.fields.title),
       ),
-      body: Padding(
+      body: SingleChildScrollView(
+        // Menggunakan SingleChildScrollView
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -30,7 +31,7 @@ class DetailBukuPage extends StatelessWidget {
             const SizedBox(height: 10),
             Text("Publisher: ${book.fields.publisher}"),
             const SizedBox(height: 10),
-            Text("Genres: ${book.fields.genres}"),
+            Text("Genres: ${book.fields.genres}"), // Jika genres adalah List
             const SizedBox(height: 10),
             Text("Description: ${book.fields.description}"),
           ],
