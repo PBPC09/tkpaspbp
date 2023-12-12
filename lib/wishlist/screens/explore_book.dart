@@ -42,67 +42,68 @@ class _ExploreBooksPageState extends State<ExploreBooksPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Books'),
-        ),
-        drawer: const LeftDrawer(),
-        body: FutureBuilder(
-            future: fetchProduct(),
-            builder: (context, AsyncSnapshot snapshot) {
-              // if (snapshot.data == null) {
-              //   return const Center(child: CircularProgressIndicator());
-              // } else {
-              if (!snapshot.hasData) {
-                return const Column(
-                  children: [
-                    Text(
-                      "Tidak ada data produk.",
-                      style: TextStyle(color: Colors.redAccent, fontSize: 20),
-                    ),
-                    SizedBox(height: 8),
-                  ],
-                );
-              } else {
-               return ListView.builder(
-                  itemCount: snapshot.data!.length,
-                  itemBuilder: (_, index) => InkWell(
-                    child: Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                      padding: const EdgeInsets.all(20.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "${snapshot.data![index].fields.title}",
-                            style: const TextStyle(
-                              fontSize: 18.0,
-                              fontWeight: FontWeight.bold,
-                            ),
+      appBar: AppBar(
+        title: const Text('Books'),
+      ),
+      drawer: const LeftDrawer(),
+      body: FutureBuilder(
+          future: fetchProduct(),
+          builder: (context, AsyncSnapshot snapshot) {
+            // if (snapshot.data == null) {
+            //   return const Center(child: CircularProgressIndicator());
+            // } else {
+            if (!snapshot.hasData) {
+              return const Column(
+                children: [
+                  Text(
+                    "Tidak ada data buku.",
+                    style: TextStyle(color: Colors.redAccent, fontSize: 20),
+                  ),
+                  SizedBox(height: 8),
+                ],
+              );
+            } else {
+              return ListView.builder(
+                itemCount: snapshot.data!.length,
+                itemBuilder: (_, index) => InkWell(
+                  child: Container(
+                    margin: const EdgeInsets.symmetric(
+                        horizontal: 16, vertical: 12),
+                    padding: const EdgeInsets.all(20.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "${snapshot.data![index].fields.title}",
+                          style: const TextStyle(
+                            fontSize: 18.0,
+                            fontWeight: FontWeight.bold,
                           ),
-                          const SizedBox(height: 10),
-                          Text(
-                            "Author: ${snapshot.data![index].fields.author}",
-                          ),
-                          const SizedBox(height: 10),
-                          Text(
-                            "Rating: ${snapshot.data![index].fields.rating}",
-                          ),
-                          const SizedBox(height: 10),
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: Column(
-                              children: [
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => DetailBukuPage(
-                                          book: snapshot.data![index],
-                                        ),
+                        ),
+                        const SizedBox(height: 10),
+                        Text(
+                          "Author: ${snapshot.data![index].fields.author}",
+                        ),
+                        const SizedBox(height: 10),
+                        Text(
+                          "Rating: ${snapshot.data![index].fields.rating}",
+                        ),
+                        const SizedBox(height: 10),
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Column(
+                            children: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => DetailBukuPage(
+                                        book: snapshot.data![index],
                                       ),
-                                    );
+                                    )
+                                  );
                                   },
                                   child: Text("Show Details"),
                                 ),
@@ -123,67 +124,66 @@ class _ExploreBooksPageState extends State<ExploreBooksPage> {
                               ],
                             ),
                           ),
-                        ],
-                      ),
+                        ]
+                        ),
                     ),
                   ),
                 );
-
-              }
-            }),
-            bottomNavigationBar: BottomNavigationBar(
-              type: BottomNavigationBarType.fixed,
-              currentIndex: 1,
-              backgroundColor: Colors.indigo,
-              selectedItemColor: Color.fromARGB(255, 255, 255, 255),
-              unselectedItemColor:Color.fromARGB(255, 156, 143, 255),
-              items: const [
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.home), // Ganti dengan path gambar yang sesuai
-                  label: 'Home',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.search), // Ganti dengan path gambar yang sesuai
-                  label: 'Explore Book',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.forum), // Ganti dengan path gambar yang sesuai
-                  label: 'Book Forum',
-                ),
-              ],
-              onTap: (index) {
-                switch (index) {
-                  case 0:
-                    Navigator.pushReplacement(
-                      context,
-                      PageRouteBuilder(
-                        pageBuilder: (_, __, ___) => MyHomePage(),
-                        transitionDuration: Duration.zero,
-                      ),
-                    );
-                    break;
-                  case 1:
-                    Navigator.pushReplacement(
-                      context,
-                      PageRouteBuilder(
-                        pageBuilder: (_, __, ___) => const ExploreBooksPage(),
-                        transitionDuration: Duration.zero,
-                      ),
-                    );
-                    break;
-                  case 2:
-                    Navigator.pushReplacement(
-                      context,
-                      PageRouteBuilder(
-                        pageBuilder: (_, __, ___) => const ForumPage(),
-                        transitionDuration: Duration.zero,
-                      ),
-                    );
-                    break;
                 }
-              },
-            ),
-            );
-    
+            }
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        currentIndex: 1,
+        backgroundColor: Colors.indigo,
+        selectedItemColor: Color.fromARGB(255, 255, 255, 255),
+        unselectedItemColor: Color.fromARGB(255, 156, 143, 255),
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home), // Ganti dengan path gambar yang sesuai
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search), // Ganti dengan path gambar yang sesuai
+            label: 'Explore Book',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.forum), // Ganti dengan path gambar yang sesuai
+            label: 'Book Forum',
+          ),
+        ],
+        onTap: (index) {
+          switch (index) {
+            case 0:
+              Navigator.pushReplacement(
+                context,
+                PageRouteBuilder(
+                  pageBuilder: (_, __, ___) => MyHomePage(),
+                  transitionDuration: Duration.zero,
+                ),
+              );
+              break;
+            case 1:
+              Navigator.pushReplacement(
+                context,
+                PageRouteBuilder(
+                  pageBuilder: (_, __, ___) => const ExploreBooksPage(),
+                  transitionDuration: Duration.zero,
+                ),
+              );
+              break;
+            case 2:
+              Navigator.pushReplacement(
+                context,
+                PageRouteBuilder(
+                  pageBuilder: (_, __, ___) => const ForumPage(),
+                  transitionDuration: Duration.zero,
+                ),
+              );
+              break;
+          }
+        },
+      ),
+    );
   }
 }

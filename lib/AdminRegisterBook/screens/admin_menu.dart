@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:lembarpena/AdminRegisterBook/screens/book_collections.dart';
+import 'package:lembarpena/AdminRegisterBook/screens/order_notifications.dart';
 import 'package:lembarpena/AdminRegisterBook/widgets/admin_left_drawer.dart';
 import 'package:lembarpena/AdminRegisterBook/widgets/admin_menu_card.dart';
-// import 'package:inventory_app_mobile/screens/book_collections.dart'; // Gantilah dengan nama halaman "Book Collections" yang sesuai
-// import 'package:inventory_app_mobile/screens/notifications.dart'; // Gantilah dengan nama halaman "Notification" yang sesuai
-// import 'package:lembarpena/authentication/login_page.dart';
-// import 'package:pbp_django_auth/pbp_django_auth.dart';
-// import 'package:provider/provider.dart';
+import 'package:lembarpena/Authentication/login_page.dart';
 
 class AdminPage extends StatelessWidget {
   AdminPage({Key? key}) : super(key: key);
@@ -19,38 +17,50 @@ class AdminPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String uname = LoginPage.uname;
     return Scaffold(
       appBar: AppBar(
-        centerTitle: false,
-        title: const Text(
-          'Admin Dashboard',
-        ),
+        title: Text('Hi, $uname!'),
         backgroundColor: Colors.indigo,
         foregroundColor: Colors.white,
       ),
       drawer: const LeftDrawer(),
       body: SingleChildScrollView(
-        // Widget wrapper yang dapat discroll
         child: Padding(
-          padding: const EdgeInsets.all(10.0), // Set padding dari halaman
+          padding: const EdgeInsets.all(0.0),
           child: Column(
-            // Widget untuk menampilkan children secara vertikal
             children: <Widget>[
-              const Padding(
-                padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
-                // Widget Text untuk menampilkan tulisan dengan alignment center dan style yang sesuai
-                child: Text(
-                  'Welcome to LembarPena', // Text yang menandakan toko
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
+              Stack(
+                alignment: Alignment.center,
+                children: <Widget>[
+                  Image.asset(
+                    'assets/images/imagecover.jpg',
+                    height: 400,
+                    fit: BoxFit.cover,
                   ),
-                ),
+                  Container(
+                    height: 400,
+                    color: Color.fromARGB(255, 1, 37, 158).withOpacity(0.5),
+                  ),
+                  const Column(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
+                        child: Text(
+                          'Welcome to LembarPena',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 30,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
+                        ),
+                      ),
+                      // Tambahkan teks lainnya jika diperlukan
+                    ],
+                  )
+                ],
               ),
-              // Grid layout
               GridView.count(
-                // Container pada card kita.
                 primary: true,
                 padding: const EdgeInsets.all(20),
                 crossAxisSpacing: 10,
@@ -58,13 +68,68 @@ class AdminPage extends StatelessWidget {
                 crossAxisCount: 3,
                 shrinkWrap: true,
                 children: pages.map((AdminMenuItem item) {
-                  // Iterasi untuk setiap item
                   return AdminMenuCard(item);
                 }).toList(),
               ),
             ],
           ),
         ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        currentIndex: 0,
+        backgroundColor: Colors.indigo,
+        selectedItemColor: Colors.white,
+        unselectedItemColor: Colors.grey,
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.dashboard),
+            label: 'Dashboard',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.book),
+            label: 'Book Collections',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.notifications),
+            label: 'Order Notifications',
+          ),
+        ],
+        onTap: (index) {
+          // Logika untuk mengganti halaman saat tab navigasi diklik
+          switch (index) {
+            case 0:
+              // Navigasi ke Dashboard
+              Navigator.pushReplacement(
+                context,
+                PageRouteBuilder(
+                  pageBuilder: (_, __, ___) => AdminPage(),
+                  transitionDuration: Duration.zero,
+                ),
+              );
+              break;
+            case 1:
+              // Navigasi ke halaman Books
+              Navigator.pushReplacement(
+                context,
+                PageRouteBuilder(
+                  pageBuilder: (_, __, ___) => const BookCollectionsPage(),
+                  transitionDuration: Duration.zero,
+                ),
+              );
+              break;
+            case 2:
+              // Navigasi ke halaman Notifications
+              Navigator.pushReplacement(
+                context,
+                PageRouteBuilder(
+                  pageBuilder: (_, __, ___) => const NotificationPage(),
+                  transitionDuration: Duration.zero,
+                ),
+              );
+              break;
+          }
+        },
       ),
     );
   }

@@ -37,10 +37,10 @@ class Book {
 class Fields {
   String title;
   String author;
-  String rating;
+  double rating;
   int voters;
-  String price;
-  Currency currency;
+  double price;
+  String currency;
   String description;
   String publisher;
   int pageCount;
@@ -65,7 +65,7 @@ class Fields {
         rating: json["rating"],
         voters: json["voters"],
         price: json["price"],
-        currency: currencyValues.map[json["currency"]]!,
+        currency: json["currency"],
         description: json["description"],
         publisher: json["publisher"],
         pageCount: json["page_count"],
