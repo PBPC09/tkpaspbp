@@ -52,67 +52,68 @@ class _BookCollectionsPageState extends State<BookCollectionsPage> {
       body: FutureBuilder(
           future: fetchBooks(),
           builder: (context, AsyncSnapshot snapshot) {
-            // if (snapshot.data == null) {
-            //   return const Center(child: CircularProgressIndicator());
-            // } else {
-            if (!snapshot.hasData) {
-              return const Column(
-                children: [
-                  Text(
-                    "Tidak ada data buku.",
-                    style: TextStyle(color: Color(0xff59A5D8), fontSize: 20),
-                  ),
-                  SizedBox(height: 8),
-                ],
-              );
+            if (snapshot.data == null) {
+              return const Center(child: CircularProgressIndicator());
             } else {
-              return ListView.builder(
-                itemCount: snapshot.data!.length,
-                itemBuilder: (_, index) => InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => DetailBukuPage(
-                          book: snapshot.data![index],
-                        ),
-                      ),
-                    );
-                  },
-                  child: Card(
-                    margin: const EdgeInsets.symmetric(
-                        horizontal: 16, vertical: 12),
-                    child: Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "${snapshot.data![index].fields.title}",
-                            style: const TextStyle(
-                              fontSize: 18.0,
-                              fontWeight: FontWeight.bold,
-                            ),
+              if (!snapshot.hasData) {
+                return const Column(
+                  children: [
+                    Text(
+                      "Tidak ada data buku.",
+                      style: TextStyle(color: Color(0xff59A5D8), fontSize: 20),
+                    ),
+                    SizedBox(height: 8),
+                  ],
+                );
+              } else {
+                return ListView.builder(
+                  itemCount: snapshot.data!.length,
+                  itemBuilder: (_, index) => InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DetailBukuPage(
+                            book: snapshot.data![index],
                           ),
-                          const SizedBox(height: 10),
-                          Text(
-                              "Author : ${snapshot.data![index].fields.author}"),
-                          const SizedBox(height: 10),
-                          Text(
-                              "Rating : ${snapshot.data![index].fields.rating}"),
-                          const SizedBox(height: 10),
-                          Text(
-                              "Price : ${snapshot.data![index].fields.price} SAR"),
-                          const SizedBox(height: 10),
-                          Text(
-                              "Genre : ${snapshot.data![index].fields.genres}"),
-                        ],
+                        ),
+                      );
+                    },
+                    child: Card(
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 16, vertical: 12),
+                      child: Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "${snapshot.data![index].fields.title}",
+                              style: const TextStyle(
+                                fontSize: 18.0,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(height: 10),
+                            Text(
+                                "Author : ${snapshot.data![index].fields.author}"),
+                            const SizedBox(height: 10),
+                            Text(
+                                "Rating : ${snapshot.data![index].fields.rating}"),
+                            const SizedBox(height: 10),
+                            Text(
+                                "Price : ${snapshot.data![index].fields.price} SAR"),
+                            const SizedBox(height: 10),
+                            Text(
+                                "Genre : ${snapshot.data![index].fields.genres}"),
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ),
-              );
+                );
+              }
             }
           }),
       bottomNavigationBar: BottomNavigationBar(
