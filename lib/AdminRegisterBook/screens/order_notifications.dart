@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lembarpena/AdminRegisterBook/models/Notification.dart';
+import 'package:lembarpena/AdminRegisterBook/screens/admin_menu.dart';
+import 'package:lembarpena/AdminRegisterBook/screens/book_collections.dart';
 import 'package:lembarpena/AdminRegisterBook/widgets/admin_left_drawer.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
@@ -78,7 +80,7 @@ class _NotificationPageState extends State<NotificationPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Pesanan masuk dari ${snapshot.data![index].fields.buyer}.",
+                            "Pesanan masuk dari ${snapshot.data![index].buyer}.",
                             style: const TextStyle(
                               fontSize: 18.0,
                               fontWeight: FontWeight.bold,
@@ -94,6 +96,62 @@ class _NotificationPageState extends State<NotificationPage> {
                 ),
               );
             }
+          }
+        },
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        currentIndex: 2,
+        backgroundColor: Colors.indigo,
+        selectedItemColor: Colors.white,
+        unselectedItemColor: Colors.grey,
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.dashboard),
+            label: 'Dashboard',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.book),
+            label: 'Book Collections',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.notifications),
+            label: 'Order Notifications',
+          ),
+        ],
+        onTap: (index) {
+          // Logika untuk mengganti halaman saat tab navigasi diklik
+          switch (index) {
+            case 0:
+              // Navigasi ke Dashboard
+              Navigator.pushReplacement(
+                context,
+                PageRouteBuilder(
+                  pageBuilder: (_, __, ___) => AdminPage(),
+                  transitionDuration: Duration.zero,
+                ),
+              );
+              break;
+            case 1:
+              // Navigasi ke halaman Books
+              Navigator.pushReplacement(
+                context,
+                PageRouteBuilder(
+                  pageBuilder: (_, __, ___) => const BookCollectionsPage(),
+                  transitionDuration: Duration.zero,
+                ),
+              );
+              break;
+            case 2:
+              // Navigasi ke halaman Notifications
+              Navigator.pushReplacement(
+                context,
+                PageRouteBuilder(
+                  pageBuilder: (_, __, ___) => const NotificationPage(),
+                  transitionDuration: Duration.zero,
+                ),
+              );
+              break;
           }
         },
       ),

@@ -28,29 +28,30 @@ class _LandingPageState extends State<LandingPage> {
               alignment: Alignment.center,
               children: <Widget>[
                 Image.asset(
-                  'image/imagecover.jpg',
+                  'assets/images/imagecover.jpg',
                   height: 400,
-                  fit: BoxFit.cover, // Menyesuaikan bagaimana gambar diisi dalam ruang yang tersedia
+                  fit: BoxFit
+                      .cover, // Menyesuaikan bagaimana gambar diisi dalam ruang yang tersedia
                 ),
                 Container(
                   height: 400,
-                  color: Color.fromARGB(255, 1, 37, 158).withOpacity(0.5), // Warna dengan opacity
+                  color: Color.fromARGB(255, 1, 37, 158)
+                      .withOpacity(0.5), // Warna dengan opacity
                 ),
                 const Column(
-                  children: 
-                  [
+                  children: [
                     Text(
-                    'Nikmati buku,',
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
+                      'Nikmati buku,',
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
                     ),
                     Text(
-                    'semua dalam 1 aplikasi',
-                    textAlign: TextAlign.left,
+                      'semua dalam 1 aplikasi',
+                      textAlign: TextAlign.left,
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
@@ -59,7 +60,7 @@ class _LandingPageState extends State<LandingPage> {
                       ),
                     ),
                   ],
-                ) 
+                )
               ],
             ),
             const SizedBox(height: 20),
@@ -91,11 +92,13 @@ class _LandingPageState extends State<LandingPage> {
   Widget buildCard(String title, String description) {
     return Container(
       width: 300,
-      margin: EdgeInsets.symmetric(horizontal: 8.0, vertical: 10.0), // Memberikan jarak antar card
+      margin: EdgeInsets.symmetric(
+          horizontal: 8.0, vertical: 10.0), // Memberikan jarak antar card
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.2), // Warna shadow, dengan sedikit transparansi
+            color: Colors.black
+                .withOpacity(0.2), // Warna shadow, dengan sedikit transparansi
             spreadRadius: 0, // Seberapa jauh shadow menyebar
             blurRadius: 8, // Seberapa buram atau soft edge shadow
             offset: Offset(0, 4), // Perubahan posisi shadow (x, y)
@@ -108,7 +111,8 @@ class _LandingPageState extends State<LandingPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text(title, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+              Text(title,
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
               SizedBox(height: 10),
               Text(description, style: TextStyle(fontSize: 16)),
             ],
@@ -120,10 +124,14 @@ class _LandingPageState extends State<LandingPage> {
 
   Widget buildHorizontalScrollCards() {
     List<Widget> cards = [
-      buildCard('Beli Buku', 'Perluas cakrawala, miliki buku yang hendak Anda baca'),
-      buildCard('Simpan Keinginan', 'Temukan bacaan terbaik dan simpan pada koleksi Anda!'),
-      buildCard('Lihat Profil Buku', 'Amati profil buku-buku terbaik dan bagaimana mereka akan menghibur Anda!'),
-      buildCard('Forum Buku', 'Temukan komunitas yang akan membantu Anda memahami bacaan terbaik!'),
+      buildCard(
+          'Beli Buku', 'Perluas cakrawala, miliki buku yang hendak Anda baca'),
+      buildCard('Simpan Keinginan',
+          'Temukan bacaan terbaik dan simpan pada koleksi Anda!'),
+      buildCard('Lihat Profil Buku',
+          'Amati profil buku-buku terbaik dan bagaimana mereka akan menghibur Anda!'),
+      buildCard('Forum Buku',
+          'Temukan komunitas yang akan membantu Anda memahami bacaan terbaik!'),
     ];
 
     return SizedBox(
@@ -135,19 +143,32 @@ class _LandingPageState extends State<LandingPage> {
     );
   }
 
-
   Widget _buildAccordion() {
     return Column(
       children: <Item>[
-        Item(headerValue: 'Apa itu LembarPena', expandedValue: 'LembarPena adalah sebuah aplikasi marketplace belanja buku yang memungkinkan Anda untuk menjelajahi, mencari, dan membeli berbagai jenis buku secara online. Kami menyediakan akses ke koleksi buku yang luas, termasuk buku-buku terbaru, buku terlaris, buku bekas, dan banyak lagi. Dengan LembarPena, Anda dapat dengan mudah menemukan buku-buku favorit Anda dan melakukan pembelian secara praktis melalui aplikasi kami.'),
-        Item(headerValue: 'Apa itu Fitur Forum Buku di LembarPena?', expandedValue: 'Fitur Forum Buku di LembarPena adalah wadah interaktif tempat pengguna aplikasi dapat berpartisipasi dalam diskusi, berbagi pendapat, dan berkomunikasi tentang buku. Ini adalah ruang online di mana pembaca, penulis, dan penggemar buku dapat bertukar pikiran, merekomendasikan buku, dan berbicara tentang berbagai aspek buku yang mereka baca.'),
-        Item(headerValue: ' Apakah Wishlist Book bersifat pribadi atau dapat dibagikan dengan pengguna lain?', expandedValue: 'Wishlist Book pada LembarPena bersifat pribadi secara default. Ini berarti daftar buku yang disimpan hanya dapat diakses oleh pengguna yang menyimpannya.'),
+        Item(
+            headerValue: 'Apa itu LembarPena',
+            expandedValue:
+                'LembarPena adalah sebuah aplikasi marketplace belanja buku yang memungkinkan Anda untuk menjelajahi, mencari, dan membeli berbagai jenis buku secara online. Kami menyediakan akses ke koleksi buku yang luas, termasuk buku-buku terbaru, buku terlaris, buku bekas, dan banyak lagi. Dengan LembarPena, Anda dapat dengan mudah menemukan buku-buku favorit Anda dan melakukan pembelian secara praktis melalui aplikasi kami.'),
+        Item(
+            headerValue: 'Apa itu Fitur Forum Buku di LembarPena?',
+            expandedValue:
+                'Fitur Forum Buku di LembarPena adalah wadah interaktif tempat pengguna aplikasi dapat berpartisipasi dalam diskusi, berbagi pendapat, dan berkomunikasi tentang buku. Ini adalah ruang online di mana pembaca, penulis, dan penggemar buku dapat bertukar pikiran, merekomendasikan buku, dan berbicara tentang berbagai aspek buku yang mereka baca.'),
+        Item(
+            headerValue:
+                ' Apakah Wishlist Book bersifat pribadi atau dapat dibagikan dengan pengguna lain?',
+            expandedValue:
+                'Wishlist Book pada LembarPena bersifat pribadi secara default. Ini berarti daftar buku yang disimpan hanya dapat diakses oleh pengguna yang menyimpannya.'),
       ].map<Widget>((Item item) {
         return ExpansionTile(
-          title: Text(item.headerValue, textAlign: TextAlign.left, style: const TextStyle(fontSize: 18)),
+          title: Text(item.headerValue,
+              textAlign: TextAlign.left, style: const TextStyle(fontSize: 18)),
           children: <Widget>[
             ListTile(
-              title: Text(item.expandedValue, textAlign: TextAlign.justify,),
+              title: Text(
+                item.expandedValue,
+                textAlign: TextAlign.justify,
+              ),
             )
           ],
         );

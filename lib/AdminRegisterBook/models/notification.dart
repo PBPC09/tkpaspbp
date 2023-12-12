@@ -38,12 +38,14 @@ class OrderNotifications {
 
 class Fields {
   int buyer;
+  String buyerUsername;
   String message;
   bool isRead;
   DateTime timestamp;
 
   Fields({
     required this.buyer,
+    required this.buyerUsername,
     required this.message,
     required this.isRead,
     required this.timestamp,
@@ -51,7 +53,9 @@ class Fields {
 
   factory Fields.fromJson(Map<String, dynamic> json) => Fields(
         buyer: json["buyer"],
-        message: json["message"],
+        buyerUsername: json[
+            'buyer_username'], // Directly use the buyer username added in the custom serialization
+        message: json['message'],
         isRead: json["is_read"],
         timestamp: DateTime.parse(json["timestamp"]),
       );
