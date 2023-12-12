@@ -8,6 +8,8 @@ import 'package:lembarpena/Wishlist/screens/detail_buku.dart';
 // import 'package:pbp_django_auth/pbp_django_auth.dart';
 // import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
 
 class BookCollectionsPage extends StatefulWidget {
   const BookCollectionsPage({super.key});
@@ -17,6 +19,8 @@ class BookCollectionsPage extends StatefulWidget {
 }
 
 class _BookCollectionsPageState extends State<BookCollectionsPage> {
+  List<Book> bookList = [];
+
   Future<List<Book>> fetchBooks() async {
     var url = Uri.parse('http://localhost:8000/registerbook/get-book/');
     var response = await http.get(
@@ -28,7 +32,7 @@ class _BookCollectionsPageState extends State<BookCollectionsPage> {
     var data = jsonDecode(utf8.decode(response.bodyBytes));
 
     // melakukan konversi data json menjadi object Product
-    List<Book> bookList = [];
+    bookList = [];
     for (var d in data) {
       if (d != null) {
         bookList.add(Book.fromJson(d));
@@ -36,9 +40,27 @@ class _BookCollectionsPageState extends State<BookCollectionsPage> {
     }
     return bookList;
   }
+  // Future<List<Book>> fetchBooks() async {
+  //   try {
+  //     var url = Uri.parse('http://localhost:8000/registerbook/get-book/');
+  //     var response = await http.get(url, headers: {"Content-Type": "application/json"});
+
+  //     if (response.statusCode == 200) {
+  //       var data = jsonDecode(utf8.decode(response.bodyBytes)) as List;
+  //       return data.map((book) => Book.fromJson(book)).toList();
+  //     } else {
+  //       // Handle non-200 responses
+  //       throw Exception('Failed to load books. Status code: ${response.statusCode}');
+  //     }
+  //   } catch (e) {
+  //     // Handle network errors, parsing errors, etc.
+  //     throw Exception('Failed to load books: $e');
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -51,68 +73,69 @@ class _BookCollectionsPageState extends State<BookCollectionsPage> {
       drawer: const LeftDrawer(),
       body: FutureBuilder(
           future: fetchBooks(),
-          builder: (context, AsyncSnapshot snapshot) {
-            // if (snapshot.data == null) {
-            //   return const Center(child: CircularProgressIndicator());
-            // } else {
-            if (!snapshot.hasData) {
-              return const Column(
-                children: [
-                  Text(
-                    "Tidak ada data buku.",
-                    style: TextStyle(color: Color(0xff59A5D8), fontSize: 20),
-                  ),
-                  SizedBox(height: 8),
-                ],
-              );
+          builder: (context, AsyncSnapshot<List<Book>> snapshot) {
+            if (snapshot.data == null) {
+              return const Center(child: CircularProgressIndicator());
             } else {
-              return ListView.builder(
-                itemCount: snapshot.data!.length,
-                itemBuilder: (_, index) => InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => DetailBukuPage(
-                          book: snapshot.data![index],
-                        ),
-                      ),
-                    );
-                  },
-                  child: Card(
-                    margin: const EdgeInsets.symmetric(
-                        horizontal: 16, vertical: 12),
-                    child: Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "${snapshot.data![index].fields.title}",
-                            style: const TextStyle(
-                              fontSize: 18.0,
-                              fontWeight: FontWeight.bold,
-                            ),
+              if (!snapshot.hasData) {
+                return const Column(
+                  children: [
+                    Text(
+                      "Tidak ada data buku.",
+                      style: TextStyle(color: Color(0xff59A5D8), fontSize: 20),
+                    ),
+                    SizedBox(height: 8),
+                  ],
+                );
+              } else {
+                return ListView.builder(
+                  itemCount: snapshot.data!.length,
+                  itemBuilder: (_, index) => InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DetailBukuPage(
+                            book: snapshot.data![index],
                           ),
-                          const SizedBox(height: 10),
-                          Text(
-                              "Author : ${snapshot.data![index].fields.author}"),
-                          const SizedBox(height: 10),
-                          Text(
-                              "Rating : ${snapshot.data![index].fields.rating}"),
-                          const SizedBox(height: 10),
-                          Text(
-                              "Price : ${snapshot.data![index].fields.price} SAR"),
-                          const SizedBox(height: 10),
-                          Text(
-                              "Genre : ${snapshot.data![index].fields.genres}"),
-                        ],
+                        ),
+                      );
+                    },
+                    child: Card(
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 16, vertical: 12),
+                      child: Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "${snapshot.data![index].fields.title}",
+                              style: const TextStyle(
+                                fontSize: 18.0,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(height: 10),
+                            Text(
+                                "Author : ${snapshot.data![index].fields.author}"),
+                            const SizedBox(height: 10),
+                            Text(
+                                "Rating : ${snapshot.data![index].fields.rating}"),
+                            const SizedBox(height: 10),
+                            Text(
+                                "Price : ${snapshot.data![index].fields.price} SAR"),
+                            const SizedBox(height: 10),
+                            Text(
+                                "Genre : ${snapshot.data![index].fields.genres}"),
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ),
-              );
+                );
+              }
             }
           }),
       bottomNavigationBar: BottomNavigationBar(
