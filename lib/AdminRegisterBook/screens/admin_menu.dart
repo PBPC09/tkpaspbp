@@ -102,32 +102,41 @@ class AdminPage extends StatelessWidget {
             case 0:
               // Navigasi ke Dashboard
               Navigator.pushReplacement(
-                context,
-                PageRouteBuilder(
-                  pageBuilder: (_, __, ___) => AdminPage(),
-                  transitionDuration: Duration.zero,
-                ),
-              );
+                  context,
+                  PageRouteBuilder(
+                    pageBuilder: (context, animation, secondaryAnimation) =>
+                        AdminPage(),
+                    transitionsBuilder:
+                        (context, animation, secondaryAnimation, child) {
+                      return FadeTransition(opacity: animation, child: child);
+                    },
+                  ));
               break;
             case 1:
               // Navigasi ke halaman Books
               Navigator.pushReplacement(
-                context,
-                PageRouteBuilder(
-                  pageBuilder: (_, __, ___) => const BookCollectionsPage(),
-                  transitionDuration: Duration.zero,
-                ),
-              );
+                  context,
+                  PageRouteBuilder(
+                    pageBuilder: (context, animation, secondaryAnimation) =>
+                        const BookCollectionsPage(),
+                    transitionsBuilder:
+                        (context, animation, secondaryAnimation, child) {
+                      return FadeTransition(opacity: animation, child: child);
+                    },
+                  ));
               break;
             case 2:
               // Navigasi ke halaman Notifications
               Navigator.pushReplacement(
-                context,
-                PageRouteBuilder(
-                  pageBuilder: (_, __, ___) => const NotificationPage(),
-                  transitionDuration: Duration.zero,
-                ),
-              );
+                  context,
+                  PageRouteBuilder(
+                    pageBuilder: (context, animation, secondaryAnimation) =>
+                        const NotificationPage(),
+                    transitionsBuilder:
+                        (context, animation, secondaryAnimation, child) {
+                      return FadeTransition(opacity: animation, child: child);
+                    },
+                  ));
               break;
           }
         },

@@ -51,8 +51,10 @@ class _NotificationPageState extends State<NotificationPage> {
   }
 
   void markNotificationAsRead(int notifId) async {
-    final response = await http.get(Uri.parse(
-        'http://localhost:8000/registerbook/mark-notification-read/$notifId/'));
+    final response = await http.get(
+        Uri.parse(
+            'http://localhost:8000/registerbook/mark-notification-read/$notifId/'),
+        headers: {"Content-Type": "application/json"});
 
     if (response.statusCode == 200) {
       setState(() {
@@ -60,22 +62,27 @@ class _NotificationPageState extends State<NotificationPage> {
             true;
       });
     } else {
-      throw Exception('Failed to mark notification as read');
+      throw Exception(
+          'Failed to mark notification as read with status code: ${response.statusCode}');
     }
   }
 
   void markAllNotificationsAsRead() async {
-    final response = await http.get(Uri.parse(
-        'http://localhost:8000/registerbook/mark-all-notifications-read/'));
+    for (var notif in notifications) {
+      if (!notif.fields.isRead) {
+        final response = await http.get(
+            Uri.parse(
+                'http://localhost:8000/registerbook/mark-notification-read/${notif.pk}/'),
+            headers: {"Content-Type": "application/json"});
 
-    if (response.statusCode == 200) {
-      setState(() {
-        for (var notif in notifications) {
-          notif.fields.isRead = true;
+        if (response.statusCode == 200) {
+          setState(() {
+            notif.fields.isRead = true;
+          });
+        } else {
+          throw Exception('Failed to mark all notifications as read');
         }
-      });
-    } else {
-      throw Exception('Failed to mark all notifications as read');
+      }
     }
   }
 
@@ -170,32 +177,41 @@ class _NotificationPageState extends State<NotificationPage> {
             case 0:
               // Navigasi ke Dashboard
               Navigator.pushReplacement(
-                context,
-                PageRouteBuilder(
-                  pageBuilder: (_, __, ___) => AdminPage(),
-                  transitionDuration: Duration.zero,
-                ),
-              );
+                  context,
+                  PageRouteBuilder(
+                    pageBuilder: (context, animation, secondaryAnimation) =>
+                        AdminPage(),
+                    transitionsBuilder:
+                        (context, animation, secondaryAnimation, child) {
+                      return FadeTransition(opacity: animation, child: child);
+                    },
+                  ));
               break;
             case 1:
               // Navigasi ke halaman Books
               Navigator.pushReplacement(
-                context,
-                PageRouteBuilder(
-                  pageBuilder: (_, __, ___) => const BookCollectionsPage(),
-                  transitionDuration: Duration.zero,
-                ),
-              );
+                  context,
+                  PageRouteBuilder(
+                    pageBuilder: (context, animation, secondaryAnimation) =>
+                        const BookCollectionsPage(),
+                    transitionsBuilder:
+                        (context, animation, secondaryAnimation, child) {
+                      return FadeTransition(opacity: animation, child: child);
+                    },
+                  ));
               break;
             case 2:
               // Navigasi ke halaman Notifications
               Navigator.pushReplacement(
-                context,
-                PageRouteBuilder(
-                  pageBuilder: (_, __, ___) => const NotificationPage(),
-                  transitionDuration: Duration.zero,
-                ),
-              );
+                  context,
+                  PageRouteBuilder(
+                    pageBuilder: (context, animation, secondaryAnimation) =>
+                        const NotificationPage(),
+                    transitionsBuilder:
+                        (context, animation, secondaryAnimation, child) {
+                      return FadeTransition(opacity: animation, child: child);
+                    },
+                  ));
               break;
           }
         },
