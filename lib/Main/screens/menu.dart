@@ -3,27 +3,23 @@ import 'package:lembarpena/Authentication/login_page.dart';
 import 'package:lembarpena/Main/widgets/left_drawer.dart';
 import 'package:lembarpena/Main/widgets/lembarpena_card.dart';
 
-class MenuItem {
+class ShopItem {
   final String name;
   final IconData icon;
-  final Color color;
 
-  MenuItem(this.name, this.icon, this.color);
+  ShopItem(this.name, this.icon);
 }
 
-class MyHomePage extends StatefulWidget {
+class MyHomePage extends StatelessWidget {
   MyHomePage({Key? key}) : super(key: key);
-  final List<MenuItem> pages = [
-    MenuItem("Buy Books", Icons.shopping_bag, Colors.indigo),
-    MenuItem("Wishlist", Icons.favorite, Colors.indigo),
-    MenuItem("Explore Book", Icons.search, Colors.indigo),
-    MenuItem("Cart", Icons.add_shopping_cart, Colors.indigo),
-    MenuItem("Book Forum", Icons.chat, Colors.indigo),
-    MenuItem("My Order", Icons.receipt, Colors.indigo),
-    MenuItem("Admin Page", Icons.admin_panel_settings, Colors.indigo),
-    MenuItem("Logout", Icons.logout, Colors.red),
+  final List<ShopItem> items = [
+    ShopItem("Buy Books", Icons.shopping_bag),
+    ShopItem("Wishlist", Icons.favorite),
+    ShopItem("Explore Book", Icons.book),
+    ShopItem("Book Forum", Icons.chat),
+    ShopItem("Admin Page", Icons.admin_panel_settings),
+    ShopItem("Logout", Icons.logout),
   ];
-
   @override
   Widget build(BuildContext context) {
     String uname = LoginPage.uname;
@@ -47,7 +43,7 @@ class MyHomePage extends StatefulWidget {
                 padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
                 // Widget Text untuk menampilkan tulisan dengan alignment center dan style yang sesuai
                 child: Text(
-                  'Welcome to Lembar Pena', // Text yang menandakan toko
+                  'Lembar Pena', // Text yang menandakan toko
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 30,
@@ -64,9 +60,9 @@ class MyHomePage extends StatefulWidget {
                 mainAxisSpacing: 10,
                 crossAxisCount: 3,
                 shrinkWrap: true,
-                children: pages.map((MenuItem item) {
+                children: items.map((ShopItem item) {
                   // Iterasi untuk setiap item
-                  return MenuCard(item);
+                  return ShopCard(item);
                 }).toList(),
               ),
             ],
@@ -74,11 +70,5 @@ class MyHomePage extends StatefulWidget {
         ),
       ),
     );
-  }
-  
-  @override
-  State<StatefulWidget> createState() {
-    // TODO: implement createState
-    throw UnimplementedError();
   }
 }

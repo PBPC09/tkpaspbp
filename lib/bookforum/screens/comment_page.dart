@@ -4,7 +4,6 @@ import 'package:lembarpena/Authentication/login_page.dart';
 import 'dart:convert';
 
 import 'package:lembarpena/BookForum/models/forumcomment.dart';
-import 'package:lembarpena/BookForum/models/forumhead.dart';
 import 'package:lembarpena/BookForum/screens/create_comment_page.dart';
 import 'package:lembarpena/Wishlist/models/book.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
@@ -68,7 +67,7 @@ class _ForumCommentsPageState extends State<ForumCommentsPage> {
     fetchBookDetails(widget.bookId).then((bookDetails) {
       setState(() {
         book = bookDetails; // Menetapkan hasil ke variabel book
-        isBookLoaded = true;  
+        isBookLoaded = true;
       });
     });
     // fetchForumHead(); // Memanggil fungsi fetchForumHead
@@ -92,10 +91,13 @@ class _ForumCommentsPageState extends State<ForumCommentsPage> {
     });
   }
 
-  Future<void> deleteComment(CookieRequest request,String username, int commentId) async { // Sesuaikan dengan URL API Anda
-    // final response = await request.postJson('http://10.0.2.2:8000/bookforum/delete_comments_flutter/$username/$commentId', 
-    final response = await request.postJson('http://localhost:8000/bookforum/delete_comments_flutter/$username/$commentId', 
-    jsonEncode({}));
+  Future<void> deleteComment(
+      CookieRequest request, String username, int commentId) async {
+    // Sesuaikan dengan URL API Anda
+    // final response = await request.postJson('http://10.0.2.2:8000/bookforum/delete_comments_flutter/$username/$commentId',
+    final response = await request.postJson(
+        'http://localhost:8000/bookforum/delete_comments_flutter/$username/$commentId',
+        jsonEncode({}));
 
     if (response['status'] == 'success') {
       // Handle berhasil menghapus
@@ -116,28 +118,32 @@ class _ForumCommentsPageState extends State<ForumCommentsPage> {
       body: !isBookLoaded
           ? const Center(child: CircularProgressIndicator())
           : Center(
-              child : Padding(
+              child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                child : Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SizedBox(height: 10),
                     Text(
                       widget.title, // Judul Forum
-                      style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                       textAlign: TextAlign.center,
                     ),
                     SizedBox(height: 5),
                     Text(
                       widget.question, // Pertanyaan
                       style: TextStyle(fontSize: 18),
-                      textAlign: TextAlign.left,
+                      textAlign: TextAlign.center,
                     ),
                     SizedBox(height: 5),
                     InkWell(
                       child: Text(
                         book.fields.title, // Judul Buku
-                        style: TextStyle(fontSize: 16, color: Color.fromARGB(255, 13, 90, 154)),
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 16,
+                            color: Color.fromARGB(255, 13, 90, 154)),
                       ),
                       onTap: () {
                         showDialog(
@@ -145,10 +151,16 @@ class _ForumCommentsPageState extends State<ForumCommentsPage> {
                           builder: (BuildContext context) {
                             return AlertDialog(
                               title: Text(book.fields.title),
-                              content: SingleChildScrollView( // Membuat konten scrollable
-                                child: Text(book.fields.description),
+                              content: SingleChildScrollView(
+                                // Membuat konten scrollable
+                                child: Text(
+                                  book.fields.description,
+                                  textAlign: TextAlign.justify,
+                                  style: const TextStyle(
+                                    fontSize: 14,
+                                  ),
+                                ),
                               ),
-
                               actions: <Widget>[
                                 TextButton(
                                   child: const Text('Close'),
@@ -165,30 +177,32 @@ class _ForumCommentsPageState extends State<ForumCommentsPage> {
                     SizedBox(height: 10),
                     Expanded(
                       child: comments.isEmpty
-                        ? const Text("Belum ada Komentar")
-                        : ListView.builder(
-                            itemCount: comments.length,
-                            itemBuilder: (context, index) {
-                              var comment = comments[index];
-                              var date = DateFormat('yyyy-MM-dd').format(comment.fields.date);
-                              return Card(
-                                child: ListTile(
-                                  title: Text(comment.fields.answer),
-                                  subtitle: Text(
-                                    
-                                      "Dikirim oleh: ${comment.fields.user} pada $date"),
-                                  trailing: comment.fields.user == loggedInUser
-                                      ? IconButton(
-                                          icon: Icon(Icons.delete),
-                                          onPressed: () {
-                                            deleteComment(request, loggedInUser, comment.pk);
-                                          },
-                                        )
-                                      : null,
-                                ),
-                              );
-                            },
-                          ),
+                          ? const Text("Belum ada Komentar")
+                          : ListView.builder(
+                              itemCount: comments.length,
+                              itemBuilder: (context, index) {
+                                var comment = comments[index];
+                                var date = DateFormat('yyyy-MM-dd')
+                                    .format(comment.fields.date);
+                                return Card(
+                                  child: ListTile(
+                                    title: Text(comment.fields.answer),
+                                    subtitle: Text(
+                                        "Dikirim oleh: ${comment.fields.user} pada $date"),
+                                    trailing:
+                                        comment.fields.user == loggedInUser
+                                            ? IconButton(
+                                                icon: Icon(Icons.delete),
+                                                onPressed: () {
+                                                  deleteComment(request,
+                                                      loggedInUser, comment.pk);
+                                                },
+                                              )
+                                            : null,
+                                  ),
+                                );
+                              },
+                            ),
                     ),
                   ],
                 ),
@@ -198,7 +212,12 @@ class _ForumCommentsPageState extends State<ForumCommentsPage> {
         onPressed: () {
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => CreateCommentPage(forumHeadId: widget.forumHeadId, title: widget.title, question: widget.question, bookId: widget.bookId)),
+            MaterialPageRoute(
+                builder: (context) => CreateCommentPage(
+                    forumHeadId: widget.forumHeadId,
+                    title: widget.title,
+                    question: widget.question,
+                    bookId: widget.bookId)),
           );
         },
         child: const Icon(Icons.add),

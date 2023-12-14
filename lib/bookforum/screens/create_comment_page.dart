@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:lembarpena/BookForum/screens/comment_page.dart';
 import 'dart:convert';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
@@ -10,11 +9,13 @@ class CreateCommentPage extends StatefulWidget {
   final String title;
   final String question;
   final int bookId;
-  const CreateCommentPage({Key? key, 
+  const CreateCommentPage({
+    Key? key,
     required this.forumHeadId,
     required this.title,
     required this.question,
-    required this.bookId,}) : super(key: key);
+    required this.bookId,
+  }) : super(key: key);
 
   @override
   _CreateCommentPageState createState() => _CreateCommentPageState();
@@ -70,23 +71,30 @@ class _CreateCommentPageState extends State<CreateCommentPage> {
                         jsonEncode({"answer": comment}),
                       );
 
-                  // Periksa kode status HTTP dari respons
-                      if (response['status'] == 'success'){
+                      // Periksa kode status HTTP dari respons
+                      if (response['status'] == 'success') {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
                             content: Text("Komentar berhasil ditambahkan!"),
                           ),
                         );
                         // Navigator.pop(context); // Kembali ke halaman sebelumnya
-                          // ignore: use_build_context_synchronously
-                          Navigator.pushReplacement(
+                        // ignore: use_build_context_synchronously
+                        Navigator.pushReplacement(
                           context,
-                          MaterialPageRoute(builder: (context) => ForumCommentsPage(forumHeadId: widget.forumHeadId, bookId: widget.bookId, question: widget.question, title: widget.title,)),
-                          ); // Kembali ke halaman sebelumnya
+                          MaterialPageRoute(
+                              builder: (context) => ForumCommentsPage(
+                                    forumHeadId: widget.forumHeadId,
+                                    bookId: widget.bookId,
+                                    question: widget.question,
+                                    title: widget.title,
+                                  )),
+                        ); // Kembali ke halaman sebelumnya
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
-                            content: Text("Terdapat kesalahan, silakan coba lagi."),
+                            content:
+                                Text("Terdapat kesalahan, silakan coba lagi."),
                           ),
                         );
                       }

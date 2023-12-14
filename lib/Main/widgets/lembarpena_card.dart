@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:lembarpena/BookForum/screens/forum_page.dart';
-import 'package:lembarpena/Main/screens/landing_page.dart';
 import 'package:lembarpena/Main/screens/menu.dart';
+import 'package:lembarpena/Authentication/login_page.dart';
 import 'package:lembarpena/Wishlist/screens/explore_book.dart';
 import 'package:lembarpena/AdminRegisterBook/screens/admin_menu.dart';
 
-class MenuCard extends StatelessWidget {
-  final MenuItem page;
+class ShopCard extends StatelessWidget {
+  final ShopItem item;
 
-  const MenuCard(this.page, {super.key}); // Constructor
+  const ShopCard(this.item, {super.key}); // Constructor
 
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: page.color,
+      color: Colors.indigo,
       child: InkWell(
         // Area responsive terhadap sentuhan
         onTap: () {
@@ -21,15 +21,15 @@ class MenuCard extends StatelessWidget {
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(SnackBar(
-                content: Text("Kamu telah menekan tombol ${page.name}!")));
-          if (page.name == "Home") {
+                content: Text("Kamu telah menekan tombol ${item.name}!")));
+          if (item.name == "Home") {
             // TODO: Implement home button functionality.
             Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => MyHomePage(),
                 ));
-          } else if (page.name == "Explore Book") {
+          } else if (item.name == "Explore Book") {
             // TODO: Implement explore book button functionality.
             Navigator.push(
               context,
@@ -37,28 +37,29 @@ class MenuCard extends StatelessWidget {
                 builder: (context) => const ExploreBooksPage(),
               ),
             );
-          } else if (page.name == "Wishlist") {
+          } else if (item.name == "WISHLIST") {
             // TODO: Implement wishlist button functionality.
             // Navigator.pushReplacement(
             //   context,
             //   MaterialPageRoute(
             //     builder: (context) => const WishlistPage(),
             //   ));
-          } else if (page.name == "Cart") {
+          } else if (item.name == "CART") {
             // TODO: Implement cart button functionality.
-          } else if (page.name == "Buy Books") {
+          } else if (item.name == "Buy Books") {
             // TODO: Implement buy books button functionality.
-          } else if (page.name == "Book Forum") {
+          } else if (item.name == "Book Forum") {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => const ForumPage()));
             // TODO: Implement forum button functionality.
-          } else if (page.name == "My Order") {
+          } else if (item.name == "My Order") {
             // TODO: Implement my order button functionality.
-          } else if (page.name == "Logout") {
-              Navigator.of(context).pushAndRemoveUntil(
-                MaterialPageRoute(builder: (context) => LandingPage()),
-                (Route<dynamic> route) => false,
-              );
+          } else if (item.name == "Admin Page") {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => AdminPage()));
+          } else if (item.name == "Logout") {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const LoginPage()));
           }
         },
         child: Container(
@@ -69,13 +70,13 @@ class MenuCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
-                  page.icon,
+                  item.icon,
                   color: Colors.white,
                   size: 30.0,
                 ),
                 const Padding(padding: EdgeInsets.all(3)),
                 Text(
-                  page.name,
+                  item.name,
                   textAlign: TextAlign.center,
                   style: const TextStyle(color: Colors.white),
                 ),
