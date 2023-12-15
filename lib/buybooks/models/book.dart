@@ -86,11 +86,19 @@ class Fields {
       };
 }
 
-enum Currency { FREE, SAR }
+enum Currency {
+  // ignore: constant_identifier_names
+  FREE,
+  // ignore: constant_identifier_names
+  SAR
+}
 
 final currencyValues = EnumValues({"Free": Currency.FREE, "SAR": Currency.SAR});
 
-enum Model { REGISTERBOOK_BOOK }
+enum Model {
+  // ignore: constant_identifier_names
+  REGISTERBOOK_BOOK
+}
 
 final modelValues = EnumValues({"registerbook.book": Model.REGISTERBOOK_BOOK});
 
