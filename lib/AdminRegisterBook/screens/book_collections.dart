@@ -11,6 +11,7 @@ class BookCollectionsPage extends StatefulWidget {
   const BookCollectionsPage({Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _BookCollectionsPageState createState() => _BookCollectionsPageState();
 }
 
