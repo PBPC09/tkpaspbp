@@ -87,7 +87,7 @@ class AdminMenuCard extends StatelessWidget {
                 } else {
                   // ignore: use_build_context_synchronously
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    content: Text("$message"),
+                    content: Text(message),
                   ));
                 }
               }
