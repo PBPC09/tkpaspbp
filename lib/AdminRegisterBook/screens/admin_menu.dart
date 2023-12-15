@@ -34,8 +34,9 @@ class AdminPage extends StatelessWidget {
                 alignment: Alignment.center,
                 children: <Widget>[
                   Image.asset(
-                    'assets/images/imagecover.jpg',
+                    'assets/images/books3.jpg',
                     height: 400,
+                    width: 600,
                     fit: BoxFit.cover,
                   ),
                   Container(
@@ -48,7 +49,7 @@ class AdminPage extends StatelessWidget {
                       Padding(
                         padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
                         child: Text(
-                          'Welcome to LembarPena',
+                          'Admin Dashboard',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               fontSize: 30,
