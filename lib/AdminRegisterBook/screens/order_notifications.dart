@@ -176,24 +176,26 @@ class _NotificationPageState extends State<NotificationPage> {
                         // Spacer between summary and buttons
                         SizedBox(height: 8),
                         // Buttons at the bottom of the card
+                        // Buttons at the bottom of the card
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            TextButton(
+                            ElevatedButton(
                               onPressed: () =>
                                   deleteNotification(notification.pk),
-                              child: Text('Delete'),
-                              style: TextButton.styleFrom(
+                              style: ElevatedButton.styleFrom(
                                 primary: Colors.red,
                               ),
+                              child: Text('Delete'),
                             ),
-                            TextButton(
+                            SizedBox(width: 8), // Spacer between buttons
+                            ElevatedButton(
                               onPressed: () =>
                                   markNotificationAsRead(notification.pk),
-                              child: Text('Read'),
-                              style: TextButton.styleFrom(
+                              style: ElevatedButton.styleFrom(
                                 primary: Colors.blue,
                               ),
+                              child: Text('Read'),
                             ),
                           ],
                         ),
