@@ -13,6 +13,7 @@ class ExploreBooksPage extends StatefulWidget {
   const ExploreBooksPage({Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _ExploreBooksPageState createState() => _ExploreBooksPageState();
 }
 
@@ -106,7 +107,7 @@ class _ExploreBooksPageState extends State<ExploreBooksPage> {
                                       ),
                                     );
                                   },
-                                  child: Text("Show Details"),
+                                  child: const Text("Show Details"),
                                 ),
                                 TextButton(
                                   onPressed: () {
@@ -121,7 +122,7 @@ class _ExploreBooksPageState extends State<ExploreBooksPage> {
                                       }
                                     });
                                   },
-                                  child: Text("Add To Wishlist"),
+                                  child: const Text("Add To Wishlist"),
                                 ),
                               ],
                             ),
@@ -138,8 +139,8 @@ class _ExploreBooksPageState extends State<ExploreBooksPage> {
         type: BottomNavigationBarType.fixed,
         currentIndex: 1,
         backgroundColor: Colors.indigo,
-        selectedItemColor: Color.fromARGB(255, 255, 255, 255),
-        unselectedItemColor: Color.fromARGB(255, 156, 143, 255),
+        selectedItemColor: const Color.fromARGB(255, 255, 255, 255),
+        unselectedItemColor: const Color.fromARGB(255, 156, 143, 255),
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home), // Ganti dengan path gambar yang sesuai

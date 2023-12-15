@@ -75,13 +75,13 @@ class MenuCard extends StatelessWidget {
                 // ignore: use_build_context_synchronously
                 Navigator.pushAndRemoveUntil(
                   context,
-                  MaterialPageRoute(builder: (context) => LandingPage()),
+                  MaterialPageRoute(builder: (context) => const LandingPage()),
                   (Route<dynamic> route) => false,
                 );
               } else {
                 // ignore: use_build_context_synchronously
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                  content: Text("$message"),
+                  content: Text(message),
                 ));
               }
 

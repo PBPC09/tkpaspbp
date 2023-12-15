@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:lembarpena/Authentication/login_page.dart';
 
 class LandingPage extends StatefulWidget {
+  const LandingPage({super.key});
+
   @override
+  // ignore: library_private_types_in_public_api
   _LandingPageState createState() => _LandingPageState();
 }
 
@@ -19,7 +22,7 @@ class _LandingPageState extends State<LandingPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Lembar Pena'),
+        title: const Text('Lembar Pena'),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -35,7 +38,7 @@ class _LandingPageState extends State<LandingPage> {
                 ),
                 Container(
                   height: 400,
-                  color: Color.fromARGB(255, 1, 37, 158)
+                  color: const Color.fromARGB(255, 1, 37, 158)
                       .withOpacity(0.5), // Warna dengan opacity
                 ),
                 const Column(
@@ -80,7 +83,7 @@ class _LandingPageState extends State<LandingPage> {
                   MaterialPageRoute(builder: (context) => const LoginPage()),
                 );
               },
-              child: Text('Let\'s Get Started'),
+              child: const Text('Let\'s Get Started'),
             ),
             const SizedBox(height: 20),
           ],
@@ -99,14 +102,14 @@ class _LandingPageState extends State<LandingPage> {
       },
       child: Container(
         width: 300,
-        margin: EdgeInsets.symmetric(horizontal: 8.0, vertical: 10.0),
+        margin: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 10.0),
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(0.2),
               spreadRadius: 0,
               blurRadius: 8,
-              offset: Offset(0, 4),
+              offset: const Offset(0, 4),
             ),
           ],
         ),
@@ -117,10 +120,10 @@ class _LandingPageState extends State<LandingPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(title,
-                    style:
-                        TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                SizedBox(height: 10),
-                Text(description, style: TextStyle(fontSize: 16)),
+                    style: const TextStyle(
+                        fontSize: 20, fontWeight: FontWeight.bold)),
+                const SizedBox(height: 10),
+                Text(description, style: const TextStyle(fontSize: 16)),
               ],
             ),
           ),

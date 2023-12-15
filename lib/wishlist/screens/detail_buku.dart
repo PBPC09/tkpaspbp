@@ -22,99 +22,99 @@ class DetailBukuPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 12),
-              Text(
+              const SizedBox(height: 12),
+              const Text(
                 "Author:",
                 style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
               ),
-              SizedBox(
+              const SizedBox(
                   height: 4), // Add a smaller space between label and value
               Text(
                 book.fields.author,
-                style: TextStyle(fontSize: 12),
+                style: const TextStyle(fontSize: 12),
               ),
-              SizedBox(height: 12),
-              Text(
+              const SizedBox(height: 12),
+              const Text(
                 "Rating:",
                 style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
               ),
-              SizedBox(height: 4),
+              const SizedBox(height: 4),
               Text(
                 book.fields.rating,
-                style: TextStyle(fontSize: 12),
+                style: const TextStyle(fontSize: 12),
               ),
-              SizedBox(height: 12),
-              Text(
+              const SizedBox(height: 12),
+              const Text(
                 "Voters:",
                 style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
               ),
-              SizedBox(height: 4),
+              const SizedBox(height: 4),
               Text(
                 book.fields.voters.toString(),
-                style: TextStyle(fontSize: 12),
+                style: const TextStyle(fontSize: 12),
               ),
-              SizedBox(height: 12),
-              Text(
+              const SizedBox(height: 12),
+              const Text(
                 "Price:",
                 style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
               ),
-              SizedBox(height: 4),
+              const SizedBox(height: 4),
               Text(
                 "${book.fields.price} SAR",
-                style: TextStyle(fontSize: 12),
+                style: const TextStyle(fontSize: 12),
               ),
-              SizedBox(height: 12),
-              Text(
+              const SizedBox(height: 12),
+              const Text(
                 "Page Count:",
                 style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
               ),
-              SizedBox(height: 4),
+              const SizedBox(height: 4),
               Text(
                 book.fields.pageCount.toString(),
-                style: TextStyle(fontSize: 12),
+                style: const TextStyle(fontSize: 12),
               ),
-              SizedBox(height: 12),
-              Text(
+              const SizedBox(height: 12),
+              const Text(
                 "Publisher:",
                 style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
               ),
-              SizedBox(height: 4),
+              const SizedBox(height: 4),
               Text(
                 book.fields.publisher,
-                style: TextStyle(fontSize: 12),
+                style: const TextStyle(fontSize: 12),
               ),
-              SizedBox(height: 12),
-              Text(
+              const SizedBox(height: 12),
+              const Text(
                 "Genres:",
                 style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
               ),
-              SizedBox(height: 5),
+              const SizedBox(height: 5),
               // Display genres as a horizontal list
               Row(
                 children: book.fields.genres.split(',').map((genre) {
                   return Container(
-                    margin: EdgeInsets.only(right: 10),
-                    padding: EdgeInsets.all(6),
+                    margin: const EdgeInsets.only(right: 10),
+                    padding: const EdgeInsets.all(6),
                     decoration: BoxDecoration(
                       color: Colors.indigo[900],
                       borderRadius: BorderRadius.circular(5),
                     ),
                     child: Text(
                       genre.trim(),
-                      style: TextStyle(fontSize: 12, color: Colors.white),
+                      style: const TextStyle(fontSize: 12, color: Colors.white),
                     ),
                   );
                 }).toList(),
               ),
-              SizedBox(height: 12),
-              Text(
+              const SizedBox(height: 12),
+              const Text(
                 "Description:",
                 style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
               ),
-              SizedBox(height: 5),
+              const SizedBox(height: 5),
               Text(
                 book.fields.description,
-                style: TextStyle(fontSize: 12),
+                style: const TextStyle(fontSize: 12),
               ),
             ],
           ),

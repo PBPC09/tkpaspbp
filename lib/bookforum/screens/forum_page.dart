@@ -16,6 +16,7 @@ class ForumPage extends StatefulWidget {
   const ForumPage({Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _ForumPageState createState() => _ForumPageState();
 }
 
@@ -184,7 +185,7 @@ class _ForumPageState extends State<ForumPage> {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  Icon(Icons.person), // Ikon Penanya
+                                  const Icon(Icons.person), // Ikon Penanya
                                   const Text("  "), // Ikon Kalender
                                   Text(
                                     forumHeadFields.user,
@@ -234,8 +235,8 @@ class _ForumPageState extends State<ForumPage> {
         type: BottomNavigationBarType.fixed,
         currentIndex: 2,
         backgroundColor: Colors.indigo,
-        selectedItemColor: Color.fromARGB(255, 255, 255, 255),
-        unselectedItemColor: Color.fromARGB(255, 156, 143, 255),
+        selectedItemColor: const Color.fromARGB(255, 255, 255, 255),
+        unselectedItemColor: const Color.fromARGB(255, 156, 143, 255),
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home), // Ganti dengan path gambar yang sesuai
@@ -290,8 +291,8 @@ class _ForumPageState extends State<ForumPage> {
             MaterialPageRoute(builder: (context) => const CreateForumPage()),
           );
         },
-        child: const Icon(Icons.add),
         tooltip: 'Buat Forum Baru',
+        child: const Icon(Icons.add),
       ),
     );
   }

@@ -40,7 +40,8 @@ class AdminPage extends StatelessWidget {
                   ),
                   Container(
                     height: 400,
-                    color: Color.fromARGB(255, 1, 37, 158).withOpacity(0.5),
+                    color:
+                        const Color.fromARGB(255, 1, 37, 158).withOpacity(0.5),
                   ),
                   const Column(
                     children: [
@@ -61,7 +62,7 @@ class AdminPage extends StatelessWidget {
                 ],
               ),
               GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 3,
                   crossAxisSpacing: 10,
                   mainAxisSpacing: 10,

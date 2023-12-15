@@ -129,7 +129,7 @@ class _NotificationPageState extends State<NotificationPage> {
                   shape: RoundedRectangleBorder(
                     side: notification.fields.isRead
                         ? BorderSide.none
-                        : BorderSide(color: Colors.blue, width: 2),
+                        : const BorderSide(color: Colors.blue, width: 2),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Padding(
@@ -146,35 +146,35 @@ class _NotificationPageState extends State<NotificationPage> {
                               width: 40,
                               height: 40,
                             ),
-                            SizedBox(width: 8),
+                            const SizedBox(width: 8),
                             // User info text
                             Expanded(
                               child: Text(
                                 userInfo,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
                             ),
                           ],
                         ),
-                        SizedBox(height: 3),
+                        const SizedBox(height: 3),
                         Text(
                           orderSummaryText,
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.black,
                             fontWeight: FontWeight.normal,
                           ),
                         ),
                         Text(
                           orderSummary,
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.black,
                             fontWeight: FontWeight.normal,
                           ),
                         ),
                         // Spacer between summary and buttons
-                        SizedBox(height: 8),
+                        const SizedBox(height: 8),
                         // Buttons at the bottom of the card
                         // Buttons at the bottom of the card
                         Row(
@@ -184,18 +184,18 @@ class _NotificationPageState extends State<NotificationPage> {
                               onPressed: () =>
                                   deleteNotification(notification.pk),
                               style: ElevatedButton.styleFrom(
-                                primary: Colors.red,
+                                backgroundColor: Colors.red,
                               ),
-                              child: Text('Delete'),
+                              child: const Text('Delete'),
                             ),
-                            SizedBox(width: 8), // Spacer between buttons
+                            const SizedBox(width: 8), // Spacer between buttons
                             ElevatedButton(
                               onPressed: () =>
                                   markNotificationAsRead(notification.pk),
                               style: ElevatedButton.styleFrom(
-                                primary: Colors.blue,
+                                backgroundColor: Colors.blue,
                               ),
-                              child: Text('Read'),
+                              child: const Text('Read'),
                             ),
                           ],
                         ),

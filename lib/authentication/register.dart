@@ -4,11 +4,14 @@ import 'package:http/http.dart' as http;
 import 'package:animate_do/animate_do.dart';
 import 'package:lembarpena/Authentication/login_page.dart'; // Asumsi Anda memiliki halaman ini
 
-void main() => runApp(
-    MaterialApp(debugShowCheckedModeBanner: false, home: RegistrationPage()));
+void main() => runApp(const MaterialApp(
+    debugShowCheckedModeBanner: false, home: RegistrationPage()));
 
 class RegistrationPage extends StatefulWidget {
+  const RegistrationPage({super.key});
+
   @override
+  // ignore: library_private_types_in_public_api
   _RegistrationPageState createState() => _RegistrationPageState();
 }
 
@@ -32,12 +35,13 @@ class _RegistrationPageState extends State<RegistrationPage> {
 
     if (response.statusCode == 200) {
       // Handle successful registration
+      // ignore: use_build_context_synchronously
       showDialog(
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('Success'),
-            content: Text('User registered successfully.'),
+            title: const Text('Success'),
+            content: const Text('User registered successfully.'),
             actions: <Widget>[
               TextButton(
                 onPressed: () {
@@ -45,10 +49,10 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   Navigator.of(context).pushReplacement(
                     // Navigate to the login page
                     MaterialPageRoute(
-                        builder: (BuildContext context) => LoginPage()),
+                        builder: (BuildContext context) => const LoginPage()),
                   );
                 },
-                child: Text('OK'),
+                child: const Text('OK'),
               ),
             ],
           );
@@ -56,18 +60,19 @@ class _RegistrationPageState extends State<RegistrationPage> {
       );
     } else {
       // Handle registration error
+      // ignore: use_build_context_synchronously
       showDialog(
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('Error'),
-            content: Text('Failed to register user.'),
+            title: const Text('Error'),
+            content: const Text('Failed to register user.'),
             actions: <Widget>[
               TextButton(
                 onPressed: () {
                   Navigator.of(context).pop(); // Close the dialog
                 },
-                child: Text('OK'),
+                child: const Text('OK'),
               ),
             ],
           );
@@ -88,7 +93,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Container(
+            SizedBox(
               height: 400,
               child: Stack(
                 children: <Widget>[
@@ -97,9 +102,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     height: 400,
                     width: width,
                     child: FadeInUp(
-                        duration: Duration(seconds: 1),
+                        duration: const Duration(seconds: 1),
                         child: Container(
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                               image: DecorationImage(
                                   image: AssetImage(
                                       'assets/images/background.png'),
@@ -110,9 +115,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     height: 400,
                     width: width + 20,
                     child: FadeInUp(
-                        duration: Duration(milliseconds: 1000),
+                        duration: const Duration(milliseconds: 1000),
                         child: Container(
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                               image: DecorationImage(
                                   image: AssetImage(
                                       'assets/images/background-2.png'),
@@ -123,29 +128,29 @@ class _RegistrationPageState extends State<RegistrationPage> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.all(30.0),
+              padding: const EdgeInsets.all(30.0),
               child: Column(
                 children: <Widget>[
                   FadeInUp(
-                      duration: Duration(milliseconds: 1500),
-                      child: Text(
+                      duration: const Duration(milliseconds: 1500),
+                      child: const Text(
                         "Sign Up",
                         style: TextStyle(
                             color: Color.fromRGBO(49, 39, 79, 1),
                             fontWeight: FontWeight.bold,
                             fontSize: 30),
                       )),
-                  SizedBox(
+                  const SizedBox(
                     height: 30,
                   ),
                   FadeInUp(
-                    duration: Duration(milliseconds: 1800),
+                    duration: const Duration(milliseconds: 1800),
                     child: Container(
-                      padding: EdgeInsets.all(5),
+                      padding: const EdgeInsets.all(5),
                       decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(10),
-                          boxShadow: [
+                          boxShadow: const [
                             BoxShadow(
                                 color: Color.fromRGBO(143, 148, 251, .2),
                                 blurRadius: 20.0,
@@ -154,8 +159,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       child: Column(
                         children: <Widget>[
                           Container(
-                            padding: EdgeInsets.all(8.0),
-                            decoration: BoxDecoration(
+                            padding: const EdgeInsets.all(8.0),
+                            decoration: const BoxDecoration(
                                 border: Border(
                                     bottom: BorderSide(
                                         color:
@@ -170,8 +175,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
                             ),
                           ),
                           Container(
-                            padding: EdgeInsets.all(8.0),
-                            decoration: BoxDecoration(
+                            padding: const EdgeInsets.all(8.0),
+                            decoration: const BoxDecoration(
                                 border: Border(
                                     bottom: BorderSide(
                                         color:
@@ -186,8 +191,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
                             ),
                           ),
                           Container(
-                            padding: EdgeInsets.all(8.0),
-                            decoration: BoxDecoration(
+                            padding: const EdgeInsets.all(8.0),
+                            decoration: const BoxDecoration(
                                 border: Border(
                                     bottom: BorderSide(
                                         color:
@@ -203,7 +208,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                             ),
                           ),
                           DropdownButtonFormField<String>(
-                            padding: EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.all(8.0),
                             value: _selectedRole,
                             items: const [
                               DropdownMenuItem<String>(
@@ -220,7 +225,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                                 _selectedRole = value!;
                               });
                             },
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               labelText: 'Role',
                             ),
                           ),
@@ -228,44 +233,44 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 24.0), // Spacing after the last input field
+                  const SizedBox(
+                      height: 24.0), // Spacing after the last input field
                   FadeInUp(
-                    duration: Duration(milliseconds: 1900),
+                    duration: const Duration(milliseconds: 1900),
                     child: ElevatedButton(
                       onPressed: _registerUser,
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.deepPurple,
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                        backgroundColor: Colors.deepPurple,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 50, vertical: 15),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
-                      child: Text(
+                      child: const Text(
                         "Sign Up",
                         style: TextStyle(
                             color: Colors.white, fontWeight: FontWeight.bold),
                       ),
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   FadeInUp(
-                      duration: Duration(milliseconds: 2000),
+                      duration: const Duration(milliseconds: 2000),
                       child: Center(
                         child: GestureDetector(
                           onTap: () {
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => LoginPage()),
+                                  builder: (context) => const LoginPage()),
                             );
                           },
                           child: RichText(
-                            text: TextSpan(
+                            text: const TextSpan(
                               style: TextStyle(color: Colors.black),
                               children: <TextSpan>[
-                                const TextSpan(
-                                    text: "Already have an account? "),
+                                TextSpan(text: "Already have an account? "),
                                 TextSpan(
                                   text: 'Log in',
                                   style: TextStyle(

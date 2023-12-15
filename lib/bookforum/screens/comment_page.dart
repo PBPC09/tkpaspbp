@@ -220,8 +220,8 @@ class _ForumCommentsPageState extends State<ForumCommentsPage> {
                     bookId: widget.bookId)),
           );
         },
-        child: const Icon(Icons.add),
         tooltip: 'Tambah Komentar',
+        child: const Icon(Icons.add),
       ),
     );
   }
