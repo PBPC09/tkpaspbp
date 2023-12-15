@@ -113,6 +113,13 @@ class _NotificationPageState extends State<NotificationPage> {
               itemCount: notifications.length,
               itemBuilder: (context, index) {
                 var notification = notifications[index];
+                var messageParts =
+                    notification.fields.message.split('Order Summary:');
+                var userInfo = messageParts.first;
+                var orderSummaryText = 'Order Summary:';
+                var orderSummary =
+                    messageParts.length > 1 ? messageParts[1].trim() : '';
+
                 return Card(
                   margin:
                       const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
@@ -125,25 +132,70 @@ class _NotificationPageState extends State<NotificationPage> {
                         : BorderSide(color: Colors.blue, width: 2),
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  child: ListTile(
-                    title: Text(notification.fields.message),
-                    subtitle:
-                        Text('From: ${notification.fields.buyer.toString()}'),
-                    tileColor: notification.fields.isRead
-                        ? Colors.white
-                        : Colors.grey[300],
-                    trailing: Row(
-                      mainAxisSize: MainAxisSize.min,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        IconButton(
-                          icon: const Icon(Icons.delete, color: Colors.red),
-                          onPressed: () => deleteNotification(notification.pk),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            // Profile icon
+                            Image.asset(
+                              'assets/images/profile.png',
+                              width: 40,
+                              height: 40,
+                            ),
+                            SizedBox(width: 8),
+                            // User info text
+                            Expanded(
+                              child: Text(
+                                userInfo,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                        IconButton(
-                          icon: const Icon(Icons.mark_email_read,
-                              color: Colors.blue),
-                          onPressed: () =>
-                              markNotificationAsRead(notification.pk),
+                        SizedBox(height: 3),
+                        Text(
+                          orderSummaryText,
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.normal,
+                          ),
+                        ),
+                        Text(
+                          orderSummary,
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.normal,
+                          ),
+                        ),
+                        // Spacer between summary and buttons
+                        SizedBox(height: 8),
+                        // Buttons at the bottom of the card
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            TextButton(
+                              onPressed: () =>
+                                  deleteNotification(notification.pk),
+                              child: Text('Delete'),
+                              style: TextButton.styleFrom(
+                                primary: Colors.red,
+                              ),
+                            ),
+                            TextButton(
+                              onPressed: () =>
+                                  markNotificationAsRead(notification.pk),
+                              child: Text('Read'),
+                              style: TextButton.styleFrom(
+                                primary: Colors.blue,
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
