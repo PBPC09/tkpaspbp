@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:lembarpena/Main/widgets/left_drawer.dart';
 import 'dart:convert';
-import 'package:lembarpena/BuyBooks/models/book.dart';
+import 'package:lembarpena/AdminRegisterBook/models/book.dart';
 
 // class BuyBooksPage extends StatelessWidget {
 //   BuyBooksPage({Key? key}) : super(key: key);
