@@ -3,7 +3,7 @@ import 'package:lembarpena/AdminRegisterBook/models/book.dart'; // Make sure to 
 import 'package:lembarpena/AdminRegisterBook/screens/admin_menu.dart';
 import 'package:lembarpena/AdminRegisterBook/screens/order_notifications.dart';
 import 'package:lembarpena/AdminRegisterBook/widgets/admin_left_drawer.dart';
-import 'package:lembarpena/Wishlist/screens/detail_buku.dart'; // Import your book detail page here
+import 'package:lembarpena/wishlist/screens/detail_buku.dart'; // Import your book detail page here
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -11,6 +11,7 @@ class BookCollectionsPage extends StatefulWidget {
   const BookCollectionsPage({Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _BookCollectionsPageState createState() => _BookCollectionsPageState();
 }
 

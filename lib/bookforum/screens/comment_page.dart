@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:lembarpena/Authentication/login_page.dart';
-import 'dart:convert';
-
-import 'package:lembarpena/BookForum/models/forumcomment.dart';
-import 'package:lembarpena/BookForum/screens/create_comment_page.dart';
-import 'package:lembarpena/Wishlist/models/book.dart';
+import 'package:lembarpena/authentication/login_page.dart';
+import 'package:lembarpena/bookforum/models/forumcomment.dart';
+import 'package:lembarpena/bookforum/screens/create_comment_page.dart';
+import 'package:lembarpena/AdminRegisterBook/models/book.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
+import 'dart:convert';
 
 // Definisikan model ForumComment Anda di sini atau import dari file model
 
@@ -26,6 +25,7 @@ class ForumCommentsPage extends StatefulWidget {
   }) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _ForumCommentsPageState createState() => _ForumCommentsPageState();
 }
 
@@ -123,25 +123,25 @@ class _ForumCommentsPageState extends State<ForumCommentsPage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Text(
                       widget.title, // Judul Forum
-                      style:
-                          TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                      style: const TextStyle(
+                          fontSize: 24, fontWeight: FontWeight.bold),
                       textAlign: TextAlign.center,
                     ),
-                    SizedBox(height: 5),
+                    const SizedBox(height: 5),
                     Text(
                       widget.question, // Pertanyaan
-                      style: TextStyle(fontSize: 18),
+                      style: const TextStyle(fontSize: 18),
                       textAlign: TextAlign.center,
                     ),
-                    SizedBox(height: 5),
+                    const SizedBox(height: 5),
                     InkWell(
                       child: Text(
                         book.fields.title, // Judul Buku
                         textAlign: TextAlign.center,
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 16,
                             color: Color.fromARGB(255, 13, 90, 154)),
                       ),
@@ -174,7 +174,7 @@ class _ForumCommentsPageState extends State<ForumCommentsPage> {
                         );
                       },
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Expanded(
                       child: comments.isEmpty
                           ? const Text("Belum ada Komentar")
@@ -192,7 +192,7 @@ class _ForumCommentsPageState extends State<ForumCommentsPage> {
                                     trailing:
                                         comment.fields.user == loggedInUser
                                             ? IconButton(
-                                                icon: Icon(Icons.delete),
+                                                icon: const Icon(Icons.delete),
                                                 onPressed: () {
                                                   deleteComment(request,
                                                       loggedInUser, comment.pk);

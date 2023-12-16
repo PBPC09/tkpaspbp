@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lembarpena/BookForum/screens/comment_page.dart';
+import 'package:lembarpena/bookforum/screens/comment_page.dart';
 import 'dart:convert';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
