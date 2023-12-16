@@ -10,6 +10,7 @@ class CreateForumPage extends StatefulWidget {
   const CreateForumPage({Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _CreateForumPageState createState() => _CreateForumPageState();
 }
 
@@ -19,7 +20,6 @@ class _CreateForumPageState extends State<CreateForumPage> {
   String _question = '';
   Book? _selectedBook;
   List<Book> _books = [];
-  
 
   @override
   void initState() {
@@ -86,10 +86,9 @@ class _CreateForumPageState extends State<CreateForumPage> {
   //   }
   // }
 
-
   @override
   Widget build(BuildContext context) {
-    final request = context.watch<CookieRequest>(); 
+    final request = context.watch<CookieRequest>();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Buat Forum Baru'),
@@ -114,7 +113,6 @@ class _CreateForumPageState extends State<CreateForumPage> {
                   return null;
                 },
               ),
-
               DropdownButtonFormField<Book>(
                 value: _selectedBook,
                 isExpanded: true,
@@ -124,26 +122,31 @@ class _CreateForumPageState extends State<CreateForumPage> {
                   });
                 },
                 items: _books.map<DropdownMenuItem<Book>>((Book book) {
-                return DropdownMenuItem<Book>(
-                  value: book,
-                  child: Container(
-                    width: 400,
-                    padding: EdgeInsets.all(8.0), // Menambahkan padding di dalam border
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Colors.grey, // Warna border, sesuaikan sesuai kebutuhan
-                        width: 1.0, // Ketebalan border
+                  return DropdownMenuItem<Book>(
+                    value: book,
+                    child: Container(
+                      width: 400,
+                      padding: const EdgeInsets.all(
+                          8.0), // Menambahkan padding di dalam border
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Colors
+                              .grey, // Warna border, sesuaikan sesuai kebutuhan
+                          width: 1.0, // Ketebalan border
+                        ),
+                        borderRadius: BorderRadius.circular(
+                            5.0), // Memberikan sudut yang membulat
                       ),
-                      borderRadius: BorderRadius.circular(5.0), // Memberikan sudut yang membulat
+                      child: Column(
+                        children: [
+                          Text(
+                              "${book.fields.title} oleh ${book.fields.author}"),
+                          Text(
+                              "Rating ${book.fields.rating} - SAR ${book.fields.price} "),
+                        ],
+                      ),
                     ),
-                    child: Column(
-                      children: [
-                        Text("${book.fields.title} oleh ${book.fields.author}"),
-                        Text("Rating ${book.fields.rating} - SAR ${book.fields.price} "),
-                      ],
-                    ),
-                  ),
-                );
+                  );
                 }).toList(),
                 selectedItemBuilder: (BuildContext context) {
                   return _books.map<Widget>((Book book) {
@@ -159,8 +162,6 @@ class _CreateForumPageState extends State<CreateForumPage> {
                   labelText: 'Buku',
                 ),
               ),
-
-
               TextFormField(
                 decoration: const InputDecoration(
                   labelText: 'Pertanyaan',
@@ -177,43 +178,49 @@ class _CreateForumPageState extends State<CreateForumPage> {
                 maxLines: null,
                 keyboardType: TextInputType.multiline,
               ),
+              const SizedBox(
+                height: 20,
+              ),
               ElevatedButton(
                 onPressed: () async {
-                    if (_formKey.currentState!.validate()) {
-                      _formKey.currentState!.save();
-                      final response = await request.postJson(
-                        // "http://10.0.2.2:8000/bookforum/create_question_flutter/",
-                        "http://localhost:8000/bookforum/create_question_flutter/",
-                        jsonEncode({
-                          "question": _question,
-                          "book_id" : _selectedBook?.pk,
-                          "title" : _title,
-                        }),
-                      );
+                  if (_formKey.currentState!.validate()) {
+                    _formKey.currentState!.save();
+                    final response = await request.postJson(
+                      // "http://10.0.2.2:8000/bookforum/create_question_flutter/",
+                      "http://localhost:8000/bookforum/create_question_flutter/",
+                      jsonEncode({
+                        "question": _question,
+                        "book_id": _selectedBook?.pk,
+                        "title": _title,
+                      }),
+                    );
 
-                  // Periksa kode status HTTP dari respons
-                      if (response['status'] == 'success'){
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text("Komentar berhasil ditambahkan!"),
-                          ),
-                        );
-                        // Navigator.pop(context); // Kembali ke halaman sebelumnya
-                          // ignore: use_build_context_synchronously
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(builder: (context) => const ForumPage()),
-                          ); // Kembali ke halaman sebelumnya
-                      } else {
-                        // ignore: use_build_context_synchronously
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text("Terdapat kesalahan, silakan coba lagi."),
-                          ),
-                        );
-                      }
+                    // Periksa kode status HTTP dari respons
+                    if (response['status'] == 'success') {
+                      // ignore: use_build_context_synchronously
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text("Komentar berhasil ditambahkan!"),
+                        ),
+                      );
+                      // Navigator.pop(context); // Kembali ke halaman sebelumnya
+                      // ignore: use_build_context_synchronously
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const ForumPage()),
+                      ); // Kembali ke halaman sebelumnya
+                    } else {
+                      // ignore: use_build_context_synchronously
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content:
+                              Text("Terdapat kesalahan, silakan coba lagi."),
+                        ),
+                      );
                     }
-                  },
+                  }
+                },
                 child: const Text('Buat Forum'),
               ),
             ],

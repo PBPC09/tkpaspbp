@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:lembarpena/BookForum/screens/forum_page.dart';
+import 'package:lembarpena/Main/screens/landing_page.dart';
 import 'package:lembarpena/Main/screens/menu.dart';
-import 'package:lembarpena/checkoutbook/screens/checkoutpage.dart';
+import 'package:lembarpena/Wishlist/screens/explore_book.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
 
 class LeftDrawer extends StatelessWidget {
   const LeftDrawer({super.key});
@@ -19,7 +22,7 @@ class LeftDrawer extends StatelessWidget {
             child: Column(
               children: [
                 Text(
-                  'Lembar Pena',
+                  'LembarPena',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 30,
@@ -29,7 +32,7 @@ class LeftDrawer extends StatelessWidget {
                 ),
                 Padding(padding: EdgeInsets.all(10)),
                 Text(
-                  "Cari buku disini bro",
+                  "Temukan buku kesayanganmu di sini!",
                   // Tambahkan gaya teks dengan center alignment, font ukuran 15, warna putih, dan weight biasa
                   textAlign: TextAlign.center,
                   style: TextStyle(
@@ -79,8 +82,11 @@ class LeftDrawer extends StatelessWidget {
             leading: const Icon(Icons.add_shopping_cart),
             title: const Text('Cart'),
             onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const CheckoutPage()));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ExploreBooksPage(),
+                  ));
             },
           ),
           ListTile(
@@ -100,6 +106,35 @@ class LeftDrawer extends StatelessWidget {
             leading: const Icon(Icons.receipt),
             title: const Text('My Order'),
             onTap: () {},
+          ),
+          ListTile(
+            leading: const Icon(Icons.logout),
+            title: const Text('Logout'),
+            // Bagian redirection ke ShopFormPage
+            onTap: () async {
+              final response =
+                  await request.logout("http://localhost:8000/auth/logout/");
+              // await request.login("http://10.0.2.2:8000/auth/login/", {
+              String message = response["message"];
+              if (response['status']) {
+                String uname = response["username"];
+                // ignore: use_build_context_synchronously
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: Text("$message Sampai jumpa, $uname!"),
+                ));
+                // ignore: use_build_context_synchronously
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) => const LandingPage()),
+                  (Route<dynamic> route) => false,
+                );
+              } else {
+                // ignore: use_build_context_synchronously
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: Text(message),
+                ));
+              }
+            },
           ),
         ],
       ),

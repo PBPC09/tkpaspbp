@@ -18,6 +18,7 @@ class CreateCommentPage extends StatefulWidget {
   }) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _CreateCommentPageState createState() => _CreateCommentPageState();
 }
 
@@ -73,6 +74,7 @@ class _CreateCommentPageState extends State<CreateCommentPage> {
 
                       // Periksa kode status HTTP dari respons
                       if (response['status'] == 'success') {
+                        // ignore: use_build_context_synchronously
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
                             content: Text("Komentar berhasil ditambahkan!"),
@@ -91,6 +93,7 @@ class _CreateCommentPageState extends State<CreateCommentPage> {
                                   )),
                         ); // Kembali ke halaman sebelumnya
                       } else {
+                        // ignore: use_build_context_synchronously
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
                             content:
