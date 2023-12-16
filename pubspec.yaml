@@ -40,6 +40,7 @@ dependencies:
   http: ^1.1.0
   intl: ^0.17.0
   animate_do: ^3.1.2
+  flutter_staggered_grid_view: ^0.7.0
 
 dev_dependencies:
   flutter_test:
@@ -73,7 +74,9 @@ flutter:
     - assets/images/light-2.png
     - assets/images/clock.png
     - assets/images/profile.png
-    # - images/a_dot_ham.jpeg
+    - assets/images/books2.jpg
+    - assets/images/books3.jpg
+  #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

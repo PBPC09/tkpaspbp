@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:lembarpena/BookForum/screens/forum_page.dart';
+import 'package:lembarpena/bookforum/screens/forum_page.dart';
 import 'dart:convert';
-import 'package:lembarpena/Wishlist/models/book.dart';
+import 'package:lembarpena/AdminRegisterBook/models/book.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 

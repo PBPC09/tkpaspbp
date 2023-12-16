@@ -1,10 +1,8 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:lembarpena/Main/widgets/left_drawer.dart';
-// import 'package:lembarpena/authentication/login_page.dart';
-import 'package:lembarpena/BuyBooks/models/book.dart';
+import 'package:lembarpena/AdminRegisterBook/models/book.dart';
 import 'package:lembarpena/BuyBooks/screens/buybooks_page.dart';
-// import 'package:toko_pbp_mobile/screens/menu.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 
@@ -18,7 +16,7 @@ class CartFormPage extends StatefulWidget {
 
 class _CartFormPageState extends State<CartFormPage> {
   final _formKey = GlobalKey<FormState>();
-  int _amount = 0;
+  int _quantity = 0;
   @override
   Widget build(BuildContext context) {
     final request = context.watch<CookieRequest>();
@@ -50,7 +48,7 @@ class _CartFormPageState extends State<CartFormPage> {
               ),
               onChanged: (String? value) {
                 setState(() {
-                  _amount = int.parse(value!);
+                  _quantity = int.parse(value!);
                 });
               },
               validator: (String? value) {
@@ -77,9 +75,9 @@ class _CartFormPageState extends State<CartFormPage> {
                   if (_formKey.currentState!.validate()) {
                     // Kirim ke Django dan tunggu respons
                     final response = await request.postJson(
-                        "http://localhost:8000/create/$bookId",
-                        jsonEncode(<String, String>{
-                          'amount': _amount.toString(),
+                        "http://localhost:8000/buybooks/create-flutter/$bookId/",
+                        jsonEncode(<String, dynamic>{
+                          'quantity': _quantity,
                         }));
                     if (response['status'] == 'success') {
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(

@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:lembarpena/Authentication/login_page.dart';
-import 'package:lembarpena/BookForum/screens/forum_page.dart';
+import 'package:lembarpena/authentication/login_page.dart';
+import 'package:lembarpena/bookforum/screens/forum_page.dart';
 import 'package:lembarpena/Main/widgets/left_drawer.dart';
 import 'package:lembarpena/Main/widgets/lembarpena_card.dart';
-import 'package:lembarpena/Wishlist/screens/explore_book.dart';
+import 'package:lembarpena/wishlist/screens/explore_book.dart';
 
-class ShopItem {
+class MenuItem {
   final String name;
   final IconData icon;
+  final Color color;
 
-  ShopItem(this.name, this.icon);
+  MenuItem(this.name, this.icon, this.color);
 }
 
 class MyHomePage extends StatelessWidget {
@@ -23,6 +24,7 @@ class MyHomePage extends StatelessWidget {
     MenuItem("My Order", Icons.receipt, Colors.indigo),
     MenuItem("Logout", Icons.logout, Colors.red),
   ];
+
   @override
   Widget build(BuildContext context) {
     String uname = LoginPage.uname;
@@ -102,9 +104,9 @@ class MyHomePage extends StatelessWidget {
                 mainAxisSpacing: 10,
                 crossAxisCount: 3,
                 shrinkWrap: true,
-                children: items.map((ShopItem item) {
+                children: pages.map((MenuItem item) {
                   // Iterasi untuk setiap item
-                  return ShopCard(item);
+                  return MenuCard(item);
                 }).toList(),
               ),
             ],

@@ -3,7 +3,7 @@ import 'package:lembarpena/AdminRegisterBook/screens/book_collections.dart';
 import 'package:lembarpena/AdminRegisterBook/screens/order_notifications.dart';
 import 'package:lembarpena/AdminRegisterBook/widgets/admin_left_drawer.dart';
 import 'package:lembarpena/AdminRegisterBook/widgets/admin_menu_card.dart';
-import 'package:lembarpena/Authentication/login_page.dart';
+import 'package:lembarpena/authentication/login_page.dart';
 
 class AdminPage extends StatelessWidget {
   AdminPage({Key? key}) : super(key: key);

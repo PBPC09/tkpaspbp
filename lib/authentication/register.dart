@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:animate_do/animate_do.dart';
-import 'package:lembarpena/Authentication/login_page.dart'; // Asumsi Anda memiliki halaman ini
+import 'package:lembarpena/authentication/login_page.dart'; // Asumsi Anda memiliki halaman ini
 
 void main() => runApp(const MaterialApp(
     debugShowCheckedModeBanner: false, home: RegistrationPage()));
