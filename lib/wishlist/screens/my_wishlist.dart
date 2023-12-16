@@ -2,12 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:lembarpena/Authentication/login_page.dart';
 import 'dart:convert';
-// import 'package:lembarpena/Wishlist/models/book.dart';
-import 'package:lembarpena/Wishlist/models/wishlist.dart';
+import 'package:lembarpena/wishlist/models/book.dart';
+import 'package:lembarpena/wishlist/models/wishlist.dart';
+// import 'package:lembarpena/wishlist/models/book.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 
 class WishlistPage extends StatefulWidget {
+  final Book? selectedBook; // Tambahkan field untuk buku yang dipilih
+
+  const WishlistPage({Key? key, this.selectedBook}) : super(key: key);
+
   @override
   _WishlistPageState createState() => _WishlistPageState();
 }
@@ -80,7 +85,7 @@ class _WishlistPageState extends State<WishlistPage> {
                     // Kembalikan widget yang sesuai dengan data buku
                     return ListTile(
                       title: Text(bookFields.title),
-                      subtitle: Text('Seberapa suka: ${bookFields.preference}'),
+                      subtitle: Text(bookFields.preference),
                     );
                   }
                 },

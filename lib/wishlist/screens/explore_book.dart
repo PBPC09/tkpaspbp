@@ -5,8 +5,9 @@ import 'package:lembarpena/Main/screens/menu.dart';
 import 'package:lembarpena/Main/widgets/left_drawer.dart';
 import 'package:lembarpena/Wishlist/screens/wishlist_form.dart';
 import 'dart:convert';
-import 'package:lembarpena/wishlist/models/book.dart';
-import 'package:lembarpena/wishlist/screens/detail_buku.dart';
+import 'package:lembarpena/Wishlist/models/book.dart';
+import 'package:lembarpena/Wishlist/screens/detail_buku.dart';
+// import 'package:lembarpena/buybooks/models/book.dart';
 // import 'package:pbp_django_auth/pbp_django_auth.dart';
 // import 'package:provider/provider.dart';
 

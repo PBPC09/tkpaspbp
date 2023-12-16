@@ -1,44 +1,45 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:lembarpena/Wishlist/models/book.dart';
 import 'package:lembarpena/wishlist/screens/my_wishlist.dart';
 import 'package:http/http.dart' as http;
-import 'package:pbp_django_auth/pbp_django_auth.dart';
-import 'package:provider/provider.dart';
+// import 'package:pbp_django_auth/pbp_django_auth.dart';
+// import 'package:provider/provider.dart';
 
-class WishlistForm extends StatelessWidget {
+class WishlistForm extends StatefulWidget {
   final Book book;
 
   const WishlistForm({Key? key, required this.book}) : super(key: key);
 
   @override
+  _WishlistFormState createState() => _WishlistFormState();
+}
+
+class _WishlistFormState extends State<WishlistForm> {
+  String? _selectedPreference;
+
+  Future<void> sendWishlistData(String preference) async {
+    final Map<String, dynamic> requestBody = {
+      'book_id': widget.book.pk.toString(),
+      'preference': preference,
+    };
+
+    final response = await http.post(
+      Uri.parse("http://localhost:8000/wishlist/add_to_wishlist_flutter/"),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: jsonEncode(requestBody),
+    );
+
+    if (response.statusCode == 201) {
+      // Handle success
+      return;
+    } 
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final request = context.watch<CookieRequest>();
-    String? _selectedPreference; 
-
-    Future<void> sendWishlistData(String preference) async {
-      if (_selectedPreference == null) {
-        print('Error: _selectedPreference is null.');
-        return;
-      }
-
-      final Map<String, dynamic> requestBody = {
-        'book_id': book.pk.toString(),
-        'preference': _selectedPreference!,
-      };
-
-      final response = await request.postJson(
-      "http://localhost:8000/wishlist/add_to_wishlist_flutter/",
-
-      jsonEncode({"book": book}),
-      );
-
-      if (response.statusCode != 201) {
-        throw Exception('Failed to add to wishlist');
-      }
-    }
-
     return Scaffold(
       appBar: AppBar(
         title: Text('Wishlist Form'),
@@ -56,8 +57,9 @@ class WishlistForm extends StatelessWidget {
             DropdownButtonFormField<String>(
               value: _selectedPreference,
               onChanged: (String? value) {
-                // No need for setState in a StatelessWidget
-                _selectedPreference = value;
+                setState(() {
+                  _selectedPreference = value;
+                });
               },
               items: [
                 'Not Interested',
@@ -77,18 +79,37 @@ class WishlistForm extends StatelessWidget {
             ),
             SizedBox(height: 16),
             ElevatedButton(
-              onPressed: () {
+              onPressed: () async {
                 if (_selectedPreference != null) {
-                  sendWishlistData(_selectedPreference!);
-
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => WishlistPage(),
-                    ),
-                  );
+                  // try {
+                    await sendWishlistData(_selectedPreference!);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => WishlistPage(
+                          // book: snapshot.data![index],
+                        ),
+                      ),
+                    );
+                  // } catch (e) {
+                  //   showDialog(
+                  //     context: context,
+                  //     builder: (context) {
+                  //       return AlertDialog(
+                  //         title: Text('Error'),
+                  //         content: Text('Failed to add book to wishlist: $e'),
+                  //         actions: [
+                  //           TextButton(
+                  //             onPressed: () => Navigator.pop(context),
+                  //             child: Text('OK'),
+                  //           ),
+                  //         ],
+                  //       );
+                  //     },
+                  //   );
+                  // }
                 } else {
-
+                  // Prompt the user to select a preference before submitting
                   showDialog(
                     context: context,
                     builder: (context) {
@@ -97,9 +118,7 @@ class WishlistForm extends StatelessWidget {
                         content: Text('Please select a preference.'),
                         actions: [
                           TextButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
+                            onPressed: () => Navigator.pop(context),
                             child: Text('OK'),
                           ),
                         ],
@@ -116,11 +135,3 @@ class WishlistForm extends StatelessWidget {
     );
   }
 }
-
-// void main() {
-//   runApp(MaterialApp(
-//     WishlistForm(
-  
-//     ),
-//   ));
-// }

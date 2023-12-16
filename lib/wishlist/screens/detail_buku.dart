@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lembarpena/AdminRegisterBook/models/book.dart';
+import 'package:lembarpena/Wishlist/models/book.dart';
 
 class DetailBukuPage extends StatelessWidget {
   final Book book;
