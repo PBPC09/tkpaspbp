@@ -3,6 +3,7 @@
 //     final cartItem = cartItemFromJson(jsonString);
 
 import 'dart:convert';
+import 'package:lembarpena/AdminRegisterBook/models/book.dart';
 
 List<CartItem> cartItemFromJson(String str) => List<CartItem>.from(json.decode(str).map((x) => CartItem.fromJson(x)));
 
@@ -59,3 +60,22 @@ class Fields {
         "is_ordered": isOrdered,
     };
 }
+// enum Model {
+//     BUYBOOKS_CARTITEM
+// }
+
+// final modelValues = EnumValues({
+//     "buybooks.cartitem": Model.BUYBOOKS_CARTITEM
+// });
+
+// class EnumValues<T> {
+//     Map<String, T> map;
+//     late Map<T, String> reverseMap;
+
+//     EnumValues(this.map);
+
+//     Map<T, String> get reverse {
+//         reverseMap = map.map((k, v) => MapEntry(v, k));
+//         return reverseMap;
+//     }
+// }

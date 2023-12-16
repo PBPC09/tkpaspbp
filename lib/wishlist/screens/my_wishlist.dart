@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lembarpena/Wishlist/models/book.dart';
+import 'package:lembarpena/AdminRegisterBook/models/book.dart';
 
 class WishlistPage extends StatefulWidget {
   final List<Book> wishlist;
@@ -7,6 +7,7 @@ class WishlistPage extends StatefulWidget {
   const WishlistPage({Key? key, required this.wishlist}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _WishlistPageState createState() => _WishlistPageState();
 }
 

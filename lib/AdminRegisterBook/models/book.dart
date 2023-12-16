@@ -40,7 +40,7 @@ class Fields {
   String rating;
   int voters;
   String price;
-  Currency currency;
+  String currency;
   String description;
   String publisher;
   int pageCount;
@@ -65,7 +65,7 @@ class Fields {
         rating: json["rating"],
         voters: json["voters"],
         price: json["price"],
-        currency: currencyValues.map[json["currency"]]!,
+        currency: json["currency"],
         description: json["description"],
         publisher: json["publisher"],
         pageCount: json["page_count"],
@@ -86,10 +86,12 @@ class Fields {
       };
 }
 
+// ignore: constant_identifier_names
 enum Currency { FREE, SAR }
 
 final currencyValues = EnumValues({"Free": Currency.FREE, "SAR": Currency.SAR});
 
+// ignore: constant_identifier_names
 enum Model { REGISTERBOOK_BOOK }
 
 final modelValues = EnumValues({"registerbook.book": Model.REGISTERBOOK_BOOK});
