@@ -3,7 +3,7 @@ import 'package:lembarpena/AdminRegisterBook/screens/book_collections.dart';
 import 'package:lembarpena/AdminRegisterBook/screens/order_notifications.dart';
 import 'package:lembarpena/AdminRegisterBook/widgets/admin_left_drawer.dart';
 import 'package:lembarpena/AdminRegisterBook/widgets/admin_menu_card.dart';
-import 'package:lembarpena/Authentication/login_page.dart';
+import 'package:lembarpena/authentication/login_page.dart';
 
 class AdminPage extends StatelessWidget {
   AdminPage({Key? key}) : super(key: key);
@@ -40,7 +40,8 @@ class AdminPage extends StatelessWidget {
                   ),
                   Container(
                     height: 400,
-                    color: Color.fromARGB(255, 1, 37, 158).withOpacity(0.5),
+                    color:
+                        const Color.fromARGB(255, 1, 37, 158).withOpacity(0.5),
                   ),
                   const Column(
                     children: [
@@ -60,16 +61,17 @@ class AdminPage extends StatelessWidget {
                   )
                 ],
               ),
-              GridView.count(
-                primary: true,
-                padding: const EdgeInsets.all(20),
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10,
-                crossAxisCount: 3,
+              GridView.builder(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3,
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 10,
+                ),
+                itemCount: pages.length,
                 shrinkWrap: true,
-                children: pages.map((AdminMenuItem item) {
-                  return AdminMenuCard(item);
-                }).toList(),
+                itemBuilder: (context, index) {
+                  return AdminMenuCard(pages[index]);
+                },
               ),
             ],
           ),
@@ -101,32 +103,41 @@ class AdminPage extends StatelessWidget {
             case 0:
               // Navigasi ke Dashboard
               Navigator.pushReplacement(
-                context,
-                PageRouteBuilder(
-                  pageBuilder: (_, __, ___) => AdminPage(),
-                  transitionDuration: Duration.zero,
-                ),
-              );
+                  context,
+                  PageRouteBuilder(
+                    pageBuilder: (context, animation, secondaryAnimation) =>
+                        AdminPage(),
+                    transitionsBuilder:
+                        (context, animation, secondaryAnimation, child) {
+                      return FadeTransition(opacity: animation, child: child);
+                    },
+                  ));
               break;
             case 1:
               // Navigasi ke halaman Books
               Navigator.pushReplacement(
-                context,
-                PageRouteBuilder(
-                  pageBuilder: (_, __, ___) => const BookCollectionsPage(),
-                  transitionDuration: Duration.zero,
-                ),
-              );
+                  context,
+                  PageRouteBuilder(
+                    pageBuilder: (context, animation, secondaryAnimation) =>
+                        const BookCollectionsPage(),
+                    transitionsBuilder:
+                        (context, animation, secondaryAnimation, child) {
+                      return FadeTransition(opacity: animation, child: child);
+                    },
+                  ));
               break;
             case 2:
               // Navigasi ke halaman Notifications
               Navigator.pushReplacement(
-                context,
-                PageRouteBuilder(
-                  pageBuilder: (_, __, ___) => const NotificationPage(),
-                  transitionDuration: Duration.zero,
-                ),
-              );
+                  context,
+                  PageRouteBuilder(
+                    pageBuilder: (context, animation, secondaryAnimation) =>
+                        const NotificationPage(),
+                    transitionsBuilder:
+                        (context, animation, secondaryAnimation, child) {
+                      return FadeTransition(opacity: animation, child: child);
+                    },
+                  ));
               break;
           }
         },

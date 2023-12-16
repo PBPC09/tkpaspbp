@@ -38,23 +38,20 @@ class OrderNotifications {
 
 class Fields {
   int buyer;
-  String buyerUsername;
   String message;
   bool isRead;
   DateTime timestamp;
 
   Fields({
     required this.buyer,
-    required this.buyerUsername,
     required this.message,
     required this.isRead,
     required this.timestamp,
   });
 
   factory Fields.fromJson(Map<String, dynamic> json) => Fields(
-        buyer: json["buyer"],
-        buyerUsername: json[
-            'buyer_username'], // Directly use the buyer username added in the custom serialization
+        buyer: json[
+            "buyer"], // Directly use the buyer username added in the custom serialization
         message: json['message'],
         isRead: json["is_read"],
         timestamp: DateTime.parse(json["timestamp"]),
@@ -68,6 +65,7 @@ class Fields {
       };
 }
 
+// ignore: constant_identifier_names
 enum Model { REGISTERBOOK_NOTIFICATION }
 
 final modelValues =

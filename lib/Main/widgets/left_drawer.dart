@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:lembarpena/BookForum/screens/forum_page.dart';
+import 'package:lembarpena/bookforum/screens/forum_page.dart';
 import 'package:lembarpena/Main/screens/landing_page.dart';
 import 'package:lembarpena/Main/screens/menu.dart';
-import 'package:lembarpena/Wishlist/screens/explore_book.dart';
+import 'package:lembarpena/wishlist/screens/explore_book.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 
@@ -76,7 +76,7 @@ class LeftDrawer extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => ExploreBooksPage(),
+                    builder: (context) => const ExploreBooksPage(),
                   ));
             },
           ),
@@ -116,7 +116,7 @@ class LeftDrawer extends StatelessWidget {
                 // ignore: use_build_context_synchronously
                 Navigator.pushAndRemoveUntil(
                   context,
-                  MaterialPageRoute(builder: (context) => LandingPage()),
+                  MaterialPageRoute(builder: (context) => const LandingPage()),
                   (Route<dynamic> route) => false,
                 );
               } else {

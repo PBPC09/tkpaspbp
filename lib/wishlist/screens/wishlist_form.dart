@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:lembarpena/Wishlist/models/book.dart';
+import 'package:lembarpena/AdminRegisterBook/models/book.dart';
 import 'package:lembarpena/wishlist/screens/my_wishlist.dart';
 import 'package:http/http.dart' as http;
 // import 'package:pbp_django_auth/pbp_django_auth.dart';

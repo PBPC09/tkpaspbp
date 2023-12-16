@@ -14,6 +14,7 @@ class WishlistPage extends StatefulWidget {
   const WishlistPage({Key? key, this.selectedBook}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _WishlistPageState createState() => _WishlistPageState();
 }
 

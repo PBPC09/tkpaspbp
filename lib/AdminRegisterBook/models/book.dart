@@ -37,9 +37,9 @@ class Book {
 class Fields {
   String title;
   String author;
-  double rating;
+  String rating;
   int voters;
-  double price;
+  String price;
   String currency;
   String description;
   String publisher;
@@ -86,10 +86,12 @@ class Fields {
       };
 }
 
+// ignore: constant_identifier_names
 enum Currency { FREE, SAR }
 
 final currencyValues = EnumValues({"Free": Currency.FREE, "SAR": Currency.SAR});
 
+// ignore: constant_identifier_names
 enum Model { REGISTERBOOK_BOOK }
 
 final modelValues = EnumValues({"registerbook.book": Model.REGISTERBOOK_BOOK});
