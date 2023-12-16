@@ -34,9 +34,8 @@ class AdminPage extends StatelessWidget {
                 alignment: Alignment.center,
                 children: <Widget>[
                   Image.asset(
-                    'assets/images/books3.jpg',
+                    'assets/images/imagecover.jpg',
                     height: 400,
-                    width: 600,
                     fit: BoxFit.cover,
                   ),
                   Container(
@@ -49,7 +48,7 @@ class AdminPage extends StatelessWidget {
                       Padding(
                         padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
                         child: Text(
-                          'Admin Dashboard',
+                          'Welcome to LembarPena',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               fontSize: 30,
@@ -104,12 +103,15 @@ class AdminPage extends StatelessWidget {
             case 0:
               // Navigasi ke Dashboard
               Navigator.pushReplacement(
-                context,
-                PageRouteBuilder(
-                  pageBuilder: (_, __, ___) => AdminPage(),
-                  transitionDuration: Duration.zero,
-                ),
-              );
+                  context,
+                  PageRouteBuilder(
+                    pageBuilder: (context, animation, secondaryAnimation) =>
+                        AdminPage(),
+                    transitionsBuilder:
+                        (context, animation, secondaryAnimation, child) {
+                      return FadeTransition(opacity: animation, child: child);
+                    },
+                  ));
               break;
             case 1:
               // Navigasi ke halaman Books
