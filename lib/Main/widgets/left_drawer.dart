@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lembarpena/BookForum/screens/forum_page.dart';
 import 'package:lembarpena/Main/screens/menu.dart';
+import 'package:lembarpena/checkoutbook/screens/checkoutpage.dart';
 
 class LeftDrawer extends StatelessWidget {
   const LeftDrawer({super.key});
@@ -77,7 +78,10 @@ class LeftDrawer extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.add_shopping_cart),
             title: const Text('Cart'),
-            onTap: () {},
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const CheckoutPage()));
+            },
           ),
           ListTile(
             leading: const Icon(Icons.shopping_bag),

@@ -27,11 +27,11 @@ class _LandingPageState extends State<LandingPage> {
             Stack(
               alignment: Alignment.center,
               children: <Widget>[
-                Image.asset(
-                  'image/imagecover.jpg',
-                  height: 400,
-                  fit: BoxFit.cover, // Menyesuaikan bagaimana gambar diisi dalam ruang yang tersedia
-                ),
+                // Image.asset(
+                //   'image/imagecover.jpg',
+                //   height: 400,
+                //   fit: BoxFit.cover, // Menyesuaikan bagaimana gambar diisi dalam ruang yang tersedia
+                // ),
                 Container(
                   height: 400,
                   color: Color.fromARGB(255, 1, 37, 158).withOpacity(0.5), // Warna dengan opacity

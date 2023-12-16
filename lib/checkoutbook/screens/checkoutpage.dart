@@ -36,6 +36,8 @@ class _CheckoutPageState extends State<CheckoutPage> {
     return listItem;
   }
 
+  String _groupValue = '';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -92,40 +94,56 @@ class _CheckoutPageState extends State<CheckoutPage> {
               title: Text('Metode Pembayaran:'),
               contentPadding: EdgeInsets.all(0.0),
             ),
-            RadioListTile(
-              title: const Text(
-                'Kartu Kredit',
-              ),
-              value: 'Kartu Kredit',
-              groupValue: null,
-              onChanged: (value) {
-                // Handle radio button changes
-              },
-            ),
+
             RadioListTile(
               title: const Text('Kartu Debit'),
               value: 'Kartu Debit',
-              groupValue: null,
+              groupValue: _groupValue,
               onChanged: (value) {
-                // Handle radio button changes
+                if (value != null) {
+                  setState(() {
+                    _groupValue = value as String;
+                  });
+                }
+              },
+            ),
+            RadioListTile(
+              title: const Text('Kartu Kredit'),
+              value: 'Kartu Kredit',
+              groupValue: _groupValue,
+              onChanged: (value) {
+                if (value != null) {
+                  setState(() {
+                    _groupValue = value as String;
+                  });
+                }
               },
             ),
             RadioListTile(
               title: const Text('Transfer Bank'),
               value: 'Transfer Bank',
-              groupValue: null,
+              groupValue: _groupValue,
               onChanged: (value) {
-                // Handle radio button changes
+                if (value != null) {
+                  setState(() {
+                    _groupValue = value as String;
+                  });
+                }
               },
             ),
             RadioListTile(
               title: const Text('E-Wallet'),
               value: 'E-Wallet',
-              groupValue: null,
+              groupValue: _groupValue,
               onChanged: (value) {
-                // Handle radio button changes
+                if (value != null) {
+                  setState(() {
+                    _groupValue = value as String;
+                  });
+                }
               },
             ),
+
             // Add more RadioListTile widgets for other payment methods
             Padding(
               padding: const EdgeInsets.all(20.0),
