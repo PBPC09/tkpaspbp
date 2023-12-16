@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lembarpena/Authentication/login_page.dart';
+import 'package:lembarpena/authentication/login_page.dart';
 
 class LandingPage extends StatefulWidget {
   const LandingPage({super.key});

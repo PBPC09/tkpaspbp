@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lembarpena/BookForum/screens/forum_page.dart';
+import 'package:lembarpena/bookforum/screens/forum_page.dart';
 import 'package:lembarpena/Main/screens/landing_page.dart';
 import 'package:lembarpena/Main/screens/menu.dart';
 import 'package:lembarpena/wishlist/screens/explore_book.dart';

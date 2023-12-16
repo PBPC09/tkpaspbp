@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lembarpena/authentication/login_page.dart';
-import 'package:lembarpena/BookForum/screens/forum_page.dart';
+import 'package:lembarpena/bookforum/screens/forum_page.dart';
 import 'package:lembarpena/Main/widgets/left_drawer.dart';
 import 'package:lembarpena/Main/widgets/lembarpena_card.dart';
 import 'package:lembarpena/wishlist/screens/explore_book.dart';
