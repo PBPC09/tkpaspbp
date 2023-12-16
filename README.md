@@ -1,8 +1,8 @@
 # LembarPena 📖
 
-[![Develop](https://github.com/PBPC09/tkpaspbp/actions/workflows/develop.yml/badge.svg?branch=main)](https://github.com/PBPC09/tkpaspbp/actions/workflows/develop.yml)
+[![Develop](https://github.com/PBPC09/tkpaspbp/actions/workflows/develop.yml/badge.svg)](https://github.com/PBPC09/tkpaspbp/actions/workflows/develop.yml)
 [![Pre-Release](https://github.com/PBPC09/tkpaspbp/actions/workflows/pre-release.yml/badge.svg?branch=main)](https://github.com/PBPC09/tkpaspbp/actions/workflows/pre-release.yml)
-[![Release](https://github.com/PBPC09/tkpaspbp/actions/workflows/release.yml/badge.svg?branch=main)](https://github.com/PBPC09/tkpaspbp/actions/workflows/release.yml)
+[![Release](https://github.com/PBPC09/tkpaspbp/actions/workflows/release.yml/badge.svg)](https://github.com/PBPC09/tkpaspbp/actions/workflows/release.yml)
 [![Build status](https://build.appcenter.ms/v0.1/apps/272d2892-6343-403a-b952-c497ff4e2559/branches/main/badge)](https://appcenter.ms)
 
 ## Seputar LembarPena
