@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:lembarpena/Main/widgets/left_drawer.dart';
 import 'package:lembarpena/AdminRegisterBook/models/book.dart';
 import 'package:lembarpena/BuyBooks/screens/buybooks_page.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
@@ -22,15 +21,13 @@ class _CartFormPageState extends State<CartFormPage> {
     final request = context.watch<CookieRequest>();
     return Scaffold(
       appBar: AppBar(
-        title: const Center(
-          child: Text(
-            'Tambah ke Keranjang',
-          ),
+        title: const Text(
+          'Add To Cart',
+          style: TextStyle(color: Colors.white),
         ),
-        // backgroundColor: Colors.deepPurple,
-        // foregroundColor: Colors.white,
+        backgroundColor: Colors.indigo[900],
+        foregroundColor: Colors.white,
       ),
-      drawer: const LeftDrawer(),
       body: Form(
         key: _formKey,
         child: SingleChildScrollView(
@@ -68,7 +65,8 @@ class _CartFormPageState extends State<CartFormPage> {
               padding: const EdgeInsets.all(8.0),
               child: ElevatedButton(
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Colors.deepPurple),
+                  backgroundColor:
+                      MaterialStateProperty.all(Colors.indigo[900]),
                 ),
                 onPressed: () async {
                   int bookId = widget.book.pk;
@@ -80,15 +78,18 @@ class _CartFormPageState extends State<CartFormPage> {
                           'quantity': _quantity,
                         }));
                     if (response['status'] == 'success') {
+                      // ignore: use_build_context_synchronously
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                         content: Text("Produk baru berhasil disimpan!"),
                       ));
+                      // ignore: use_build_context_synchronously
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
                             builder: (context) => const BuyBooksPage()),
                       );
                     } else {
+                      // ignore: use_build_context_synchronously
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                         content: Text("Terdapat kesalahan, silakan coba lagi."),
                       ));

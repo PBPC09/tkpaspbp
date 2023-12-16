@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:lembarpena/AdminRegisterBook/models/book.dart';
 import 'package:lembarpena/bookforum/screens/forum_page.dart';
+import 'package:lembarpena/buybooks/screens/add_to_cart_form.dart';
 import 'package:lembarpena/wishlist/screens/explore_book.dart';
 import 'package:lembarpena/Main/screens/menu.dart';
 import 'package:lembarpena/Main/widgets/left_drawer.dart';
-import 'package:lembarpena/buybooks/screens/detail_book.dart'; // Import your book detail page here
 import 'package:lembarpena/buybooks/screens/cart_page.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -18,27 +18,39 @@ class BuyBooksPage extends StatefulWidget {
 }
 
 class _BuyBooksPageState extends State<BuyBooksPage> {
-  List<Book> bookList = [];
+  final List<String> ratings = ['All Ratings', '≥ 4.0', '< 4.0'];
   String selectedRating = 'All Ratings';
-  final Map<String, String> ratingFilterMap = {
-    'All Ratings': 'all',
-    '> 4.0': 'gt4',
-    '≤ 4.0': 'lte4',
-  };
+  List<Book> bookList = [];
 
   Future<List<Book>> fetchBooks({String? ratingFilter}) async {
     Map<String, String> queryParams = {};
-    if (ratingFilter != null && ratingFilterMap[ratingFilter] != 'all') {
-      queryParams['rating_filter'] = ratingFilterMap[ratingFilter]!;
+    if (ratingFilter == '≥ 4.0') {
+      queryParams['rating_gte'] = '4';
+    } else if (ratingFilter == '< 4.0') {
+      queryParams['rating_lt'] = '4';
     }
 
     var uri =
-        Uri.http('localhost:8000', '/registerbook/get-book/', queryParams);
+        Uri.http('localhost:8000', '/buybooks/show_books_json/', queryParams);
     var response =
         await http.get(uri, headers: {"Content-Type": "application/json"});
 
-    var data = jsonDecode(utf8.decode(response.bodyBytes));
-    return List<Book>.from(data.map((bookData) => Book.fromJson(bookData)));
+    if (response.statusCode == 200) {
+      var data = jsonDecode(utf8.decode(response.bodyBytes)) as List;
+      return data.map((bookData) => Book.fromJson(bookData)).toList();
+    } else {
+      throw Exception('Failed to load books');
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    fetchBooks().then((bookList) {
+      setState(() {
+        this.bookList = bookList;
+      });
+    });
   }
 
   @override
@@ -61,7 +73,7 @@ class _BuyBooksPageState extends State<BuyBooksPage> {
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 10.0),
               decoration: BoxDecoration(
-                color: Colors.white, // Ensuring the background is white
+                color: Colors.white,
                 borderRadius: BorderRadius.circular(15.0),
                 border: Border.all(
                     color: Colors.indigo,
@@ -74,21 +86,20 @@ class _BuyBooksPageState extends State<BuyBooksPage> {
                   isExpanded: true,
                   icon: const Icon(Icons.arrow_drop_down, color: Colors.indigo),
                   iconSize: 24,
-                  elevation: 0, // Removes elevation and shadow
+                  elevation: 0,
                   style: const TextStyle(color: Colors.indigo, fontSize: 16),
                   onChanged: (String? newValue) {
                     setState(() {
                       selectedRating = newValue!;
                     });
                   },
-                  items: ratingFilterMap.keys
-                      .map<DropdownMenuItem<String>>((String value) {
+                  items: ratings.map<DropdownMenuItem<String>>((String value) {
                     return DropdownMenuItem<String>(
                       value: value,
                       child: Text(value),
                     );
                   }).toList(),
-                  dropdownColor: Colors.white, // Dropdown background color
+                  dropdownColor: Colors.white,
                 ),
               ),
             ),
@@ -99,11 +110,10 @@ class _BuyBooksPageState extends State<BuyBooksPage> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                      builder: (context) => const CartPage()),
+                  MaterialPageRoute(builder: (context) => const CartPage()),
                 );
               },
-              child: Text(
+              child: const Text(
                 'Cek Keranjang Saya',
                 style: TextStyle(
                   color: Colors.indigo,
@@ -117,45 +127,34 @@ class _BuyBooksPageState extends State<BuyBooksPage> {
               future: fetchBooks(ratingFilter: selectedRating),
               builder:
                   (BuildContext context, AsyncSnapshot<List<Book>> snapshot) {
-                bookList = snapshot.data!;
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(child: CircularProgressIndicator());
                 } else if (snapshot.hasError) {
-                  return Center(
-                      child: Text("Error: ${snapshot.error.toString()}"));
-                } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                  return const Center(child: Text("No books available."));
-                } else {
+                  return Center(child: Text("Error: ${snapshot.error}"));
+                } else if (snapshot.hasData) {
                   return ListView.builder(
                     itemCount: snapshot.data!.length,
                     itemBuilder: (BuildContext context, int index) {
                       Book book = snapshot.data![index];
-                      return Card(
-                        margin: const EdgeInsets.all(8.0),
-                        child: ListTile(
-                          title: Text(book.fields.title),
-                          subtitle: Text(
-                            "Author: ${book.fields.author}\nRating: ${book.fields.rating}",
-                          ),
-                          trailing: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              IconButton(
-                                icon: const Icon(Icons.shopping_cart),
-                                color: Colors.blue[400],
-                                onPressed: () {
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) =>
-                                        ItemDetailPage(book: book),
-                                  ));
-                                },
-                              ),
-                            ],
-                          ),
+                      return ListTile(
+                        title: Text(book.fields.title),
+                        subtitle: Text(
+                          "Author: ${book.fields.author}\nRating: ${book.fields.rating}",
+                        ),
+                        trailing: IconButton(
+                          icon: const Icon(Icons.shopping_cart),
+                          color: Colors.blue[400],
+                          onPressed: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => CartFormPage(book: book),
+                            ));
+                          },
                         ),
                       );
                     },
                   );
+                } else {
+                  return const Center(child: Text("No books available."));
                 }
               },
             ),

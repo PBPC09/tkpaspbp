@@ -18,7 +18,7 @@ class ExploreBooksPage extends StatefulWidget {
 class _ExploreBooksPageState extends State<ExploreBooksPage> {
   List<Book> wishlist = [];
   Future<List<Book>> fetchProduct() async {
-    var url = Uri.parse('http://localhost:8000/buybooks/show_books_json');
+    var url = Uri.parse('http://localhost:8000/buybooks/show_books_json/');
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},
