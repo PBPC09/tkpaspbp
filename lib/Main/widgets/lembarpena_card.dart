@@ -3,6 +3,8 @@ import 'package:lembarpena/bookforum/screens/forum_page.dart';
 import 'package:lembarpena/Main/screens/landing_page.dart';
 import 'package:lembarpena/Main/screens/menu.dart';
 import 'package:lembarpena/wishlist/screens/explore_book.dart';
+import 'package:lembarpena/buybooks/screens/buybooks_page.dart';
+import 'package:lembarpena/buybooks/screens/cart_page.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 
@@ -51,7 +53,11 @@ class MenuCard extends StatelessWidget {
               //     builder: (context) => const WishlistPage(),
               //   ));
             } else if (page.name == "Cart") {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const CartPage()));
             } else if (page.name == "Buy Books") {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const BuyBooksPage()));
             } else if (page.name == "Book Forum") {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => const ForumPage()));
