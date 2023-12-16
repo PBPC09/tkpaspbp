@@ -3,6 +3,7 @@ import 'package:lembarpena/bookforum/screens/forum_page.dart';
 import 'package:lembarpena/Main/screens/landing_page.dart';
 import 'package:lembarpena/Main/screens/menu.dart';
 import 'package:lembarpena/wishlist/screens/explore_book.dart';
+import 'package:lembarpena/wishlist/screens/my_wishlist.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 
@@ -67,7 +68,13 @@ class LeftDrawer extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.favorite),
             title: const Text('Wishlist'),
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const WishlistPage(),
+                ));
+            },
           ),
           ListTile(
             leading: const Icon(Icons.search),

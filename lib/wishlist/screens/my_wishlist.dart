@@ -64,6 +64,8 @@ class _WishlistPageState extends State<WishlistPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Wishlist Saya'),
+        backgroundColor: Colors.indigo[900],
+        foregroundColor: Colors.white,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

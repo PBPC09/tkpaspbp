@@ -43,6 +43,8 @@ class _WishlistFormState extends State<WishlistForm> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Wishlist Form'),
+        backgroundColor: Colors.indigo[900],
+        foregroundColor: Colors.white,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -127,7 +129,11 @@ class _WishlistFormState extends State<WishlistForm> {
                   );
                 }
               },
-              child: Text('Save'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.indigo[900],
+                foregroundColor: Colors.white,
+              ),
+              child: Text('Simpan'),
             ),
           ],
         ),

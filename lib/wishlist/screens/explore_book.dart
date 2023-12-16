@@ -6,6 +6,7 @@ import 'package:lembarpena/Main/screens/menu.dart';
 import 'package:lembarpena/Main/widgets/left_drawer.dart';
 import 'package:lembarpena/AdminRegisterBook/models/book.dart';
 import 'package:lembarpena/wishlist/screens/detail_buku.dart';
+import 'package:lembarpena/wishlist/screens/wishlist_form.dart';
 
 class ExploreBooksPage extends StatefulWidget {
   const ExploreBooksPage({Key? key}) : super(key: key);
@@ -110,16 +111,16 @@ class _ExploreBooksPageState extends State<ExploreBooksPage> {
                                 TextButton(
                                   onPressed: () {
                                     // Handle adding to wishlist logic
-                                    setState(() {
-                                      snapshot.data![index].isInWishlist =
-                                          !snapshot.data![index].isInWishlist;
-                                      if (snapshot.data![index].isInWishlist) {
-                                        wishlist.add(snapshot.data![index]);
-                                      } else {
-                                        wishlist.remove(snapshot.data![index]);
-                                      }
-                                    });
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => WishlistForm(
+                                          book: snapshot.data![index],
+                                        ),
+                                      ),
+                                    );
                                   },
+
                                   child: const Text("Add To Wishlist"),
                                 ),
                               ],
