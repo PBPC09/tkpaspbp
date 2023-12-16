@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lembarpena/BookForum/screens/forum_page.dart';
 import 'package:lembarpena/Main/screens/landing_page.dart';
 import 'package:lembarpena/Main/screens/menu.dart';
-import 'package:lembarpena/Wishlist/screens/explore_book.dart';
+import 'package:lembarpena/wishlist/screens/explore_book.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 

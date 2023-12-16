@@ -7,7 +7,7 @@ import 'package:lembarpena/BookForum/screens/create_forum_page.dart'; // Pastika
 import 'package:lembarpena/BookForum/models/forumhead.dart';
 import 'package:lembarpena/BookForum/screens/comment_page.dart';
 import 'package:lembarpena/Main/widgets/left_drawer.dart';
-import 'package:lembarpena/Wishlist/screens/explore_book.dart';
+import 'package:lembarpena/wishlist/screens/explore_book.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
