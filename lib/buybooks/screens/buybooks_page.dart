@@ -136,19 +136,22 @@ class _BuyBooksPageState extends State<BuyBooksPage> {
                     itemCount: snapshot.data!.length,
                     itemBuilder: (BuildContext context, int index) {
                       Book book = snapshot.data![index];
-                      return ListTile(
-                        title: Text(book.fields.title),
-                        subtitle: Text(
-                          "Author: ${book.fields.author}\nRating: ${book.fields.rating}",
-                        ),
-                        trailing: IconButton(
-                          icon: const Icon(Icons.shopping_cart),
-                          color: Colors.blue[400],
-                          onPressed: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => CartFormPage(book: book),
-                            ));
-                          },
+                      return Card(
+                        margin: const EdgeInsets.all(8),
+                        child: ListTile(
+                          title: Text(book.fields.title),
+                          subtitle: Text(
+                            "Author: ${book.fields.author}\nRating: ${book.fields.rating}\nPrice: ${book.fields.currency} ${book.fields.price}",
+                          ),
+                          trailing: IconButton(
+                            icon: const Icon(Icons.shopping_cart),
+                            color: Colors.blue[400],
+                            onPressed: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => CartFormPage(book: book),
+                              ));
+                            },
+                          ),
                         ),
                       );
                     },

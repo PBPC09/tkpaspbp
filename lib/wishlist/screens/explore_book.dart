@@ -47,92 +47,91 @@ class _ExploreBooksPageState extends State<ExploreBooksPage> {
       ),
       drawer: const LeftDrawer(),
       body: FutureBuilder(
-          future: fetchProduct(),
-          builder: (context, AsyncSnapshot snapshot) {
-            if (snapshot.data == null) {
-              return const Center(child: CircularProgressIndicator());
-            } else {
-              if (!snapshot.hasData) {
-                return const Column(
-                  children: [
-                    Text(
-                      "Tidak ada data buku.",
-                      style: TextStyle(color: Colors.redAccent, fontSize: 20),
-                    ),
-                    SizedBox(height: 8),
-                  ],
-                );
-              } else {
-                return ListView.builder(
-                  itemCount: snapshot.data!.length,
-                  itemBuilder: (_, index) => InkWell(
-                    child: Container(
-                      margin: const EdgeInsets.symmetric(
-                          horizontal: 16, vertical: 12),
-                      padding: const EdgeInsets.all(20.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "${snapshot.data![index].fields.title}",
-                            style: const TextStyle(
-                              fontSize: 18.0,
-                              fontWeight: FontWeight.bold,
+        future: fetchProduct(),
+        builder: (context, AsyncSnapshot snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (!snapshot.hasData) {
+            return const Center(
+              child: Text(
+                "Tidak ada data buku.",
+                style: TextStyle(color: Colors.redAccent, fontSize: 20),
+              ),
+            );
+          } else {
+            return ListView.builder(
+              itemCount: snapshot.data!.length,
+              itemBuilder: (_, index) {
+                Book book = snapshot.data![index];
+                return Card(
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  elevation: 4,
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          book.fields.title,
+                          style: const TextStyle(
+                            fontSize: 15.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Text("Author: ${book.fields.author}"),
+                        const SizedBox(height: 8),
+                        Text("Rating: ${book.fields.rating}"),
+                        const SizedBox(height: 16),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            // Show Details Icon Button
+                            IconButton(
+                              icon: const Icon(Icons.info_outline),
+                              color: Colors.blue[400],
+                              onPressed: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) =>
+                                      DetailBukuPage(book: book),
+                                ));
+                              },
                             ),
-                          ),
-                          const SizedBox(height: 10),
-                          Text(
-                            "Author: ${snapshot.data![index].fields.author}",
-                          ),
-                          const SizedBox(height: 10),
-                          Text(
-                            "Rating: ${snapshot.data![index].fields.rating}",
-                          ),
-                          const SizedBox(height: 10),
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: Column(
-                              children: [
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => DetailBukuPage(
-                                          book: snapshot.data![index],
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                  child: const Text("Show Details"),
-                                ),
-                                TextButton(
-                                  onPressed: () {
-                                    // Handle adding to wishlist logic
-                                    setState(() {
-                                      snapshot.data![index].isInWishlist =
-                                          !snapshot.data![index].isInWishlist;
-                                      if (snapshot.data![index].isInWishlist) {
-                                        wishlist.add(snapshot.data![index]);
-                                      } else {
-                                        wishlist.remove(snapshot.data![index]);
-                                      }
-                                    });
-                                  },
-                                  child: const Text("Add To Wishlist"),
-                                ),
-                              ],
+                            // Add to Wishlist Icon Button
+                            IconButton(
+                              icon: Icon(book.isInWishlist
+                                  ? Icons.favorite
+                                  : Icons.favorite_border),
+                              color:
+                                  book.isInWishlist ? Colors.red : Colors.grey,
+                              onPressed: () {
+                                setState(() {
+                                  book.isInWishlist = !book.isInWishlist;
+                                  if (book.isInWishlist) {
+                                    wishlist.add(book);
+                                  } else {
+                                    wishlist.removeWhere((Book b) =>
+                                        b.fields.title == book.fields.title);
+                                  }
+                                });
+                              },
                             ),
-                          ),
-                        ],
-                      ),
+                          ],
+                        ),
+                      ],
                     ),
                   ),
                 );
-              }
-            }
-          }),
+              },
+            );
+          }
+        },
+      ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         currentIndex: 1,

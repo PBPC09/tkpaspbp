@@ -14,17 +14,20 @@ class Book {
   Model model;
   int pk;
   Fields fields;
+  bool isInWishlist;
 
   Book({
     required this.model,
     required this.pk,
     required this.fields,
+    this.isInWishlist = false,
   });
 
   factory Book.fromJson(Map<String, dynamic> json) => Book(
         model: modelValues.map[json["model"]]!,
         pk: json["pk"],
         fields: Fields.fromJson(json["fields"]),
+        isInWishlist: json['isInWishlist'] ?? false,
       );
 
   Map<String, dynamic> toJson() => {
