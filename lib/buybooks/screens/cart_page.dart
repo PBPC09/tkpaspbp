@@ -6,12 +6,12 @@ import 'package:lembarpena/bookforum/screens/forum_page.dart';
 import 'package:lembarpena/buybooks/models/cart_item.dart';
 import 'package:lembarpena/authentication/login_page.dart';
 import 'package:lembarpena/wishlist/screens/explore_book.dart';
+import 'package:lembarpena/checkoutbook/screens/checkoutpage.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({Key? key}) : super(key: key);
 
   @override
-  // ignore: library_private_types_in_public_api
   _CartPageState createState() => _CartPageState();
 }
 
@@ -137,6 +137,13 @@ class _CartPageState extends State<CartPage> {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) =>
+                  CheckoutPage(), // Ganti dengan nama halaman CheckoutPage yang sesuai
+            ),
+          );
           // Implementasi checkout modul si Rifqi
         },
         label: const Text('Checkout'),

@@ -32,7 +32,15 @@ Modul ini memungkinkan pengguna untuk memilih dan membeli buku dari katalog yang
 - Opsi untuk pengguna mencari buku berdasarkan rating buku.
 - Saat pengguna mengklik buku tertentu, halaman detail buku akan menampilkan informasi yang lebih lengkap
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+### 🛒 Modul Checkout Book 🛒 - Rifqi Rahmatuloh - 2206820365 
+=======
 ### 🛒 Modul Checkout Book 🛒 - Rifqi Rahmatuloh - 2206820365
+>>>>>>> 3ef86270c4c3d58c96bc8046e917705d036406e2
+=======
+### 🛒 Modul Checkout Book 🛒 - Rifqi Rahmatuloh - 2206820365
+>>>>>>> 650c3b4a81fc5942196e7454020b602b2e29619c
 Modul ini untuk proses finalisasi pembelian buku yang telah dipilih oleh pengguna. Fitur-fitur utama dari modul ini akan meliputi:
 - Menyimpan buku yang dipilih oleh pengguna sebelum melakukan pembayaran
 - Memberi konfirmasi kepada pengguna untuk mengisi form, seperti alamat dan pilihan pembayaran
