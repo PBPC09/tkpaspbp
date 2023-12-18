@@ -5,6 +5,7 @@ import 'package:lembarpena/Main/screens/menu.dart';
 import 'package:lembarpena/wishlist/screens/explore_book.dart';
 import 'package:lembarpena/buybooks/screens/buybooks_page.dart';
 import 'package:lembarpena/buybooks/screens/cart_page.dart';
+import 'package:lembarpena/wishlist/screens/my_wishlist.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 
@@ -41,11 +42,11 @@ class MenuCard extends StatelessWidget {
                 ),
               );
             } else if (page.name == "Wishlist") {
-              // Navigator.pushReplacement(
-              //   context,
-              //   MaterialPageRoute(
-              //     builder: (context) => const WishlistPage(),
-              //   ));
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const WishlistPage(),
+                ));
             } else if (page.name == "Cart") {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => const CartPage()));

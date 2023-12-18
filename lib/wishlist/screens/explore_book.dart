@@ -20,8 +20,8 @@ class ExploreBooksPage extends StatefulWidget {
 class _ExploreBooksPageState extends State<ExploreBooksPage> {
   List<Book> books = [];
   Set<int> wishlistBookIds = {};
-  String selectedRating =
-      'All Ratings'; // State untuk menyimpan rating yang dipilih
+  final List<String> ratings = ['All Ratings', '≥ 4.0', '< 4.0'];
+  String selectedRating = 'All Ratings';
   String uname = LoginPage.uname;
 
   @override
@@ -32,9 +32,14 @@ class _ExploreBooksPageState extends State<ExploreBooksPage> {
   }
 
   Future<void> fetchBooks(String rating) async {
-    String ratingQuery = rating != 'All Ratings' ? '&rating=$rating' : '';
+    Map<String, String> queryParams = {};
+    if (rating == '≥ 4.0') {
+      queryParams['rating_gte'] = '4';
+    } else if (rating == '< 4.0') {
+      queryParams['rating_lt'] = '4';
+    }
     var url = Uri.parse(
-        'http://localhost:8000/buybooks/show_books_json/?rating=$ratingQuery');
+        'http://localhost:8000/buybooks/show_books_json/?rating=$queryParams');
     var response =
         await http.get(url, headers: {"Content-Type": "application/json"});
     var data = jsonDecode(utf8.decode(response.bodyBytes));
@@ -49,40 +54,47 @@ class _ExploreBooksPageState extends State<ExploreBooksPage> {
     var response =
         await http.get(url, headers: {"Content-Type": "application/json"});
     var data = jsonDecode(utf8.decode(response.bodyBytes));
+
+    // Filter data untuk hanya menyimpan item yang memiliki "user" yang sesuai dengan currentUser
+    var filteredData = data.where((x) => x['fields']['user'] == uname).toList();
+    // print(filteredData);
     setState(() {
-      wishlistBookIds = Set<int>.from(data.map((x) => x['pk']));
+      wishlistBookIds = Set<int>.from(filteredData.map((x) => x['fields']["book_id"]));
     });
   }
 
-  Future<void> addToWishlist(int bookId, int preference, request) async {
-    // print(bookId);
+  Future<void> addToWishlist(
+      CookieRequest request, int bookId, int preference) async {
     final response = await request.postJson(
-                    "http://localhost:8000/wishlist/add_to_wishlist_flutter/",
-                      jsonEncode({
-                        'book_id': bookId, 
-                        'preference': preference, 
-                        // 'user_id': uname,
-                      }),
-                    );
-    if (response.statusCode == 200) {
-      var data = jsonDecode(response.body);
-      if (data['status'] == 'success') {
-        setState(() {
-          wishlistBookIds.add(bookId);
-        });
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text(data['message'])));
-      } else {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text(data['message'])));
-      }
+      // "http://10.0.2.2:8000/bookforum/create_question_flutter/",
+      "http://localhost:8000/wishlist/add_to_wishlist_flutter/",
+      jsonEncode(
+          {'username': uname, "book_id": bookId, 'preference': preference}),
+    );
+    // var url =
+    //     Uri.parse('http://localhost:8000/wishlist/add_to_wishlist_flutter/');
+    // var response = await http.post(url,
+    //     body: json.encode(
+    //         {'book_id': bookId, 'preference': preference, 'user_id': uname}),
+    //     headers: {"Content-Type": "application/json"});
+
+    if (response['status'] == 'success') {
+      // var data = jsonDecode(response.body);
+      // if (data['status'] == 'success') {
+      setState(() {
+        wishlistBookIds.add(bookId);
+      });
+      // });
+      // ignore: use_build_context_synchronously
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text("Buku berhasil ditambahkan ke Wishlist!")));
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Error adding book to wishlist')));
     }
   }
 
-  void showPreferenceDialog(int bookId, request) async {
+  void showPreferenceDialog(CookieRequest request, int bookId) async {
     int? preference = await showDialog<int>(
       context: context,
       builder: (BuildContext context) {
@@ -125,8 +137,7 @@ class _ExploreBooksPageState extends State<ExploreBooksPage> {
     );
 
     if (preference != null) {
-      // print(bookId);
-      addToWishlist(bookId, preference, request);
+      addToWishlist(request, bookId, preference);
     }
   }
 
@@ -182,24 +193,23 @@ class _ExploreBooksPageState extends State<ExploreBooksPage> {
                         color: isInWishlist ? Colors.red : Colors.grey,
                         onPressed: () {
                           if (!isInWishlist) {
-                            // print(book.pk);
-                            showPreferenceDialog(book.pk, request);
+                            showPreferenceDialog(request, book.pk);
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                  content: Text(
-                                      'Buku sudah ada dalam wishlist.')));
-                                    }
-                                  },
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
+                                const SnackBar(
+                                    content: Text(
+                                        'Buku sudah ada dalam wishlist.')));
+                          }
+                        },
                       ),
-                    );
-                  },
-                ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         currentIndex: 1,
