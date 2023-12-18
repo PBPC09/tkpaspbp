@@ -1,9 +1,9 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:lembarpena/Main/screens/menu.dart';
 import 'package:lembarpena/authentication/login_page.dart';
-import 'dart:convert';
-import 'package:lembarpena/bookforum/screens/create_forum_page.dart'; // Pastikan import ini benar
+import 'package:lembarpena/bookforum/screens/create_forum_page.dart';
 import 'package:lembarpena/bookforum/models/forumhead.dart';
 import 'package:lembarpena/bookforum/screens/comment_page.dart';
 import 'package:lembarpena/Main/widgets/left_drawer.dart';
@@ -87,150 +87,141 @@ class _ForumPageState extends State<ForumPage> {
     final request = context.watch<CookieRequest>();
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Forum Buku'),
+        title: const Text('Forum Buku', style: TextStyle(color: Colors.white)),
+        backgroundColor: Colors.indigo[900],
       ),
       drawer: const LeftDrawer(),
-      body: Column(children: [
-        ListTile(
-          title: const Text("Tampilkan forum buku populer saja"),
-          leading: Checkbox(
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(children: [
+          SwitchListTile(
+            title: const Text("Tampilkan forum buku populer saja"),
             value: isChecked,
-            onChanged: (bool? value) {
+            onChanged: (bool value) {
               setState(() {
-                isChecked = value!;
+                isChecked = value;
               });
             },
+            secondary: const Icon(Icons.filter_list),
           ),
-        ),
-        Expanded(
-          child: FutureBuilder(
-            future: isChecked ? fetchForumHeadsPopular() : fetchForumHeads(),
-            builder: (context, AsyncSnapshot<List<ForumHead>> snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(child: CircularProgressIndicator());
-              } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                return const Center(
-                  child: Text(
-                    "Tidak ada forum diskusi.",
-                    style: TextStyle(color: Color(0xff59A5D8), fontSize: 20),
-                  ),
-                );
-              } else {
-                return ListView.builder(
-                  itemCount: snapshot.data!.length,
-                  itemBuilder: (context, index) {
-                    var forumHeadData = snapshot.data![index];
-                    var forumHeadFields = forumHeadData.fields;
+          Expanded(
+            child: FutureBuilder(
+              future: isChecked ? fetchForumHeadsPopular() : fetchForumHeads(),
+              builder: (context, AsyncSnapshot<List<ForumHead>> snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                  return const Center(
+                    child: Text(
+                      "Tidak ada forum diskusi.",
+                      style: TextStyle(color: Color(0xff59A5D8), fontSize: 20),
+                    ),
+                  );
+                } else {
+                  return ListView.builder(
+                    itemCount: snapshot.data!.length,
+                    itemBuilder: (context, index) {
+                      var forumHeadData = snapshot.data![index];
+                      var forumHeadFields = forumHeadData.fields;
 
-                    return Card(
-                      child: InkWell(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => ForumCommentsPage(
+                      return Card(
+                        elevation: 4.0,
+                        margin: const EdgeInsets.all(8),
+                        child: InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ForumCommentsPage(
                                   forumHeadId: forumHeadData.pk,
                                   title: forumHeadFields.title,
                                   question: forumHeadFields.question,
-                                  bookId:
-                                      forumHeadData.fields.bookId // Misalnya
-                                  ),
-                            ),
-                          );
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            crossAxisAlignment:
-                                CrossAxisAlignment.center, // Tengah
-                            children: [
-                              Text(
-                                forumHeadFields.title, // Judul Topik
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
+                                  bookId: forumHeadData.fields.bookId,
                                 ),
                               ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  const Icon(Icons.book), // Ikon Buku
-                                  const Text("  "), // Ikon Kalender
-                                  Expanded(
-                                    child: Text(
-                                      forumHeadFields.book,
-                                      overflow: TextOverflow.ellipsis,
-                                      // Tambahkan ellipsis
-                                      style: const TextStyle(
-                                          fontSize: 18), // Format Tanggal
+                            );
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.all(12.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  forumHeadFields.title,
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18,
+                                    color: Colors.indigo,
+                                  ),
+                                ),
+                                const SizedBox(height: 8),
+                                Text(
+                                  forumHeadFields.book,
+                                  style: const TextStyle(
+                                      fontSize: 14, color: Colors.black87),
+                                ),
+                                const SizedBox(height: 4),
+                                Text(
+                                  "Penanya: ${forumHeadFields.user}",
+                                  style: const TextStyle(fontSize: 14),
+                                ),
+                                const SizedBox(height: 4),
+                                Text(
+                                  "Tanggal: ${DateFormat('dd MMMM yyyy').format(forumHeadFields.date)}",
+                                  style: const TextStyle(fontSize: 14),
+                                ),
+                                const SizedBox(height: 8),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        const Icon(Icons.comment, size: 16),
+                                        const SizedBox(width: 4),
+                                        Text(
+                                            "${forumHeadFields.commentCounts} Komentar"),
+                                      ],
                                     ),
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  const Icon(Icons.calendar_today),
-                                  const Text("  "), // Ikon Kalender
-                                  Text(
-                                    DateFormat('yyyy-MM-dd')
-                                        .format(forumHeadFields.date),
-                                    style: const TextStyle(fontSize: 18),
-                                  ), // Format Tanggal
-                                ],
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  const Icon(Icons.person), // Ikon Penanya
-                                  const Text("  "), // Ikon Kalender
-                                  Text(
-                                    forumHeadFields.user,
-                                    style: const TextStyle(fontSize: 18),
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  const Icon(Icons.comment), // Ikon Komentar
-                                  const Text("  "), // Ikon Kalender
-                                  Text(
-                                    "${forumHeadFields.commentCounts}",
-                                    style: const TextStyle(fontSize: 18),
-                                  ),
-                                ],
-                              ),
-                              if (forumHeadFields.user ==
-                                  loggedInUser) // Tombol Hapus
-                                Align(
-                                  alignment: Alignment.centerRight,
-                                  child: IconButton(
-                                    icon: const Icon(
-                                        Icons.delete), // Ikon Tong Sampah
-                                    onPressed: () {
-                                      deleteQuestion(
-                                          request,
-                                          forumHeadFields.user,
-                                          forumHeadData.pk);
-                                    },
-                                  ),
+                                    if (forumHeadFields.user == loggedInUser)
+                                      IconButton(
+                                        icon: const Icon(Icons.delete,
+                                            size: 20, color: Colors.redAccent),
+                                        onPressed: () {
+                                          deleteQuestion(
+                                              request,
+                                              forumHeadFields.user,
+                                              forumHeadData.pk);
+                                        },
+                                      ),
+                                  ],
                                 ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                    );
-                  },
-                );
-              }
-            },
+                      );
+                    },
+                  );
+                }
+              },
+            ),
           ),
-        )
-      ]),
+        ]),
+      ),
+      floatingActionButtonLocation:
+          FloatingActionButtonLocation.miniCenterFloat,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const CreateForumPage()),
+          );
+        },
+        backgroundColor: Colors.indigo[900],
+        mini: true,
+        child: const Icon(Icons.add), // Mengubah ukuran tombol menjadi mini
+      ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         currentIndex: 2,
@@ -282,33 +273,6 @@ class _ForumPageState extends State<ForumPage> {
               break;
           }
         },
-      ),
-      floatingActionButton: Stack(
-        alignment: Alignment.center,
-        children: [
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Container(
-              margin: const EdgeInsets.only(
-                  bottom: 16.0, left: 25.0), // Adjust the margin as needed
-              child: Transform.scale(
-                scale: 0.5, // Adjust the scale factor as needed
-                child: FloatingActionButton(
-                  onPressed: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const CreateForumPage(),
-                      ),
-                    );
-                  },
-                  tooltip: 'Buat Forum Baru',
-                  child: const Icon(Icons.add),
-                ),
-              ),
-            ),
-          ),
-        ],
       ),
     );
   }
