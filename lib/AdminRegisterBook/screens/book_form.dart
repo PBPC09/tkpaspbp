@@ -72,7 +72,7 @@ class _BookFormPageState extends State<BookFormPage> {
                     return null;
                   },
                 ),
-                SizedBox(height: 12.0),
+                const SizedBox(height: 12.0),
                 TextFormField(
                   decoration: InputDecoration(
                     hintText: "Author",
@@ -99,7 +99,7 @@ class _BookFormPageState extends State<BookFormPage> {
                     return null;
                   },
                 ),
-                SizedBox(height: 12.0),
+                const SizedBox(height: 12.0),
                 TextFormField(
                   decoration: InputDecoration(
                     hintText: "Rating",
@@ -126,7 +126,7 @@ class _BookFormPageState extends State<BookFormPage> {
                     return null;
                   },
                 ),
-                SizedBox(height: 12.0),
+                const SizedBox(height: 12.0),
                 TextFormField(
                   decoration: InputDecoration(
                     hintText: "Voters",
@@ -150,7 +150,7 @@ class _BookFormPageState extends State<BookFormPage> {
                     return null;
                   },
                 ),
-                SizedBox(height: 12.0),
+                const SizedBox(height: 12.0),
                 TextFormField(
                   decoration: InputDecoration(
                     hintText: "Price",
@@ -177,7 +177,7 @@ class _BookFormPageState extends State<BookFormPage> {
                     return null;
                   },
                 ),
-                SizedBox(height: 12.0),
+                const SizedBox(height: 12.0),
                 TextFormField(
                   decoration: InputDecoration(
                     hintText: "Currency",
@@ -204,7 +204,7 @@ class _BookFormPageState extends State<BookFormPage> {
                     return null;
                   },
                 ),
-                SizedBox(height: 12.0),
+                const SizedBox(height: 12.0),
                 TextFormField(
                   decoration: InputDecoration(
                     hintText: "Publisher",
@@ -232,7 +232,7 @@ class _BookFormPageState extends State<BookFormPage> {
                     return null;
                   },
                 ),
-                SizedBox(height: 12.0),
+                const SizedBox(height: 12.0),
                 TextFormField(
                   decoration: InputDecoration(
                     hintText: "Page Count",
@@ -256,7 +256,7 @@ class _BookFormPageState extends State<BookFormPage> {
                     return null;
                   },
                 ),
-                SizedBox(height: 12.0),
+                const SizedBox(height: 12.0),
                 TextFormField(
                   decoration: InputDecoration(
                     hintText: "Genres",
@@ -284,7 +284,7 @@ class _BookFormPageState extends State<BookFormPage> {
                     return null;
                   },
                 ),
-                SizedBox(height: 12.0),
+                const SizedBox(height: 12.0),
                 TextFormField(
                   decoration: InputDecoration(
                     hintText: "Description",
@@ -312,18 +312,18 @@ class _BookFormPageState extends State<BookFormPage> {
                     return null;
                   },
                 ),
-                SizedBox(height: 12.0),
+                const SizedBox(height: 12.0),
               ],
             ),
           ),
         ),
       ),
       bottomNavigationBar: Container(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
-            primary: Colors.indigo,
-            padding: EdgeInsets.symmetric(vertical: 16.0),
+            backgroundColor: Colors.indigo,
+            padding: const EdgeInsets.symmetric(vertical: 16.0),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8.0),
             ),
@@ -346,16 +346,19 @@ class _BookFormPageState extends State<BookFormPage> {
                 }),
               );
               if (response['status'] == 'success') {
+                // ignore: use_build_context_synchronously
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
                     content: Text("New book has been saved!"),
                   ),
                 );
+                // ignore: use_build_context_synchronously
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(builder: (context) => AdminPage()),
                 );
               } else {
+                // ignore: use_build_context_synchronously
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
                     content: Text("ERROR, please try again!"),
@@ -364,7 +367,7 @@ class _BookFormPageState extends State<BookFormPage> {
               }
             }
           },
-          child: Text(
+          child: const Text(
             "Save",
             style: TextStyle(fontSize: 16, color: Colors.white),
           ),

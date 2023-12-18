@@ -1,26 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:lembarpena/BookForum/screens/forum_page.dart';
+import 'package:lembarpena/bookforum/screens/forum_page.dart';
 import 'package:lembarpena/Main/screens/menu.dart';
 import 'package:lembarpena/Main/widgets/left_drawer.dart';
 import 'package:lembarpena/Wishlist/screens/wishlist_form.dart';
 import 'dart:convert';
 import 'package:lembarpena/wishlist/models/book.dart';
 import 'package:lembarpena/wishlist/screens/detail_buku.dart';
-// import 'package:pbp_django_auth/pbp_django_auth.dart';
-// import 'package:provider/provider.dart';
 
 class ExploreBooksPage extends StatefulWidget {
   const ExploreBooksPage({Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _ExploreBooksPageState createState() => _ExploreBooksPageState();
 }
 
 class _ExploreBooksPageState extends State<ExploreBooksPage> {
   List<Book> wishlist = [];
   Future<List<Book>> fetchProduct() async {
-    var url = Uri.parse('http://localhost:8000/buybooks/show_books_json');
+    var url = Uri.parse('http://localhost:8000/buybooks/show_books_json/');
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},
@@ -105,7 +104,7 @@ class _ExploreBooksPageState extends State<ExploreBooksPage> {
                                     )
                                   );
                                   },
-                                  child: Text("Show Details"),
+                                  child: const Text("Show Details"),
                                 ),
                                 TextButton(
                                   onPressed: () {
@@ -119,7 +118,7 @@ class _ExploreBooksPageState extends State<ExploreBooksPage> {
                                       ),
                                     );
                                   },
-                                  child: Text("Add To Wishlist"),
+                                  child: const Text("Add To Wishlist"),
                                 ),
                               ],
                             ),
@@ -136,8 +135,8 @@ class _ExploreBooksPageState extends State<ExploreBooksPage> {
         type: BottomNavigationBarType.fixed,
         currentIndex: 1,
         backgroundColor: Colors.indigo,
-        selectedItemColor: Color.fromARGB(255, 255, 255, 255),
-        unselectedItemColor: Color.fromARGB(255, 156, 143, 255),
+        selectedItemColor: const Color.fromARGB(255, 255, 255, 255),
+        unselectedItemColor: const Color.fromARGB(255, 156, 143, 255),
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home), // Ganti dengan path gambar yang sesuai

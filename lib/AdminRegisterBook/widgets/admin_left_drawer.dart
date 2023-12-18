@@ -17,7 +17,7 @@ class LeftDrawer extends StatelessWidget {
     return Drawer(
       child: ListView(
         children: [
-          DrawerHeader(
+          const DrawerHeader(
             decoration: BoxDecoration(
               color: Colors.indigo,
             ),
@@ -133,7 +133,7 @@ class LeftDrawer extends StatelessWidget {
                 // ignore: use_build_context_synchronously
                 Navigator.pushAndRemoveUntil(
                   context,
-                  MaterialPageRoute(builder: (context) => LandingPage()),
+                  MaterialPageRoute(builder: (context) => const LandingPage()),
                   (Route<dynamic> route) => false,
                 );
               } else {

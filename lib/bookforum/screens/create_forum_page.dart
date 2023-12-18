@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:lembarpena/BookForum/screens/forum_page.dart';
+import 'package:lembarpena/bookforum/screens/forum_page.dart';
 import 'dart:convert';
-import 'package:lembarpena/Wishlist/models/book.dart';
+import 'package:lembarpena/AdminRegisterBook/models/book.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 
@@ -10,6 +10,7 @@ class CreateForumPage extends StatefulWidget {
   const CreateForumPage({Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _CreateForumPageState createState() => _CreateForumPageState();
 }
 
@@ -125,7 +126,7 @@ class _CreateForumPageState extends State<CreateForumPage> {
                     value: book,
                     child: Container(
                       width: 400,
-                      padding: EdgeInsets.all(
+                      padding: const EdgeInsets.all(
                           8.0), // Menambahkan padding di dalam border
                       decoration: BoxDecoration(
                         border: Border.all(
@@ -177,7 +178,9 @@ class _CreateForumPageState extends State<CreateForumPage> {
                 maxLines: null,
                 keyboardType: TextInputType.multiline,
               ),
-              const SizedBox(height: 20,),
+              const SizedBox(
+                height: 20,
+              ),
               ElevatedButton(
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
@@ -194,6 +197,7 @@ class _CreateForumPageState extends State<CreateForumPage> {
 
                     // Periksa kode status HTTP dari respons
                     if (response['status'] == 'success') {
+                      // ignore: use_build_context_synchronously
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
                           content: Text("Komentar berhasil ditambahkan!"),

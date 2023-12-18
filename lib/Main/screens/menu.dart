@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:lembarpena/Authentication/login_page.dart';
-import 'package:lembarpena/BookForum/screens/forum_page.dart';
+import 'package:lembarpena/authentication/login_page.dart';
+import 'package:lembarpena/bookforum/screens/forum_page.dart';
 import 'package:lembarpena/Main/widgets/left_drawer.dart';
 import 'package:lembarpena/Main/widgets/lembarpena_card.dart';
-import 'package:lembarpena/Wishlist/screens/explore_book.dart';
+import 'package:lembarpena/wishlist/screens/explore_book.dart';
 
 class MenuItem {
   final String name;
@@ -15,14 +15,13 @@ class MenuItem {
 
 class MyHomePage extends StatelessWidget {
   MyHomePage({Key? key}) : super(key: key);
+
   final List<MenuItem> pages = [
     MenuItem("Buy Books", Icons.shopping_bag, Colors.indigo),
     MenuItem("Wishlist", Icons.favorite, Colors.indigo),
     MenuItem("Explore Book", Icons.search, Colors.indigo),
     MenuItem("Cart", Icons.add_shopping_cart, Colors.indigo),
-    // MenuItem("Book Forum", Icons.chat, Colors.indigo),
     MenuItem("My Order", Icons.receipt, Colors.indigo),
-    // MenuItem("Admin Page", Icons.admin_panel_settings, Colors.indigo),
     MenuItem("Logout", Icons.logout, Colors.red),
   ];
 
@@ -56,7 +55,7 @@ class MyHomePage extends StatelessWidget {
                   ),
                   Container(
                     height: 400,
-                    color: Color.fromARGB(255, 1, 37, 158)
+                    color: const Color.fromARGB(255, 1, 37, 158)
                         .withOpacity(0.5), // Warna dengan opacity
                   ),
                   const Column(
@@ -118,8 +117,8 @@ class MyHomePage extends StatelessWidget {
         type: BottomNavigationBarType.fixed,
         currentIndex: 0,
         backgroundColor: Colors.indigo,
-        selectedItemColor: Color.fromARGB(255, 255, 255, 255),
-        unselectedItemColor: Color.fromARGB(255, 156, 143, 255),
+        selectedItemColor: const Color.fromARGB(255, 255, 255, 255),
+        unselectedItemColor: const Color.fromARGB(255, 156, 143, 255),
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home), // Ganti dengan path gambar yang sesuai

@@ -3,7 +3,7 @@ import 'package:lembarpena/AdminRegisterBook/screens/book_collections.dart';
 import 'package:lembarpena/AdminRegisterBook/screens/order_notifications.dart';
 import 'package:lembarpena/AdminRegisterBook/widgets/admin_left_drawer.dart';
 import 'package:lembarpena/AdminRegisterBook/widgets/admin_menu_card.dart';
-import 'package:lembarpena/Authentication/login_page.dart';
+import 'package:lembarpena/authentication/login_page.dart';
 
 class AdminPage extends StatelessWidget {
   AdminPage({Key? key}) : super(key: key);
@@ -34,13 +34,15 @@ class AdminPage extends StatelessWidget {
                 alignment: Alignment.center,
                 children: <Widget>[
                   Image.asset(
-                    'assets/images/imagecover.jpg',
+                    'assets/images/books3.jpg',
                     height: 400,
+                    width: 600,
                     fit: BoxFit.cover,
                   ),
                   Container(
                     height: 400,
-                    color: Color.fromARGB(255, 1, 37, 158).withOpacity(0.5),
+                    color:
+                        const Color.fromARGB(255, 1, 37, 158).withOpacity(0.5),
                   ),
                   const Column(
                     children: [
@@ -61,7 +63,7 @@ class AdminPage extends StatelessWidget {
                 ],
               ),
               GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 3,
                   crossAxisSpacing: 10,
                   mainAxisSpacing: 10,
