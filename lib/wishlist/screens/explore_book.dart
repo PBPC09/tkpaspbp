@@ -7,6 +7,8 @@ import 'package:lembarpena/Main/widgets/left_drawer.dart';
 import 'package:lembarpena/AdminRegisterBook/models/book.dart';
 import 'package:lembarpena/wishlist/screens/detail_buku.dart';
 import 'package:lembarpena/authentication/login_page.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
 
 class ExploreBooksPage extends StatefulWidget {
   const ExploreBooksPage({Key? key}) : super(key: key);
@@ -51,34 +53,37 @@ class _ExploreBooksPageState extends State<ExploreBooksPage> {
 
     // Filter data untuk hanya menyimpan item yang memiliki "user" yang sesuai dengan currentUser
     var filteredData = data.where((x) => x['fields']['user'] == uname).toList();
-
+    // print(filteredData);
     setState(() {
-      wishlistBookIds = Set<int>.from(filteredData.map((x) => x['pk']));
+      wishlistBookIds = Set<int>.from(filteredData.map((x) => x['fields']["book_id"]));
     });
   }
 
-  Future<void> addToWishlist(int bookId, int preference) async {
-    var url =
-        Uri.parse('http://localhost:8000/wishlist/add_to_wishlist_flutter/');
-    var response = await http.post(url,
-        body: json.encode(
-            {'book_id': bookId, 'preference': preference, 'user_id': uname}),
-        headers: {"Content-Type": "application/json"});
+  Future<void> addToWishlist(
+      CookieRequest request, int bookId, int preference) async {
+    final response = await request.postJson(
+      // "http://10.0.2.2:8000/bookforum/create_question_flutter/",
+      "http://localhost:8000/wishlist/add_to_wishlist_flutter/",
+      jsonEncode(
+          {'username': uname, "book_id": bookId, 'preference': preference}),
+    );
+    // var url =
+    //     Uri.parse('http://localhost:8000/wishlist/add_to_wishlist_flutter/');
+    // var response = await http.post(url,
+    //     body: json.encode(
+    //         {'book_id': bookId, 'preference': preference, 'user_id': uname}),
+    //     headers: {"Content-Type": "application/json"});
 
-    if (response.statusCode == 200) {
-      var data = jsonDecode(response.body);
-      if (data['status'] == 'success') {
-        setState(() {
-          wishlistBookIds.add(bookId);
-        });
-        // ignore: use_build_context_synchronously
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text(data['message'])));
-      } else {
-        // ignore: use_build_context_synchronously
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text(data['message'])));
-      }
+    if (response['status'] == 'success') {
+      // var data = jsonDecode(response.body);
+      // if (data['status'] == 'success') {
+      setState(() {
+        wishlistBookIds.add(bookId);
+      });
+      // });
+      // ignore: use_build_context_synchronously
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text("Sukses Ditambahkan!")));
     } else {
       // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
@@ -86,7 +91,7 @@ class _ExploreBooksPageState extends State<ExploreBooksPage> {
     }
   }
 
-  void showPreferenceDialog(int bookId) async {
+  void showPreferenceDialog(CookieRequest request, int bookId) async {
     int? preference = await showDialog<int>(
       context: context,
       builder: (BuildContext context) {
@@ -129,12 +134,13 @@ class _ExploreBooksPageState extends State<ExploreBooksPage> {
     );
 
     if (preference != null) {
-      addToWishlist(bookId, preference);
+      addToWishlist(request, bookId, preference);
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Books', style: TextStyle(color: Colors.white)),
@@ -184,7 +190,7 @@ class _ExploreBooksPageState extends State<ExploreBooksPage> {
                         color: isInWishlist ? Colors.red : Colors.grey,
                         onPressed: () {
                           if (!isInWishlist) {
-                            showPreferenceDialog(book.pk);
+                            showPreferenceDialog(request, book.pk);
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
