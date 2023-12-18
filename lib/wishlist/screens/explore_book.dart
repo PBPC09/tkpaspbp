@@ -24,12 +24,41 @@ class _ExploreBooksPageState extends State<ExploreBooksPage> {
   String selectedRating =
       'All Ratings'; // State untuk menyimpan rating yang dipilih
   String uname = LoginPage.uname;
-
+  // ignore: prefer_typing_uninitialized_variables
+  var filteredData;
   @override
   void initState() {
     super.initState();
     fetchBooks(selectedRating); // Panggil dengan rating awal
     fetchWishlist();
+  }
+
+  Future<void> deleteQuestion(CookieRequest request, int bookId) async {
+    // final response = await request.postJson('http://10.0.2.2:8000/bookforum/delete_question_flutter/$username/$id',
+    int pkWishlist = 0;
+    for (var data in filteredData) {
+      if (data["fields"]["book_id"] == bookId) {
+        pkWishlist = data["pk"];
+        break;
+      }
+    }
+
+    final response = await request.postJson(
+        'http://localhost:8000/wishlist/delete_wishlist_item_flutter/$pkWishlist/',
+        jsonEncode({}));
+
+    if (response['status'] == 'success') {
+      // Handle berhasil menghapus
+      setState(() {
+        // Memuat ulang data ForumHead
+        wishlistBookIds.remove(bookId);
+        ScaffoldMessenger.of(context)
+            .showSnackBar(const SnackBar(content: Text("Sukses dihapus!")));
+      });
+      // Muat ulang komentar
+    } else {
+      // Handle error
+    }
   }
 
   Future<void> fetchBooks(String rating) async {
@@ -52,10 +81,11 @@ class _ExploreBooksPageState extends State<ExploreBooksPage> {
     var data = jsonDecode(utf8.decode(response.bodyBytes));
 
     // Filter data untuk hanya menyimpan item yang memiliki "user" yang sesuai dengan currentUser
-    var filteredData = data.where((x) => x['fields']['user'] == uname).toList();
+    filteredData = data.where((x) => x['fields']['user'] == uname).toList();
     // print(filteredData);
     setState(() {
-      wishlistBookIds = Set<int>.from(filteredData.map((x) => x['fields']["book_id"]));
+      wishlistBookIds =
+          Set<int>.from(filteredData.map((x) => x['fields']["book_id"]));
     });
   }
 
@@ -67,20 +97,12 @@ class _ExploreBooksPageState extends State<ExploreBooksPage> {
       jsonEncode(
           {'username': uname, "book_id": bookId, 'preference': preference}),
     );
-    // var url =
-    //     Uri.parse('http://localhost:8000/wishlist/add_to_wishlist_flutter/');
-    // var response = await http.post(url,
-    //     body: json.encode(
-    //         {'book_id': bookId, 'preference': preference, 'user_id': uname}),
-    //     headers: {"Content-Type": "application/json"});
 
     if (response['status'] == 'success') {
-      // var data = jsonDecode(response.body);
-      // if (data['status'] == 'success') {
       setState(() {
         wishlistBookIds.add(bookId);
+        fetchWishlist();
       });
-      // });
       // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context)
           .showSnackBar(const SnackBar(content: Text("Sukses Ditambahkan!")));
@@ -192,10 +214,7 @@ class _ExploreBooksPageState extends State<ExploreBooksPage> {
                           if (!isInWishlist) {
                             showPreferenceDialog(request, book.pk);
                           } else {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                    content: Text(
-                                        'Buku sudah ada dalam wishlist.')));
+                            deleteQuestion(request, book.pk);
                           }
                         },
                       ),
