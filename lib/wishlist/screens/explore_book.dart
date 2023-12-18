@@ -48,8 +48,12 @@ class _ExploreBooksPageState extends State<ExploreBooksPage> {
     var response =
         await http.get(url, headers: {"Content-Type": "application/json"});
     var data = jsonDecode(utf8.decode(response.bodyBytes));
+
+    // Filter data untuk hanya menyimpan item yang memiliki "user" yang sesuai dengan currentUser
+    var filteredData = data.where((x) => x['fields']['user'] == uname).toList();
+
     setState(() {
-      wishlistBookIds = Set<int>.from(data.map((x) => x['pk']));
+      wishlistBookIds = Set<int>.from(filteredData.map((x) => x['pk']));
     });
   }
 
