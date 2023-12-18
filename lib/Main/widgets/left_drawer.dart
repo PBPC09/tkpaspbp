@@ -3,7 +3,8 @@ import 'package:lembarpena/bookforum/screens/forum_page.dart';
 import 'package:lembarpena/Main/screens/landing_page.dart';
 import 'package:lembarpena/Main/screens/menu.dart';
 import 'package:lembarpena/wishlist/screens/explore_book.dart';
-import 'package:lembarpena/wishlist/screens/my_wishlist.dart';
+import 'package:lembarpena/buybooks/screens/buybooks_page.dart';
+import 'package:lembarpena/buybooks/screens/cart_page.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 
@@ -63,18 +64,24 @@ class LeftDrawer extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.shopping_bag),
             title: const Text('Buy Books'),
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const BuyBooksPage(),
+                  ));
+            },
           ),
           ListTile(
             leading: const Icon(Icons.favorite),
             title: const Text('Wishlist'),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const WishlistPage(),
-                ));
-            },
+            // onTap: () {
+            //   Navigator.push(
+            //     context,
+            //     MaterialPageRoute(
+            //       builder: (context) => const WishlistPage(),
+            //     ));
+            // },
           ),
           ListTile(
             leading: const Icon(Icons.search),
@@ -90,7 +97,13 @@ class LeftDrawer extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.add_shopping_cart),
             title: const Text('Cart'),
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const CartPage(),
+                  ));
+            },
           ),
           ListTile(
             leading: const Icon(Icons.chat),
