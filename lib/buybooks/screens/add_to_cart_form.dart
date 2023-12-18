@@ -80,7 +80,8 @@ class _CartFormPageState extends State<CartFormPage> {
                     if (response['status'] == 'success') {
                       // ignore: use_build_context_synchronously
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                        content: Text("Produk baru berhasil disimpan!"),
+                        content: Text(
+                            "Item berhasil ditambahkan ke dalam keranjang Anda."),
                       ));
                       // ignore: use_build_context_synchronously
                       Navigator.pushReplacement(

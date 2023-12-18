@@ -1,27 +1,27 @@
 // To parse this JSON data, do
 //
-//     final wishlistBook = wishlistBookFromJson(jsonString);
+//     final wishlist = wishlistFromJson(jsonString);
 
 import 'dart:convert';
 
-List<WishlistBook> wishlistBookFromJson(String str) => List<WishlistBook>.from(
-    json.decode(str).map((x) => WishlistBook.fromJson(x)));
+List<Wishlist> wishlistFromJson(String str) =>
+    List<Wishlist>.from(json.decode(str).map((x) => Wishlist.fromJson(x)));
 
-String wishlistBookToJson(List<WishlistBook> data) =>
+String wishlistToJson(List<Wishlist> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class WishlistBook {
+class Wishlist {
   String model;
   int pk;
   Fields fields;
 
-  WishlistBook({
+  Wishlist({
     required this.model,
     required this.pk,
     required this.fields,
   });
 
-  factory WishlistBook.fromJson(Map<String, dynamic> json) => WishlistBook(
+  factory Wishlist.fromJson(Map<String, dynamic> json) => Wishlist(
         model: json["model"],
         pk: json["pk"],
         fields: Fields.fromJson(json["fields"]),
@@ -35,25 +35,25 @@ class WishlistBook {
 }
 
 class Fields {
+  String user;
   String title;
   String preference;
-  String user;
 
   Fields({
+    required this.user,
     required this.title,
     required this.preference,
-    required this.user,
   });
 
   factory Fields.fromJson(Map<String, dynamic> json) => Fields(
+        user: json["user"],
         title: json["title"],
         preference: json["preference"],
-        user: json["user"]
       );
 
   Map<String, dynamic> toJson() => {
+        "user": user,
         "title": title,
         "preference": preference,
-        "user" : user,
       };
 }

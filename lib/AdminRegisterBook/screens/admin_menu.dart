@@ -49,7 +49,7 @@ class AdminPage extends StatelessWidget {
                       Padding(
                         padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
                         child: Text(
-                          'Welcome to LembarPena',
+                          'Admin Dashboard',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               fontSize: 30,

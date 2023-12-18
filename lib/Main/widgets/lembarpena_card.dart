@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:lembarpena/bookforum/screens/forum_page.dart';
 import 'package:lembarpena/Main/screens/landing_page.dart';
 import 'package:lembarpena/Main/screens/menu.dart';
-import 'package:lembarpena/Wishlist/screens/explore_book.dart';
+import 'package:lembarpena/wishlist/screens/explore_book.dart';
 import 'package:lembarpena/buybooks/screens/buybooks_page.dart';
 import 'package:lembarpena/buybooks/screens/cart_page.dart';
-import 'package:lembarpena/wishlist/screens/my_wishlist.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 
@@ -24,8 +23,7 @@ class MenuCard extends StatelessWidget {
       elevation: 5, // Drop shadow
       child: Material(
         color: page.color,
-        borderRadius: BorderRadius.circular(
-            10), // Ensure this matches the Card's border radius
+        borderRadius: BorderRadius.circular(10),
         child: InkWell(
           // Area responsive terhadap sentuhan
           onTap: () async {
@@ -43,12 +41,11 @@ class MenuCard extends StatelessWidget {
                 ),
               );
             } else if (page.name == "Wishlist") {
-
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => WishlistPage(),
-                ));
+              // Navigator.pushReplacement(
+              //   context,
+              //   MaterialPageRoute(
+              //     builder: (context) => const WishlistPage(),
+              //   ));
             } else if (page.name == "Cart") {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => const CartPage()));
@@ -86,8 +83,7 @@ class MenuCard extends StatelessWidget {
               }
             }
           },
-          borderRadius:
-              BorderRadius.circular(10), // Match with Material's border radius
+          borderRadius: BorderRadius.circular(10),
           child: Container(
             // Container untuk menyimpan Icon dan Text
             padding: const EdgeInsets.all(8),
