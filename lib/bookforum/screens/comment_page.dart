@@ -208,21 +208,38 @@ class _ForumCommentsPageState extends State<ForumCommentsPage> {
                 ),
               ),
             ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-                builder: (context) => CreateCommentPage(
-                    forumHeadId: widget.forumHeadId,
-                    title: widget.title,
-                    question: widget.question,
-                    bookId: widget.bookId)),
-          );
-        },
-        tooltip: 'Tambah Komentar',
-        child: const Icon(Icons.add),
-      ),
+            floatingActionButton: Stack(
+              alignment: Alignment.center,
+              children: [
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Container(
+                    margin: const EdgeInsets.only(bottom: 16.0, left: 25.0), // Adjust the margin as needed
+                    child: Transform.scale(
+                      scale: 0.5, // Adjust the scale factor as needed
+                      child: FloatingActionButton(
+                        onPressed: () {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => CreateCommentPage(
+                                forumHeadId: widget.forumHeadId,
+                                title: widget.title,
+                                question: widget.question,
+                                bookId: widget.bookId,
+                              ),
+                            ),
+                          );
+                        },
+                        tooltip: 'Tambah Komentar',
+                        child: const Icon(Icons.add),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+
     );
   }
 }
