@@ -19,20 +19,25 @@ class ExploreBooksPage extends StatefulWidget {
 class _ExploreBooksPageState extends State<ExploreBooksPage> {
   List<Book> books = [];
   Set<int> wishlistBookIds = {};
+  String selectedRating =
+      'All Ratings'; // State untuk menyimpan rating yang dipilih
   String uname = LoginPage.uname;
 
   @override
   void initState() {
     super.initState();
-    fetchBooks();
+    fetchBooks(selectedRating); // Panggil dengan rating awal
     fetchWishlist();
   }
 
-  Future<void> fetchBooks() async {
-    var url = Uri.parse('http://localhost:8000/buybooks/show_books_json/');
+  Future<void> fetchBooks(String rating) async {
+    String ratingQuery = rating != 'All Ratings' ? '&rating=$rating' : '';
+    var url = Uri.parse(
+        'http://localhost:8000/buybooks/show_books_json/?rating=$ratingQuery');
     var response =
         await http.get(url, headers: {"Content-Type": "application/json"});
     var data = jsonDecode(utf8.decode(response.bodyBytes));
+
     setState(() {
       books = List<Book>.from(data.map((x) => Book.fromJson(x)));
     });
@@ -179,7 +184,8 @@ class _ExploreBooksPageState extends State<ExploreBooksPage> {
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
-                                    content: Text('Book already in wishlist')));
+                                    content: Text(
+                                        'Buku sudah ada dalam wishlist.')));
                           }
                         },
                       ),

@@ -37,7 +37,6 @@ class _WishlistPageState extends State<WishlistPage> {
                       onPressed: () {
                         setState(() {
                           widget.wishlist.remove(book);
-                          // Add logic to remove from wishlist in backend
                         });
                       },
                     ),
