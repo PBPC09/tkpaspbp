@@ -67,83 +67,96 @@ class _CartPageState extends State<CartPage> {
         backgroundColor: Colors.indigo[900],
         foregroundColor: Colors.white,
       ),
-      body: FutureBuilder<List<CartItem>>(
-        future: futureCartItems,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
-          } else if (snapshot.hasData) {
-            return ListView.builder(
-              itemCount: snapshot.data!.length,
-              itemBuilder: (context, index) {
-                var cartItem = snapshot.data![index];
-                return Card(
-                  margin: const EdgeInsets.all(10),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: Stack(
-                      children: [
-                        ListTile(
-                          leading: Checkbox(
-                            value: itemsChecked[cartItem.id] ?? false,
-                            onChanged: (bool? value) {
-                              toggleCheckbox(cartItem.id, value);
-                            },
+      body: Column(
+        children: [
+          Expanded(
+            child: FutureBuilder<List<CartItem>>(
+              future: futureCartItems,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (snapshot.hasError) {
+                  return Center(child: Text('Error: ${snapshot.error}'));
+                } else if (snapshot.hasData) {
+                  return ListView.builder(
+                    itemCount: snapshot.data!.length,
+                    itemBuilder: (context, index) {
+                      var cartItem = snapshot.data![index];
+                      return Card(
+                        margin: const EdgeInsets.all(10),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8),
+                          child: Stack(
+                            children: [
+                              ListTile(
+                                leading: Checkbox(
+                                  value: itemsChecked[cartItem.id] ?? false,
+                                  onChanged: (bool? value) {
+                                    toggleCheckbox(cartItem.id, value);
+                                  },
+                                ),
+                                title: Text(
+                                  cartItem.title,
+                                  style: const TextStyle(
+                                    fontSize: 15.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                subtitle: Text(
+                                  "Jumlah: ${cartItem.quantity}\nSubtotal Harga: ${cartItem.currency} ${cartItem.subtotal}",
+                                  style: const TextStyle(
+                                    fontSize: 12.0,
+                                    color: Colors.black87,
+                                  ),
+                                ),
+                                isThreeLine: true,
+                              ),
+                              Positioned(
+                                bottom: 4,
+                                right: 4,
+                                child: TextButton(
+                                  style: TextButton.styleFrom(
+                                    foregroundColor: Colors.white,
+                                    backgroundColor: Colors.redAccent,
+                                    disabledForegroundColor:
+                                        Colors.grey.withOpacity(0.38),
+                                  ),
+                                  onPressed: () {
+                                    removeItemFromCart(cartItem.id);
+                                  },
+                                  child: const Text('Remove'),
+                                ),
+                              ),
+                            ],
                           ),
-                          title: Text(
-                            cartItem.title,
-                            style: const TextStyle(
-                              fontSize: 15.0,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          subtitle: Text(
-                            "Jumlah: ${cartItem.quantity}\nSubtotal Harga: ${cartItem.currency} ${cartItem.subtotal}",
-                            style: const TextStyle(
-                              fontSize: 12.0,
-                              color: Colors.black87,
-                            ),
-                          ),
-                          isThreeLine: true, // Jika subtitle memiliki dua baris
                         ),
-                        Positioned(
-                          bottom: 4,
-                          right: 4,
-                          child: TextButton(
-                            style: TextButton.styleFrom(
-                              foregroundColor: Colors.white,
-                              backgroundColor: Colors.redAccent,
-                              disabledForegroundColor:
-                                  Colors.grey.withOpacity(0.38),
-                            ),
-                            onPressed: () {
-                              removeItemFromCart(cartItem.id);
-                            },
-                            child: const Text('Remove'),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                );
+                      );
+                    },
+                  );
+                } else {
+                  return const Center(child: Text('Your cart is empty.'));
+                }
               },
-            );
-          } else {
-            return const Center(child: Text('Your cart is empty.'));
-          }
-        },
+            ),
+          ),
+          Center(
+            child: Container(
+              width: 200, // Lebar tombol Checkout
+              margin: const EdgeInsets.only(bottom: 20), // Margin bawah
+              child: ElevatedButton(
+                onPressed: () {
+                  // Implementasi checkout modul si Rifqi
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.indigo[900],
+                  minimumSize: const Size.fromHeight(40), // Tinggi tombol
+                ),
+                child: const Text('Checkout'),
+              ),
+            ),
+          ),
+        ],
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          // Implementasi checkout modul si Rifqi
-        },
-        label: const Text('Checkout'),
-        icon: const Icon(Icons.payment),
-        backgroundColor: Colors.indigo[900],
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         currentIndex: 1,
