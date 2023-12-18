@@ -23,8 +23,7 @@ class MenuCard extends StatelessWidget {
       elevation: 5, // Drop shadow
       child: Material(
         color: page.color,
-        borderRadius: BorderRadius.circular(
-            10), // Ensure this matches the Card's border radius
+        borderRadius: BorderRadius.circular(10),
         child: InkWell(
           // Area responsive terhadap sentuhan
           onTap: () async {
@@ -84,8 +83,7 @@ class MenuCard extends StatelessWidget {
               }
             }
           },
-          borderRadius:
-              BorderRadius.circular(10), // Match with Material's border radius
+          borderRadius: BorderRadius.circular(10),
           child: Container(
             // Container untuk menyimpan Icon dan Text
             padding: const EdgeInsets.all(8),

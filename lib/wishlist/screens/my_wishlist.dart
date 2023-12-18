@@ -18,26 +18,33 @@ class _WishlistPageState extends State<WishlistPage> {
       appBar: AppBar(
         title: const Text('Wishlist'),
       ),
-      body: ListView.builder(
-        itemCount: widget.wishlist.length,
-        itemBuilder: (context, index) {
-          Book book = widget.wishlist[index];
-
-          return ListTile(
-            title: Text(book.fields.title),
-            subtitle: Text('Author: ${book.fields.author}'),
-            trailing: ElevatedButton(
-              onPressed: () {
-                // Handle remove from wishlist logic
-                setState(() {
-                  widget.wishlist.remove(book);
-                });
+      body: widget.wishlist.isEmpty
+          ? const Center(
+              child: Text('Your wishlist is empty',
+                  style: TextStyle(fontSize: 18)),
+            )
+          : ListView.builder(
+              itemCount: widget.wishlist.length,
+              itemBuilder: (context, index) {
+                Book book = widget.wishlist[index];
+                return Card(
+                  margin: const EdgeInsets.all(10),
+                  child: ListTile(
+                    title: Text(book.fields.title),
+                    subtitle: Text('Author: ${book.fields.author}'),
+                    trailing: IconButton(
+                      icon: const Icon(Icons.delete_outline),
+                      onPressed: () {
+                        setState(() {
+                          widget.wishlist.remove(book);
+                          // Add logic to remove from wishlist in backend
+                        });
+                      },
+                    ),
+                  ),
+                );
               },
-              child: const Text('Remove from Wishlist'),
             ),
-          );
-        },
-      ),
     );
   }
 }
