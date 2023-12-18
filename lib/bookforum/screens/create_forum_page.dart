@@ -43,7 +43,7 @@ class _CreateForumPageState extends State<CreateForumPage> {
 
   Future<List<Book>> fetchBooks() async {
     // var url = Uri.parse('http://10.0.2.2:8000/buybooks/show_books_json');
-    var url = Uri.parse('http://localhost:8000/buybooks/show_books_json');
+    var url = Uri.parse('http://localhost:8000/buybooks/show_books_json/');
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},
