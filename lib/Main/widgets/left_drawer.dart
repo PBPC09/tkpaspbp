@@ -3,10 +3,11 @@ import 'package:lembarpena/bookforum/screens/forum_page.dart';
 import 'package:lembarpena/Main/screens/landing_page.dart';
 import 'package:lembarpena/Main/screens/menu.dart';
 import 'package:lembarpena/wishlist/screens/explore_book.dart';
-import 'package:pbp_django_auth/pbp_django_auth.dart';
-import 'package:provider/provider.dart';
 import 'package:lembarpena/buybooks/screens/buybooks_page.dart';
 import 'package:lembarpena/buybooks/screens/cart_page.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
+
 
 class LeftDrawer extends StatelessWidget {
   const LeftDrawer({super.key});
@@ -68,7 +69,7 @@ class LeftDrawer extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => BuyBooksPage(),
+                    builder: (context) => const BuyBooksPage(),
                   ));
             },
           ),
@@ -95,7 +96,7 @@ class LeftDrawer extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => CartPage(),
+                    builder: (context) => const CartPage(),
                   ));
             },
           ),

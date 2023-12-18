@@ -3,9 +3,6 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:lembarpena/authentication/login_page.dart';
 import 'package:lembarpena/buybooks/models/cart_item.dart';
-// import 'package:lembarpena/Main/widgets/left_drawer.dart';
-// import 'package:lembarpena/BuyBooks/screens/cart_page.dart';
-// import 'package:lembarpena/BuyBooks/models/book.dart';
 
 class CheckoutPage extends StatefulWidget {
   const CheckoutPage({Key? key}) : super(key: key);
@@ -15,6 +12,14 @@ class CheckoutPage extends StatefulWidget {
 }
 
 class _CheckoutPageState extends State<CheckoutPage> {
+  late Future<List<CartItem>> _cartItemsFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    _cartItemsFuture = fetchProduct();
+  }
+
   Future<List<CartItem>> fetchProduct() async {
     String uname = LoginPage.uname;
     var url = Uri.parse('http://127.0.0.1:8000/show_cart_json/$uname/');
@@ -23,10 +28,8 @@ class _CheckoutPageState extends State<CheckoutPage> {
       headers: {"Content-Type": "application/json"},
     );
 
-    // melakukan decode response menjadi bentuk json
     var data = jsonDecode(utf8.decode(response.bodyBytes));
 
-    // melakukan konversi data json menjadi object Product
     List<CartItem> listItem = [];
     for (var d in data) {
       if (d != null) {
@@ -46,40 +49,39 @@ class _CheckoutPageState extends State<CheckoutPage> {
       ),
       body: SingleChildScrollView(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const Padding(
-              padding: EdgeInsets.all(20.0),
+            Padding(
+              padding: const EdgeInsets.all(20.0),
               child: Text(
                 'Checkout',
                 style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
               ),
             ),
-            // DataTable(
-            //   columns: [
-            //     DataColumn(label: Text('Produk')),
-            //     DataColumn(label: Text('Harga Satuan')),
-            //     DataColumn(label: Text('Jumlah')),
-            //     DataColumn(label: Text('Subtotal Harga')),
-            //   ],
-            //   rows: cartItemFromJson.((product) {
-            //     return DataRow(cells: [
-            //       DataCell(Text(product['book']['title'])),
-            //       DataCell(Text(
-            //           '${product['book']['currency']} ${product['book']['price']}')),
-            //       DataCell(Text('${product['quantity']}')),
-            //       DataCell(Text('${product['subtotal']}')),
-            //     ]);
-            //   }).toList(),
-            // ),
-            // Padding(
-            //   padding: EdgeInsets.symmetric(vertical: 10.0),
-            //   child: Text(
-            //     'Total Harga: ${Currency} ${totalPrice}',
-            //     style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-            //   ),
-            // ),
+            FutureBuilder<List<CartItem>>(
+              future: _cartItemsFuture,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(child: CircularProgressIndicator());
+                } else if (snapshot.hasError) {
+                  return Center(
+                    child: Text('Error: ${snapshot.error.toString()}'),
+                  );
+                } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                  return const Center(
+                      child: Text('Tidak ada barang di keranjang.'));
+                } else {
+                  return Column(
+                    children: snapshot.data!.map((item) {
+                      return ListTile(
+                        title: Text(item.title),
+                        subtitle: Text('Quantity: ${item.quantity.toString()}'),
+                        // Add other widgets as needed
+                      );
+                    }).toList(),
+                  );
+                }
+              },
+            ),
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: TextFormField(
@@ -155,7 +157,6 @@ class _CheckoutPageState extends State<CheckoutPage> {
                 child: const Text('Checkout'),
               ),
             ),
-            ElevatedButton(onPressed: () {}, child: const Text('Berhasil'))
           ],
         ),
       ),
