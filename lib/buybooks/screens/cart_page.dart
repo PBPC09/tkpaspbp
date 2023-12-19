@@ -42,9 +42,14 @@ class _CartPageState extends State<CartPage> {
       var cartJson = json.decode(response.body) as List;
       List<CartItem> cartItems =
           cartJson.map((json) => CartItem.fromJson(json)).toList();
+      Map<int, bool> tempItemsChecked = {};
       for (var item in cartItems) {
-        itemsChecked.putIfAbsent(item.id, () => false);
+        tempItemsChecked[item.id] = item.isSelected;
       }
+      // Update the state once after loading all data
+      setState(() {
+        itemsChecked.addAll(tempItemsChecked);
+      });
       return cartItems;
     } else {
       throw Exception('Failed to load cart');
@@ -58,31 +63,46 @@ class _CartPageState extends State<CartPage> {
         jsonEncode({}));
 
     if (response['status'] == 'success') {
+        ScaffoldMessenger.of(context)
+      .showSnackBar(const SnackBar(content: Text("Sukses dihapus!")));
       // Handle berhasil menghapus
       setState(() {
         // Memuat ulang data ForumHead
         // futureCartItems = fetchCartItems();
-        ScaffoldMessenger.of(context)
-            .showSnackBar(const SnackBar(content: Text("Sukses dihapus!")));
+        itemsChecked.remove(itemId); // Hapus item dari itemsChecked
+
+            futureCartItems = fetchCartItems();
       });
       // Muat ulang komentar
     } else {
       // Handle error
+       // ignore: use_build_context_synchronously
+      ScaffoldMessenger.of(context)
+        .showSnackBar(const SnackBar(content: Text("Gagal menghapus item.")));
     }
   }
 
-  void toggleCheckbox(CookieRequest request, int itemId) async {
+  void toggleCheckbox(CookieRequest request, int itemId, bool? value) async {
+    setState(() {
+      itemsChecked[itemId] = value ?? false;
+    });
     final response = await request.postJson(
         'http://localhost:8000/buybooks/selected_flutter/$itemId/',
         jsonEncode({}));
 
     if (response['status'] == 'success') {
       // Handle berhasil menghapus
-      setState(() {});
+      setState(() {
+      });
+
       // Muat ulang komentar
     } else {
       // Handle error
     }
+  }
+
+  bool isAnyItemSelected() {
+    return itemsChecked.containsValue(true);
   }
 
   @override
@@ -95,7 +115,7 @@ class _CartPageState extends State<CartPage> {
         foregroundColor: Colors.white,
       ),
       body: FutureBuilder<List<CartItem>>(
-        future: getCartItems(),
+        future: futureCartItems,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
@@ -110,7 +130,8 @@ class _CartPageState extends State<CartPage> {
               return ListView.builder(
                 itemCount: snapshot.data!.length,
                 itemBuilder: (context, index) {
-                  var cartItem = snapshot.data![index];
+                var cartItem = snapshot.data![index];
+                cartItem.isSelected = itemsChecked[cartItem.id] ?? false;
                   return Card(
                     margin: const EdgeInsets.all(10),
                     child: Padding(
@@ -122,7 +143,7 @@ class _CartPageState extends State<CartPage> {
                               // value: true,
                               value: cartItem.isSelected,
                               onChanged: (bool? value) {
-                                toggleCheckbox(request, cartItem.id);
+                                toggleCheckbox(request, cartItem.id, value);
                               },
                             ),
                             title: Text(
@@ -170,21 +191,23 @@ class _CartPageState extends State<CartPage> {
           }
         },
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) =>
-                  CheckoutPage(), // Ganti dengan nama halaman CheckoutPage yang sesuai
-            ),
-          );
-          // Implementasi checkout modul si Rifqi
-        },
-        label: const Text('Checkout'),
-        icon: const Icon(Icons.payment),
-        backgroundColor: Colors.indigo[900],
-      ),
+      floatingActionButton: isAnyItemSelected()
+          ? FloatingActionButton.extended(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        CheckoutPage(), // Ganti dengan nama halaman CheckoutPage yang sesuai
+                  ),
+                );
+                // Implementasi checkout modul si Rifqi
+              },
+              label: const Text('Checkout'),
+              icon: const Icon(Icons.payment),
+              backgroundColor: Colors.indigo[900],
+            )
+          : null,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
