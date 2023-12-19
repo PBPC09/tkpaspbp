@@ -48,7 +48,7 @@ class _ExploreBooksPageState extends State<ExploreBooksPage> {
       setState(() {
         wishlistBookIds.remove(bookId);
         ScaffoldMessenger.of(context)
-            .showSnackBar(const SnackBar(content: Text("Sukses dihapus!")));
+            .showSnackBar(const SnackBar(content: Text("Buku telah dihapus dari wishlist!")));
       });
     } else {
       // Handle error
