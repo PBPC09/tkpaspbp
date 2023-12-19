@@ -16,7 +16,8 @@ class CheckoutPage extends StatefulWidget {
 }
 
 class _CheckoutPageState extends State<CheckoutPage> {
-  String _groupValue = '';
+  String _deliveryGroupValue = '';
+  String _paymentGroupValue = '';
   late String uname = LoginPage.uname;
   late Future<double> harga;
   double valueHarga = 0;
@@ -87,6 +88,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
               buildCartItemsSection(),
               buildTotalPriceSection(),
               buildAddressInput(),
+              buildDeliveryOptionsSection(),
               buildPaymentOptionsSection(),
               buildCheckoutButton(request),
             ],
@@ -153,6 +155,39 @@ class _CheckoutPageState extends State<CheckoutPage> {
     );
   }
 
+  Widget buildDeliveryOptionsSection() {
+    List<Map<String, String>> deliveryOptions = [
+      {"title": "Reguler", "value": "Reguler"},
+      {"title": "Express", "value": "Express"},
+    ];
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          'Pilih jenis pengiriman',
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        Column(
+          children: deliveryOptions.map((option) {
+            return RadioListTile(
+              title:
+                  Text(option['title']!, style: const TextStyle(fontSize: 16)),
+              value: option['value']!,
+              groupValue: _deliveryGroupValue,
+              onChanged: (value) =>
+                  setState(() => _deliveryGroupValue = value as String),
+              activeColor: Colors.deepPurple,
+            );
+          }).toList(),
+        ),
+      ],
+    );
+  }
+
   Widget buildPaymentOptionsSection() {
     List<Map<String, String>> paymentOptions = [
       {"title": "Kartu Debit", "value": "Kartu Debit"},
@@ -162,15 +197,29 @@ class _CheckoutPageState extends State<CheckoutPage> {
     ];
 
     return Column(
-      children: paymentOptions.map((option) {
-        return RadioListTile(
-          title: Text(option['title']!, style: const TextStyle(fontSize: 16)),
-          value: option['value']!,
-          groupValue: _groupValue,
-          onChanged: (value) => setState(() => _groupValue = value as String),
-          activeColor: Colors.deepPurple,
-        );
-      }).toList(),
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          'Pilih metode pembayaran',
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        Column(
+          children: paymentOptions.map((option) {
+            return RadioListTile(
+              title:
+                  Text(option['title']!, style: const TextStyle(fontSize: 16)),
+              value: option['value']!,
+              groupValue: _paymentGroupValue,
+              onChanged: (value) =>
+                  setState(() => _paymentGroupValue = value as String),
+              activeColor: Colors.deepPurple,
+            );
+          }).toList(),
+        ),
+      ],
     );
   }
 
@@ -193,7 +242,14 @@ class _CheckoutPageState extends State<CheckoutPage> {
   }
 
   void handleCheckout(CookieRequest request) async {
-    if (_groupValue.isEmpty) {
+    if (_deliveryGroupValue.isEmpty) {
+      // Menampilkan pesan jika metode pembayaran belum dipilih
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Silakan pilih metode pembayaran')),
+      );
+      return;
+    }
+    if (_paymentGroupValue.isEmpty) {
       // Menampilkan pesan jika metode pembayaran belum dipilih
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Silakan pilih metode pembayaran')),
@@ -214,7 +270,8 @@ class _CheckoutPageState extends State<CheckoutPage> {
         "http:///127.0.0.1:8000/checkoutbook/checkout_flutter/",
         jsonEncode({
           "alamat": alamatController.text,
-          "metode_pembayaran": _groupValue,
+          "metode_pengiriman": _deliveryGroupValue,
+          "metode_pembayaran": _paymentGroupValue,
           "total_harga": valueHarga,
         }),
       );
