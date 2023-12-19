@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:lembarpena/Main/screens/menu.dart';
+//import 'package:lembarpena/Main/screens/menu.dart';
 import 'dart:convert';
 import 'package:lembarpena/authentication/login_page.dart';
 import 'package:lembarpena/buybooks/models/cart_item.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
+import 'package:lembarpena/buybooks/screens/cart_page.dart';
 
 class CheckoutPage extends StatefulWidget {
   const CheckoutPage({Key? key}) : super(key: key);
@@ -245,7 +246,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
     if (_deliveryGroupValue.isEmpty) {
       // Menampilkan pesan jika metode pembayaran belum dipilih
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Silakan pilih metode pembayaran')),
+        const SnackBar(content: Text('Silakan pilih jenis pengiriman')),
       );
       return;
     }
@@ -278,17 +279,25 @@ class _CheckoutPageState extends State<CheckoutPage> {
 
       // Menangani respons dari server
       if (response['status'] == 'success') {
-        // Menampilkan pesan sukses dan navigasi ke halaman berikutnya
-        // ignore: use_build_context_synchronously
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Checkout berhasil!")),
-        );
-        // ignore: use_build_context_synchronously
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-              builder: (context) =>
-                  MyHomePage()), // Sesuaikan dengan halaman tujuan setelah checkout
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: const Text('Berhasil Checkout'),
+              content: const Text('Terima kasih telah berbelanja!'),
+              actions: <Widget>[
+                TextButton(
+                  child: const Text('Kembali'),
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => CartPage()),
+                    );
+                  },
+                ),
+              ],
+            );
+          },
         );
       } else {
         // Menampilkan pesan error
