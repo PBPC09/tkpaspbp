@@ -42,11 +42,11 @@ class MenuCard extends StatelessWidget {
                 ),
               );
             } else if (page.name == "Wishlist") {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const WishlistPage(),
-                ));
+              // Navigator.pushReplacement(
+              //   context,
+              //   MaterialPageRoute(
+              //     builder: (context) => const WishlistPage(wishlist: [],),
+              //   ));
             } else if (page.name == "Cart") {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => const CartPage()));
@@ -112,3 +112,4 @@ class MenuCard extends StatelessWidget {
     );
   }
 }
+
