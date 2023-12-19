@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:lembarpena/Main/screens/menu.dart';
+import 'package:lembarpena/Main/widgets/left_drawer.dart';
 import 'package:lembarpena/bookforum/screens/forum_page.dart';
 import 'package:lembarpena/buybooks/models/cart_item.dart';
 import 'package:lembarpena/authentication/login_page.dart';
@@ -95,6 +96,7 @@ class _CartPageState extends State<CartPage> {
         backgroundColor: Colors.indigo[900],
         foregroundColor: Colors.white,
       ),
+      drawer: const LeftDrawer(),
       body: FutureBuilder<List<CartItem>>(
         future: getCartItems(),
         builder: (context, snapshot) {
