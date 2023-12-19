@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lembarpena/AdminRegisterBook/models/book.dart';
+import 'package:lembarpena/Main/widgets/left_drawer.dart';
 
 class WishlistPage extends StatefulWidget {
   final List<Book> wishlist;
@@ -16,8 +17,10 @@ class _WishlistPageState extends State<WishlistPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Wishlist'),
+        title: const Text('My Wishlist', style: TextStyle(color: Colors.white)),
+        backgroundColor: Colors.indigo[900],
       ),
+      drawer: const LeftDrawer(),
       body: widget.wishlist.isEmpty
           ? const Center(
               child: Text('Your wishlist is empty',

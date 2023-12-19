@@ -28,13 +28,12 @@ class CartItem {
   });
 
   factory CartItem.fromJson(Map<String, dynamic> json) => CartItem(
-        id: json["id"],
-        title: json["title"],
-        quantity: json["quantity"],
-        subtotal: json["subtotal"],
-        currency: json["currency"],
-        isSelected: json["is_ordered"] ?? false,
-      );
+      id: json["id"],
+      title: json["title"],
+      quantity: json["quantity"],
+      subtotal: json["subtotal"],
+      currency: json["currency"],
+      isSelected: json["is_ordered"]);
 
   Map<String, dynamic> toJson() => {
         "id": id,

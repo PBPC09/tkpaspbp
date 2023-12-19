@@ -36,7 +36,7 @@ class _CartPageState extends State<CartPage> {
   Future<List<CartItem>> fetchCartItems() async {
     String uname = LoginPage.uname;
     var url =
-        Uri.parse('http://127.0.0.1:8000/buybooks/show_cart_json/$uname/');
+        Uri.parse('http://localhost:8000/buybooks/show_cart_json/$uname/');
     var response =
         await http.get(url, headers: {"Content-Type": "application/json"});
 
@@ -56,7 +56,7 @@ class _CartPageState extends State<CartPage> {
   Future<void> removeItemFromCart(CookieRequest request, int itemId) async {
     // Implementasi fungsi untuk menghapus item dari keranjang
     final response = await request.postJson(
-        'http://127.0.0.1:8000/buybooks/delete_cart_flutter/$itemId/',
+        'http://localhost:8000/buybooks/delete_cart_flutter/$itemId/',
         jsonEncode({}));
 
     if (response['status'] == 'success') {
@@ -75,21 +75,13 @@ class _CartPageState extends State<CartPage> {
 
   void toggleCheckbox(CookieRequest request, int itemId) async {
     final response = await request.postJson(
-        'http://127.0.0.1:8000/buybooks/selected_flutter/$itemId/',
+        'http://localhost:8000/buybooks/selected_flutter/$itemId/',
         jsonEncode({}));
 
     if (response['status'] == 'success') {
-      // Cari item dengan id yang sama dan perbarui isSelected
-      for (var item in cartItems) {
-        if (item.id == itemId) {
-          item.isSelected = !item.isSelected;
-          break;
-        }
-      }
-      // Muat ulang data cartItems
-      setState(() {
-        futureCartItems = fetchCartItems();
-      });
+      // Handle berhasil menghapus
+      setState(() {});
+      // Muat ulang komentar
     } else {
       // Handle error
     }

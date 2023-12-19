@@ -33,8 +33,8 @@ class _CheckoutPageState extends State<CheckoutPage> {
   }
 
   Future<double> fetchHarga() async {
-    var url =
-        Uri.parse('http://localhost:8000/checkoutbook/get_total_harga/$uname/');
+    var url = Uri.parse(
+        'http:///127.0.0.1:8000/checkoutbook/get_total_harga/$uname/');
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},
@@ -50,7 +50,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
 
   Future<List<CartItem>> fetchProduct() async {
     var url = Uri.parse(
-        ' http://127.0.0.1:8000//checkoutbook/show_checkout_json/$uname/');
+        'http:///127.0.0.1:8000/checkoutbook/show_checkout_json/$uname/');
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},
@@ -211,7 +211,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
 
     try {
       final response = await request.postJson(
-        "http://localhost:8000/checkoutbook/checkout_flutter/",
+        "http:///127.0.0.1:8000/checkoutbook/checkout_flutter/",
         jsonEncode({
           "alamat": alamatController.text,
           "metode_pembayaran": _groupValue,

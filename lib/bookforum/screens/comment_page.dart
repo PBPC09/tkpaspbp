@@ -9,13 +9,12 @@ import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 import 'dart:convert';
 
-// Definisikan model ForumComment Anda di sini atau import dari file model
-
 class ForumCommentsPage extends StatefulWidget {
   final int forumHeadId;
   final String title;
   final String question;
   final int bookId;
+
   const ForumCommentsPage({
     Key? key,
     required this.forumHeadId,
@@ -36,15 +35,6 @@ class _ForumCommentsPageState extends State<ForumCommentsPage> {
   late Book book;
   late String loggedInUser = LoginPage
       .uname; // Tambahkan variabel untuk menyimpan username pengguna yang login
-
-  // Not working
-  // Future<void> fetchForumHead() async {
-  //   var url = Uri.parse(
-  //       'http://127.0.0.1:8000/bookforum/forumhead/json/${widget.forumHeadId}');
-  //   var response = await http.get(url);
-  //   var data = jsonDecode(utf8.decode(response.bodyBytes));
-  //   forumHead = ForumHead.fromJson(data);
-  // }
 
   Future<Book> fetchBookDetails(int bookId) async {
     var url =
@@ -114,6 +104,16 @@ class _ForumCommentsPageState extends State<ForumCommentsPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Komentar Forum'),
+        backgroundColor: Colors.blue,
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Colors.indigo, Colors.deepPurple],
+              begin: Alignment.bottomRight,
+              end: Alignment.topLeft,
+            ),
+          ),
+        ),
       ),
       body: !isBookLoaded
           ? const Center(child: CircularProgressIndicator())
@@ -125,21 +125,21 @@ class _ForumCommentsPageState extends State<ForumCommentsPage> {
                   children: [
                     const SizedBox(height: 10),
                     Text(
-                      widget.title, // Judul Forum
+                      widget.title,
                       style: const TextStyle(
                           fontSize: 24, fontWeight: FontWeight.bold),
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 5),
                     Text(
-                      widget.question, // Pertanyaan
+                      widget.question,
                       style: const TextStyle(fontSize: 18),
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 5),
                     InkWell(
                       child: Text(
-                        book.fields.title, // Judul Buku
+                        book.fields.title,
                         textAlign: TextAlign.center,
                         style: const TextStyle(
                             fontSize: 16,
@@ -152,13 +152,10 @@ class _ForumCommentsPageState extends State<ForumCommentsPage> {
                             return AlertDialog(
                               title: Text(book.fields.title),
                               content: SingleChildScrollView(
-                                // Membuat konten scrollable
                                 child: Text(
                                   book.fields.description,
                                   textAlign: TextAlign.justify,
-                                  style: const TextStyle(
-                                    fontSize: 14,
-                                  ),
+                                  style: const TextStyle(fontSize: 14),
                                 ),
                               ),
                               actions: <Widget>[
@@ -185,6 +182,10 @@ class _ForumCommentsPageState extends State<ForumCommentsPage> {
                                 var date = DateFormat('yyyy-MM-dd')
                                     .format(comment.fields.date);
                                 return Card(
+                                  elevation: 5,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
                                   child: ListTile(
                                     title: Text(comment.fields.answer),
                                     subtitle: Text(
@@ -193,6 +194,7 @@ class _ForumCommentsPageState extends State<ForumCommentsPage> {
                                         comment.fields.user == loggedInUser
                                             ? IconButton(
                                                 icon: const Icon(Icons.delete),
+                                                color: Colors.red,
                                                 onPressed: () {
                                                   deleteComment(request,
                                                       loggedInUser, comment.pk);
@@ -208,20 +210,26 @@ class _ForumCommentsPageState extends State<ForumCommentsPage> {
                 ),
               ),
             ),
+      floatingActionButtonLocation:
+          FloatingActionButtonLocation.miniCenterFloat,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.pushReplacement(
+          Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => CreateCommentPage(
-                    forumHeadId: widget.forumHeadId,
-                    title: widget.title,
-                    question: widget.question,
-                    bookId: widget.bookId)),
+              builder: (context) => CreateCommentPage(
+                forumHeadId: widget.forumHeadId,
+                title: widget.title,
+                question: widget.question,
+                bookId: widget.bookId,
+              ),
+            ),
           );
         },
         tooltip: 'Tambah Komentar',
-        child: const Icon(Icons.add),
+        backgroundColor: Colors.indigo[900],
+        mini: true,
+        child: const Icon(Icons.add), // Mengubah ukuran tombol menjadi mini
       ),
     );
   }
