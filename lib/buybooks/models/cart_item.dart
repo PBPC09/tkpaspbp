@@ -24,16 +24,16 @@ class CartItem {
     required this.quantity,
     required this.subtotal,
     required this.currency,
-    this.isSelected = false,
+    required this.isSelected,
   });
 
   factory CartItem.fromJson(Map<String, dynamic> json) => CartItem(
-        id: json["id"],
-        title: json["title"],
-        quantity: json["quantity"],
-        subtotal: json["subtotal"],
-        currency: json["currency"],
-      );
+      id: json["id"],
+      title: json["title"],
+      quantity: json["quantity"],
+      subtotal: json["subtotal"],
+      currency: json["currency"],
+      isSelected: json["is_ordered"]);
 
   Map<String, dynamic> toJson() => {
         "id": id,
@@ -41,5 +41,6 @@ class CartItem {
         "quantity": quantity,
         "subtotal": subtotal,
         "currency": currency,
+        "is_ordered": isSelected,
       };
 }
