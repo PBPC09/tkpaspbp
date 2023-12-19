@@ -166,9 +166,9 @@ class _BuyBooksPageState extends State<BuyBooksPage> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        currentIndex: 1,
+        // currentIndex: 1,
         backgroundColor: Colors.indigo,
-        selectedItemColor: const Color.fromARGB(255, 255, 255, 255),
+        selectedItemColor:const Color.fromARGB(255, 156, 143, 255),
         unselectedItemColor: const Color.fromARGB(255, 156, 143, 255),
         items: const [
           BottomNavigationBarItem(

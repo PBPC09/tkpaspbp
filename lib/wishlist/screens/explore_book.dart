@@ -266,7 +266,58 @@ class _ExploreBooksPageState extends State<ExploreBooksPage> {
           ),
         ],
       ),
-      // ...
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        currentIndex: 1,
+        backgroundColor: Colors.indigo,
+        selectedItemColor: const Color.fromARGB(255, 255, 255, 255),
+        unselectedItemColor: const Color.fromARGB(255, 156, 143, 255),
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home), // Ganti dengan path gambar yang sesuai
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search), // Ganti dengan path gambar yang sesuai
+            label: 'Explore Book',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.forum), // Ganti dengan path gambar yang sesuai
+            label: 'Book Forum',
+          ),
+        ],
+        onTap: (index) {
+          switch (index) {
+            case 0:
+              Navigator.pushReplacement(
+                context,
+                PageRouteBuilder(
+                  pageBuilder: (_, __, ___) => MyHomePage(),
+                  transitionDuration: Duration.zero,
+                ),
+              );
+              break;
+            case 1:
+              Navigator.pushReplacement(
+                context,
+                PageRouteBuilder(
+                  pageBuilder: (_, __, ___) => const ExploreBooksPage(),
+                  transitionDuration: Duration.zero,
+                ),
+              );
+              break;
+            case 2:
+              Navigator.pushReplacement(
+                context,
+                PageRouteBuilder(
+                  pageBuilder: (_, __, ___) => const ForumPage(),
+                  transitionDuration: Duration.zero,
+                ),
+              );
+              break;
+          }
+        },
+      ),
     );
   }
 }
