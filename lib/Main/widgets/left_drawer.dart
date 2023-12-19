@@ -8,6 +8,7 @@ import 'package:lembarpena/buybooks/screens/cart_page.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 
+
 class LeftDrawer extends StatelessWidget {
   const LeftDrawer({super.key});
 
@@ -75,7 +76,13 @@ class LeftDrawer extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.favorite),
             title: const Text('Wishlist'),
-            onTap: () {},
+            // onTap: () {
+            //   Navigator.push(
+            //     context,
+            //     MaterialPageRoute(
+            //       builder: (context) => const WishlistPage(),
+            //     ));
+            // },
           ),
           ListTile(
             leading: const Icon(Icons.search),

@@ -15,7 +15,6 @@ class CartPage extends StatefulWidget {
   const CartPage({Key? key}) : super(key: key);
 
   @override
-  // ignore: library_private_types_in_public_api
   _CartPageState createState() => _CartPageState();
 }
 
@@ -105,62 +104,69 @@ class _CartPageState extends State<CartPage> {
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (snapshot.hasData) {
-            return ListView.builder(
-              itemCount: snapshot.data!.length,
-              itemBuilder: (context, index) {
-                var cartItem = snapshot.data![index];
-                return Card(
-                  margin: const EdgeInsets.all(10),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: Stack(
-                      children: [
-                        ListTile(
-                          leading: Checkbox(
-                            // value: true,
-                            value: cartItem.isSelected,
-                            onChanged: (bool? value) {
-                              toggleCheckbox(request, cartItem.id);
-                            },
+            if (snapshot.data!.isEmpty) {
+              return const Center(
+                  child:
+                      Text('Anda belum memasukkan apapun ke dalam keranjang!'));
+            } else {
+              return ListView.builder(
+                itemCount: snapshot.data!.length,
+                itemBuilder: (context, index) {
+                  var cartItem = snapshot.data![index];
+                  return Card(
+                    margin: const EdgeInsets.all(10),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: Stack(
+                        children: [
+                          ListTile(
+                            leading: Checkbox(
+                              // value: true,
+                              value: cartItem.isSelected,
+                              onChanged: (bool? value) {
+                                toggleCheckbox(request, cartItem.id);
+                              },
+                            ),
+                            title: Text(
+                              cartItem.title,
+                              style: const TextStyle(
+                                fontSize: 15.0,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            subtitle: Text(
+                              "Jumlah: ${cartItem.quantity}\nSubtotal Harga: ${cartItem.currency} ${cartItem.subtotal}",
+                              style: const TextStyle(
+                                fontSize: 12.0,
+                                color: Colors.black87,
+                              ),
+                            ),
+                            isThreeLine:
+                                true, // Jika subtitle memiliki dua baris
                           ),
-                          title: Text(
-                            cartItem.title,
-                            style: const TextStyle(
-                              fontSize: 15.0,
-                              fontWeight: FontWeight.bold,
+                          Positioned(
+                            bottom: 4,
+                            right: 4,
+                            child: TextButton(
+                              style: TextButton.styleFrom(
+                                foregroundColor: Colors.white,
+                                backgroundColor: Colors.redAccent,
+                                disabledForegroundColor:
+                                    Colors.grey.withOpacity(0.38),
+                              ),
+                              onPressed: () {
+                                removeItemFromCart(request, cartItem.id);
+                              },
+                              child: const Text('Remove'),
                             ),
                           ),
-                          subtitle: Text(
-                            "Jumlah: ${cartItem.quantity}\nSubtotal Harga: ${cartItem.currency} ${cartItem.subtotal}",
-                            style: const TextStyle(
-                              fontSize: 12.0,
-                              color: Colors.black87,
-                            ),
-                          ),
-                          isThreeLine: true, // Jika subtitle memiliki dua baris
-                        ),
-                        Positioned(
-                          bottom: 4,
-                          right: 4,
-                          child: TextButton(
-                            style: TextButton.styleFrom(
-                              foregroundColor: Colors.white,
-                              backgroundColor: Colors.redAccent,
-                              disabledForegroundColor:
-                                  Colors.grey.withOpacity(0.38),
-                            ),
-                            onPressed: () {
-                              removeItemFromCart(request, cartItem.id);
-                            },
-                            child: const Text('Remove'),
-                          ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                );
-              },
-            );
+                  );
+                },
+              );
+            }
           } else {
             return const Center(child: Text('Your cart is empty.'));
           }
@@ -172,7 +178,7 @@ class _CartPageState extends State<CartPage> {
             context,
             MaterialPageRoute(
               builder: (context) =>
-                  const CheckoutPage(), // Ganti dengan nama halaman CheckoutPage yang sesuai
+                  CheckoutPage(), // Ganti dengan nama halaman CheckoutPage yang sesuai
             ),
           );
           // Implementasi checkout modul si Rifqi
@@ -184,9 +190,9 @@ class _CartPageState extends State<CartPage> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        currentIndex: 1,
+        // currentIndex: 9,
         backgroundColor: Colors.indigo,
-        selectedItemColor: const Color.fromARGB(255, 255, 255, 255),
+        selectedItemColor: const Color.fromARGB(255, 156, 143, 255),
         unselectedItemColor: const Color.fromARGB(255, 156, 143, 255),
         items: const [
           BottomNavigationBarItem(

@@ -40,7 +40,7 @@ class _ForumCommentsPageState extends State<ForumCommentsPage> {
     var url =
         // Uri.parse('http://10.0.2.2:8000/bookforum/book_details/json/$bookId');
         Uri.parse('http://localhost:8000/bookforum/book_details/json/$bookId');
-
+    // print(loggedInUser);
     var response = await http.get(url);
 
     if (response.statusCode == 200) {
@@ -210,26 +210,37 @@ class _ForumCommentsPageState extends State<ForumCommentsPage> {
                 ),
               ),
             ),
-      floatingActionButtonLocation:
-          FloatingActionButtonLocation.miniCenterFloat,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => CreateCommentPage(
-                forumHeadId: widget.forumHeadId,
-                title: widget.title,
-                question: widget.question,
-                bookId: widget.bookId,
+      floatingActionButton: Stack(
+        alignment: Alignment.center,
+        children: [
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Container(
+              margin: const EdgeInsets.only(
+                  bottom: 16.0, left: 25.0), // Adjust the margin as needed
+              child: Transform.scale(
+                scale: 0.5, // Adjust the scale factor as needed
+                child: FloatingActionButton(
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => CreateCommentPage(
+                          forumHeadId: widget.forumHeadId,
+                          title: widget.title,
+                          question: widget.question,
+                          bookId: widget.bookId,
+                        ),
+                      ),
+                    );
+                  },
+                  tooltip: 'Tambah Komentar',
+                  child: const Icon(Icons.add),
+                ),
               ),
             ),
-          );
-        },
-        tooltip: 'Tambah Komentar',
-        backgroundColor: Colors.indigo[900],
-        mini: true,
-        child: const Icon(Icons.add), // Mengubah ukuran tombol menjadi mini
+          ),
+        ],
       ),
     );
   }

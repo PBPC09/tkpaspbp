@@ -211,16 +211,31 @@ class _ForumPageState extends State<ForumPage> {
       ),
       floatingActionButtonLocation:
           FloatingActionButtonLocation.miniCenterFloat,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const CreateForumPage()),
-          );
-        },
-        backgroundColor: Colors.indigo[900],
-        mini: true,
-        child: const Icon(Icons.add), // Mengubah ukuran tombol menjadi mini
+      floatingActionButton: Stack(
+        alignment: Alignment.center,
+        children: [
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Container(
+              margin: const EdgeInsets.only(bottom: 16.0, left: 25.0), // Adjust the margin as needed
+              child: Transform.scale(
+                scale: 0.5, // Adjust the scale factor as needed
+                child: FloatingActionButton(
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const CreateForumPage(),
+                      ),
+                    );
+                  },
+                  tooltip: 'Buat Forum Baru',
+                  child: const Icon(Icons.add),
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
@@ -274,6 +289,8 @@ class _ForumPageState extends State<ForumPage> {
           }
         },
       ),
+      
     );
+    
   }
 }
