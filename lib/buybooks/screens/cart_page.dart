@@ -7,17 +7,25 @@ import 'package:lembarpena/buybooks/models/cart_item.dart';
 import 'package:lembarpena/authentication/login_page.dart';
 import 'package:lembarpena/wishlist/screens/explore_book.dart';
 import 'package:lembarpena/checkoutbook/screens/checkoutpage.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _CartPageState createState() => _CartPageState();
 }
 
 class _CartPageState extends State<CartPage> {
   late Future<List<CartItem>> futureCartItems;
   final Map<int, bool> itemsChecked = {};
+  List<CartItem> cartItems = [];
+
+  Future<List<CartItem>> getCartItems() {
+    return fetchCartItems();
+  }
 
   @override
   void initState() {
@@ -31,6 +39,7 @@ class _CartPageState extends State<CartPage> {
         Uri.parse('http://127.0.0.1:8000/buybooks/show_cart_json/$uname/');
     var response =
         await http.get(url, headers: {"Content-Type": "application/json"});
+
     if (response.statusCode == 200) {
       var cartJson = json.decode(response.body) as List;
       List<CartItem> cartItems =
@@ -44,23 +53,51 @@ class _CartPageState extends State<CartPage> {
     }
   }
 
-  void removeItemFromCart(int itemId) {
+  Future<void> removeItemFromCart(CookieRequest request, int itemId) async {
     // Implementasi fungsi untuk menghapus item dari keranjang
-    setState(() {
-      futureCartItems = fetchCartItems();
-    });
+    final response = await request.postJson(
+        'http://127.0.0.1:8000/buybooks/delete_cart_flutter/$itemId/',
+        jsonEncode({}));
+
+    if (response['status'] == 'success') {
+      // Handle berhasil menghapus
+      setState(() {
+        // Memuat ulang data ForumHead
+        // futureCartItems = fetchCartItems();
+        ScaffoldMessenger.of(context)
+            .showSnackBar(const SnackBar(content: Text("Sukses dihapus!")));
+      });
+      // Muat ulang komentar
+    } else {
+      // Handle error
+    }
   }
 
-  void toggleCheckbox(int itemId, bool? value) {
-    if (value != null) {
+  void toggleCheckbox(CookieRequest request, int itemId) async {
+    final response = await request.postJson(
+        'http://127.0.0.1:8000/buybooks/selected_flutter/$itemId/',
+        jsonEncode({}));
+
+    if (response['status'] == 'success') {
+      // Cari item dengan id yang sama dan perbarui isSelected
+      for (var item in cartItems) {
+        if (item.id == itemId) {
+          item.isSelected = !item.isSelected;
+          break;
+        }
+      }
+      // Muat ulang data cartItems
       setState(() {
-        itemsChecked[itemId] = value;
+        futureCartItems = fetchCartItems();
       });
+    } else {
+      // Handle error
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
     return Scaffold(
       appBar: AppBar(
         title: const Text('My Cart'),
@@ -68,7 +105,7 @@ class _CartPageState extends State<CartPage> {
         foregroundColor: Colors.white,
       ),
       body: FutureBuilder<List<CartItem>>(
-        future: futureCartItems,
+        future: getCartItems(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
@@ -87,9 +124,10 @@ class _CartPageState extends State<CartPage> {
                       children: [
                         ListTile(
                           leading: Checkbox(
-                            value: itemsChecked[cartItem.id] ?? false,
+                            // value: true,
+                            value: cartItem.isSelected,
                             onChanged: (bool? value) {
-                              toggleCheckbox(cartItem.id, value);
+                              toggleCheckbox(request, cartItem.id);
                             },
                           ),
                           title: Text(
@@ -119,7 +157,7 @@ class _CartPageState extends State<CartPage> {
                                   Colors.grey.withOpacity(0.38),
                             ),
                             onPressed: () {
-                              removeItemFromCart(cartItem.id);
+                              removeItemFromCart(request, cartItem.id);
                             },
                             child: const Text('Remove'),
                           ),
@@ -141,7 +179,7 @@ class _CartPageState extends State<CartPage> {
             context,
             MaterialPageRoute(
               builder: (context) =>
-                  CheckoutPage(), // Ganti dengan nama halaman CheckoutPage yang sesuai
+                  const CheckoutPage(), // Ganti dengan nama halaman CheckoutPage yang sesuai
             ),
           );
           // Implementasi checkout modul si Rifqi
