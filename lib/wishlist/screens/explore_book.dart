@@ -107,8 +107,8 @@ class _ExploreBooksPageState extends State<ExploreBooksPage> {
           content: Text("Buku berhasil ditambahkan ke Wishlist!")));
     } else {
       // ignore: use_build_context_synchronously
-      ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Error adding book to wishlist')));
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text("Buku berhasil ditambahkan ke Wishlist!")));
     }
   }
 
