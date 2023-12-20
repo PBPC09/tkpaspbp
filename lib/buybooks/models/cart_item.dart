@@ -28,12 +28,22 @@ class CartItem {
   });
 
   factory CartItem.fromJson(Map<String, dynamic> json) => CartItem(
+<<<<<<< HEAD
       id: json["id"],
       title: json["title"],
       quantity: json["quantity"],
       subtotal: json["subtotal"],
       currency: json["currency"],
       isSelected: json["is_ordered"]);
+=======
+        id: json["id"],
+        title: json["title"],
+        quantity: json["quantity"],
+        subtotal: json["subtotal"],
+        currency: json["currency"],
+        isSelected: json["is_ordered"]
+      );
+>>>>>>> 273332b4a49442091214b79e7554aba2cebfbeac
 
   Map<String, dynamic> toJson() => {
         "id": id,
@@ -41,6 +51,10 @@ class CartItem {
         "quantity": quantity,
         "subtotal": subtotal,
         "currency": currency,
+<<<<<<< HEAD
         "is_ordered": isSelected,
+=======
+        "is_ordered":isSelected,
+>>>>>>> 273332b4a49442091214b79e7554aba2cebfbeac
       };
 }

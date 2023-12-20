@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lembarpena/bookforum/screens/forum_page.dart';
 import 'package:lembarpena/Main/screens/landing_page.dart';
 import 'package:lembarpena/Main/screens/menu.dart';
+import 'package:lembarpena/checkoutbook/screens/my_order.dart';
 // import 'package:lembarpena/checkoutbook/screens/checkoutpage.dart';
 import 'package:lembarpena/wishlist/screens/explore_book.dart';
 import 'package:lembarpena/buybooks/screens/buybooks_page.dart';
@@ -44,6 +45,7 @@ class MenuCard extends StatelessWidget {
                 ),
               );
             } else if (page.name == "Wishlist") {
+<<<<<<< HEAD
               Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
@@ -51,6 +53,13 @@ class MenuCard extends StatelessWidget {
                       wishlist: [],
                     ),
                   ));
+=======
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const WishlistPage(),
+                ));
+>>>>>>> 273332b4a49442091214b79e7554aba2cebfbeac
             } else if (page.name == "Cart") {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => const CartPage()));
@@ -63,6 +72,8 @@ class MenuCard extends StatelessWidget {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => const ForumPage()));
             } else if (page.name == "My Order") {
+                Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const MyOrderPage()));
             } else if (page.name == "Logout") {
               final response =
                   await request.logout("http://localhost:8000/auth/logout/");
@@ -116,3 +127,4 @@ class MenuCard extends StatelessWidget {
     );
   }
 }
+

@@ -1,89 +1,126 @@
+// import 'dart:convert';
+
 // import 'package:flutter/material.dart';
+// import 'package:lembarpena/wishlist/models/book.dart';
+// import 'package:lembarpena/wishlist/screens/my_wishlist.dart';
+// import 'package:http/http.dart' as http;
+// import 'package:pbp_django_auth/pbp_django_auth.dart';
+// import 'package:provider/provider.dart';
 
-// class WishlistFormPage extends StatefulWidget {
-//   const WishlistFormPage({Key? key}) : super(key: key);
+// class WishlistForm extends StatelessWidget {
+//   final Book book;
 
-//   @override
-//   _WishlistFormPageState createState() => _WishlistFormPageState();
-// }
-
-// class _WishlistFormPageState extends State<WishlistFormPage> {
-//   final _formKey = GlobalKey<FormState>();
-//   late Choice _selectedChoice;
-
-//   @override
-//   void initState() {
-//     super.initState();
-//     // Set an initial choice
-//     _selectedChoice = PREFERENCE_CHOICES[0];
-//   }
+//   const WishlistForm({Key? key, required this.book}) : super(key: key);
 
 //   @override
 //   Widget build(BuildContext context) {
+//     final request = context.watch<CookieRequest>();
+//     String? selectedPreference; 
+
+//     Future<void> sendWishlistData(String preference) async {
+//       if (selectedPreference == null) {
+//         print('Error: _selectedPreference is null.');
+//         return;
+//       }
+
+//       // final Map<String, dynamic> requestBody = {
+//       //   'book_id': book.pk.toString(),
+//       //   'preference': selectedPreference!,
+//       // };
+
+//       final response = await request.postJson(
+//       "http://localhost:8000/wishlist/add_to_wishlist_flutter/",
+
+//       jsonEncode({"book": book.pk.toInt(), "preference" : selectedPreference!}),
+//       );
+
+//       if (response.statusCode != 201) {
+//         throw Exception('Failed to add to wishlist');
+//       }
+//     }
+
 //     return Scaffold(
 //       appBar: AppBar(
-//         title: const Center(
-//           child: Text(
-//             'Form Add To Wishlist',
-//           ),
-//         ),
-//         backgroundColor: Colors.indigoAccent[100],
-//         foregroundColor: Colors.black,
+//         title: const Text('Wishlist Form'),
 //       ),
 //       body: Padding(
 //         padding: const EdgeInsets.all(16.0),
-//         child: Form(
-//           key: _formKey,
-//           child: Column(
-//             children: [
-//               Text(
-//                 "How much do you like this book?",
-//                 style: TextStyle(fontSize: 18.0),
+//         child: Column(
+//           crossAxisAlignment: CrossAxisAlignment.stretch,
+//           children: [
+//             const Text(
+//               'How much do you like this book?',
+//               style: TextStyle(fontSize: 18),
+//             ),
+//             const SizedBox(height: 16),
+//             DropdownButtonFormField<String>(
+//               value: selectedPreference,
+//               onChanged: (String? value) {
+//                 // No need for setState in a StatelessWidget
+//                 selectedPreference = value;
+//               },
+//               items: [
+//                 'Not Interested',
+//                 'Maybe Later',
+//                 'Interested',
+//                 'Really Want It',
+//                 'Must Have',
+//               ].map<DropdownMenuItem<String>>((String value) {
+//                 return DropdownMenuItem<String>(
+//                   value: value,
+//                   child: Text(value),
+//                 );
+//               }).toList(),
+//               decoration: const InputDecoration(
+//                 labelText: 'Preference',
 //               ),
-//               Column(
-//                 children: PREFERENCE_CHOICES.map((choice) {
-//                   return RadioListTile<Choice>(
-//                     title: Text(choice.label),
-//                     value: choice,
-//                     groupValue: _selectedChoice,
-//                     onChanged: (Choice? value) {
-//                       if (value != null) {
-//                         setState(() {
-//                           _selectedChoice = value;
-//                         });
-//                       }
+//             ),
+//             const SizedBox(height: 16),
+//             ElevatedButton(
+//               onPressed: () {
+//                 if (selectedPreference != null) {
+//                   sendWishlistData(selectedPreference!);
+
+//                   Navigator.push(
+//                     context,
+//                     MaterialPageRoute(
+//                       builder: (context) => const WishlistPage(wishlist: [],),
+//                     ),
+//                   );
+//                 } else {
+
+//                   showDialog(
+//                     context: context,
+//                     builder: (context) {
+//                       return AlertDialog(
+//                         title: const Text('Error'),
+//                         content: const Text('Please select a preference.'),
+//                         actions: [
+//                           TextButton(
+//                             onPressed: () {
+//                               Navigator.pop(context);
+//                             },
+//                             child: const Text('OK'),
+//                           ),
+//                         ],
+//                       );
 //                     },
 //                   );
-//                 }).toList(),
-//               ),
-//               const SizedBox(height: 20),
-//               ElevatedButton(
-//                 style: ButtonStyle(
-//                   backgroundColor: MaterialStateProperty.all(Colors.indigo),
-//                 ),
-//                 onPressed: () async {
-//                   if (_formKey.currentState!.validate()) {
-//                     // Perform the desired action with the selected preference
-//                     print("Selected Preference: ${_selectedChoice.value}");
-
-//                     // Add your logic here to send the data to Django
-//                   }
-//                 },
-//                 child: const Text(
-//                   "Save",
-//                   style: TextStyle(color: Colors.white),
-//                 ),
-//               ),
-//             ],
-//           ),
+//                 }
+//               },
+//               child: const Text('Save'),
+//             ),
+//           ],
 //         ),
 //       ),
 //     );
 //   }
 // }
 
-// class Choice {
-// }
-
-// class PREFERENCE_CHOICES {
-// }
+// // void main() {
+// //   runApp(MaterialApp(
+// //     WishlistForm(
+  
+// //     ),
+// //   ));
+// // }

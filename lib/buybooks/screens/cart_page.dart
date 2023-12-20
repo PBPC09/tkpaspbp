@@ -28,6 +28,10 @@ class _CartPageState extends State<CartPage> {
     return fetchCartItems();
   }
 
+  Future<List<CartItem>> getCartItems() {
+    return fetchCartItems();
+  }
+
   @override
   void initState() {
     super.initState();
@@ -45,9 +49,14 @@ class _CartPageState extends State<CartPage> {
       var cartJson = json.decode(response.body) as List;
       List<CartItem> cartItems =
           cartJson.map((json) => CartItem.fromJson(json)).toList();
+      Map<int, bool> tempItemsChecked = {};
       for (var item in cartItems) {
-        itemsChecked.putIfAbsent(item.id, () => false);
+        tempItemsChecked[item.id] = item.isSelected;
       }
+      // Update the state once after loading all data
+      setState(() {
+        itemsChecked.addAll(tempItemsChecked);
+      });
       return cartItems;
     } else {
       throw Exception('Failed to load cart');
@@ -61,31 +70,46 @@ class _CartPageState extends State<CartPage> {
         jsonEncode({}));
 
     if (response['status'] == 'success') {
+        ScaffoldMessenger.of(context)
+      .showSnackBar(const SnackBar(content: Text("Sukses dihapus!")));
       // Handle berhasil menghapus
       setState(() {
         // Memuat ulang data ForumHead
         // futureCartItems = fetchCartItems();
-        ScaffoldMessenger.of(context)
-            .showSnackBar(const SnackBar(content: Text("Sukses dihapus!")));
+        itemsChecked.remove(itemId); // Hapus item dari itemsChecked
+
+            futureCartItems = fetchCartItems();
       });
       // Muat ulang komentar
     } else {
       // Handle error
+       // ignore: use_build_context_synchronously
+      ScaffoldMessenger.of(context)
+        .showSnackBar(const SnackBar(content: Text("Gagal menghapus item.")));
     }
   }
 
-  void toggleCheckbox(CookieRequest request, int itemId) async {
+  void toggleCheckbox(CookieRequest request, int itemId, bool? value) async {
+    setState(() {
+      itemsChecked[itemId] = value ?? false;
+    });
     final response = await request.postJson(
         'http://localhost:8000/buybooks/selected_flutter/$itemId/',
         jsonEncode({}));
 
     if (response['status'] == 'success') {
       // Handle berhasil menghapus
-      setState(() {});
+      setState(() {
+      });
+
       // Muat ulang komentar
     } else {
       // Handle error
     }
+  }
+
+  bool isAnyItemSelected() {
+    return itemsChecked.containsValue(true);
   }
 
   @override
@@ -106,31 +130,18 @@ class _CartPageState extends State<CartPage> {
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (snapshot.hasData) {
-            return ListView.builder(
-              itemCount: snapshot.data!.length,
-              itemBuilder: (context, index) {
+            if (snapshot.data!.isEmpty) {
+              return const Center(
+                  child:
+                      Text('Anda belum memasukkan apapun ke dalam keranjang!'));
+            } else {
+              return ListView.builder(
+                itemCount: snapshot.data!.length,
+                itemBuilder: (context, index) {
                 var cartItem = snapshot.data![index];
-                return Card(
-                  margin: const EdgeInsets.all(10),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: Stack(
-                      children: [
-                        ListTile(
-                          leading: Checkbox(
-                            // value: true,
-                            value: cartItem.isSelected,
-                            onChanged: (bool? value) {
-                              toggleCheckbox(request, cartItem.id);
-                            },
+                              child: const Text('Remove'),
                           ),
-                          title: Text(
-                            cartItem.title,
-                            style: const TextStyle(
-                              fontSize: 15.0,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
+<<<<<<< HEAD
                           subtitle: Text(
                             "Jumlah: ${cartItem.quantity}\nSubtotal Harga: ${cartItem.currency} ${cartItem.subtotal}",
                             style: const TextStyle(
@@ -144,7 +155,6 @@ class _CartPageState extends State<CartPage> {
                           bottom: 4,
                           right: 4,
                           child: TextButton(
-                            style: TextButton.styleFrom(
                               foregroundColor: Colors.white,
                               backgroundColor: Colors.redAccent,
                               disabledForegroundColor:
@@ -157,16 +167,20 @@ class _CartPageState extends State<CartPage> {
                           ),
                         ),
                       ],
+=======
+                        ],
+                      ),
                     ),
-                  ),
-                );
-              },
-            );
+                  );
+                },
+              );
+            }
           } else {
             return const Center(child: Text('Your cart is empty.'));
           }
         },
       ),
+<<<<<<< HEAD
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           Navigator.push(
@@ -182,12 +196,31 @@ class _CartPageState extends State<CartPage> {
         icon: const Icon(Icons.payment),
         backgroundColor: Colors.indigo[900],
       ),
+=======
+      floatingActionButton: isAnyItemSelected()
+          ? FloatingActionButton.extended(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        CheckoutPage(), // Ganti dengan nama halaman CheckoutPage yang sesuai
+                  ),
+                );
+                // Implementasi checkout modul si Rifqi
+              },
+              label: const Text('Checkout'),
+              icon: const Icon(Icons.payment),
+              backgroundColor: Colors.indigo[900],
+            )
+          : null,
+>>>>>>> 273332b4a49442091214b79e7554aba2cebfbeac
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        currentIndex: 1,
+        // currentIndex: 9,
         backgroundColor: Colors.indigo,
-        selectedItemColor: const Color.fromARGB(255, 255, 255, 255),
+        selectedItemColor: const Color.fromARGB(255, 156, 143, 255),
         unselectedItemColor: const Color.fromARGB(255, 156, 143, 255),
         items: const [
           BottomNavigationBarItem(

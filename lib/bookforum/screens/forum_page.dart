@@ -274,6 +274,36 @@ class _ForumPageState extends State<ForumPage> {
           }
         },
       ),
+<<<<<<< HEAD
+=======
+      floatingActionButton: Stack(
+              alignment: Alignment.center,
+              children: [
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Container(
+                    margin: const EdgeInsets.only(bottom: 16.0, left: 25.0), // Adjust the margin as needed
+                    child: Transform.scale(
+                      scale: 0.5, // Adjust the scale factor as needed
+                      child: FloatingActionButton(
+                        onPressed: () {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const CreateForumPage(),
+                            ),
+                          );
+                        },
+                        tooltip: 'Buat Forum Baru',
+                        child: const Icon(Icons.add),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+>>>>>>> 273332b4a49442091214b79e7554aba2cebfbeac
     );
+    
   }
 }
