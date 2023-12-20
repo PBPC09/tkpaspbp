@@ -3,14 +3,12 @@ import 'package:lembarpena/bookforum/screens/forum_page.dart';
 import 'package:lembarpena/Main/screens/landing_page.dart';
 import 'package:lembarpena/Main/screens/menu.dart';
 import 'package:lembarpena/checkoutbook/screens/my_order.dart';
-// import 'package:lembarpena/checkoutbook/screens/checkoutpage.dart';
 import 'package:lembarpena/wishlist/screens/explore_book.dart';
 import 'package:lembarpena/buybooks/screens/buybooks_page.dart';
 import 'package:lembarpena/buybooks/screens/cart_page.dart';
 import 'package:lembarpena/wishlist/screens/my_wishlist.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
-
 
 class MenuCard extends StatelessWidget {
   final MenuItem page;
@@ -47,13 +45,16 @@ class MenuCard extends StatelessWidget {
             } else if (page.name == "Wishlist") {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
               Navigator.pushReplacement(
+=======
+              Navigator.push(
+>>>>>>> 9b475f63f7665b99e505aa0c619e32b3ef6643ea
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const WishlistPage(
-                      wishlist: [],
-                    ),
+                    builder: (context) => const WishlistPage(),
                   ));
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> 6df0294be23d3be3512853889a2c70caf4c71d6e
@@ -66,6 +67,8 @@ class MenuCard extends StatelessWidget {
 >>>>>>> 273332b4a49442091214b79e7554aba2cebfbeac
 =======
 >>>>>>> 6df0294be23d3be3512853889a2c70caf4c71d6e
+=======
+>>>>>>> 9b475f63f7665b99e505aa0c619e32b3ef6643ea
             } else if (page.name == "Cart") {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => const CartPage()));
@@ -78,11 +81,11 @@ class MenuCard extends StatelessWidget {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => const ForumPage()));
             } else if (page.name == "My Order") {
-                Navigator.push(context,
+              Navigator.push(context,
                   MaterialPageRoute(builder: (context) => const MyOrderPage()));
             } else if (page.name == "Logout") {
-              final response =
-                  await request.logout("http://localhost:8000/auth/logout/");
+              final response = await request.logout(
+                  "https://lembarpena-c09-tk.pbp.cs.ui.ac.id/auth/logout/");
               // await request.login("http://10.0.2.2:8000/auth/login/", {
               String message = response["message"];
               if (response['status']) {
@@ -133,4 +136,3 @@ class MenuCard extends StatelessWidget {
     );
   }
 }
-

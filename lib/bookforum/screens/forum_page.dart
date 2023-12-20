@@ -28,7 +28,7 @@ class _ForumPageState extends State<ForumPage> {
   Future<List<ForumHead>> fetchForumHeads() async {
     // var url = Uri.parse('http://10.0.2.2:8000/bookforum/forum/json/'); // Sesuaikan dengan URL endpoint Anda
     var url = Uri.parse(
-        'http://localhost:8000/bookforum/forum/json/'); // Sesuaikan dengan URL endpoint Anda
+        'https://lembarpena-c09-tk.pbp.cs.ui.ac.id/bookforum/forum/json/'); // Sesuaikan dengan URL endpoint Anda
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},
@@ -45,7 +45,7 @@ class _ForumPageState extends State<ForumPage> {
   Future<List<ForumHead>> fetchForumHeadsPopular() async {
     // var url = Uri.parse('http://10.0.2.2:8000/bookforum/forum/json/'); // Sesuaikan dengan URL endpoint Anda
     var url = Uri.parse(
-        'http://localhost:8000/bookforum/show_forum_json_popular_only/'); // Sesuaikan dengan URL endpoint Anda
+        'https://lembarpena-c09-tk.pbp.cs.ui.ac.id/bookforum/show_forum_json_popular_only/'); // Sesuaikan dengan URL endpoint Anda
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},
@@ -63,7 +63,7 @@ class _ForumPageState extends State<ForumPage> {
       CookieRequest request, String username, int id) async {
     // final response = await request.postJson('http://10.0.2.2:8000/bookforum/delete_question_flutter/$username/$id',
     final response = await request.postJson(
-        'http://localhost:8000/bookforum/delete_question_flutter/$username/$id',
+        'https://lembarpena-c09-tk.pbp.cs.ui.ac.id/bookforum/delete_question_flutter/$username/$id',
         jsonEncode({}));
 
     if (response['status'] == 'success') {
@@ -211,31 +211,16 @@ class _ForumPageState extends State<ForumPage> {
       ),
       floatingActionButtonLocation:
           FloatingActionButtonLocation.miniCenterFloat,
-      floatingActionButton: Stack(
-        alignment: Alignment.center,
-        children: [
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Container(
-              margin: const EdgeInsets.only(bottom: 16.0, left: 25.0), // Adjust the margin as needed
-              child: Transform.scale(
-                scale: 0.5, // Adjust the scale factor as needed
-                child: FloatingActionButton(
-                  onPressed: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const CreateForumPage(),
-                      ),
-                    );
-                  },
-                  tooltip: 'Buat Forum Baru',
-                  child: const Icon(Icons.add),
-                ),
-              ),
-            ),
-          ),
-        ],
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const CreateForumPage()),
+          );
+        },
+        backgroundColor: Colors.indigo[900],
+        mini: true,
+        child: const Icon(Icons.add), // Mengubah ukuran tombol menjadi mini
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
@@ -289,40 +274,6 @@ class _ForumPageState extends State<ForumPage> {
           }
         },
       ),
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-      floatingActionButton: Stack(
-              alignment: Alignment.center,
-              children: [
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Container(
-                    margin: const EdgeInsets.only(bottom: 16.0, left: 25.0), // Adjust the margin as needed
-                    child: Transform.scale(
-                      scale: 0.5, // Adjust the scale factor as needed
-                      child: FloatingActionButton(
-                        onPressed: () {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const CreateForumPage(),
-                            ),
-                          );
-                        },
-                        tooltip: 'Buat Forum Baru',
-                        child: const Icon(Icons.add),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
->>>>>>> 273332b4a49442091214b79e7554aba2cebfbeac
-=======
-      
->>>>>>> 6df0294be23d3be3512853889a2c70caf4c71d6e
     );
-    
   }
 }

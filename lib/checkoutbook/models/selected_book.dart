@@ -48,4 +48,4 @@ Map<String, dynamic> selectedBookToJson(SelectedBook book) => {
       "author": book.author,
       "price": book.price,
       "imageUrl": book.imageUrl,
-};
+    };

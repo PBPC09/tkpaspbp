@@ -14,6 +14,7 @@ class ExploreBooksPage extends StatefulWidget {
   const ExploreBooksPage({Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _ExploreBooksPageState createState() => _ExploreBooksPageState();
 }
 
@@ -21,14 +22,7 @@ class _ExploreBooksPageState extends State<ExploreBooksPage> {
   List<Book> books = [];
   Set<int> wishlistBookIds = {};
   String uname = LoginPage.uname;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
   String dropdownValue = 'Semua';
->>>>>>> 273332b4a49442091214b79e7554aba2cebfbeac
-=======
-  String dropdownValue = 'Semua';
->>>>>>> 6df0294be23d3be3512853889a2c70caf4c71d6e
   // ignore: prefer_typing_uninitialized_variables
   var filteredData;
   @override
@@ -39,13 +33,6 @@ class _ExploreBooksPageState extends State<ExploreBooksPage> {
   }
 
   Future<void> deleteQuestion(CookieRequest request, int bookId) async {
-<<<<<<< HEAD
-<<<<<<< HEAD
-    // final response = await request.postJson('http://10.0.2.2:8000/bookforum/delete_question_flutter/$username/$id',
-=======
->>>>>>> 273332b4a49442091214b79e7554aba2cebfbeac
-=======
->>>>>>> 6df0294be23d3be3512853889a2c70caf4c71d6e
     int pkWishlist = 0;
     for (var data in filteredData) {
       if (data["fields"]["book_id"] == bookId) {
@@ -55,32 +42,15 @@ class _ExploreBooksPageState extends State<ExploreBooksPage> {
     }
 
     final response = await request.postJson(
-        'http://localhost:8000/wishlist/delete_wishlist_item_flutter/$pkWishlist/',
+        'https://lembarpena-c09-tk.pbp.cs.ui.ac.id/wishlist/delete_wishlist_item_flutter/$pkWishlist/',
         jsonEncode({}));
 
     if (response['status'] == 'success') {
-<<<<<<< HEAD
-<<<<<<< HEAD
-      // Handle berhasil menghapus
       setState(() {
-        // Memuat ulang data ForumHead
-=======
-      setState(() {
->>>>>>> 273332b4a49442091214b79e7554aba2cebfbeac
-=======
-      setState(() {
->>>>>>> 6df0294be23d3be3512853889a2c70caf4c71d6e
         wishlistBookIds.remove(bookId);
         ScaffoldMessenger.of(context)
             .showSnackBar(const SnackBar(content: Text("Sukses dihapus!")));
       });
-<<<<<<< HEAD
-<<<<<<< HEAD
-      // Muat ulang komentar
-=======
->>>>>>> 273332b4a49442091214b79e7554aba2cebfbeac
-=======
->>>>>>> 6df0294be23d3be3512853889a2c70caf4c71d6e
     } else {
       // Handle error
     }
@@ -94,7 +64,7 @@ class _ExploreBooksPageState extends State<ExploreBooksPage> {
       queryParams['rating_lt'] = '4';
     }
     var url = Uri.parse(
-        'http://localhost:8000/buybooks/show_books_json/?rating=$queryParams');
+        'https://lembarpena-c09-tk.pbp.cs.ui.ac.id/buybooks/show_books_json/?rating=$queryParams');
     var response =
         await http.get(url, headers: {"Content-Type": "application/json"});
     var data = jsonDecode(utf8.decode(response.bodyBytes));
@@ -105,23 +75,13 @@ class _ExploreBooksPageState extends State<ExploreBooksPage> {
   }
 
   Future<void> fetchWishlist() async {
-    var url = Uri.parse('http://localhost:8000/wishlist/mywishlist/json');
+    var url = Uri.parse(
+        'https://lembarpena-c09-tk.pbp.cs.ui.ac.id/wishlist/mywishlist/json');
     var response =
-        await http.get(url, 
-        headers: {"Content-Type": "application/json"});
+        await http.get(url, headers: {"Content-Type": "application/json"});
     var data = jsonDecode(utf8.decode(response.bodyBytes));
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-    // Filter data untuk hanya menyimpan item yang memiliki "user" yang sesuai dengan currentUser
     filteredData = data.where((x) => x['fields']['user'] == uname).toList();
-    // print(filteredData);
-=======
-    filteredData = data.where((x) => x['fields']['user'] == uname).toList();
->>>>>>> 273332b4a49442091214b79e7554aba2cebfbeac
-=======
-    filteredData = data.where((x) => x['fields']['user'] == uname).toList();
->>>>>>> 6df0294be23d3be3512853889a2c70caf4c71d6e
     setState(() {
       wishlistBookIds =
           Set<int>.from(filteredData.map((x) => x['fields']["book_id"]));
@@ -129,28 +89,11 @@ class _ExploreBooksPageState extends State<ExploreBooksPage> {
   }
 
   Future<void> addToWishlist(
-<<<<<<< HEAD
-<<<<<<< HEAD
       CookieRequest request, int bookId, int preference) async {
     final response = await request.postJson(
-      // "http://10.0.2.2:8000/bookforum/create_question_flutter/",
-      "http://localhost:8000/wishlist/add_to_wishlist_flutter/",
+      "https://lembarpena-c09-tk.pbp.cs.ui.ac.id/wishlist/add_to_wishlist_flutter/",
       jsonEncode(
           {'username': uname, "book_id": bookId, 'preference': preference}),
-=======
-=======
->>>>>>> 6df0294be23d3be3512853889a2c70caf4c71d6e
-    CookieRequest request, int bookId, int preference) async {
-    final response = await request.postJson(
-      "http://localhost:8000/wishlist/add_to_wishlist_flutter/",
-      jsonEncode({
-        'username': uname, 
-        "book_id": bookId, 
-        'preference': preference}),
-<<<<<<< HEAD
->>>>>>> 273332b4a49442091214b79e7554aba2cebfbeac
-=======
->>>>>>> 6df0294be23d3be3512853889a2c70caf4c71d6e
     );
 
     if (response['status'] == 'success') {
@@ -158,44 +101,25 @@ class _ExploreBooksPageState extends State<ExploreBooksPage> {
         wishlistBookIds.add(bookId);
         fetchWishlist();
       });
-<<<<<<< HEAD
-<<<<<<< HEAD
-      // ignore: use_build_context_synchronously
-      ScaffoldMessenger.of(context)
-          .showSnackBar(const SnackBar(content: Text("Sukses Ditambahkan!")));
-    } else {
-=======
       // fetchWishlist();
->>>>>>> 273332b4a49442091214b79e7554aba2cebfbeac
-=======
-      // fetchWishlist();
->>>>>>> 6df0294be23d3be3512853889a2c70caf4c71d6e
       // ignore: use_build_context_synchronously
-      ScaffoldMessenger.of(context)
-          .showSnackBar(const SnackBar(content: Text("Buku berhasil ditambahkan ke Wishlist!")));
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text("Buku berhasil ditambahkan ke Wishlist!")));
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Error adding book to wishlist')));
+      // ignore: use_build_context_synchronously
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text("Buku berhasil ditambahkan ke Wishlist!")));
     }
   }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 6df0294be23d3be3512853889a2c70caf4c71d6e
   List<Book> getFilteredBooks() {
     if (dropdownValue == 'Wishlist Saya') {
       return books.where((book) => wishlistBookIds.contains(book.pk)).toList();
-    }else{
+    } else {
       return books;
     }
   }
 
-<<<<<<< HEAD
->>>>>>> 273332b4a49442091214b79e7554aba2cebfbeac
-=======
->>>>>>> 6df0294be23d3be3512853889a2c70caf4c71d6e
   void showPreferenceDialog(CookieRequest request, int bookId) async {
     int? preference = await showDialog<int>(
       context: context,
@@ -252,78 +176,18 @@ class _ExploreBooksPageState extends State<ExploreBooksPage> {
         backgroundColor: Colors.indigo[900],
       ),
       drawer: const LeftDrawer(),
-<<<<<<< HEAD
-<<<<<<< HEAD
-      body: ListView.builder(
-        itemCount: books.length,
-        itemBuilder: (_, index) {
-          Book book = books[index];
-          bool isInWishlist = wishlistBookIds.contains(book.pk);
-          return Card(
-            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-            elevation: 4,
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(book.fields.title,
-                      style: const TextStyle(
-                          fontSize: 15.0, fontWeight: FontWeight.bold)),
-                  const SizedBox(height: 8),
-                  Text("Author: ${book.fields.author}"),
-                  const SizedBox(height: 8),
-                  Text("Rating: ${book.fields.rating}"),
-                  const SizedBox(height: 16),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      IconButton(
-                        icon: const Icon(Icons.info_outline),
-                        color: Colors.blue[400],
-                        onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => DetailBukuPage(book: book),
-                          ));
-                        },
-                      ),
-                      IconButton(
-                        icon: Icon(isInWishlist
-                            ? Icons.favorite
-                            : Icons.favorite_border),
-                        color: isInWishlist ? Colors.red : Colors.grey,
-                        onPressed: () {
-                          if (!isInWishlist) {
-                            showPreferenceDialog(request, book.pk);
-                          } else {
-                            deleteQuestion(request, book.pk);
-                          }
-                        },
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-=======
-=======
->>>>>>> 6df0294be23d3be3512853889a2c70caf4c71d6e
-      body: 
-      Column(
+      body: Column(
         children: [
           DropdownButton<String>(
             value: dropdownValue,
-            icon: const Icon(Icons.arrow_downward, size: 20), // Ukuran icon yang lebih besar
+            icon: const Icon(Icons.arrow_downward,
+                size: 20), // Ukuran icon yang lebih besar
             elevation: 16,
-            style: const TextStyle(color: Colors.indigoAccent, fontSize: 20), // Ukuran font yang lebih besar
+            style: const TextStyle(
+                color: Colors.indigoAccent,
+                fontSize: 20), // Ukuran font yang lebih besar
             underline: Container(
               color: Colors.indigoAccent[900],
-<<<<<<< HEAD
->>>>>>> 273332b4a49442091214b79e7554aba2cebfbeac
-=======
->>>>>>> 6df0294be23d3be3512853889a2c70caf4c71d6e
             ),
             onChanged: (String? newValue) {
               setState(() {
@@ -334,22 +198,24 @@ class _ExploreBooksPageState extends State<ExploreBooksPage> {
                 .map<DropdownMenuItem<String>>((String value) {
               return DropdownMenuItem<String>(
                 value: value,
-                child: Padding( // Padding untuk item
-                  padding: EdgeInsets.symmetric(vertical: 10), // Tingkatkan padding secara vertikal
+                child: Padding(
+                  // Padding untuk item
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 10), // Tingkatkan padding secara vertikal
                   child: Text(value),
                 ),
               );
             }).toList(),
           ),
-
           Expanded(
             child: ListView.builder(
               itemCount: getFilteredBooks().length,
               itemBuilder: (_, index) {
-                Book book =  getFilteredBooks()[index];
+                Book book = getFilteredBooks()[index];
                 bool isInWishlist = wishlistBookIds.contains(book.pk);
                 return Card(
-                  margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10)),
                   elevation: 4,

@@ -31,19 +31,10 @@ class _CreateForumPageState extends State<CreateForumPage> {
     });
   }
 
-  // Future<void> fetchBooks() async {
-  //   var url = Uri.parse('http://127.0.0.1:8000/bookforum/show_books_json/json/');
-  //   var response = await http.get(url);
-  //   var data = jsonDecode(utf8.decode(response.bodyBytes));
-  //   List<Book> fetchedBooks = bookFromJson(data);
-  //   setState(() {
-  //     _books = fetchedBooks;
-  //   });
-  // }
-
   Future<List<Book>> fetchBooks() async {
     // var url = Uri.parse('http://10.0.2.2:8000/buybooks/show_books_json');
-    var url = Uri.parse('http://localhost:8000/buybooks/show_books_json/');
+    var url = Uri.parse(
+        'https://lembarpena-c09-tk.pbp.cs.ui.ac.id/buybooks/show_books_json/');
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},
@@ -61,30 +52,6 @@ class _CreateForumPageState extends State<CreateForumPage> {
     }
     return listItem;
   }
-
-  // void createForumHead() async {
-  //   var url = Uri.parse('http://10.0.2.2:8000/create_question/');
-  //   var response = await http.post(
-  //     url,
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       // Jika autentikasi diperlukan, tambahkan header untuk token autentikasi
-  //     },
-  //     body: json.encode({
-  //       'title': _title,
-  //       'book_id': _selectedBook?.pk,
-  //       'question': _question,
-  //     }),
-  //   );
-
-  //   if (response.statusCode == 200) {
-  //     // Handle sukses
-  //     // menampilkan pesan sukses atau navigasi ke halaman lain
-  //   } else {
-  //     // Handle error
-  //     // menampilkan pesan error
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -187,7 +154,7 @@ class _CreateForumPageState extends State<CreateForumPage> {
                     _formKey.currentState!.save();
                     final response = await request.postJson(
                       // "http://10.0.2.2:8000/bookforum/create_question_flutter/",
-                      "http://localhost:8000/bookforum/create_question_flutter/",
+                      "https://lembarpena-c09-tk.pbp.cs.ui.ac.id/bookforum/create_question_flutter/",
                       jsonEncode({
                         "question": _question,
                         "book_id": _selectedBook?.pk,

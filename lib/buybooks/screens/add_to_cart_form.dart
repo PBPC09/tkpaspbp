@@ -73,7 +73,7 @@ class _CartFormPageState extends State<CartFormPage> {
                   if (_formKey.currentState!.validate()) {
                     // Kirim ke Django dan tunggu respons
                     final response = await request.postJson(
-                        "http://localhost:8000/buybooks/create-flutter/$bookId/",
+                        "https://lembarpena-c09-tk.pbp.cs.ui.ac.id/buybooks/create-flutter/$bookId/",
                         jsonEncode(<String, dynamic>{
                           'quantity': _quantity,
                         }));

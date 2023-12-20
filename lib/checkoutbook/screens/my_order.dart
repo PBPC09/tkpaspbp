@@ -12,6 +12,7 @@ class MyOrderPage extends StatefulWidget {
   const MyOrderPage({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _MyOrderPageState createState() => _MyOrderPageState();
 }
 
@@ -25,8 +26,8 @@ class _MyOrderPageState extends State<MyOrderPage> {
   }
 
   Future<List<Checkoutbook>> fetchOrder() async {
-    var url =
-        Uri.parse('https://lembarpena-c09-tk.pbp.cs.ui.ac.id/checkoutbook/get_order_json_all/');
+    var url = Uri.parse(
+        'https://lembarpena-c09-tk.pbp.cs.ui.ac.id/checkoutbook/get_order_json_all/');
     var response =
         await http.get(url, headers: {"Content-Type": "application/json"});
     var data = jsonDecode(utf8.decode(response.bodyBytes));
@@ -46,7 +47,7 @@ class _MyOrderPageState extends State<MyOrderPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Pesanan Saya'),
+        title: const Text('Pesanan Saya'),
         backgroundColor: Colors.indigo[900],
         foregroundColor: Colors.white,
       ),
@@ -56,11 +57,11 @@ class _MyOrderPageState extends State<MyOrderPage> {
           future: futureOrder,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             } else if (snapshot.hasError) {
               return Center(child: Text('Error: ${snapshot.error}'));
             } else if (snapshot.data == null || snapshot.data!.isEmpty) {
-              return Center(child: Text('Anda belum memesan apapun!'));
+              return const Center(child: Text('Anda belum memesan apapun!'));
             } else {
               return ListView.builder(
                 itemCount: snapshot.data!.length,
@@ -68,12 +69,13 @@ class _MyOrderPageState extends State<MyOrderPage> {
                   Checkoutbook order = snapshot.data![index];
                   return Card(
                     elevation: 2.0,
-                    margin: EdgeInsets.symmetric(vertical: 8.0),
+                    margin: const EdgeInsets.symmetric(vertical: 8.0),
                     child: ListTile(
                       title: Text("Checkout $index"),
                       subtitle: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          Text("Alamat: ${order.fields.alamat}"),
                           Text(
                               "Alamat: ${order.fields.alamat}"),
                           Text(
@@ -94,7 +96,7 @@ class _MyOrderPageState extends State<MyOrderPage> {
         type: BottomNavigationBarType.fixed,
         // currentIndex: 2,
         backgroundColor: Colors.indigo,
-        selectedItemColor:const Color.fromARGB(255, 156, 143, 255),
+        selectedItemColor: const Color.fromARGB(255, 156, 143, 255),
         unselectedItemColor: const Color.fromARGB(255, 156, 143, 255),
         items: const [
           BottomNavigationBarItem(

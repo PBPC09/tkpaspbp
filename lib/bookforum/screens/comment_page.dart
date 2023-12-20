@@ -39,8 +39,9 @@ class _ForumCommentsPageState extends State<ForumCommentsPage> {
   Future<Book> fetchBookDetails(int bookId) async {
     var url =
         // Uri.parse('http://10.0.2.2:8000/bookforum/book_details/json/$bookId');
-        Uri.parse('http://localhost:8000/bookforum/book_details/json/$bookId');
-    // print(loggedInUser);
+        Uri.parse(
+            'https://lembarpena-c09-tk.pbp.cs.ui.ac.id/bookforum/book_details/json/$bookId');
+
     var response = await http.get(url);
 
     if (response.statusCode == 200) {
@@ -68,7 +69,7 @@ class _ForumCommentsPageState extends State<ForumCommentsPage> {
   Future<void> fetchComments() async {
     var url = Uri.parse(
         // 'http://10.0.2.2:8000/bookforum/uniquecomments/json/${widget.forumHeadId}');
-        'http://localhost:8000/bookforum/uniquecomments/json/${widget.forumHeadId}');
+        'https://lembarpena-c09-tk.pbp.cs.ui.ac.id/bookforum/uniquecomments/json/${widget.forumHeadId}');
 
     var response = await http.get(url);
     var data = jsonDecode(utf8.decode(response.bodyBytes));
@@ -86,7 +87,7 @@ class _ForumCommentsPageState extends State<ForumCommentsPage> {
     // Sesuaikan dengan URL API Anda
     // final response = await request.postJson('http://10.0.2.2:8000/bookforum/delete_comments_flutter/$username/$commentId',
     final response = await request.postJson(
-        'http://localhost:8000/bookforum/delete_comments_flutter/$username/$commentId',
+        'https://lembarpena-c09-tk.pbp.cs.ui.ac.id/bookforum/delete_comments_flutter/$username/$commentId',
         jsonEncode({}));
 
     if (response['status'] == 'success') {
@@ -210,13 +211,11 @@ class _ForumCommentsPageState extends State<ForumCommentsPage> {
                 ),
               ),
             ),
-<<<<<<< HEAD
-<<<<<<< HEAD
       floatingActionButtonLocation:
           FloatingActionButtonLocation.miniCenterFloat,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(
+          Navigator.pushReplacement(
             context,
             MaterialPageRoute(
               builder: (context) => CreateCommentPage(
@@ -232,44 +231,6 @@ class _ForumCommentsPageState extends State<ForumCommentsPage> {
         backgroundColor: Colors.indigo[900],
         mini: true,
         child: const Icon(Icons.add), // Mengubah ukuran tombol menjadi mini
-=======
-=======
->>>>>>> 6df0294be23d3be3512853889a2c70caf4c71d6e
-      floatingActionButton: Stack(
-        alignment: Alignment.center,
-        children: [
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Container(
-              margin: const EdgeInsets.only(
-                  bottom: 16.0, left: 25.0), // Adjust the margin as needed
-              child: Transform.scale(
-                scale: 0.5, // Adjust the scale factor as needed
-                child: FloatingActionButton(
-                  onPressed: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => CreateCommentPage(
-                          forumHeadId: widget.forumHeadId,
-                          title: widget.title,
-                          question: widget.question,
-                          bookId: widget.bookId,
-                        ),
-                      ),
-                    );
-                  },
-                  tooltip: 'Tambah Komentar',
-                  child: const Icon(Icons.add),
-                ),
-              ),
-            ),
-          ),
-        ],
-<<<<<<< HEAD
->>>>>>> 273332b4a49442091214b79e7554aba2cebfbeac
-=======
->>>>>>> 6df0294be23d3be3512853889a2c70caf4c71d6e
       ),
     );
   }

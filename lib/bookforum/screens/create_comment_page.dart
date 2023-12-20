@@ -44,9 +44,6 @@ class _CreateCommentPageState extends State<CreateCommentPage> {
                   decoration: const InputDecoration(
                     hintText: "Komentar",
                     labelText: "Komentar",
-                    // border: OutlineInputBorder(
-                    //   borderRadius: BorderRadius.circular(5.0),
-                    // ),
                   ),
                   onSaved: (String? value) {
                     comment = value!;
@@ -67,7 +64,7 @@ class _CreateCommentPageState extends State<CreateCommentPage> {
                       _formKey.currentState!.save();
                       final response = await request.postJson(
                         // "http://10.0.2.2:8000/bookforum/create_comments_flutter/${widget.forumHeadId}",
-                        "http://localhost:8000/bookforum/create_comments_flutter/${widget.forumHeadId}",
+                        "https://lembarpena-c09-tk.pbp.cs.ui.ac.id/bookforum/create_comments_flutter/${widget.forumHeadId}",
 
                         jsonEncode({"answer": comment}),
                       );

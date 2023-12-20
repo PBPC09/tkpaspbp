@@ -34,8 +34,8 @@ class _CheckoutPageState extends State<CheckoutPage> {
   }
 
   Future<double> fetchHarga() async {
-    var url =
-        Uri.parse('https://lembarpena-c09-tk.pbp.cs.ui.ac.id/checkoutbook/get_total_harga/$uname/');
+    var url = Uri.parse(
+        'https://lembarpena-c09-tk.pbp.cs.ui.ac.id/checkoutbook/get_total_harga/$uname/');
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},
@@ -243,5 +243,62 @@ class _CheckoutPageState extends State<CheckoutPage> {
         ),
       ),
     );
+  }
+
+  void handleCheckout(CookieRequest request) async {
+    if (_groupValue.isEmpty) {
+      // Menampilkan pesan jika metode pembayaran belum dipilih
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Silakan pilih metode pembayaran')),
+      );
+      return;
+    }
+
+    if (alamatController.text.isEmpty) {
+      // Menampilkan pesan jika alamat belum diisi
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Silakan isi alamat pengiriman')),
+      );
+      return;
+    }
+
+    try {
+      final response = await request.postJson(
+        "https://lembarpena-c09-tk.pbp.cs.ui.ac.id/checkoutbook/checkout_flutter/",
+        jsonEncode({
+          "alamat": alamatController.text,
+          "metode_pembayaran": _groupValue,
+          "total_harga": valueHarga,
+        }),
+      );
+
+      // Menangani respons dari server
+      if (response['status'] == 'success') {
+        // Menampilkan pesan sukses dan navigasi ke halaman berikutnya
+        // ignore: use_build_context_synchronously
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Checkout berhasil!")),
+        );
+        // ignore: use_build_context_synchronously
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  MyHomePage()), // Sesuaikan dengan halaman tujuan setelah checkout
+        );
+      } else {
+        // Menampilkan pesan error
+        // ignore: use_build_context_synchronously
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("Error: ${response['message']}")),
+        );
+      }
+    } catch (e) {
+      // Menangani error pada saat request
+      // ignore: use_build_context_synchronously
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Terjadi kesalahan: $e")),
+      );
+    }
   }
 }
