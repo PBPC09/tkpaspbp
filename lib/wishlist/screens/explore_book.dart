@@ -41,7 +41,7 @@ class _ExploreBooksPageState extends State<ExploreBooksPage> {
     }
 
     final response = await request.postJson(
-        'http://localhost:8000/wishlist/delete_wishlist_item_flutter/$pkWishlist/',
+        'https://lembarpena-c09-tk.pbp.cs.ui.ac.id/wishlist/delete_wishlist_item_flutter/$pkWishlist/',
         jsonEncode({}));
 
     if (response['status'] == 'success') {
@@ -63,7 +63,7 @@ class _ExploreBooksPageState extends State<ExploreBooksPage> {
       queryParams['rating_lt'] = '4';
     }
     var url = Uri.parse(
-        'http://localhost:8000/buybooks/show_books_json/?rating=$queryParams');
+        'https://lembarpena-c09-tk.pbp.cs.ui.ac.id/buybooks/show_books_json/?rating=$queryParams');
     var response =
         await http.get(url, headers: {"Content-Type": "application/json"});
     var data = jsonDecode(utf8.decode(response.bodyBytes));
@@ -74,7 +74,8 @@ class _ExploreBooksPageState extends State<ExploreBooksPage> {
   }
 
   Future<void> fetchWishlist() async {
-    var url = Uri.parse('http://localhost:8000/wishlist/mywishlist/json');
+    var url = Uri.parse(
+        'https://lembarpena-c09-tk.pbp.cs.ui.ac.id/wishlist/mywishlist/json');
     var response =
         await http.get(url, 
         headers: {"Content-Type": "application/json"});
@@ -88,13 +89,11 @@ class _ExploreBooksPageState extends State<ExploreBooksPage> {
   }
 
   Future<void> addToWishlist(
-    CookieRequest request, int bookId, int preference) async {
+      CookieRequest request, int bookId, int preference) async {
     final response = await request.postJson(
-      "http://localhost:8000/wishlist/add_to_wishlist_flutter/",
-      jsonEncode({
-        'username': uname, 
-        "book_id": bookId, 
-        'preference': preference}),
+      "https://lembarpena-c09-tk.pbp.cs.ui.ac.id/wishlist/add_to_wishlist_flutter/",
+      jsonEncode(
+          {'username': uname, "book_id": bookId, 'preference': preference}),
     );
 
     if (response['status'] == 'success') {
@@ -104,8 +103,8 @@ class _ExploreBooksPageState extends State<ExploreBooksPage> {
       });
       // fetchWishlist();
       // ignore: use_build_context_synchronously
-      ScaffoldMessenger.of(context)
-          .showSnackBar(const SnackBar(content: Text("Buku berhasil ditambahkan ke Wishlist!")));
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text("Buku berhasil ditambahkan ke Wishlist!")));
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Error adding book to wishlist')));
@@ -115,7 +114,7 @@ class _ExploreBooksPageState extends State<ExploreBooksPage> {
   List<Book> getFilteredBooks() {
     if (dropdownValue == 'Wishlist Saya') {
       return books.where((book) => wishlistBookIds.contains(book.pk)).toList();
-    }else{
+    } else {
       return books;
     }
   }
@@ -176,14 +175,16 @@ class _ExploreBooksPageState extends State<ExploreBooksPage> {
         backgroundColor: Colors.indigo[900],
       ),
       drawer: const LeftDrawer(),
-      body: 
-      Column(
+      body: Column(
         children: [
           DropdownButton<String>(
             value: dropdownValue,
-            icon: const Icon(Icons.arrow_downward, size: 20), // Ukuran icon yang lebih besar
+            icon: const Icon(Icons.arrow_downward,
+                size: 20), // Ukuran icon yang lebih besar
             elevation: 16,
-            style: const TextStyle(color: Colors.indigoAccent, fontSize: 20), // Ukuran font yang lebih besar
+            style: const TextStyle(
+                color: Colors.indigoAccent,
+                fontSize: 20), // Ukuran font yang lebih besar
             underline: Container(
               color: Colors.indigoAccent[900],
             ),
@@ -196,22 +197,24 @@ class _ExploreBooksPageState extends State<ExploreBooksPage> {
                 .map<DropdownMenuItem<String>>((String value) {
               return DropdownMenuItem<String>(
                 value: value,
-                child: Padding( // Padding untuk item
-                  padding: EdgeInsets.symmetric(vertical: 10), // Tingkatkan padding secara vertikal
+                child: Padding(
+                  // Padding untuk item
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 10), // Tingkatkan padding secara vertikal
                   child: Text(value),
                 ),
               );
             }).toList(),
           ),
-
           Expanded(
             child: ListView.builder(
               itemCount: getFilteredBooks().length,
               itemBuilder: (_, index) {
-                Book book =  getFilteredBooks()[index];
+                Book book = getFilteredBooks()[index];
                 bool isInWishlist = wishlistBookIds.contains(book.pk);
                 return Card(
-                  margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10)),
                   elevation: 4,

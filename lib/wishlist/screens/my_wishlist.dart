@@ -8,8 +8,6 @@ import 'package:lembarpena/bookforum/screens/forum_page.dart';
 import 'dart:convert';
 import 'package:lembarpena/wishlist/models/wishlist.dart';
 import 'package:lembarpena/wishlist/screens/explore_book.dart';
-import 'package:pbp_django_auth/pbp_django_auth.dart';
-import 'package:provider/provider.dart';
 
 class WishlistPage extends StatefulWidget {
   final Book? selectedBook; // Tambahkan field untuk buku yang dipilih
@@ -37,7 +35,8 @@ class _WishlistPageState extends State<WishlistPage> {
   }
 
   Future<List<Wishlist>> fetchWishlist() async {
-    var url = Uri.parse('http://localhost:8000/wishlist/mywishlist/json');
+    var url = Uri.parse(
+        'https://lembarpena-c09-tk.pbp.cs.ui.ac.id/wishlist/mywishlist/json');
     var response =
         await http.get(url, headers: {"Content-Type": "application/json"});
     var data = jsonDecode(utf8.decode(response.bodyBytes));
@@ -55,10 +54,10 @@ class _WishlistPageState extends State<WishlistPage> {
 
   @override
   Widget build(BuildContext context) {
-    final request = context.watch<CookieRequest>();
+    // final request = context.watch<CookieRequest>();
     return Scaffold(
       appBar: AppBar(
-        title: Text('Wishlist Saya'),
+        title: const Text('My Wishlist'),
         backgroundColor: Colors.indigo[900],
         foregroundColor: Colors.white,
       ),
@@ -69,11 +68,12 @@ class _WishlistPageState extends State<WishlistPage> {
           future: getWishlist(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             } else if (snapshot.hasError) {
               return Center(child: Text('Error: ${snapshot.error}'));
             } else if (snapshot.data == null || snapshot.data!.isEmpty) {
-              return Center(child: Text('Tidak ada buku dalam wishlist.'));
+              return const Center(
+                  child: Text('Tidak ada buku dalam wishlist.'));
             } else {
               return ListView.builder(
                 itemCount: snapshot.data!.length,
@@ -93,7 +93,7 @@ class _WishlistPageState extends State<WishlistPage> {
         type: BottomNavigationBarType.fixed,
         // currentIndex: 2,
         backgroundColor: Colors.indigo,
-        selectedItemColor:const Color.fromARGB(255, 156, 143, 255),
+        selectedItemColor: const Color.fromARGB(255, 156, 143, 255),
         unselectedItemColor: const Color.fromARGB(255, 156, 143, 255),
         items: const [
           BottomNavigationBarItem(

@@ -3,7 +3,6 @@ import 'package:lembarpena/bookforum/screens/forum_page.dart';
 import 'package:lembarpena/Main/screens/landing_page.dart';
 import 'package:lembarpena/Main/screens/menu.dart';
 import 'package:lembarpena/checkoutbook/screens/my_order.dart';
-// import 'package:lembarpena/checkoutbook/screens/checkoutpage.dart';
 import 'package:lembarpena/wishlist/screens/explore_book.dart';
 import 'package:lembarpena/buybooks/screens/buybooks_page.dart';
 import 'package:lembarpena/buybooks/screens/cart_page.dart';
@@ -46,10 +45,10 @@ class MenuCard extends StatelessWidget {
               );
             } else if (page.name == "Wishlist") {
               Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const WishlistPage(),
-                ));
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const WishlistPage(),
+                  ));
             } else if (page.name == "Cart") {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => const CartPage()));
@@ -62,11 +61,11 @@ class MenuCard extends StatelessWidget {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => const ForumPage()));
             } else if (page.name == "My Order") {
-                Navigator.push(context,
+              Navigator.push(context,
                   MaterialPageRoute(builder: (context) => const MyOrderPage()));
             } else if (page.name == "Logout") {
-              final response =
-                  await request.logout("http://localhost:8000/auth/logout/");
+              final response = await request.logout(
+                  "https://lembarpena-c09-tk.pbp.cs.ui.ac.id/auth/logout/");
               // await request.login("http://10.0.2.2:8000/auth/login/", {
               String message = response["message"];
               if (response['status']) {
