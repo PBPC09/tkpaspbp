@@ -14,6 +14,7 @@ class ExploreBooksPage extends StatefulWidget {
   const ExploreBooksPage({Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _ExploreBooksPageState createState() => _ExploreBooksPageState();
 }
 
@@ -77,8 +78,7 @@ class _ExploreBooksPageState extends State<ExploreBooksPage> {
     var url = Uri.parse(
         'https://lembarpena-c09-tk.pbp.cs.ui.ac.id/wishlist/mywishlist/json');
     var response =
-        await http.get(url, 
-        headers: {"Content-Type": "application/json"});
+        await http.get(url, headers: {"Content-Type": "application/json"});
     var data = jsonDecode(utf8.decode(response.bodyBytes));
 
     filteredData = data.where((x) => x['fields']['user'] == uname).toList();
@@ -106,8 +106,9 @@ class _ExploreBooksPageState extends State<ExploreBooksPage> {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           content: Text("Buku berhasil ditambahkan ke Wishlist!")));
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Error adding book to wishlist')));
+      // ignore: use_build_context_synchronously
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text("Buku berhasil ditambahkan ke Wishlist!")));
     }
   }
 

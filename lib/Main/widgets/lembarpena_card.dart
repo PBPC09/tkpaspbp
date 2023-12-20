@@ -10,7 +10,6 @@ import 'package:lembarpena/wishlist/screens/my_wishlist.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 
-
 class MenuCard extends StatelessWidget {
   final MenuItem page;
 
@@ -116,4 +115,3 @@ class MenuCard extends StatelessWidget {
     );
   }
 }
-

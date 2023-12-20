@@ -217,8 +217,9 @@ class _CheckoutPageState extends State<CheckoutPage> {
           "metode_pembayaran": _groupValue,
           "total_harga": valueHarga,
         }),
-      );
 
+
+      );
       // Menangani respons dari server
       if (response['status'] == 'success') {
         // Menampilkan pesan sukses dan navigasi ke halaman berikutnya

@@ -7,9 +7,6 @@ import 'package:lembarpena/wishlist/screens/detail_buku.dart'; // Import your bo
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-import 'package:pbp_django_auth/pbp_django_auth.dart';
-import 'package:provider/provider.dart';
-
 class BookCollectionsPage extends StatefulWidget {
   const BookCollectionsPage({Key? key}) : super(key: key);
 
@@ -79,7 +76,7 @@ class _BookCollectionsPageState extends State<BookCollectionsPage> {
 
   @override
   Widget build(BuildContext context) {
-    final request = context.watch<CookieRequest>();
+    // final request = context.watch<CookieRequest>();
     return Scaffold(
       appBar: AppBar(
         title: const Text(

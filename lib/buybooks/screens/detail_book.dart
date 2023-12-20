@@ -20,23 +20,23 @@ class ItemDetailPage extends StatelessWidget {
           children: [
             Text(
               'Name: ${book.fields.title}',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Text('Author: ${book.fields.author}'),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Text('Rating: ${book.fields.rating}'),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Text('Voters: ${book.fields.voters}'),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Text('Price: ${book.fields.price}'),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Text('Publisher: ${book.fields.publisher}'),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Text('Page Count: ${book.fields.pageCount}'),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Text('Description: ${book.fields.description}'),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
                 Navigator.push(
@@ -46,7 +46,7 @@ class ItemDetailPage extends StatelessWidget {
                   ),
                 );
               },
-              child: Text('Tambah ke Keranjang'),
+              child: const Text('Tambah ke Keranjang'),
             ),
           ],
         ),

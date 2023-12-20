@@ -87,7 +87,9 @@ class Fields {
 }
 
 enum Currency {
+    // ignore: constant_identifier_names
     FREE,
+    // ignore: constant_identifier_names
     SAR
 }
 
@@ -97,6 +99,7 @@ final currencyValues = EnumValues({
 });
 
 enum Model {
+    // ignore: constant_identifier_names
     REGISTERBOOK_BOOK
 }
 

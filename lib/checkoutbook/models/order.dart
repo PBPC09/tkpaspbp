@@ -38,7 +38,7 @@ class Fields {
   int user;
   String alamat;
   MetodePembayaran metodePembayaran;
-  int totalPrice;
+  double totalPrice;
   List<dynamic> items;
 
   Fields({

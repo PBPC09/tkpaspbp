@@ -69,13 +69,13 @@ class _MyOrderPageState extends State<MyOrderPage> {
                     elevation: 2.0,
                     margin: const EdgeInsets.symmetric(vertical: 8.0),
                     child: ListTile(
-                      title: Text("Alamat: ${order.fields.alamat}"),
+                      title: Text("Checkout $index"),
                       subtitle: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          Text("Alamat: ${order.fields.alamat}"),
                           Text(
                               "Metode Pembayaran: ${order.fields.metodePembayaran}"),
-                          const Text("Mata Uang: SAR"),
                           Text(
                               "Total Price: SAR ${order.fields.totalPrice.toStringAsFixed(2)}"),
                         ],
@@ -96,15 +96,15 @@ class _MyOrderPageState extends State<MyOrderPage> {
         unselectedItemColor: const Color.fromARGB(255, 156, 143, 255),
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home), // Ganti dengan path gambar yang sesuai
+            icon: Icon(Icons.home),
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.search), // Ganti dengan path gambar yang sesuai
+            icon: Icon(Icons.search),
             label: 'Explore Book',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.forum), // Ganti dengan path gambar yang sesuai
+            icon: Icon(Icons.forum),
             label: 'Book Forum',
           ),
         ],
