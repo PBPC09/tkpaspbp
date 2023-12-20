@@ -122,71 +122,61 @@ class _CartPageState extends State<CartPage> {
             return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
-          } else if (snapshot.hasData) {
-            if (snapshot.data!.isEmpty) {
-              return const Center(
-                child: Center(
-                    child: Text(
-                        'Anda belum memasukkan apapun ke dalam keranjang!',
-                        style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.bold))),
-              );
-            } else {
-              return ListView.builder(
-                itemCount: snapshot.data!.length,
-                itemBuilder: (context, index) {
-                  var cartItem = snapshot.data![index];
-                  cartItem.isSelected = itemsChecked[cartItem.id] ?? false;
-                  return Card(
-                    margin: const EdgeInsets.all(10),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8),
-                      child: Stack(
-                        children: [
-                          ListTile(
-                            leading: Checkbox(
-                              // value: true,
-                              value: cartItem.isSelected,
-                              onChanged: (bool? value) {
-                                toggleCheckbox(request, cartItem.id, value);
-                              },
-                            ),
-                            title: Text(
-                              cartItem.title,
-                              style: const TextStyle(
-                                fontSize: 15.0,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            subtitle: Text(
-                              "Jumlah: ${cartItem.quantity}\nSubtotal Harga: ${cartItem.currency} ${cartItem.subtotal}",
-                              style: const TextStyle(
-                                fontSize: 12.0,
-                                color: Colors.black87,
-                              ),
-                            ),
-                            isThreeLine:
-                                true, // Jika subtitle memiliki dua baris
-                          ),
-                          Positioned(
-                            bottom: 4,
-                            right: 4,
-                            child: IconButton(
-                              onPressed: () {
-                                removeItemFromCart(request, cartItem.id);
-                              },
-                              icon: const Icon(Icons.delete, color: Colors.red),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                },
-              );
-            }
+          } else if (snapshot.data == null || snapshot.data!.isEmpty) {
+            return const Text(
+                'Anda belum memasukkan apapun ke dalam keranjang.');
           } else {
-            return const Center(child: Text('Your cart is empty.'));
+            return ListView.builder(
+              itemCount: snapshot.data!.length,
+              itemBuilder: (context, index) {
+                var cartItem = snapshot.data![index];
+                cartItem.isSelected = itemsChecked[cartItem.id] ?? false;
+                return Card(
+                  margin: const EdgeInsets.all(10),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: Stack(
+                      children: [
+                        ListTile(
+                          leading: Checkbox(
+                            // value: true,
+                            value: cartItem.isSelected,
+                            onChanged: (bool? value) {
+                              toggleCheckbox(request, cartItem.id, value);
+                            },
+                          ),
+                          title: Text(
+                            cartItem.title,
+                            style: const TextStyle(
+                              fontSize: 15.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          subtitle: Text(
+                            "Jumlah: ${cartItem.quantity}\nSubtotal Harga: ${cartItem.currency} ${cartItem.subtotal}",
+                            style: const TextStyle(
+                              fontSize: 12.0,
+                              color: Colors.black87,
+                            ),
+                          ),
+                          isThreeLine: true, // Jika subtitle memiliki dua baris
+                        ),
+                        Positioned(
+                          bottom: 4,
+                          right: 4,
+                          child: IconButton(
+                            onPressed: () {
+                              removeItemFromCart(request, cartItem.id);
+                            },
+                            icon: const Icon(Icons.delete, color: Colors.red),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            );
           }
         },
       ),

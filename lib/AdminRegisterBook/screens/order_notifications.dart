@@ -187,7 +187,12 @@ class _NotificationPageState extends State<NotificationPage> {
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.red,
                               ),
-                              child: const Text('Delete'),
+                              child: const Text(
+                                'Delete',
+                                style: TextStyle(
+                                    color: Colors
+                                        .white), // Set text color to white
+                              ),
                             ),
                             const SizedBox(width: 8), // Spacer between buttons
                             ElevatedButton(
@@ -196,7 +201,12 @@ class _NotificationPageState extends State<NotificationPage> {
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.blue,
                               ),
-                              child: const Text('Read'),
+                              child: const Text(
+                                'Read',
+                                style: TextStyle(
+                                    color: Colors
+                                        .white), // Set text color to white
+                              ),
                             ),
                           ],
                         ),
@@ -223,7 +233,7 @@ class _NotificationPageState extends State<NotificationPage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.notifications),
-            label: 'Order Notifications',
+            label: 'Notifications',
           ),
         ],
         onTap: (index) {

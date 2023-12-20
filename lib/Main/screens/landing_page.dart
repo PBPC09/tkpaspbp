@@ -80,7 +80,11 @@ class _LandingPageState extends State<LandingPage> {
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.deepPurple,
               ),
-              child: const Text('Let\'s Get Started'),
+              child: const Text(
+                'Let\'s Get Started',
+                style:
+                    TextStyle(color: Colors.white), // Set text color to white
+              ),
             ),
             const SizedBox(height: 20),
           ],
