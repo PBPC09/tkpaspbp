@@ -215,7 +215,7 @@ class _ForumCommentsPageState extends State<ForumCommentsPage> {
           FloatingActionButtonLocation.miniCenterFloat,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(
+          Navigator.pushReplacement(
             context,
             MaterialPageRoute(
               builder: (context) => CreateCommentPage(

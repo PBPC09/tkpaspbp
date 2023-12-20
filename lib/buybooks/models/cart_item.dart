@@ -33,7 +33,7 @@ class CartItem {
         quantity: json["quantity"],
         subtotal: json["subtotal"],
         currency: json["currency"],
-        isSelected: json['isSelected'] ?? false,
+        isSelected: json['is_ordered'],
       );
 
   Map<String, dynamic> toJson() => {
