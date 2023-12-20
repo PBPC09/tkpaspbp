@@ -95,7 +95,7 @@ class AdminPage extends StatelessWidget {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.notifications),
-            label: 'Order Notifications',
+            label: 'Notifications',
           ),
         ],
         onTap: (index) {

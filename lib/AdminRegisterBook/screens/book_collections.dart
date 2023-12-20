@@ -190,7 +190,7 @@ class _BookCollectionsPageState extends State<BookCollectionsPage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.notifications),
-            label: 'Order Notifications',
+            label: 'Notifications',
           ),
         ],
         onTap: (index) {
