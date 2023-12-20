@@ -95,7 +95,7 @@ class _NotificationPageState extends State<NotificationPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Order Notifications${unreadNotificationsCount > 0 ? ' ($unreadNotificationsCount)' : ''}',
+          'Notifications${unreadNotificationsCount > 0 ? ' ($unreadNotificationsCount)' : ''}',
           style: const TextStyle(color: Colors.white),
         ),
         actions: <Widget>[

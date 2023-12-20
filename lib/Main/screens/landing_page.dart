@@ -77,6 +77,9 @@ class _LandingPageState extends State<LandingPage> {
                   MaterialPageRoute(builder: (context) => const LoginPage()),
                 );
               },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.deepPurple,
+              ),
               child: const Text('Let\'s Get Started'),
             ),
             const SizedBox(height: 20),

@@ -33,7 +33,7 @@ class MyHomePage extends StatelessWidget {
         title: Text(
           'Hi - $uname !',
         ),
-        backgroundColor: Colors.indigo,
+        backgroundColor: Colors.indigo[900],
         foregroundColor: Colors.white,
       ),
       drawer: const LeftDrawer(),

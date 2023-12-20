@@ -125,8 +125,12 @@ class _CartPageState extends State<CartPage> {
           } else if (snapshot.hasData) {
             if (snapshot.data!.isEmpty) {
               return const Center(
-                  child:
-                      Text('Anda belum memasukkan apapun ke dalam keranjang!'));
+                child: Center(
+                    child: Text(
+                        'Anda belum memasukkan apapun ke dalam keranjang!',
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.bold))),
+              );
             } else {
               return ListView.builder(
                 itemCount: snapshot.data!.length,
@@ -167,17 +171,11 @@ class _CartPageState extends State<CartPage> {
                           Positioned(
                             bottom: 4,
                             right: 4,
-                            child: TextButton(
-                              style: TextButton.styleFrom(
-                                foregroundColor: Colors.white,
-                                backgroundColor: Colors.redAccent,
-                                disabledForegroundColor:
-                                    Colors.grey.withOpacity(0.38),
-                              ),
+                            child: IconButton(
                               onPressed: () {
                                 removeItemFromCart(request, cartItem.id);
                               },
-                              child: const Text('Remove'),
+                              icon: const Icon(Icons.delete, color: Colors.red),
                             ),
                           ),
                         ],

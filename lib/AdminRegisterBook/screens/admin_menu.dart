@@ -21,7 +21,7 @@ class AdminPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Hi, $uname!'),
-        backgroundColor: Colors.indigo,
+        backgroundColor: Colors.indigo[900],
         foregroundColor: Colors.white,
       ),
       drawer: const LeftDrawer(),

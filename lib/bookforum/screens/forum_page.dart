@@ -87,8 +87,9 @@ class _ForumPageState extends State<ForumPage> {
     final request = context.watch<CookieRequest>();
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Forum Buku', style: TextStyle(color: Colors.white)),
+        title: const Text('Book Forum'),
         backgroundColor: Colors.indigo[900],
+        foregroundColor: Colors.white,
       ),
       drawer: const LeftDrawer(),
       body: Padding(

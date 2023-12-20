@@ -32,6 +32,8 @@ class _CreateCommentPageState extends State<CreateCommentPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Tambah Komentar'),
+        backgroundColor: Colors.indigo[900],
+        foregroundColor: Colors.white,
       ),
       body: Form(
         key: _formKey,
@@ -100,6 +102,10 @@ class _CreateCommentPageState extends State<CreateCommentPage> {
                       }
                     }
                   },
+                  style: ElevatedButton.styleFrom(
+                    foregroundColor: Colors.white,
+                    backgroundColor: Colors.indigo[900],
+                  ),
                   child: const Text(
                     "Kirim",
                     style: TextStyle(color: Colors.white),

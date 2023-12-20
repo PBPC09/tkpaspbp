@@ -59,6 +59,8 @@ class _CreateForumPageState extends State<CreateForumPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Buat Forum Baru'),
+        backgroundColor: Colors.indigo[900],
+        foregroundColor: Colors.white,
       ),
       body: Form(
         key: _formKey,
@@ -188,7 +190,14 @@ class _CreateForumPageState extends State<CreateForumPage> {
                     }
                   }
                 },
-                child: const Text('Buat Forum'),
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: Colors.white,
+                  backgroundColor: Colors.indigo[900],
+                ),
+                child: const Text(
+                  "Buat Forum",
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ],
           ),

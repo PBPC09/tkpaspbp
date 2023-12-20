@@ -38,7 +38,7 @@ class Fields {
   String user;
   String alamat;
   String metodePembayaran;
-  double totalPrice;
+  int totalPrice;
 
   Fields({
     required this.user,

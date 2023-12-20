@@ -77,7 +77,7 @@ class _MyOrderPageState extends State<MyOrderPage> {
                           Text(
                               "Metode Pembayaran: ${order.fields.metodePembayaran}"),
                           Text(
-                              "Total Price: SAR ${order.fields.totalPrice.toDouble().toStringAsFixed(2)}"),
+                              "Total Price: SAR ${order.fields.totalPrice.toStringAsFixed(2)}"),
                         ],
                       ),
                     ),

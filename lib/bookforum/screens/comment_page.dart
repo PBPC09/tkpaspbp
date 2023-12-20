@@ -105,16 +105,8 @@ class _ForumCommentsPageState extends State<ForumCommentsPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Komentar Forum'),
-        backgroundColor: Colors.blue,
-        flexibleSpace: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Colors.indigo, Colors.deepPurple],
-              begin: Alignment.bottomRight,
-              end: Alignment.topLeft,
-            ),
-          ),
-        ),
+        backgroundColor: Colors.indigo[900],
+        foregroundColor: Colors.white,
       ),
       body: !isBookLoaded
           ? const Center(child: CircularProgressIndicator())
