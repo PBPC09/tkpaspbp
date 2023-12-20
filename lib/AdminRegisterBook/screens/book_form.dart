@@ -35,7 +35,8 @@ class _BookFormPageState extends State<BookFormPage> {
           'Register Your Book',
           style: TextStyle(color: Colors.white),
         ),
-        backgroundColor: Colors.indigo.shade900,
+        backgroundColor: Colors.indigo[900],
+        foregroundColor: Colors.white,
       ),
       drawer: const LeftDrawer(),
       body: SingleChildScrollView(

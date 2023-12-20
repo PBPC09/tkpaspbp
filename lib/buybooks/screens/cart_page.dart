@@ -204,8 +204,9 @@ class _CartPageState extends State<CartPage> {
                 );
                 // Implementasi checkout modul si Rifqi
               },
-              label: const Text('Checkout'),
-              icon: const Icon(Icons.payment),
+              label:
+                  const Text('Checkout', style: TextStyle(color: Colors.white)),
+              icon: const Icon(Icons.payment, color: Colors.white),
               backgroundColor: Colors.indigo[900],
             )
           : null,

@@ -86,9 +86,13 @@ class _RegistrationPageState extends State<RegistrationPage> {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text('Registration Form'),
+        title: const Text(
+          'Registration Form',
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.deepPurple,
+        foregroundColor: Colors.white,
       ),
       body: SingleChildScrollView(
         child: Column(

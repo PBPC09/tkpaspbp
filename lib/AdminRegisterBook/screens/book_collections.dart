@@ -56,23 +56,6 @@ class _BookCollectionsPageState extends State<BookCollectionsPage> {
       throw Exception('Failed to delete the book.');
     }
   }
-  // Future<List<Book>> fetchBooks() async {
-  //   try {
-  //     var url = Uri.parse('http://localhost:8000/registerbook/get-book/');
-  //     var response = await http.get(url, headers: {"Content-Type": "application/json"});
-
-  //     if (response.statusCode == 200) {
-  //       var data = jsonDecode(utf8.decode(response.bodyBytes)) as List;
-  //       return data.map((book) => Book.fromJson(book)).toList();
-  //     } else {
-  //       // Handle non-200 responses
-  //       throw Exception('Failed to load books. Status code: ${response.statusCode}');
-  //     }
-  //   } catch (e) {
-  //     // Handle network errors, parsing errors, etc.
-  //     throw Exception('Failed to load books: $e');
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {

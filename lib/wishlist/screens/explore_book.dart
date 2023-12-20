@@ -172,8 +172,9 @@ class _ExploreBooksPageState extends State<ExploreBooksPage> {
     final request = context.watch<CookieRequest>();
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Books', style: TextStyle(color: Colors.white)),
+        title: const Text('Books'),
         backgroundColor: Colors.indigo[900],
+        foregroundColor: Colors.white,
       ),
       drawer: const LeftDrawer(),
       body: Column(

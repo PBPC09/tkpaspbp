@@ -220,7 +220,8 @@ class _ForumPageState extends State<ForumPage> {
         },
         backgroundColor: Colors.indigo[900],
         mini: true,
-        child: const Icon(Icons.add), // Mengubah ukuran tombol menjadi mini
+        child: const Icon(Icons.add,
+            color: Colors.white), // Mengubah ukuran tombol menjadi mini
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,

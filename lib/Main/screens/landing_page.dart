@@ -15,6 +15,8 @@ class _LandingPageState extends State<LandingPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Lembar Pena'),
+        backgroundColor: Colors.indigo,
+        foregroundColor: Colors.white,
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -158,7 +160,7 @@ class _LandingPageState extends State<LandingPage> {
                 'Fitur Forum Buku di LembarPena adalah wadah interaktif tempat pengguna aplikasi dapat berpartisipasi dalam diskusi, berbagi pendapat, dan berkomunikasi tentang buku. Ini adalah ruang online di mana pembaca, penulis, dan penggemar buku dapat bertukar pikiran, merekomendasikan buku, dan berbicara tentang berbagai aspek buku yang mereka baca.'),
         Item(
             headerValue:
-                ' Apakah Wishlist Book bersifat pribadi atau dapat dibagikan dengan pengguna lain?',
+                'Apakah Wishlist Book bersifat pribadi atau dapat dibagikan dengan pengguna lain?',
             expandedValue:
                 'Wishlist Book pada LembarPena bersifat pribadi secara default. Ini berarti daftar buku yang disimpan hanya dapat diakses oleh pengguna yang menyimpannya.'),
       ].map<Widget>((Item item) {
