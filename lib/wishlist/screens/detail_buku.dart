@@ -60,7 +60,7 @@ class DetailBukuPage extends StatelessWidget {
               ),
               const SizedBox(height: 4),
               Text(
-                "${book.fields.price} SAR",
+                "${book.fields.currency} ${book.fields.price}",
                 style: const TextStyle(fontSize: 12),
               ),
               const SizedBox(height: 12),

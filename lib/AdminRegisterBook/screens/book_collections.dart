@@ -29,18 +29,24 @@ class _BookCollectionsPageState extends State<BookCollectionsPage> {
       queryParams['rating_filter'] = ratingFilterMap[ratingFilter]!;
     }
 
-    var uri =
-        Uri.http('localhost:8000', '/registerbook/get-book/', queryParams);
-    var response =
-        await http.get(uri, headers: {"Content-Type": "application/json"});
+    String baseUrl = 'https://lembarpena-c09-tk.pbp.cs.ui.ac.id';
+    String path = '/registerbook/get-book/';
+    String queryString = Uri(queryParameters: queryParams).query;
 
-    var data = jsonDecode(utf8.decode(response.bodyBytes));
-    return List<Book>.from(data.map((bookData) => Book.fromJson(bookData)));
+    final response = await http.get(Uri.parse('$baseUrl$path?$queryString'),
+        headers: {"Content-Type": "application/json"});
+
+    if (response.statusCode == 200) {
+      var data = jsonDecode(utf8.decode(response.bodyBytes));
+      return List<Book>.from(data.map((bookData) => Book.fromJson(bookData)));
+    } else {
+      throw Exception('Failed to load books');
+    }
   }
 
   Future<void> deleteBook(int bookId) async {
     final url = Uri.parse(
-        'http://localhost:8000/registerbook/delete-book-ajax/$bookId/');
+        'https://lembarpena-c09-tk.pbp.cs.ui.ac.id/registerbook/delete-book-ajax/$bookId/');
 
     final response = await http.delete(url);
 
@@ -50,9 +56,27 @@ class _BookCollectionsPageState extends State<BookCollectionsPage> {
       throw Exception('Failed to delete the book.');
     }
   }
+  // Future<List<Book>> fetchBooks() async {
+  //   try {
+  //     var url = Uri.parse('http://localhost:8000/registerbook/get-book/');
+  //     var response = await http.get(url, headers: {"Content-Type": "application/json"});
+
+  //     if (response.statusCode == 200) {
+  //       var data = jsonDecode(utf8.decode(response.bodyBytes)) as List;
+  //       return data.map((book) => Book.fromJson(book)).toList();
+  //     } else {
+  //       // Handle non-200 responses
+  //       throw Exception('Failed to load books. Status code: ${response.statusCode}');
+  //     }
+  //   } catch (e) {
+  //     // Handle network errors, parsing errors, etc.
+  //     throw Exception('Failed to load books: $e');
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
+    // final request = context.watch<CookieRequest>();
     return Scaffold(
       appBar: AppBar(
         title: const Text(
