@@ -28,7 +28,7 @@ class _ForumPageState extends State<ForumPage> {
   Future<List<ForumHead>> fetchForumHeads() async {
     // var url = Uri.parse('http://10.0.2.2:8000/bookforum/forum/json/'); // Sesuaikan dengan URL endpoint Anda
     var url = Uri.parse(
-        'http://localhost:8000/bookforum/forum/json/'); // Sesuaikan dengan URL endpoint Anda
+        'https://lembarpena-c09-tk.pbp.cs.ui.ac.id/bookforum/forum/json/'); // Sesuaikan dengan URL endpoint Anda
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},
@@ -45,7 +45,7 @@ class _ForumPageState extends State<ForumPage> {
   Future<List<ForumHead>> fetchForumHeadsPopular() async {
     // var url = Uri.parse('http://10.0.2.2:8000/bookforum/forum/json/'); // Sesuaikan dengan URL endpoint Anda
     var url = Uri.parse(
-        'http://localhost:8000/bookforum/show_forum_json_popular_only/'); // Sesuaikan dengan URL endpoint Anda
+        'https://lembarpena-c09-tk.pbp.cs.ui.ac.id/bookforum/show_forum_json_popular_only/'); // Sesuaikan dengan URL endpoint Anda
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},
@@ -63,7 +63,7 @@ class _ForumPageState extends State<ForumPage> {
       CookieRequest request, String username, int id) async {
     // final response = await request.postJson('http://10.0.2.2:8000/bookforum/delete_question_flutter/$username/$id',
     final response = await request.postJson(
-        'http://localhost:8000/bookforum/delete_question_flutter/$username/$id',
+        'https://lembarpena-c09-tk.pbp.cs.ui.ac.id/bookforum/delete_question_flutter/$username/$id',
         jsonEncode({}));
 
     if (response['status'] == 'success') {

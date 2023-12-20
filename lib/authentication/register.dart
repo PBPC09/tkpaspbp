@@ -22,7 +22,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
   String _selectedRole = 'B';
 
   Future<void> _registerUser() async {
-    final url = Uri.parse("http://localhost:8000/auth/register/");
+    final url =
+        Uri.parse("https://lembarpena-c09-tk.pbp.cs.ui.ac.id/auth/register/");
     final response = await http.post(url,
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({

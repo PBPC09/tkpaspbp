@@ -23,20 +23,22 @@ class _BuyBooksPageState extends State<BuyBooksPage> {
   List<Book> bookList = [];
 
   Future<List<Book>> fetchBooks({String? ratingFilter}) async {
-    Map<String, String> queryParams = {};
+    var queryParams = <String, String>{};
     if (ratingFilter == '≥ 4.0') {
       queryParams['rating_gte'] = '4';
     } else if (ratingFilter == '< 4.0') {
       queryParams['rating_lt'] = '4';
     }
 
-    var uri =
-        Uri.http('localhost:8000', '/buybooks/show_books_json/', queryParams);
-    var response =
-        await http.get(uri, headers: {"Content-Type": "application/json"});
+    String baseUrl = 'https://lembarpena-c09-tk.pbp.cs.ui.ac.id';
+    String path = '/buybooks/show_books_json/';
+    String queryString = Uri(queryParameters: queryParams).query;
+
+    final response = await http.get(Uri.parse('$baseUrl$path?$queryString'),
+        headers: {"Content-Type": "application/json"});
 
     if (response.statusCode == 200) {
-      var data = jsonDecode(utf8.decode(response.bodyBytes)) as List;
+      var data = jsonDecode(response.body) as List;
       return data.map((bookData) => Book.fromJson(bookData)).toList();
     } else {
       throw Exception('Failed to load books');
@@ -46,7 +48,7 @@ class _BuyBooksPageState extends State<BuyBooksPage> {
   @override
   void initState() {
     super.initState();
-    fetchBooks().then((bookList) {
+    fetchBooks(ratingFilter: selectedRating).then((bookList) {
       setState(() {
         this.bookList = bookList;
       });
@@ -57,10 +59,7 @@ class _BuyBooksPageState extends State<BuyBooksPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Books',
-          style: TextStyle(color: Colors.white),
-        ),
+        title: const Text('Books'),
         backgroundColor: Colors.indigo[900],
         foregroundColor: Colors.white,
       ),
@@ -91,6 +90,11 @@ class _BuyBooksPageState extends State<BuyBooksPage> {
                   onChanged: (String? newValue) {
                     setState(() {
                       selectedRating = newValue!;
+                      fetchBooks(ratingFilter: selectedRating).then((bookList) {
+                        setState(() {
+                          this.bookList = bookList;
+                        });
+                      });
                     });
                   },
                   items: ratings.map<DropdownMenuItem<String>>((String value) {
@@ -166,21 +170,20 @@ class _BuyBooksPageState extends State<BuyBooksPage> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        currentIndex: 1,
         backgroundColor: Colors.indigo,
-        selectedItemColor: const Color.fromARGB(255, 255, 255, 255),
+        selectedItemColor: const Color.fromARGB(255, 156, 143, 255),
         unselectedItemColor: const Color.fromARGB(255, 156, 143, 255),
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home), // Ganti dengan path gambar yang sesuai
+            icon: Icon(Icons.home),
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.search), // Ganti dengan path gambar yang sesuai
+            icon: Icon(Icons.search),
             label: 'Explore Book',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.forum), // Ganti dengan path gambar yang sesuai
+            icon: Icon(Icons.forum),
             label: 'Book Forum',
           ),
         ],

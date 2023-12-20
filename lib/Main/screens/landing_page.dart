@@ -10,14 +10,6 @@ class LandingPage extends StatefulWidget {
 }
 
 class _LandingPageState extends State<LandingPage> {
-  // late List<Item> _data;
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _data = generateAccordionItems();
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

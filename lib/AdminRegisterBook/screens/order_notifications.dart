@@ -23,7 +23,8 @@ class _NotificationPageState extends State<NotificationPage> {
 
   void fetchNotifications() async {
     final response = await http.get(
-        Uri.parse('http://localhost:8000/registerbook/get-notif/'),
+        Uri.parse(
+            'https://lembarpena-c09-tk.pbp.cs.ui.ac.id/registerbook/get-notif/'),
         headers: {"Content-Type": "application/json"});
 
     if (response.statusCode == 200) {
@@ -39,7 +40,7 @@ class _NotificationPageState extends State<NotificationPage> {
 
   void deleteNotification(int notifId) async {
     final response = await http.delete(Uri.parse(
-        'http://localhost:8000/registerbook/delete-notification/$notifId/'));
+        'https://lembarpena-c09-tk.pbp.cs.ui.ac.id/registerbook/delete-notification/$notifId/'));
 
     if (response.statusCode == 200) {
       setState(() {
@@ -53,7 +54,7 @@ class _NotificationPageState extends State<NotificationPage> {
   void markNotificationAsRead(int notifId) async {
     final response = await http.get(
         Uri.parse(
-            'http://localhost:8000/registerbook/mark-notification-read/$notifId/'),
+            'https://lembarpena-c09-tk.pbp.cs.ui.ac.id/registerbook/mark-notification-read/$notifId/'),
         headers: {"Content-Type": "application/json"});
 
     if (response.statusCode == 200) {
@@ -72,7 +73,7 @@ class _NotificationPageState extends State<NotificationPage> {
       if (!notif.fields.isRead) {
         final response = await http.get(
             Uri.parse(
-                'http://localhost:8000/registerbook/mark-notification-read/${notif.pk}/'),
+                'https://lembarpena-c09-tk.pbp.cs.ui.ac.id/registerbook/mark-notification-read/${notif.pk}/'),
             headers: {"Content-Type": "application/json"});
 
         if (response.statusCode == 200) {

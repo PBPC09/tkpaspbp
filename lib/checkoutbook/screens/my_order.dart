@@ -1,88 +1,86 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:lembarpena/AdminRegisterBook/models/book.dart';
-import 'package:lembarpena/Main/screens/menu.dart';
 import 'package:lembarpena/authentication/login_page.dart';
-import 'package:lembarpena/Main/widgets/left_drawer.dart';
+import 'package:lembarpena/Main/screens/menu.dart';
 import 'package:lembarpena/bookforum/screens/forum_page.dart';
 import 'dart:convert';
-import 'package:lembarpena/wishlist/models/wishlist.dart';
+
+import 'package:lembarpena/checkoutbook/models/checkout.dart';
 import 'package:lembarpena/wishlist/screens/explore_book.dart';
 
-class WishlistPage extends StatefulWidget {
-  final Book? selectedBook; // Tambahkan field untuk buku yang dipilih
-
-  const WishlistPage({Key? key, this.selectedBook}) : super(key: key);
+class MyOrderPage extends StatefulWidget {
+  const MyOrderPage({super.key});
 
   @override
   // ignore: library_private_types_in_public_api
-  _WishlistPageState createState() => _WishlistPageState();
+  _MyOrderPageState createState() => _MyOrderPageState();
 }
 
-class _WishlistPageState extends State<WishlistPage> {
-  late Future<List<Wishlist>> futureWishlist;
+class _MyOrderPageState extends State<MyOrderPage> {
+  late Future<List<Checkoutbook>> futureOrder;
   late String loggedInUser = LoginPage.uname;
-
   @override
   void initState() {
     super.initState();
-
-    futureWishlist =
-        fetchWishlist(); // Memuat data wishlist ketika state diinisialisasi
+    futureOrder = fetchOrder();
   }
 
-  Future<List<Wishlist>> getWishlist() async {
-    return fetchWishlist();
-  }
-
-  Future<List<Wishlist>> fetchWishlist() async {
+  Future<List<Checkoutbook>> fetchOrder() async {
     var url = Uri.parse(
-        'https://lembarpena-c09-tk.pbp.cs.ui.ac.id/wishlist/mywishlist/json');
+        'https://lembarpena-c09-tk.pbp.cs.ui.ac.id/checkoutbook/get_order_json_all/');
     var response =
         await http.get(url, headers: {"Content-Type": "application/json"});
     var data = jsonDecode(utf8.decode(response.bodyBytes));
 
-    List<Wishlist> fetchedWishlist = [];
+    List<Checkoutbook> fetchedOrder = [];
     for (var item in data) {
       if (item['fields']['user'] == loggedInUser) {
-        fetchedWishlist.add(Wishlist.fromJson(item));
+        fetchedOrder.add(Checkoutbook.fromJson(item));
       }
     }
-
-    // print(item['fields']['user']);
-    return fetchedWishlist;
+    return fetchedOrder;
   }
 
   @override
   Widget build(BuildContext context) {
-    // final request = context.watch<CookieRequest>();
     return Scaffold(
       appBar: AppBar(
-        title: const Text('My Wishlist'),
+        title: const Text('Pesanan Saya'),
         backgroundColor: Colors.indigo[900],
         foregroundColor: Colors.white,
       ),
-      drawer: const LeftDrawer(),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: FutureBuilder<List<Wishlist>>(
-          future: getWishlist(),
+        child: FutureBuilder<List<Checkoutbook>>(
+          future: futureOrder,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(child: CircularProgressIndicator());
             } else if (snapshot.hasError) {
               return Center(child: Text('Error: ${snapshot.error}'));
             } else if (snapshot.data == null || snapshot.data!.isEmpty) {
-              return const Center(
-                  child: Text('Tidak ada buku dalam wishlist.'));
+              return const Center(child: Text('Anda belum memesan apapun!'));
             } else {
               return ListView.builder(
                 itemCount: snapshot.data!.length,
                 itemBuilder: (context, index) {
-                  Wishlist wishlistItem = snapshot.data![index];
-                  return ListTile(
-                    title: Text(wishlistItem.fields.title),
-                    // subtitle: Text(wishlistItem.preference.toString()),
+                  Checkoutbook order = snapshot.data![index];
+                  return Card(
+                    elevation: 2.0,
+                    margin: const EdgeInsets.symmetric(vertical: 8.0),
+                    child: ListTile(
+                      title: Text("Alamat: ${order.fields.alamat}"),
+                      subtitle: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                              "Metode Pembayaran: ${order.fields.metodePembayaran}"),
+                          const Text("Mata Uang: SAR"),
+                          Text(
+                              "Total Price: SAR ${order.fields.totalPrice.toStringAsFixed(2)}"),
+                        ],
+                      ),
+                    ),
                   );
                 },
               );
