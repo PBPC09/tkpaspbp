@@ -46,6 +46,7 @@ class MenuCard extends StatelessWidget {
               );
             } else if (page.name == "Wishlist") {
 <<<<<<< HEAD
+<<<<<<< HEAD
               Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
@@ -54,12 +55,17 @@ class MenuCard extends StatelessWidget {
                     ),
                   ));
 =======
+=======
+>>>>>>> 6df0294be23d3be3512853889a2c70caf4c71d6e
               Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => const WishlistPage(),
                 ));
+<<<<<<< HEAD
 >>>>>>> 273332b4a49442091214b79e7554aba2cebfbeac
+=======
+>>>>>>> 6df0294be23d3be3512853889a2c70caf4c71d6e
             } else if (page.name == "Cart") {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => const CartPage()));

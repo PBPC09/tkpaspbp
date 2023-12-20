@@ -40,7 +40,7 @@ SelectedBook selectedBookFromJson(Map<String, dynamic> json) => SelectedBook(
       author: json["author"],
       price: json["price"].toDouble(),
       imageUrl: json["imageUrl"],
-    );
+);
 
 Map<String, dynamic> selectedBookToJson(SelectedBook book) => {
       "id": book.id,
@@ -48,4 +48,4 @@ Map<String, dynamic> selectedBookToJson(SelectedBook book) => {
       "author": book.author,
       "price": book.price,
       "imageUrl": book.imageUrl,
-    };
+};

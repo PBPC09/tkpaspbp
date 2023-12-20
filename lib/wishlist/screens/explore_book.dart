@@ -22,9 +22,13 @@ class _ExploreBooksPageState extends State<ExploreBooksPage> {
   Set<int> wishlistBookIds = {};
   String uname = LoginPage.uname;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
   String dropdownValue = 'Semua';
 >>>>>>> 273332b4a49442091214b79e7554aba2cebfbeac
+=======
+  String dropdownValue = 'Semua';
+>>>>>>> 6df0294be23d3be3512853889a2c70caf4c71d6e
   // ignore: prefer_typing_uninitialized_variables
   var filteredData;
   @override
@@ -36,9 +40,12 @@ class _ExploreBooksPageState extends State<ExploreBooksPage> {
 
   Future<void> deleteQuestion(CookieRequest request, int bookId) async {
 <<<<<<< HEAD
+<<<<<<< HEAD
     // final response = await request.postJson('http://10.0.2.2:8000/bookforum/delete_question_flutter/$username/$id',
 =======
 >>>>>>> 273332b4a49442091214b79e7554aba2cebfbeac
+=======
+>>>>>>> 6df0294be23d3be3512853889a2c70caf4c71d6e
     int pkWishlist = 0;
     for (var data in filteredData) {
       if (data["fields"]["book_id"] == bookId) {
@@ -53,20 +60,27 @@ class _ExploreBooksPageState extends State<ExploreBooksPage> {
 
     if (response['status'] == 'success') {
 <<<<<<< HEAD
+<<<<<<< HEAD
       // Handle berhasil menghapus
       setState(() {
         // Memuat ulang data ForumHead
 =======
       setState(() {
 >>>>>>> 273332b4a49442091214b79e7554aba2cebfbeac
+=======
+      setState(() {
+>>>>>>> 6df0294be23d3be3512853889a2c70caf4c71d6e
         wishlistBookIds.remove(bookId);
         ScaffoldMessenger.of(context)
             .showSnackBar(const SnackBar(content: Text("Sukses dihapus!")));
       });
 <<<<<<< HEAD
+<<<<<<< HEAD
       // Muat ulang komentar
 =======
 >>>>>>> 273332b4a49442091214b79e7554aba2cebfbeac
+=======
+>>>>>>> 6df0294be23d3be3512853889a2c70caf4c71d6e
     } else {
       // Handle error
     }
@@ -98,12 +112,16 @@ class _ExploreBooksPageState extends State<ExploreBooksPage> {
     var data = jsonDecode(utf8.decode(response.bodyBytes));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     // Filter data untuk hanya menyimpan item yang memiliki "user" yang sesuai dengan currentUser
     filteredData = data.where((x) => x['fields']['user'] == uname).toList();
     // print(filteredData);
 =======
     filteredData = data.where((x) => x['fields']['user'] == uname).toList();
 >>>>>>> 273332b4a49442091214b79e7554aba2cebfbeac
+=======
+    filteredData = data.where((x) => x['fields']['user'] == uname).toList();
+>>>>>>> 6df0294be23d3be3512853889a2c70caf4c71d6e
     setState(() {
       wishlistBookIds =
           Set<int>.from(filteredData.map((x) => x['fields']["book_id"]));
@@ -112,6 +130,7 @@ class _ExploreBooksPageState extends State<ExploreBooksPage> {
 
   Future<void> addToWishlist(
 <<<<<<< HEAD
+<<<<<<< HEAD
       CookieRequest request, int bookId, int preference) async {
     final response = await request.postJson(
       // "http://10.0.2.2:8000/bookforum/create_question_flutter/",
@@ -119,6 +138,8 @@ class _ExploreBooksPageState extends State<ExploreBooksPage> {
       jsonEncode(
           {'username': uname, "book_id": bookId, 'preference': preference}),
 =======
+=======
+>>>>>>> 6df0294be23d3be3512853889a2c70caf4c71d6e
     CookieRequest request, int bookId, int preference) async {
     final response = await request.postJson(
       "http://localhost:8000/wishlist/add_to_wishlist_flutter/",
@@ -126,7 +147,10 @@ class _ExploreBooksPageState extends State<ExploreBooksPage> {
         'username': uname, 
         "book_id": bookId, 
         'preference': preference}),
+<<<<<<< HEAD
 >>>>>>> 273332b4a49442091214b79e7554aba2cebfbeac
+=======
+>>>>>>> 6df0294be23d3be3512853889a2c70caf4c71d6e
     );
 
     if (response['status'] == 'success') {
@@ -135,6 +159,7 @@ class _ExploreBooksPageState extends State<ExploreBooksPage> {
         fetchWishlist();
       });
 <<<<<<< HEAD
+<<<<<<< HEAD
       // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context)
           .showSnackBar(const SnackBar(content: Text("Sukses Ditambahkan!")));
@@ -142,6 +167,9 @@ class _ExploreBooksPageState extends State<ExploreBooksPage> {
 =======
       // fetchWishlist();
 >>>>>>> 273332b4a49442091214b79e7554aba2cebfbeac
+=======
+      // fetchWishlist();
+>>>>>>> 6df0294be23d3be3512853889a2c70caf4c71d6e
       // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context)
           .showSnackBar(const SnackBar(content: Text("Buku berhasil ditambahkan ke Wishlist!")));
@@ -152,7 +180,10 @@ class _ExploreBooksPageState extends State<ExploreBooksPage> {
   }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 6df0294be23d3be3512853889a2c70caf4c71d6e
   List<Book> getFilteredBooks() {
     if (dropdownValue == 'Wishlist Saya') {
       return books.where((book) => wishlistBookIds.contains(book.pk)).toList();
@@ -161,7 +192,10 @@ class _ExploreBooksPageState extends State<ExploreBooksPage> {
     }
   }
 
+<<<<<<< HEAD
 >>>>>>> 273332b4a49442091214b79e7554aba2cebfbeac
+=======
+>>>>>>> 6df0294be23d3be3512853889a2c70caf4c71d6e
   void showPreferenceDialog(CookieRequest request, int bookId) async {
     int? preference = await showDialog<int>(
       context: context,
@@ -219,6 +253,7 @@ class _ExploreBooksPageState extends State<ExploreBooksPage> {
       ),
       drawer: const LeftDrawer(),
 <<<<<<< HEAD
+<<<<<<< HEAD
       body: ListView.builder(
         itemCount: books.length,
         itemBuilder: (_, index) {
@@ -273,6 +308,8 @@ class _ExploreBooksPageState extends State<ExploreBooksPage> {
                 ],
               ),
 =======
+=======
+>>>>>>> 6df0294be23d3be3512853889a2c70caf4c71d6e
       body: 
       Column(
         children: [
@@ -283,7 +320,10 @@ class _ExploreBooksPageState extends State<ExploreBooksPage> {
             style: const TextStyle(color: Colors.indigoAccent, fontSize: 20), // Ukuran font yang lebih besar
             underline: Container(
               color: Colors.indigoAccent[900],
+<<<<<<< HEAD
 >>>>>>> 273332b4a49442091214b79e7554aba2cebfbeac
+=======
+>>>>>>> 6df0294be23d3be3512853889a2c70caf4c71d6e
             ),
             onChanged: (String? newValue) {
               setState(() {

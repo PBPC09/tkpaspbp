@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:lembarpena/Main/screens/menu.dart';
-import 'package:lembarpena/Main/widgets/left_drawer.dart';
 import 'package:lembarpena/bookforum/screens/forum_page.dart';
 import 'package:lembarpena/buybooks/models/cart_item.dart';
 import 'package:lembarpena/authentication/login_page.dart';
@@ -15,18 +14,12 @@ class CartPage extends StatefulWidget {
   const CartPage({Key? key}) : super(key: key);
 
   @override
-  // ignore: library_private_types_in_public_api
   _CartPageState createState() => _CartPageState();
 }
 
 class _CartPageState extends State<CartPage> {
   late Future<List<CartItem>> futureCartItems;
   final Map<int, bool> itemsChecked = {};
-  List<CartItem> cartItems = [];
-
-  Future<List<CartItem>> getCartItems() {
-    return fetchCartItems();
-  }
 
   Future<List<CartItem>> getCartItems() {
     return fetchCartItems();
@@ -121,9 +114,8 @@ class _CartPageState extends State<CartPage> {
         backgroundColor: Colors.indigo[900],
         foregroundColor: Colors.white,
       ),
-      drawer: const LeftDrawer(),
       body: FutureBuilder<List<CartItem>>(
-        future: getCartItems(),
+        future: futureCartItems,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
@@ -139,35 +131,54 @@ class _CartPageState extends State<CartPage> {
                 itemCount: snapshot.data!.length,
                 itemBuilder: (context, index) {
                 var cartItem = snapshot.data![index];
+                cartItem.isSelected = itemsChecked[cartItem.id] ?? false;
+                  return Card(
+                    margin: const EdgeInsets.all(10),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: Stack(
+                        children: [
+                          ListTile(
+                            leading: Checkbox(
+                              // value: true,
+                              value: cartItem.isSelected,
+                              onChanged: (bool? value) {
+                                toggleCheckbox(request, cartItem.id, value);
+                              },
+                            ),
+                            title: Text(
+                              cartItem.title,
+                              style: const TextStyle(
+                                fontSize: 15.0,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            subtitle: Text(
+                              "Jumlah: ${cartItem.quantity}\nSubtotal Harga: ${cartItem.currency} ${cartItem.subtotal}",
+                              style: const TextStyle(
+                                fontSize: 12.0,
+                                color: Colors.black87,
+                              ),
+                            ),
+                            isThreeLine:
+                                true, // Jika subtitle memiliki dua baris
+                          ),
+                          Positioned(
+                            bottom: 4,
+                            right: 4,
+                            child: TextButton(
+                              style: TextButton.styleFrom(
+                                foregroundColor: Colors.white,
+                                backgroundColor: Colors.redAccent,
+                                disabledForegroundColor:
+                                    Colors.grey.withOpacity(0.38),
+                              ),
+                              onPressed: () {
+                                removeItemFromCart(request, cartItem.id);
+                              },
                               child: const Text('Remove'),
-                          ),
-<<<<<<< HEAD
-                          subtitle: Text(
-                            "Jumlah: ${cartItem.quantity}\nSubtotal Harga: ${cartItem.currency} ${cartItem.subtotal}",
-                            style: const TextStyle(
-                              fontSize: 12.0,
-                              color: Colors.black87,
                             ),
                           ),
-                          isThreeLine: true, // Jika subtitle memiliki dua baris
-                        ),
-                        Positioned(
-                          bottom: 4,
-                          right: 4,
-                          child: TextButton(
-                              foregroundColor: Colors.white,
-                              backgroundColor: Colors.redAccent,
-                              disabledForegroundColor:
-                                  Colors.grey.withOpacity(0.38),
-                            ),
-                            onPressed: () {
-                              removeItemFromCart(request, cartItem.id);
-                            },
-                            child: const Text('Remove'),
-                          ),
-                        ),
-                      ],
-=======
                         ],
                       ),
                     ),
@@ -180,23 +191,6 @@ class _CartPageState extends State<CartPage> {
           }
         },
       ),
-<<<<<<< HEAD
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) =>
-                  const CheckoutPage(), // Ganti dengan nama halaman CheckoutPage yang sesuai
-            ),
-          );
-          // Implementasi checkout modul si Rifqi
-        },
-        label: const Text('Checkout'),
-        icon: const Icon(Icons.payment),
-        backgroundColor: Colors.indigo[900],
-      ),
-=======
       floatingActionButton: isAnyItemSelected()
           ? FloatingActionButton.extended(
               onPressed: () {
@@ -214,7 +208,6 @@ class _CartPageState extends State<CartPage> {
               backgroundColor: Colors.indigo[900],
             )
           : null,
->>>>>>> 273332b4a49442091214b79e7554aba2cebfbeac
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,

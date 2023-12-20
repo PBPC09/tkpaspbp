@@ -211,6 +211,7 @@ class _ForumCommentsPageState extends State<ForumCommentsPage> {
               ),
             ),
 <<<<<<< HEAD
+<<<<<<< HEAD
       floatingActionButtonLocation:
           FloatingActionButtonLocation.miniCenterFloat,
       floatingActionButton: FloatingActionButton(
@@ -232,6 +233,8 @@ class _ForumCommentsPageState extends State<ForumCommentsPage> {
         mini: true,
         child: const Icon(Icons.add), // Mengubah ukuran tombol menjadi mini
 =======
+=======
+>>>>>>> 6df0294be23d3be3512853889a2c70caf4c71d6e
       floatingActionButton: Stack(
         alignment: Alignment.center,
         children: [
@@ -263,7 +266,10 @@ class _ForumCommentsPageState extends State<ForumCommentsPage> {
             ),
           ),
         ],
+<<<<<<< HEAD
 >>>>>>> 273332b4a49442091214b79e7554aba2cebfbeac
+=======
+>>>>>>> 6df0294be23d3be3512853889a2c70caf4c71d6e
       ),
     );
   }

@@ -35,7 +35,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
 
   Future<double> fetchHarga() async {
     var url =
-        Uri.parse('http://localhost:8000/checkoutbook/get_total_harga/$uname/');
+        Uri.parse('https://lembarpena-c09-tk.pbp.cs.ui.ac.id/checkoutbook/get_total_harga/$uname/');
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},
@@ -56,7 +56,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
 
   Future<List<CartItem>> fetchProduct() async {
     var url = Uri.parse(
-        'http://localhost:8000/checkoutbook/show_checkout_json/$uname/');
+        'https://lembarpena-c09-tk.pbp.cs.ui.ac.id/checkoutbook/show_checkout_json/$uname/');
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},
@@ -204,10 +204,8 @@ class _CheckoutPageState extends State<CheckoutPage> {
               child: ElevatedButton(
                 onPressed: () async {
                   // Implement checkout functionality
-                  //nanti akan dibuat halaman selesai co
                   final response = await request.postJson(
-                    // "http://10.0.2.2:8000/bookforum/create_question_flutter/",
-                    "http://localhost:8000/checkoutbook/checkout_flutter/",
+                    "https://lembarpena-c09-tk.pbp.cs.ui.ac.id/checkoutbook/checkout_flutter/",
                     jsonEncode({
                       "alamat": alamatController.text,
                       "metode_pembayaran": _groupValue,
@@ -222,7 +220,6 @@ class _CheckoutPageState extends State<CheckoutPage> {
                           content: Text("CheckOut Berhasil!"),
                         ),
                       );
-                      // Navigator.pop(context); // Kembali ke halaman sebelumnya
                       // ignore: use_build_context_synchronously
                       Navigator.pushReplacement(
                         context,

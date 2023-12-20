@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:lembarpena/AdminRegisterBook/models/book.dart';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import 'package:lembarpena/Main/widgets/left_drawer.dart';
 =======
+=======
+>>>>>>> 6df0294be23d3be3512853889a2c70caf4c71d6e
 import 'package:lembarpena/Main/screens/menu.dart';
 import 'package:lembarpena/authentication/login_page.dart';
 import 'package:lembarpena/Main/widgets/left_drawer.dart';
@@ -13,7 +16,10 @@ import 'package:lembarpena/wishlist/models/wishlist.dart';
 import 'package:lembarpena/wishlist/screens/explore_book.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
+<<<<<<< HEAD
 >>>>>>> 273332b4a49442091214b79e7554aba2cebfbeac
+=======
+>>>>>>> 6df0294be23d3be3512853889a2c70caf4c71d6e
 
 class WishlistPage extends StatefulWidget {
   final Book? selectedBook; // Tambahkan field untuk buku yang dipilih
@@ -63,6 +69,7 @@ class _WishlistPageState extends State<WishlistPage> {
     return Scaffold(
       appBar: AppBar(
 <<<<<<< HEAD
+<<<<<<< HEAD
         title: const Text('My Wishlist', style: TextStyle(color: Colors.white)),
         backgroundColor: Colors.indigo[900],
       ),
@@ -94,6 +101,8 @@ class _WishlistPageState extends State<WishlistPage> {
               },
             ),
 =======
+=======
+>>>>>>> 6df0294be23d3be3512853889a2c70caf4c71d6e
         title: Text('Wishlist Saya'),
         backgroundColor: Colors.indigo[900],
         foregroundColor: Colors.white,
@@ -177,7 +186,10 @@ class _WishlistPageState extends State<WishlistPage> {
           }
         },
       ),
+<<<<<<< HEAD
 >>>>>>> 273332b4a49442091214b79e7554aba2cebfbeac
+=======
+>>>>>>> 6df0294be23d3be3512853889a2c70caf4c71d6e
     );
   }
 }
